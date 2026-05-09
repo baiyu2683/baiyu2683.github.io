@@ -1,1231 +1,178 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/page/3/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
   
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
-<meta name="generator" content="Hexo 8.1.2"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/ffmpeg%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9/" title="FFmpeg 视频压缩">FFmpeg 视频压缩</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span></div><div class="content">基本命令123456789ffmpeg -i 原视频.mp4 \  -c:v libx264 \  -crf 32 \  -preset fast \  -c:a aac \  -b:a 64k \  -vf &quot;scale=720:-2&quot; \  -fs 48M \  输出.mp4  参数说明   参数 说明    -c:v libx264 视频编码用 H.264   -crf 32 压缩质量，越小质量越高。23&#x3D;视觉无损，32&#x3D;高压缩   -preset fast 编码速度，fast 比默认 medium 快，文件略大   -c:a aac 音频用 AAC 编码   -b:a 64k 音频比特率 64kbps   -vf &quot;scale=720:-2&quot; 分辨率限制 720p，-2 让宽度自动计算   -fs 48M 文件大小上限，到此自动截断   CRF 参考值 0 &#x3D; 无损 18 &#x3D; 近乎无损 23 &#x3D; 默认，视觉无损 28 &#x3D; 中等压缩 32 &#x3D; 高压缩（够用） 51 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/Linux/ubuntu%E6%B7%BB%E5%8A%A0%E6%B8%85%E5%8D%8E%E6%BA%90/" title="默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释">默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">我正在使用什么版本的 Ubuntu？可以通过以下命令查看当前系统版本： 1cat /etc/os-release  例如在 Ubuntu 24.04 下，文件内容如下： 12345678910111213PRETTY_NAME=&quot;Ubuntu 24.04.1 LTS&quot;NAME=&quot;Ubuntu&quot;VERSION_ID=&quot;24.04&quot;VERSION=&quot;24.04.1 LTS (Noble Numbat)&quot;VERSION_CODENAME=nobleID=ubuntuID_LIKE=debianHOME_URL=&quot;https://www.ubuntu.com/&quot;SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/term...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/" title="编辑">编辑</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/blender/">blender</a></span></div><div class="content">编辑编辑模式的切换 为了改变物体的点线面，需要进入编辑模式 快捷键：    功能 键位 补充说明    进入编辑模式 tab 按一次进入编辑模式，再按一次退出    物体模式有这么多，如何快速切换？  打开编辑-&gt; 偏好设置 -&gt; 键位映射，勾选拖动激活饼菜单之后按住tab键，移动鼠标会出现模式切换的饼菜单，然后鼠标滑动就能快速切换 编辑模式下点线面的切换   模式切换旁边是依次是点模式、线模式、面模式 快捷键    功能 快捷键 补充    点模式 1    线模式 2    面模式 3    同时选多种模式 shift + 1&#x2F;2&#x2F;3 也可以鼠标点击多个   点线面的选择方法快捷键和操作截图    功能 快捷键 补充    框选 b    刷选 c 按住鼠标中键可以取消选择，鼠标右键点击空白处退出刷选，或者点击esc键也能退出   套索选择     选择两个点&#x2F;线&#x2F;面中间所有的点&#x2F;线&#x2F;面 ctrl + 鼠标点击 按照ctrl键，然后鼠标点击选择两个点，这两个点中间最短的路径上所有的点都会被选中。线和面同理...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/" title="3.2 建模">3.2 建模</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/blender/">blender</a></span></div><div class="content">  四大：挤出、内插、循环切割、倒角    功能 快捷键 补充    挤出 e    连续挤出 e,  ctrl + 鼠标右键 按e开始挤出，然后按住ctrl，点击鼠标右键可以连续挤出操作   内插&#x2F;向内挤出 i    倒角 ctrl + b 鼠标滚轮可以增加或者减少倒角面数，控制倒角是否圆滑   循环切割 ctrl + r 按住鼠标左键可以移动循环边，鼠标滚轮可以增加减少循环边   挤出流型说明： 选中一个面向下挤出，此时四角的边会有重复的在一起。 使用挤出流型，不会出现重复的边。 六小： 合并&#x2F;断开&#x2F;填充&#x2F;切刀&#x2F;桥接&#x2F;分离    功能 快捷键 补充    合并 m    断开 v    填充 f 需要选中循环边   栅格填充  面菜单里面的，仅限偶数边，奇数边无法填充，可以选择栅格数量   切刀工具 k 按鼠标右键或者空格键退出   桥接 ctrl + e ctrl +e会打开菜单，选择桥接循环边。只有一个物体的不同部分可以桥接，多个物体无法桥接，需要先使用ctrl + j将多个物体合并为一个物体   多个物体合并为...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/" title="3.3 修改器">3.3 修改器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/blender/">blender</a></span></div><div class="content">为什么使用修改器 建模快，效率高，能快速直观地实现一个效果 非破坏性。可以在不改变原来模型的基础上，很精地控制参数 灵活，可重复使用，可叠加多个效果。需要说明的是修改器应用是从上到下应用的，顺序会影响结果。  修改器1 表面细分修改器将网格的面分割成更小的面，使其看起来更平滑，可以修改修改器的参数使其表面更加平滑 给一个立方体增加一个表面细分修改器，其变成一个球形了，tab进入修改模式可以看到实际还是一个立方体 2 实体化修改器获取任意网格的表面，然后为之添加深度，使之变厚 新建一个平面，为其添加实体化修改器，修改厚度参数。 3 倒角修改器宽度是坡口形成的两条新边的距离，段数是增加细分。  4 布尔修改器可以对两个物体进行交集、差集、并集运算，偶尔会出现奇怪的问题，慎用  给立方体增加一个布尔修改器，然后物体使用吸管选择圆柱体，之后隐藏圆柱体，就能看到差集效果，另外还有并集和交集两种可选差集隐藏柱体之后的效果 并集效果 交集效果 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/blender/3.4%20%E5%BB%BA%E6%A8%A1%E9%A9%AC%E6%8B%89%E6%9D%BE/" title="3.4 建模马拉松">3.4 建模马拉松</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/blender/">blender</a></span></div><div class="content">蘑菇建模简易形变修改器 + 吸附工具 树桩建模衰减编辑 + 分离 + 拉平选中点 之后选择面或者别的元素，点击G移动，然后会出现一个圆环，通过滑动鼠标滚轮，控制圆环大小，圆环内的部分都会被影响到。 由于移动的关系，下面的点不在一个平面上，可以进入透视模式，选中下平面所有的点，因为是垂直于z轴的，使用快捷键S + z  + 0 花朵建模旋绕工具  编辑模式旋绕工具，可以设置按照哪个轴旋绕，可以设置旋绕角度，默认是连续生成的勾选使用副本之后，变成断开的 树干建模缩裹修改器： 让物体沿着物体的表面曲线贴合在物体表面 龟背竹建模拓扑建模 + 合并断开切刀 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/blender/3.5%20%E9%98%B5%E5%88%97%E4%BF%AE%E6%94%B9%E5%99%A8%E4%B8%8E%E6%99%B6%E6%A0%BC%E5%BD%A2%E5%8F%98/" title="3.5 阵列修改器与晶格形变">3.5 阵列修改器与晶格形变</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/blender/">blender</a></span></div><div class="content">晶格形变</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/" title="蒙皮修改器">蒙皮修改器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/blender/">blender</a></span></div><div class="content">曲线修改器#贝塞尔曲线通过两个轴来控制曲线走向 曲线闭合方法：1, 选择两个点，f,   可以将两个点连接起来，曲线就闭合起来了2, 选择曲线上的一个点，Alt + c 曲线断开方法：选择两个点，x，删除分段数，会删除两个点中间的线。不能删除点，删除线之后曲线会自动变小，但是还是闭合的 实现一个管子 通过设置曲线的深度，使曲线形成一个管状，然后可以对其进行挤出旋转等操作，形成一个管子 Alt + s  缩放管子粗细 倒角- 物体 设置的物体相当于曲线的横截面然后通过缩放，挤出等操作，可以做出动漫人物的头发等 #圆环圆环就是一个闭合的贝塞尔曲线 #NURBS曲线Non-Uniform Rational B-Spline 非均匀有理B样条通过一些点来拟合，控制曲线的走向将点e挤出，曲线会跟着线拟合 #NURBS圆环NURBS生成的一个圆，也是NURBS曲线的闭合  #路径曲线线的开头结尾和点重合 通过移动线上的点，拟合出一条曲线 #曲线修改器默认简易型便修改器，跟着原点旋转，曲线修改器可以让物体跟着曲线进行形变  注意的点：路径曲线是有方向的，新建时默认朝向x正轴，物体会沿着路径的的...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.18/" title="2026.4.18">2026.4.18</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></span></div><div class="content">这是之前对项目进行改进工作的进度，继续进行[PROJECT] 改进 Java 8 分布式爬虫 dcrawler：先补回归覆盖，再做解耦和现代化。[STACK] Java 8 target, Maven multi-module, Spring Boot 1.4, Vert.x, HttpClient, JUnit, Fastjson, Log4j 1.x, JDK 21 build[ARCH] CrawlerSpiderStarter 初始化 Spring&#x2F;JPA&#x2F;Vert.x&#x2F;Jetty。 PointScheduler -&gt; CrawlerDownloader -&gt; CrawlerParser -&gt; Storage。 Filter&#x2F;Downloader&#x2F;Storage&#x2F;Processor 分模块但依赖仍耦合。 [MODULES] * dc-spider-core: Point&#x2F;Config&#x2F;Crawltrace&#x2F;服务模型 * dc-spider-processor: 模板...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/" title="2026.4.19">2026.4.19</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></span></div><div class="content">[PROJECT] 改进 Java 8 分布式爬虫 dcrawler：先补回归覆盖，再做解耦和现代化。[STACK] Java 8 target, Maven multi-module, Spring Boot 1.4, Vert.x, HttpClient, JUnit, Fastjson, Log4j 1.x, JDK 21 build[ARCH] CrawlerSpiderStarter 初始化 Spring&#x2F;JPA&#x2F;Vert.x&#x2F;Jetty。 PointScheduler -&gt; CrawlerDownloader -&gt; CrawlerParser -&gt; Storage。 Filter&#x2F;Downloader&#x2F;Storage&#x2F;Processor 分模块但仍有耦合。[MODULES] * dc-spider-core: Point&#x2F;Config&#x2F;Crawltrace&#x2F;服务模型 * dc-spider-processor: 模板解析与 golden fixtures * d...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/" title="Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a><time datetime="2026-05-09T08:30:00.000Z" title="Created 2026-05-09 16:30:00">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/" title="Hexo 与 Obsidian 协作集成方案">Hexo 与 Obsidian 协作集成方案</a><time datetime="2026-05-09T07:36:13.000Z" title="Created 2026-05-09 15:36:13">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/" title="1常用操作分类">1常用操作分类</a><time datetime="2026-05-09T03:06:20.000Z" title="Created 2026-05-09 11:06:20">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" title="PineScript_v6核心知识点">PineScript_v6核心知识点</a><time datetime="2026-05-09T01:34:34.886Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/python/uv/" title="配置国内镜像">配置国内镜像</a><time datetime="2026-05-09T01:34:34.886Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="View More">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Incus/"><span class="card-category-list-name">Incus</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/General/"><span class="card-category-list-name">General</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Virtualization/"><span class="card-category-list-name">Virtualization</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Virtualization/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/blender/"><span class="card-category-list-name">blender</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/claudecode/"><span class="card-category-list-name">claudecode</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/"><span class="card-category-list-name">dcrawler改进</span><span class="card-category-list-count">3</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/Virtualization/" style="font-size: 1.1em; color: #999">Virtualization</a> <a href="/tags/java-generics/" style="font-size: 1.1em; color: #999">java/generics</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 1.37em; color: #99a4b2">编程思想</a> <a href="/tags/Container/" style="font-size: 1.1em; color: #999">Container</a> <a href="/tags/scp/" style="font-size: 1.1em; color: #999">scp</a> <a href="/tags/erasure/" style="font-size: 1.1em; color: #999">erasure</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/dualboot/" style="font-size: 1.1em; color: #999">dualboot</a> <a href="/tags/Hexo/" style="font-size: 1.23em; color: #999ea6">Hexo</a> <a href="/tags/ssh/" style="font-size: 1.1em; color: #999">ssh</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 1.37em; color: #99a4b2">java/泛型</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Obsidian/" style="font-size: 1.23em; color: #999ea6">Obsidian</a> <a href="/tags/ArchLinux/" style="font-size: 1.23em; color: #999ea6">ArchLinux</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 1.1em; color: #999">java/数组</a> <a href="/tags/git/" style="font-size: 1.5em; color: #99a9bf">git</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/java-onjava/" style="font-size: 1.1em; color: #999">java/onjava</a> <a href="/tags/pattern-generics/" style="font-size: 1.1em; color: #999">pattern/generics</a> <a href="/tags/conda/" style="font-size: 1.1em; color: #999">conda</a> <a href="/tags/ffmpeg/" style="font-size: 1.1em; color: #999">ffmpeg</a> <a href="/tags/migration/" style="font-size: 1.1em; color: #999">migration</a> <a href="/tags/LinuxOps/" style="font-size: 1.1em; color: #999">LinuxOps</a> <a href="/tags/networking/" style="font-size: 1.1em; color: #999">networking</a> <a href="/tags/archlinux/" style="font-size: 1.23em; color: #999ea6">archlinux</a> <a href="/tags/Docker/" style="font-size: 1.1em; color: #999">Docker</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.1em; color: #999">数据库</a> <a href="/tags/Networking/" style="font-size: 1.1em; color: #999">Networking</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 1.1em; color: #999">故障排查</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 1.1em; color: #999">java/字节码</a> <a href="/tags/btrfs/" style="font-size: 1.1em; color: #999">btrfs</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/Incus/" style="font-size: 1.23em; color: #999ea6">Incus</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
       
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
   
-    <article id="post-ffmpeg视频压缩" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/ffmpeg%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/ffmpeg%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9/">FFmpeg 视频压缩</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+    <ul class="card-archive-list">
       
-        <h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i 原视频.mp4 \</span><br><span class="line">  -c:v libx264 \</span><br><span class="line">  -crf 32 \</span><br><span class="line">  -preset fast \</span><br><span class="line">  -c:a aac \</span><br><span class="line">  -b:a 64k \</span><br><span class="line">  -vf <span class="string">&quot;scale=720:-2&quot;</span> \</span><br><span class="line">  -fs 48M \</span><br><span class="line">  输出.mp4</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>-c:v libx264</code></td>
-<td>视频编码用 H.264</td>
-</tr>
-<tr>
-<td><code>-crf 32</code></td>
-<td>压缩质量，越小质量越高。23&#x3D;视觉无损，32&#x3D;高压缩</td>
-</tr>
-<tr>
-<td><code>-preset fast</code></td>
-<td>编码速度，fast 比默认 medium 快，文件略大</td>
-</tr>
-<tr>
-<td><code>-c:a aac</code></td>
-<td>音频用 AAC 编码</td>
-</tr>
-<tr>
-<td><code>-b:a 64k</code></td>
-<td>音频比特率 64kbps</td>
-</tr>
-<tr>
-<td><code>-vf &quot;scale=720:-2&quot;</code></td>
-<td>分辨率限制 720p，-2 让宽度自动计算</td>
-</tr>
-<tr>
-<td><code>-fs 48M</code></td>
-<td>文件大小上限，到此自动截断</td>
-</tr>
-</tbody></table>
-<h2 id="CRF-参考值"><a href="#CRF-参考值" class="headerlink" title="CRF 参考值"></a>CRF 参考值</h2><ul>
-<li>0 &#x3D; 无损</li>
-<li>18 &#x3D; 近乎无损</li>
-<li>23 &#x3D; 默认，视觉无损</li>
-<li>28 &#x3D; 中等压缩</li>
-<li>32 &#x3D; 高压缩（够用）</li>
-<li>51 &#x3D; 最差</li>
-</ul>
-<h2 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h2><p>小Lin说视频压缩：124MB → 40MB（压缩 68%），CRF 32 + 720p</p>
-
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              May 2026
+            </span>
+            <span class="card-archive-list-count">49</span>
+          </a>
+        </li>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/ffmpeg%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9/" data-id="cuidWg2txKr2_TbCRegBiwnf6" data-title="FFmpeg 视频压缩" class="article-share-link"><span class="fa fa-share">Share</span></a>
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              April 2026
+            </span>
+            <span class="card-archive-list-count">8</span>
+          </a>
+        </li>
       
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Linux/ubuntu添加清华源" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/Linux/ubuntu%E6%B7%BB%E5%8A%A0%E6%B8%85%E5%8D%8E%E6%BA%90/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/Linux/ubuntu%E6%B7%BB%E5%8A%A0%E6%B8%85%E5%8D%8E%E6%BA%90/">默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="我正在使用什么版本的-Ubuntu？"><a href="#我正在使用什么版本的-Ubuntu？" class="headerlink" title="我正在使用什么版本的 Ubuntu？"></a>我正在使用什么版本的 Ubuntu？</h2><p>可以通过以下命令查看当前系统版本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/os-release</span><br></pre></td></tr></table></figure>
-
-<p>例如在 Ubuntu 24.04 下，文件内容如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PRETTY_NAME=<span class="string">&quot;Ubuntu 24.04.1 LTS&quot;</span></span><br><span class="line">NAME=<span class="string">&quot;Ubuntu&quot;</span></span><br><span class="line">VERSION_ID=<span class="string">&quot;24.04&quot;</span></span><br><span class="line">VERSION=<span class="string">&quot;24.04.1 LTS (Noble Numbat)&quot;</span></span><br><span class="line">VERSION_CODENAME=noble</span><br><span class="line">ID=ubuntu</span><br><span class="line">ID_LIKE=debian</span><br><span class="line">HOME_URL=<span class="string">&quot;https://www.ubuntu.com/&quot;</span></span><br><span class="line">SUPPORT_URL=<span class="string">&quot;https://help.ubuntu.com/&quot;</span></span><br><span class="line">BUG_REPORT_URL=<span class="string">&quot;https://bugs.launchpad.net/ubuntu/&quot;</span></span><br><span class="line">PRIVACY_POLICY_URL=<span class="string">&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;</span></span><br><span class="line">UBUNTU_CODENAME=noble</span><br><span class="line">LOGO=ubuntu-logo</span><br></pre></td></tr></table></figure>
-
-<p><code>VERSION_ID</code> 后面的版本号即为当前系统版本，<code>VERSION_CODENAME</code> 后面的是代号。代号在软件源配置文件中会被使用。<strong>请注意在下面的配置中选择符合你的机器的版本号，在替换配置前确认代号一致，否则之后的更新操作可能导致系统出现问题。</strong></p>
-<h2 id="配置内容"><a href="#配置内容" class="headerlink" title="配置内容"></a>配置内容</h2><p>将系统自带的对应文件做个备份，然后根据格式的选择下面对应的内容替换，即可使用选择的软件源镜像。</p>
-<h3 id="传统格式（-etc-apt-sources-list）"><a href="#传统格式（-etc-apt-sources-list）" class="headerlink" title="传统格式（/etc/apt/sources.list）"></a>传统格式（<code>/etc/apt/sources.list</code>）</h3><p>Ubuntu 24.04 LTS</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ noble main restricted universe multiverse</span><br><span class="line"><span class="comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ noble main restricted universe multiverse</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ noble-updates main restricted universe multiverse</span><br><span class="line"><span class="comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ noble-updates main restricted universe multiverse</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ noble-backports main restricted universe multiverse</span><br><span class="line"><span class="comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ noble-backports main restricted universe multiverse</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下安全更新软件源为官方源配置</span></span><br><span class="line">deb http://security.ubuntu.com/ubuntu/ noble-security main restricted universe multiverse</span><br><span class="line"><span class="comment"># deb-src http://security.ubuntu.com/ubuntu/ noble-security main restricted universe multiverse</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 预发布软件源，不建议启用</span></span><br><span class="line"><span class="comment"># deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ noble-proposed main restricted universe multiverse</span></span><br><span class="line"><span class="comment"># # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ noble-proposed main restricted universe multiverse</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="DEB822-格式（-etc-apt-sources-list-d-ubuntu-sources）"><a href="#DEB822-格式（-etc-apt-sources-list-d-ubuntu-sources）" class="headerlink" title="DEB822 格式（/etc/apt/sources.list.d/ubuntu.sources）"></a>DEB822 格式（<code>/etc/apt/sources.list.d/ubuntu.sources</code>）</h3><p>Ubuntu 24.04 LTS</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Types: deb</span><br><span class="line">URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu</span><br><span class="line">Suites: noble noble-updates noble-backports</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span></span><br><span class="line"><span class="comment"># Types: deb-src</span></span><br><span class="line"><span class="comment"># URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu</span></span><br><span class="line"><span class="comment"># Suites: noble noble-updates noble-backports</span></span><br><span class="line"><span class="comment"># Components: main restricted universe multiverse</span></span><br><span class="line"><span class="comment"># Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下安全更新软件源包含了官方源与镜像站配置，如有需要可自行修改注释切换</span></span><br><span class="line">Types: deb</span><br><span class="line">URIs: http://security.ubuntu.com/ubuntu/</span><br><span class="line">Suites: noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># Types: deb-src</span></span><br><span class="line"><span class="comment"># URIs: http://security.ubuntu.com/ubuntu/</span></span><br><span class="line"><span class="comment"># Suites: noble-security</span></span><br><span class="line"><span class="comment"># Components: main restricted universe multiverse</span></span><br><span class="line"><span class="comment"># Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 预发布软件源，不建议启用</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Types: deb</span></span><br><span class="line"><span class="comment"># URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu</span></span><br><span class="line"><span class="comment"># Suites: noble-proposed</span></span><br><span class="line"><span class="comment"># Components: main restricted universe multiverse</span></span><br><span class="line"><span class="comment"># Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # Types: deb-src</span></span><br><span class="line"><span class="comment"># # URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu</span></span><br><span class="line"><span class="comment"># # Suites: noble-proposed</span></span><br><span class="line"><span class="comment"># # Components: main restricted universe multiverse</span></span><br><span class="line"><span class="comment"># # Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="清华源链接"><a href="#清华源链接" class="headerlink" title="清华源链接"></a>清华源链接</h2><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/Linux/ubuntu%E6%B7%BB%E5%8A%A0%E6%B8%85%E5%8D%8E%E6%BA%90/" data-id="cuidAgPBtSpuHfjpVv1QzE_Rm" data-title="默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/Git worktree 日常协作笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/Git%20worktree%20%E6%97%A5%E5%B8%B8%E5%8D%8F%E4%BD%9C%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/Git%20worktree%20%E6%97%A5%E5%B8%B8%E5%8D%8F%E4%BD%9C%E7%AC%94%E8%AE%B0/">Git worktree 日常协作笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-worktree-日常协作笔记"><a href="#Git-worktree-日常协作笔记" class="headerlink" title="Git worktree 日常协作笔记"></a>Git worktree 日常协作笔记</h1><p>这篇笔记已经被拆分进一套更完整的团队协作手册中。</p>
-<p>建议从这里开始：</p>
-<ul>
-<li>[[团队协作总览]]</li>
-</ul>
-<p>按场景查阅：</p>
-<ul>
-<li>[[日常开发流程]]</li>
-<li>[[PR、评审与合并]]</li>
-<li>[[冲突处理与常见问题]]</li>
-</ul>
-<p>如果你只关心一个问题，可以直接跳到对应子笔记；如果你想看整套流程，先看总览。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/Git%20worktree%20%E6%97%A5%E5%B8%B8%E5%8D%8F%E4%BD%9C%E7%AC%94%E8%AE%B0/" data-id="cuidIRzEuC_8lUjPuFQ7zVi4t" data-title="Git worktree 日常协作笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/Git 提交信息与拆分" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/Git%20%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8B%86%E5%88%86/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/Git%20%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8B%86%E5%88%86/">Git 提交信息与拆分</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-提交信息与拆分"><a href="#Git-提交信息与拆分" class="headerlink" title="Git 提交信息与拆分"></a>Git 提交信息与拆分</h1><h2 id="这篇笔记解决什么问题"><a href="#这篇笔记解决什么问题" class="headerlink" title="这篇笔记解决什么问题"></a>这篇笔记解决什么问题</h2><p>这篇笔记主要帮助解决两个问题：</p>
-<ul>
-<li>这次改动应该保留为一个 commit，还是拆成多个 commit</li>
-<li>这条 commit message 应该怎么写，才能让别人看得懂、以后也方便回看</li>
-</ul>
-<p>目标不是追求形式上的完美，而是让提交更容易 review、更容易回滚，也更容易理解。</p>
-<h2 id="什么时候一个-commit-就够"><a href="#什么时候一个-commit-就够" class="headerlink" title="什么时候一个 commit 就够"></a>什么时候一个 commit 就够</h2><p>通常满足下面这些条件时，一个 commit 就够：</p>
-<ul>
-<li>这次改动只服务于一个明确目标</li>
-<li>改动涉及的文件虽然不止一个，但仍然在讲同一件事</li>
-<li>你能用一句话说清这次提交为什么存在</li>
-<li>以后如果要回滚这次改动，不会顺便回滚掉无关内容</li>
-</ul>
-<p>简单判断：</p>
-<blockquote>
-<p>如果别人只看这一个 commit，就能理解你做了什么、为什么这么做，而且单独回滚也不会伤到别的内容，那通常一个 commit 就够。</p>
-</blockquote>
-<h2 id="什么时候应该拆成多个-commit"><a href="#什么时候应该拆成多个-commit" class="headerlink" title="什么时候应该拆成多个 commit"></a>什么时候应该拆成多个 commit</h2><p>遇到下面这些情况时，通常应该拆：</p>
-<ul>
-<li>重构和功能修改混在一起</li>
-<li>机械性改动和逻辑改动混在一起</li>
-<li>两个不相干的问题被顺手一起改了</li>
-<li>某一部分改动本来就可以独立 review</li>
-<li>你自己已经开始说“顺手把这个也改了”</li>
-</ul>
-<p>常见例子：</p>
-<ul>
-<li>一次提交里既改命名、又改逻辑、又补文档</li>
-<li>为了修一个 bug，顺手把另一个模块的格式也整理了</li>
-<li>同时包含“纯重构”和“真实行为变化”</li>
-</ul>
-<p>拆 commit 的核心不是追求越多越好，而是看：</p>
-<ul>
-<li>能不能独立 review</li>
-<li>能不能独立回滚</li>
-<li>message 能不能各自说清楚</li>
-</ul>
-<h2 id="怎么写-commit-message"><a href="#怎么写-commit-message" class="headerlink" title="怎么写 commit message"></a>怎么写 commit message</h2><p>实操上，先做到两件事就够：</p>
-<ol>
-<li>开头类型尽量明确</li>
-<li>一句话能看出这次提交为什么存在</li>
-</ol>
-<p>常见起手：</p>
-<ul>
-<li><code>feat:</code> 新功能或新能力</li>
-<li><code>fix:</code> 修 bug 或纠正错误行为</li>
-<li><code>refactor:</code> 重构，但不改变对外行为</li>
-<li><code>docs:</code> 文档说明调整</li>
-</ul>
-<p>好的 message 应该让以后回看的人快速明白：</p>
-<ul>
-<li>这是在加东西、修东西，还是整理东西</li>
-<li>这次改动存在的原因是什么</li>
-</ul>
-<p>例如：</p>
-<ul>
-<li><code>feat: add manual launcher for dc-spider-tool</code></li>
-<li><code>fix: correct worktree cleanup order after PR merge</code></li>
-<li><code>refactor: simplify proxy startup entrypoint</code></li>
-<li><code>docs: clarify when to split commits</code></li>
-</ul>
-<p>尽量不要写这种过于空泛的标题：</p>
-<ul>
-<li><code>update</code></li>
-<li><code>fix bug</code></li>
-<li><code>修改一下</code></li>
-<li><code>调整代码</code></li>
-</ul>
-<p>这些标题的问题不是“不规范”，而是几乎不能帮助别人理解这次提交为什么存在。</p>
-<h2 id="常见反例"><a href="#常见反例" class="headerlink" title="常见反例"></a>常见反例</h2><h3 id="反例-1：一个-commit-里混太多事"><a href="#反例-1：一个-commit-里混太多事" class="headerlink" title="反例 1：一个 commit 里混太多事"></a>反例 1：一个 commit 里混太多事</h3><p>比如：</p>
-<ul>
-<li>改了代码逻辑</li>
-<li>顺手统一了格式</li>
-<li>又补了一点文档</li>
-</ul>
-<p>这种提交的问题是：</p>
-<ul>
-<li>review 时重点不清楚</li>
-<li>回滚时容易误伤</li>
-<li>message 很难写准确</li>
-</ul>
-<h3 id="反例-2：message-太空"><a href="#反例-2：message-太空" class="headerlink" title="反例 2：message 太空"></a>反例 2：message 太空</h3><p>比如：</p>
-<ul>
-<li><code>update</code></li>
-<li><code>fix</code></li>
-<li><code>改一下</code></li>
-</ul>
-<p>这种 message 的问题是，几天后连你自己都不一定知道当时到底改了什么、为什么改。</p>
-<h3 id="反例-3：拆得过碎"><a href="#反例-3：拆得过碎" class="headerlink" title="反例 3：拆得过碎"></a>反例 3：拆得过碎</h3><p>不是 commit 越多越好。</p>
-<p>如果拆到每个 commit 都只剩下零散、不完整、无法独立理解的改动，review 反而更痛苦。</p>
-<p>好的拆分应该让每个 commit 都还是一个完整、能讲明白的小单位。</p>
-<h2 id="提交前快速检查"><a href="#提交前快速检查" class="headerlink" title="提交前快速检查"></a>提交前快速检查</h2><p>提交前可以快速问自己这几个问题：</p>
-<ul>
-<li>这个 commit 是不是只在表达一件事</li>
-<li>别人只看这一个 commit，能不能大致理解意图</li>
-<li>如果现在回滚它，会不会顺便回滚掉不该回滚的内容</li>
-<li>这条 message 有没有说明为什么改，而不只是“改了什么”</li>
-</ul>
-<p>如果这四个问题里有两个以上答不上来，通常就该停一下，重新整理 commit。</p>
-<h2 id="最小模板"><a href="#最小模板" class="headerlink" title="最小模板"></a>最小模板</h2><p>可以直接从这些模板开始：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">feat: add &lt;new capability&gt;</span><br><span class="line">fix: correct &lt;specific problem&gt;</span><br><span class="line">refactor: simplify &lt;target area&gt;</span><br><span class="line">docs: clarify &lt;documented topic&gt;</span><br></pre></td></tr></table></figure>
-
-<p>如果要写得更贴近日常一点，也可以这样想：</p>
-<ul>
-<li>这是新增能力吗？用 <code>feat</code></li>
-<li>这是修错误吗？用 <code>fix</code></li>
-<li>这是整理代码但不改行为吗？用 <code>refactor</code></li>
-<li>这是改说明文档吗？用 <code>docs</code></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/Git%20%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8B%86%E5%88%86/" data-id="cuid5ffsoZ4yOFAB7hVjBspYr" data-title="Git 提交信息与拆分" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/PR、评审与合并" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/">PR、评审与合并</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="PR、评审与合并"><a href="#PR、评审与合并" class="headerlink" title="PR、评审与合并"></a>PR、评审与合并</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>这篇笔记解决的问题是：代码已经在功能分支里，接下来应该怎么发 PR、怎么 review、怎么合并。</p>
-<h2 id="什么时候发-PR"><a href="#什么时候发-PR" class="headerlink" title="什么时候发 PR"></a>什么时候发 PR</h2><p>通常在以下情况发 PR：</p>
-<ul>
-<li>当前任务已经形成一段相对完整的改动</li>
-<li>代码已经可以让别人 review</li>
-<li>你准备进入合并流程</li>
-</ul>
-<h2 id="PR-里至少写什么"><a href="#PR-里至少写什么" class="headerlink" title="PR 里至少写什么"></a>PR 里至少写什么</h2><p>建议最少写清楚：</p>
-<ul>
-<li>这次改了什么</li>
-<li>为什么这样改</li>
-<li>还有没有已知限制</li>
-<li>review 时最值得重点看的地方</li>
-</ul>
-<h2 id="小团队下的最低-review-要求"><a href="#小团队下的最低-review-要求" class="headerlink" title="小团队下的最低 review 要求"></a>小团队下的最低 review 要求</h2><p>适合小团队的最低要求：</p>
-<ul>
-<li>改动较小且风险低时，可以快速 review</li>
-<li>改动较大、影响共享逻辑、或可能影响稳定性时，最好等另一个人看过</li>
-<li>如果只是你个人维护的内容，可以按自己的节奏合并，但仍建议保留 PR 记录</li>
-</ul>
-<h2 id="什么时候可以自己合并"><a href="#什么时候可以自己合并" class="headerlink" title="什么时候可以自己合并"></a>什么时候可以自己合并</h2><p>通常可以自己合并：</p>
-<ul>
-<li>只有你自己在维护该模块</li>
-<li>改动很小，且影响范围清楚</li>
-<li>团队已经约定这类改动无需等待额外 review</li>
-</ul>
-<p>通常不建议自己直接合并：</p>
-<ul>
-<li>改动涉及公共基础能力</li>
-<li>改动较大</li>
-<li>其他人正在并行依赖这部分代码</li>
-</ul>
-<h2 id="默认合并建议"><a href="#默认合并建议" class="headerlink" title="默认合并建议"></a>默认合并建议</h2><p>小团队默认建议优先使用 <strong>squash merge</strong>。</p>
-<p>原因：</p>
-<ul>
-<li>PR 内可以保留开发过程中的多个小提交</li>
-<li>合并到 <code>master</code> 后历史更整洁</li>
-<li>回看主分支历史时更容易理解</li>
-</ul>
-<p>如果团队明确希望保留完整分支提交历史，再考虑普通 merge。</p>
-<h2 id="PR-合并后本地要做什么"><a href="#PR-合并后本地要做什么" class="headerlink" title="PR 合并后本地要做什么"></a>PR 合并后本地要做什么</h2><p>先回到主仓库所在的 <code>master</code> worktree，再执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
-<p>不要在当前功能 worktree 里直接切回 <code>master</code>。同步完成后，再清理已经完成的分支和 worktree：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git worktree remove ../wt-foo</span><br><span class="line">git branch -d feature/foo</span><br></pre></td></tr></table></figure>
-
-<p>先默认尝试 <code>git branch -d feature/foo</code>。如果因为 squash merge，Git 仍然认为这个分支没有合并，可以在确认远端 PR 已经合并后改用 <code>git branch -D feature/foo</code>。</p>
-<p>如果远端分支也需要删：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete feature/foo</span><br></pre></td></tr></table></figure>
-
-<h2 id="常见误区"><a href="#常见误区" class="headerlink" title="常见误区"></a>常见误区</h2><h3 id="误区-1：PR-合并后，还要不要本地再-merge-一遍？"><a href="#误区-1：PR-合并后，还要不要本地再-merge-一遍？" class="headerlink" title="误区 1：PR 合并后，还要不要本地再 merge 一遍？"></a>误区 1：PR 合并后，还要不要本地再 merge 一遍？</h3><p>通常不需要。</p>
-<p>一般是远端 PR 合并完成后，你本地更新 <code>master</code> 即可。</p>
-<h3 id="误区-2：是不是把-worktree-推到远端？"><a href="#误区-2：是不是把-worktree-推到远端？" class="headerlink" title="误区 2：是不是把 worktree 推到远端？"></a>误区 2：是不是把 worktree 推到远端？</h3><p>不是。</p>
-<p>推到远端的是分支，worktree 只是本地目录。</p>
-<h3 id="误区-3：是不是每个-PR-都必须很正式？"><a href="#误区-3：是不是每个-PR-都必须很正式？" class="headerlink" title="误区 3：是不是每个 PR 都必须很正式？"></a>误区 3：是不是每个 PR 都必须很正式？</h3><p>对小团队来说，不需要过度流程化，但至少要保证别人能看懂改动目的。</p>
-<p>遇到 pull 冲突、清理失败等问题，转到 [[冲突处理与常见问题]]。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/" data-id="cuid3NIE3vxVbTi1xlasOTwaD" data-title="PR、评审与合并" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/冲突处理与常见问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">冲突处理与常见问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="冲突处理与常见问题"><a href="#冲突处理与常见问题" class="headerlink" title="冲突处理与常见问题"></a>冲突处理与常见问题</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>这篇笔记解决的问题是：当 <code>git pull</code>、merge、rebase、stash、worktree 清理这些环节出问题时，应该先怎么判断、再怎么处理。</p>
-<h2 id="本地有未提交内容时，能不能直接-pull"><a href="#本地有未提交内容时，能不能直接-pull" class="headerlink" title="本地有未提交内容时，能不能直接 pull"></a>本地有未提交内容时，能不能直接 pull</h2><p>默认不建议。</p>
-<p>因为这时通常会发生两种情况：</p>
-<ol>
-<li>Git 直接拒绝 pull</li>
-<li>pull 进入 merge&#x2F;rebase 后出现冲突</li>
-</ol>
-<p>更稳妥的做法是先处理本地改动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git add ...</span><br><span class="line">git commit -m <span class="string">&quot;wip&quot;</span></span><br><span class="line"><span class="comment"># 或 git stash</span></span><br><span class="line">git pull --rebase</span><br></pre></td></tr></table></figure>
-
-<h2 id="pull-被拒绝时怎么处理"><a href="#pull-被拒绝时怎么处理" class="headerlink" title="pull 被拒绝时怎么处理"></a>pull 被拒绝时怎么处理</h2><p>优先按这个顺序判断：</p>
-<ol>
-<li>你是不是在一个不该直接开发的分支上改了东西</li>
-<li>这些本地改动是不是已经值得提交</li>
-<li>如果只是临时内容，是否适合先 stash</li>
-</ol>
-<p>大多数情况下，优先考虑：</p>
-<ul>
-<li>先 commit</li>
-<li>次选 stash</li>
-<li>再 pull</li>
-</ul>
-<h2 id="merge-rebase-冲突时怎么想"><a href="#merge-rebase-冲突时怎么想" class="headerlink" title="merge &#x2F; rebase 冲突时怎么想"></a>merge &#x2F; rebase 冲突时怎么想</h2><p>先不要急着做复杂操作，先确认：</p>
-<ul>
-<li>这是你自己的功能分支，还是 <code>master</code></li>
-<li>你现在是在 merge 过程中，还是 rebase 过程中</li>
-<li>冲突文件里哪些改动是本地的，哪些来自远端</li>
-</ul>
-<p>处理思路：</p>
-<ul>
-<li>如果是日常同步功能分支，通常优先把冲突解开，然后继续当前流程</li>
-<li>如果是 <code>master</code> 上出现混乱，先确认是不是因为你不小心在 <code>master</code> 上开发了</li>
-</ul>
-<h2 id="stash-什么时候用"><a href="#stash-什么时候用" class="headerlink" title="stash 什么时候用"></a>stash 什么时候用</h2><p>适合用 stash：</p>
-<ul>
-<li>你只是临时切一下上下文</li>
-<li>当前改动还不值得形成正式提交</li>
-</ul>
-<p>不建议滥用 stash：</p>
-<ul>
-<li>长时间堆很多 stash 不处理</li>
-<li>把本来应该提交的小步进度一直藏在 stash 里</li>
-</ul>
-<h2 id="worktree-删除失败怎么办"><a href="#worktree-删除失败怎么办" class="headerlink" title="worktree 删除失败怎么办"></a>worktree 删除失败怎么办</h2><p>常见原因：</p>
-<ul>
-<li>worktree 里还有未提交内容</li>
-<li>该 worktree 正被某个 shell 占用</li>
-<li>分支状态还没整理干净</li>
-</ul>
-<p>先检查：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git worktree list</span><br></pre></td></tr></table></figure>
-
-<h2 id="分支删不掉通常是什么原因"><a href="#分支删不掉通常是什么原因" class="headerlink" title="分支删不掉通常是什么原因"></a>分支删不掉通常是什么原因</h2><p>常见原因：</p>
-<ul>
-<li>该分支还有未合并提交</li>
-<li>当前正停留在这个分支上</li>
-<li>这个分支仍然被某个 worktree 使用</li>
-</ul>
-<p>先检查：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br><span class="line">git worktree list</span><br></pre></td></tr></table></figure>
-
-<h2 id="常见问题速查"><a href="#常见问题速查" class="headerlink" title="常见问题速查"></a>常见问题速查</h2><h3 id="为什么-push-的不是-worktree？"><a href="#为什么-push-的不是-worktree？" class="headerlink" title="为什么 push 的不是 worktree？"></a>为什么 push 的不是 worktree？</h3><p>因为远端识别的是 Git 分支，不是你本地目录。</p>
-<h3 id="为什么-master-要保持干净？"><a href="#为什么-master-要保持干净？" class="headerlink" title="为什么 master 要保持干净？"></a>为什么 master 要保持干净？</h3><p>因为这样同步远端最简单，冲突最少。</p>
-<h3 id="什么时候必须新开分支？"><a href="#什么时候必须新开分支？" class="headerlink" title="什么时候必须新开分支？"></a>什么时候必须新开分支？</h3><p>只要是一个独立任务，就建议新开分支。</p>
-<h3 id="一个-PR-多大合适？"><a href="#一个-PR-多大合适？" class="headerlink" title="一个 PR 多大合适？"></a>一个 PR 多大合适？</h3><p>以“别人能看懂并能安全 review”为准，不要把多个无关需求塞进同一个 PR。</p>
-<p>处理完问题后，回到 [[日常开发流程]] 或 [[PR、评审与合并]] 继续。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" data-id="cuidSwowM0_3zC6u2CE7sVrsO" data-title="冲突处理与常见问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/团队协作总览" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%80%BB%E8%A7%88/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%80%BB%E8%A7%88/">团队协作总览</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="团队协作总览"><a href="#团队协作总览" class="headerlink" title="团队协作总览"></a>团队协作总览</h1><h2 id="这套手册适合谁"><a href="#这套手册适合谁" class="headerlink" title="这套手册适合谁"></a>这套手册适合谁</h2><p>这套手册适合我自己和少量协作者一起开发时使用。</p>
-<p>目标是：</p>
-<ul>
-<li>日常开发步骤尽量固定</li>
-<li>减少因为分支、worktree、PR 使用不一致带来的混乱</li>
-<li>遇到常见 Git 问题时能快速查到处理办法</li>
-</ul>
-<p>这不是大团队流程文档，也不是公司级规范，而是一套能直接执行的小团队协作手册。</p>
-<h2 id="我们的基本约定"><a href="#我们的基本约定" class="headerlink" title="我们的基本约定"></a>我们的基本约定</h2><ul>
-<li><code>master</code> 保持干净，只负责同步远端</li>
-<li>一个任务一个分支</li>
-<li>一个任务尽量对应一个 worktree</li>
-<li>日常开发在功能分支中完成，不直接在 <code>master</code> 上改代码</li>
-<li>代码完成后先推分支，再发 PR</li>
-<li>PR 合并通常在远端完成，本地只负责同步结果</li>
-</ul>
-<h2 id="分支、worktree、PR-的关系"><a href="#分支、worktree、PR-的关系" class="headerlink" title="分支、worktree、PR 的关系"></a>分支、worktree、PR 的关系</h2><ul>
-<li><strong>分支</strong>：表示一段独立开发工作</li>
-<li><strong>worktree</strong>：本地承载某个分支的一份独立目录</li>
-<li><strong>PR</strong>：把某个分支的改动提交给团队评审和合并</li>
-</ul>
-<p>一句话理解：</p>
-<blockquote>
-<p>worktree 是本地工作目录，真正推到远端的是分支，协作入口是 PR。</p>
-</blockquote>
-<h2 id="标准协作主线"><a href="#标准协作主线" class="headerlink" title="标准协作主线"></a>标准协作主线</h2><ol>
-<li>先在主 worktree 中同步本地 <code>master</code></li>
-<li>为新任务创建分支和 worktree</li>
-<li>在 worktree 中开发和提交</li>
-<li>推送分支到远端</li>
-<li>创建 PR</li>
-<li>完成 review 与合并</li>
-<li>回到主 worktree 同步 <code>master</code></li>
-<li>删除已完成的分支和 worktree</li>
-</ol>
-<h2 id="从哪里开始看"><a href="#从哪里开始看" class="headerlink" title="从哪里开始看"></a>从哪里开始看</h2><ul>
-<li>想开始一个新任务：看 [[日常开发流程]]</li>
-<li>想发 PR 或决定怎么合并：看 [[PR、评审与合并]]</li>
-<li>遇到 pull、冲突、stash、清理失败等问题：看 [[冲突处理与常见问题]]</li>
-</ul>
-<h2 id="阅读顺序建议"><a href="#阅读顺序建议" class="headerlink" title="阅读顺序建议"></a>阅读顺序建议</h2><ol>
-<li>先读这篇总览</li>
-<li>日常开发时主要查 [[日常开发流程]]</li>
-<li>提交协作时查 [[PR、评审与合并]]</li>
-<li>出现异常时查 [[冲突处理与常见问题]]</li>
-</ol>
-<h2 id="新任务开始前"><a href="#新任务开始前" class="headerlink" title="新任务开始前"></a>新任务开始前</h2><p>默认先回到主仓库所在的 <code>master</code> worktree，再做这几件事：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
-<p>不要在当前功能 worktree 里直接切回 <code>master</code>。然后根据任务创建新的分支和 worktree，具体命令见 [[日常开发流程]]。</p>
-<h2 id="PR-合并后"><a href="#PR-合并后" class="headerlink" title="PR 合并后"></a>PR 合并后</h2><p>默认先回到主仓库所在的 <code>master</code> worktree，再同步结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
-<p>完成同步后，再删除已经完成的功能分支和 worktree，具体步骤见 [[PR、评审与合并]]。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%80%BB%E8%A7%88/" data-id="cuiduRw82fVkvIJrtByoDIXKt" data-title="团队协作总览" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/日常开发流程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">日常开发流程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="日常开发流程"><a href="#日常开发流程" class="headerlink" title="日常开发流程"></a>日常开发流程</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>这篇笔记解决的问题是：从接到一个新任务开始，到把代码推到远端分支为止，日常应该怎么操作。</p>
-<h2 id="标准流程"><a href="#标准流程" class="headerlink" title="标准流程"></a>标准流程</h2><h3 id="1-先在主-worktree-里同步主分支"><a href="#1-先在主-worktree-里同步主分支" class="headerlink" title="1. 先在主 worktree 里同步主分支"></a>1. 先在主 worktree 里同步主分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
-<p>这里的命令应该在主仓库所在的 <code>master</code> worktree 中执行，不要在当前功能 worktree 里直接切回 <code>master</code>。</p>
-<p>要求：</p>
-<ul>
-<li><code>master</code> 尽量保持干净</li>
-<li>不要在 <code>master</code> 上直接开发</li>
-</ul>
-<h3 id="2-为新任务创建分支和-worktree"><a href="#2-为新任务创建分支和-worktree" class="headerlink" title="2. 为新任务创建分支和 worktree"></a>2. 为新任务创建分支和 worktree</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree add ../wt-foo -b feature/foo master</span><br></pre></td></tr></table></figure>
-
-<p>含义：</p>
-<ul>
-<li>基于 <code>master</code> 创建 <code>feature/foo</code></li>
-<li>在 <code>../wt-foo</code> 目录中开始新任务</li>
-</ul>
-<h3 id="3-在-worktree-里开发"><a href="#3-在-worktree-里开发" class="headerlink" title="3. 在 worktree 里开发"></a>3. 在 worktree 里开发</h3><p>常用节奏：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git add &lt;files&gt;</span><br><span class="line">git commit -m <span class="string">&quot;feat: foo&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>建议：</p>
-<ul>
-<li>小步提交</li>
-<li>一个提交只表达一件事</li>
-<li>不要等到改了一大堆再一次性提交</li>
-</ul>
-<h3 id="4-首次推送远端分支"><a href="#4-首次推送远端分支" class="headerlink" title="4. 首次推送远端分支"></a>4. 首次推送远端分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin feature/foo</span><br></pre></td></tr></table></figure>
-
-<p>之后继续开发时，正常 <code>git push</code> 即可。</p>
-<h2 id="一个任务对应一个分支"><a href="#一个任务对应一个分支" class="headerlink" title="一个任务对应一个分支"></a>一个任务对应一个分支</h2><p>推荐：</p>
-<ul>
-<li>一个任务一个分支</li>
-<li>一个任务一个 worktree</li>
-</ul>
-<p>不推荐：</p>
-<ul>
-<li>多个需求混在同一个分支里</li>
-<li>在同一个 worktree 中长期混做多个任务</li>
-</ul>
-<h2 id="什么时候应该-push"><a href="#什么时候应该-push" class="headerlink" title="什么时候应该 push"></a>什么时候应该 push</h2><p>推荐在这些时机 push：</p>
-<ul>
-<li>一个功能点已经可以保存</li>
-<li>想让别人提前看到进展</li>
-<li>准备发 PR</li>
-<li>需要把当前进度同步到远端备用</li>
-</ul>
-<h2 id="不要这样做"><a href="#不要这样做" class="headerlink" title="不要这样做"></a>不要这样做</h2><ul>
-<li>不要在 <code>master</code> 上直接写业务代码</li>
-<li>不要在有大量未整理改动时才第一次提交</li>
-<li>不要把多个无关需求塞进同一个分支</li>
-<li>不要把 worktree 当成远端协作对象，真正协作的是分支</li>
-</ul>
-<h2 id="最小命令模板"><a href="#最小命令模板" class="headerlink" title="最小命令模板"></a>最小命令模板</h2><h3 id="新任务开始"><a href="#新任务开始" class="headerlink" title="新任务开始"></a>新任务开始</h3><p>先回到主仓库所在的 <code>master</code> worktree，再执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br><span class="line">git worktree add ../wt-foo -b feature/foo master</span><br></pre></td></tr></table></figure>
-
-<h3 id="开发中提交"><a href="#开发中提交" class="headerlink" title="开发中提交"></a>开发中提交</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;files&gt;</span><br><span class="line">git commit -m <span class="string">&quot;feat: foo&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="首次推送"><a href="#首次推送" class="headerlink" title="首次推送"></a>首次推送</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin feature/foo</span><br></pre></td></tr></table></figure>
-
-<p>下一步见 [[PR、评审与合并]]。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/" data-id="cuidEz7vgJZje42fvQ5HoOS5w" data-title="日常开发流程" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/通过sub2api访问gpt5.4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/">通过sub2api访问gpt5.4</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="claude-code配置"><a href="#claude-code配置" class="headerlink" title="claude code配置"></a>claude code配置</h2><h3 id="配置文件路径"><a href="#配置文件路径" class="headerlink" title="配置文件路径"></a>配置文件路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.claude/settings.json</span><br></pre></td></tr></table></figure>
-
-<h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>模型直接配置gpt-5.4,此时不需要配置sub2api的模型映射</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span> </span><br><span class="line">	<span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> </span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_OPUS_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gpt-5.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_SONNET_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gpt-5.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_HAIKU_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gpt-5.4-mini&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;___CLAUDE_CODE_EFFORT_LEVEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;max&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_BASE_URL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://localhost:8090&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_AUTH_TOKEN&quot;</span><span class="punctuation">:</span> <span class="string">&quot;api-key&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;CLAUDE_CODE_ATTRIBUTION_HEADER&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;theme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auto&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>配置anthropic的模型</strong>或者<strong>不配置模型使用默认的（实际也是claude模型）</strong>，需要在sub2api里面进行模型映射，映射成gpt的模型</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span> </span><br><span class="line">	<span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> </span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_OPUS_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;claude-opus-4-6&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_SONNET_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;claude-opus-4-6&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_HAIKU_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;claude-opus-4-6&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;___CLAUDE_CODE_EFFORT_LEVEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;max&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_BASE_URL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://localhost:8090&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_AUTH_TOKEN&quot;</span><span class="punctuation">:</span> <span class="string">&quot;api-key&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;CLAUDE_CODE_ATTRIBUTION_HEADER&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;theme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auto&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="各个配置解释"><a href="#各个配置解释" class="headerlink" title="各个配置解释"></a>各个配置解释</h3><ul>
-<li>“ANTHROPIC_DEFAULT_OPUS_MODEL”: “复杂推理任务模型，最好的模型”,</li>
-<li>“ANTHROPIC_DEFAULT_SONNET_MODEL”: “常规编码模型”,</li>
-<li>“ANTHROPIC_DEFAULT_HAIKU_MODEL”: “日常任务模型”,</li>
-<li>“___CLAUDE_CODE_EFFORT_LEVEL”: “模型推理强度，前面加__是为了注释，实际没使用”,</li>
-<li>“ANTHROPIC_BASE_URL”: “sub2api 服务”,</li>
-<li>“ANTHROPIC_AUTH_TOKEN”: “api-key”,</li>
-<li>“CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC”: “关闭所有非必要网络请求，遥测，统计，自动更新等请求”,</li>
-<li>“CLAUDE_CODE_ATTRIBUTION_HEADER”: “用来自定义请求里的 Attribution 标识头（来源标识）”</li>
-</ul>
-<h2 id="在sub2api中做模型映射"><a href="#在sub2api中做模型映射" class="headerlink" title="在sub2api中做模型映射"></a>在sub2api中做模型映射</h2><p>分组管理</p>
-<p><img src="/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/file-20260424234121657.png"></p>
-<p>“&#x2F;v1&#x2F;messages” 是claude的协议，开启之后sub2api可以识别并自动将模型进行映射</p>
-<p><img src="/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/file-20260424234147503.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/" data-id="cuidR0Dasih2V_dMdM1tAEe1B" data-title="通过sub2api访问gpt5.4" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-blender/3.1建模" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blender/">blender</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/">编辑</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><p><strong>编辑模式的切换</strong></p>
-<p>为了改变物体的点线面，需要进入编辑模式</p>
-<p>快捷键：</p>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>键位</th>
-<th>补充说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>进入编辑模式</td>
-<td>tab</td>
-<td>按一次进入编辑模式，再按一次退出</td>
-</tr>
-</tbody></table>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117103505385.png"></p>
-<p>物体模式有这么多，如何快速切换？</p>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117104003314.png"></p>
-<p>打开编辑-&gt; 偏好设置 -&gt; 键位映射，勾选拖动激活饼菜单<br>之后按住tab键，移动鼠标会出现模式切换的饼菜单，然后鼠标滑动就能快速切换</p>
-<p><strong>编辑模式下点线面的切换</strong></p>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117105535829.png"></p>
-<p> 模式切换旁边是依次是点模式、线模式、面模式<br> 快捷键</p>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>快捷键</th>
-<th>补充</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>点模式</td>
-<td>1</td>
-<td></td>
-</tr>
-<tr>
-<td>线模式</td>
-<td>2</td>
-<td></td>
-</tr>
-<tr>
-<td>面模式</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td>同时选多种模式</td>
-<td>shift + 1&#x2F;2&#x2F;3</td>
-<td>也可以鼠标点击多个</td>
-</tr>
-</tbody></table>
-<p><strong>点线面的选择方法快捷键和操作截图</strong></p>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>快捷键</th>
-<th>补充</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>框选</td>
-<td>b</td>
-<td></td>
-</tr>
-<tr>
-<td>刷选</td>
-<td>c</td>
-<td>按住鼠标中键可以取消选择，鼠标右键点击空白处退出刷选，或者点击esc键也能退出</td>
-</tr>
-<tr>
-<td>套索选择</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>选择两个点&#x2F;线&#x2F;面中间所有的点&#x2F;线&#x2F;面</td>
-<td>ctrl + 鼠标点击</td>
-<td>按照ctrl键，然后鼠标点击选择两个点，这两个点中间最短的路径上所有的点都会被选中。线和面同理。</td>
-</tr>
-<tr>
-<td>选择相临的点&#x2F;线&#x2F;面</td>
-<td>L</td>
-<td>会把跟选中的点能连起来的点&#x2F;线&#x2F;面都选中，计算是按照四边形计算的，比如四边形和三角形不算相邻。另外鼠标需要在物体上，如果鼠标在空白处也是无法选中的</td>
-</tr>
-<tr>
-<td>循环选择</td>
-<td>alt + 鼠标点击</td>
-<td>选择球体上的一个点，然后鼠标点击点的左或者右，就会按照纬线选中一圈；点击上下，就会按照经线方向选中一圈。 线模式和面模式类似</td>
-</tr>
-<tr>
-<td>在垂直方向上循环选择</td>
-<td>ctrl + alt + 鼠标点击</td>
-<td>选中垂直于选中线的一圈元素</td>
-</tr>
-<tr>
-<td>反选</td>
-<td>ctrl + i</td>
-<td>选中所有没有被选中的元素</td>
-</tr>
-<tr>
-<td>随机选择</td>
-<td></td>
-<td>随机选择一些点线面</td>
-</tr>
-<tr>
-<td>扩大&#x2F;减小选取</td>
-<td>ctrl + 数字键盘+&#x2F;-</td>
-<td>需要有小键盘</td>
-</tr>
-<tr>
-<td>透视模式</td>
-<td>alt + z</td>
-<td>默认情况选择只能选到看见的一面，透视模式可以选到背面的</td>
-</tr>
-</tbody></table>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117110859753.png"><br>按住ctrl 选中了两个红圈的点，中间所有的点都被自动选中了</p>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117111759191.png"><br>选中四边面的一个点，按l无法选中三角面上的点，需要鼠标放到三角面上再按l才能选中</p>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117112724238.png"><br>在线模式下，然后使用ctrl + alt + 鼠标左键点击可以选中垂直于线的一圈线</p>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117113216918.png"><br>随机选择任意点线面</p>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117152426896.png"><br>透视模式选择球体的线</p>
-<p><strong>点线面的控制</strong></p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>快捷键</th>
-<th>补充</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>移动</td>
-<td>g</td>
-<td></td>
-</tr>
-<tr>
-<td>旋转</td>
-<td>r</td>
-<td></td>
-</tr>
-<tr>
-<td>缩放</td>
-<td>s</td>
-<td></td>
-</tr>
-<tr>
-<td>删除</td>
-<td>x</td>
-<td>会弹出菜单</td>
-</tr>
-</tbody></table>
-<p>法向： 是一个向量的概念，有方向，为了区分面的正反而设计的概念，物体的正面就是法向。法线是沿着法向方向的，只有正面有</p>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117153917132.png"><br>打开这个面朝向选项可以看到面的正反面</p>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117153949064.png"><br><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117154019950.png"><br>如上面两张图，红色是反面，默认颜色是正面</p>
-<p>法线：垂直于元素的线，只在物体正面有，是为了告诉渲染器光的反射角度，点线面都有<br><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117155028926.png"><br>通过这个开关可以显示法线<br><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117155952281.png"><br>法线只显示在正面，也就是法向指向的方向</p>
-<p><img src="/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/file-20260117154353206.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/blender/3.1%E5%BB%BA%E6%A8%A1/" data-id="cuidxSW_H62mjT9SEC7Vv6yRn" data-title="编辑" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/migration/" rel="tag">migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/ArchLinux/" style="font-size: 13.33px;">ArchLinux</a> <a href="/tags/Container/" style="font-size: 10px;">Container</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Incus/" style="font-size: 13.33px;">Incus</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LinuxOps/" style="font-size: 10px;">LinuxOps</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Networking/" style="font-size: 10px;">Networking</a> <a href="/tags/Obsidian/" style="font-size: 13.33px;">Obsidian</a> <a href="/tags/Virtualization/" style="font-size: 10px;">Virtualization</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/btrfs/" style="font-size: 10px;">btrfs</a> <a href="/tags/conda/" style="font-size: 10px;">conda</a> <a href="/tags/dualboot/" style="font-size: 10px;">dualboot</a> <a href="/tags/erasure/" style="font-size: 10px;">erasure</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java-generics/" style="font-size: 10px;">java/generics</a> <a href="/tags/java-onjava/" style="font-size: 10px;">java/onjava</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 10px;">java/字节码</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 10px;">java/数组</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 16.67px;">java/泛型</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/migration/" style="font-size: 10px;">migration</a> <a href="/tags/networking/" style="font-size: 10px;">networking</a> <a href="/tags/pattern-generics/" style="font-size: 10px;">pattern/generics</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 10px;">故障排查</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 16.67px;">编程思想</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/python/uv/">配置国内镜像</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">57</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-05-09T09:27:02.644Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

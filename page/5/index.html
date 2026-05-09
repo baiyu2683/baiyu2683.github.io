@@ -1,1565 +1,178 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/page/5/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
   
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
-<meta name="generator" content="Hexo 8.1.2"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%86%85%E9%83%A8%E7%B1%BB/" title="内部类">内部类</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a></span></div><div class="content">匿名内部类使用外部变量，为什么必须是final的或者是“事实上的final”匿名内部类在编译后会变成一个独立的类（比如 Outer$1.class），它和外部方法是两个不同的栈帧（不同的方法执行上下文）。  匿名内部类对象通常会比外部方法活得更久（比如作为事件监听器、Runnable 提交到线程池、被返回出去等）。 Java 不允许匿名内部类直接修改外部方法的栈上局部变量（那样会导致数据不一致、线程安全隐患、生命周期问题）。 为了实现“捕获”（capture），Java 的做法是：把用到的局部变量的值拷贝一份 到匿名内部类的实例字段中（编译器自动生成）。  如果允许修改外部变量，就会出现“拷贝的值”和“原变量”不一致的情况（经典的多线程可见性问题）。 所以 Java 强制：被捕获的局部变量在整个方法执行期间值不能改变，也就是必须是 final 或 effectively final。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="基本数据类型">基本数据类型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a></span></div><div class="content">Java 中的基本数据类型（Primitive Types）共有 8 种。它们是由语言预定义的，直接存储在栈（Stack）中，因此在内存操作上非常高效。 我们可以根据它们存储的数据性质，将其分为 4 大类： 1. 整数类型 (Integer Types)用于存储不带小数点的整数。Java 的整数类型都是有符号的（即支持正负数）。    类型 大小 (位&#x2F;比特) 字节 (Bytes) 范围 默认值    byte 8-bit 1 -128 到 127 0   short 16-bit 2 -32,768 到 32,767 0   int 32-bit 4 约 ±21 亿 0   long 64-bit 8 非常大 (需以 L 或 l 结尾) 0L   2. 浮点类型 (Floating-Point Types)用于存储带小数点的数值，遵循 IEEE 754 标准。    类型 大小 (位) 字节 精度 默认值    float 32-bit 4 单精度 (需以 f 或 F 结尾) 0.0f   double 64-bit 8 双精度 (Java 默认的小数类型) 0.0d...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%A4%87%E5%BF%98/" title="备忘">备忘</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a></span></div><div class="content">理由非常务实，这关乎你的“学习心流”和“知识迁移效率”：    1. 基础卷已过半，不要“半途而废” 你已经看到第 16 章（代码校验&#x2F;测试），这说明你已经翻过了 Java 最枯燥的语法大山，正进入“工程化思维”的核心区（测试、异常、断言等）。  * 第 16 章的代码校验：非常重要！无论是 Java 还是 AI 开发，测试（Unit Testing）是保证系统不崩溃的底线。  * 剩下的章节：基础卷剩下的章节（如集合、IO 等）是 Java 的骨架。如果你现在分心去看 Python，Java    的这套逻辑体系就会打断，回过头再看时，你需要花双倍的时间找回感觉。    2. 利用“完结奖励”开启 Python 当你读完《On Java 基础卷》的那一刻，你会有一种“阶段性大胜”的成就感。这时候把 Python 作为“奖励”或者“调剂”开启，学习劲头会非常足。  * Python 的“降维打击”：当你彻底理解了 Java 的强类型、接口和复杂的测试框架后，去看 Python    简直就像从“开手动挡货车”切换到“开自动挡轿车”，你会学得极快。    3. 为你量身定...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%9E%9A%E4%B8%BE%20EnumSet%20%E8%AF%A6%E8%A7%A3/" title="枚举 EnumSet 详解">枚举 EnumSet 详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a></span></div><div class="content">枚举 EnumSet 详解枚举类构造函数 只能使用 private 修饰符 即使不写，默认也是 private（不是包访问级别）  编译器生成的方法 values() — 返回所有枚举常量数组，每个枚举类独有 valueOf(String) — 简化的 valueOf 方法，内部调用 Enum.valueOf(Class, String)  EnumSet 实现原理EnumSet 使用**位向量（bit vector）**实现，本质是一个 long 型数组。 存储结构123class RegularEnumSet&lt;E extends Enum&lt;E&gt;&gt; extends EnumSet&lt;E&gt; &#123;    private long elements = 0L;  // 位向量&#125;   每个枚举常量占 1 位（bit） ≤64 个枚举 → 用单个 long  64 个枚举 → 用 long[]（JumboEnumSet）    核心操作添加 add: 1elements |= (1L &lt;&lt; e.ordinal()); 把对应...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%B5%81/" title="流">流</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a></span></div><div class="content">创建   方式 适用场景    Collection.stream() 从 List&#x2F;Set 等集合创建   Arrays.stream() 从数组创建   Stream.of() 从单个元素或数组创建   Stream.builder() 需要逐步构建流   Stream.iterate() 需要按规律生成元素   Stream.generate() 需要随机或动态生成元素   Files.lines() 从文件读取行   IntStream.range() 生成数字范围   Pattern.splitAsStream() 字符串分割   Random.ints() 生成随机数   Optional.stream() 从 Optional 展开   Stream.empty() 创建空流   终结操作toArray()forEachcollectreduceallMatch, anyMatch, noneMatchfindFirst, findAnycount, max, minaverage, max, min, sum, summaryStatistics </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E9%97%AE%E9%A2%98/" title="问题">问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a></span></div><div class="content">Java 8 之后允许接口出现 default 方法 和 static 方法，本质上是为了解决两个不同但都很重要的痛点。 下面用最直接的方式说明「为什么加」以及「加了之后主要解决什么问题」。 1. default 方法（默认方法）为什么允许存在？最核心、最真实的动机只有一个： 让已有接口在不破坏海量已有实现类的情况下进化（向后兼容 + API 演进） 经典场景（也是 Java 8 引入 default 方法的真正导火索）Java 8 要引入函数式编程 → Stream API → 需要在集合框架里加一堆新方法： 12345678910interface Collection&lt;E&gt; &#123;    // Java 8 新增    default Stream&lt;E&gt; stream() &#123;        return StreamSupport.stream(spliterator(), false);    &#125;    default Stream&lt;E&gt; parallelStream() &#123; ... &#125;  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/Linux/General/%E6%80%8E%E4%B9%88%E5%B0%86vim%E4%B8%AD%E5%A4%8D%E5%88%B6%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%8C%E5%A4%8D%E5%88%B6%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%89%AA%E8%B4%B4%E6%9D%BF/" title="安装 gvim（会替换 vim，但命令仍然是 vim，不会影响使用）">安装 gvim（会替换 vim，但命令仍然是 vim，不会影响使用）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/General/">General</a></span></div><div class="content">在 Arch Linux + Ghostty 中，使用普通 vim（通过 pacman -S vim 安装）时，默认没有系统剪贴板支持（vim –version | grep clipboard 会显示 -clipboard）。 下面是 2026 年最实用的几种解决方案，按推荐顺序排列： 1. 最推荐方案：安装 gvim（简单有效）12# 安装 gvim（会替换 vim，但命令仍然是 vim，不会影响使用）sudo pacman -S gvim  安装后检查： 1vim --version | grep -E &quot;clipboard|xterm_clipboard&quot;  应该看到 +clipboard（可能还有 +xterm_clipboard）。 在 ~&#x2F;.vimrc 中添加配置（推荐）编辑配置文件： 1nano ~/.vimrc  添加下面这行（最常用）： 1set clipboard=unnamedplus  解释：  unnamedplus：让普通 y（yank）直接复制到系统剪贴板（”+ 寄存器，对应 Ctrl+V 粘贴）。 如果你只想用 “+...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/%E6%96%B9%E6%B3%95/" title="方法">方法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></span></div><div class="content">isAssignableFrom() 是 Java 反射中非常重要且常用的一个方法，其作用是：  判断一个类是否可以被另一个类赋值（即类型兼容性检查）  官方定义Java 1public boolean isAssignableFrom(Class&lt;?&gt; cls)  含义： 判断 cls 这个类（或接口）是否能赋值给当前 Class 对象所代表的类型。 简单说就是：“cls 是否是当前类型的子类、实现类、或者就是当前类型本身？” </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/Linux/Virtualization/Docker/%E9%85%8D%E7%BD%AE/" title="配置">配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.000Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/Virtualization/">Virtualization</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/Virtualization/Docker/">Docker</a></span></div><div class="content">修改docker root dir位置 &#x2F;etc&#x2F;docker&#x2F;daemon.json 配置代理 创建 dockerd 相关的 systemd 目录，这个目录下的配置将覆盖 dockerd 的默认配置  1$ sudo mkdir -p /etc/systemd/system/docker.service.d   新建配置文件 /etc/systemd/system/docker.service.d/http-proxy.conf，这个文件中将包含环境变量  123[Service]Environment=&quot;HTTP_PROXY=http://proxy.example.com&quot;Environment=&quot;HTTPS_PROXY=http://proxy.example.com&quot;   如果你自己建了私有的镜像仓库，需要 dockerd 绕过代理服务器直连，那么配置 NO_PROXY 变量：  1234[Service]Environment=&quot;HTTP_PROXY=http://proxy.exampl...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/04/26/Linux/Arch%20Linux%20%E4%BB%8E%20ext4%20%E9%87%8D%E8%A3%85%E8%BF%81%E7%A7%BB%E5%88%B0%20Btrfs%20%E6%96%B9%E6%A1%88/" title="Arch Linux 从 ext4 重装迁移到 Btrfs 方案">Arch Linux 从 ext4 重装迁移到 Btrfs 方案</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-25T16:00:00.000Z" title="Created 2026-04-26 00:00:00">2026-04-26</time></span></div><div class="content">Arch Linux 从 ext4 重装迁移到 Btrfs 方案目标：在保留 Windows 11 双系统的前提下，重装当前 Arch Linux，把根分区从 ext4 迁移到 Btrfs，并尽可能保留当前已安装软件、系统配置、用户配置、自定义环境变量等信息。  结论：基于当前机器的实际结构，最稳妥的方案是：保留 nvme0n1 上的整个 Windows 盘完全不动，只重装 nvme1n1 上的 Arch；复用当前 Arch 自己的 EFI 分区 /dev/nvme1n1p1，把根分区 /dev/nvme1n1p2 改成 Btrfs，继续保留单独的 /home 分区 /dev/nvme1n1p3。   1. 迁移目标需要保留的内容：  已安装软件列表 AUR 软件列表 /etc 中的重要系统配置 用户目录中的配置与数据 shell &#x2F; systemd 用户环境中的自定义环境变量 systemd 服务、timer、开发工具链配置 SSH &#x2F; GPG &#x2F; 字体 &#x2F; 输入法 &#x2F; 编辑器 &#x2F; 终端等个人环境  需要实现的内容： ...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/" title="Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a><time datetime="2026-05-09T08:30:00.000Z" title="Created 2026-05-09 16:30:00">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/" title="Hexo 与 Obsidian 协作集成方案">Hexo 与 Obsidian 协作集成方案</a><time datetime="2026-05-09T07:36:13.000Z" title="Created 2026-05-09 15:36:13">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/" title="1常用操作分类">1常用操作分类</a><time datetime="2026-05-09T03:06:20.000Z" title="Created 2026-05-09 11:06:20">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" title="PineScript_v6核心知识点">PineScript_v6核心知识点</a><time datetime="2026-05-09T01:34:34.886Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/python/uv/" title="配置国内镜像">配置国内镜像</a><time datetime="2026-05-09T01:34:34.886Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="View More">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Incus/"><span class="card-category-list-name">Incus</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/General/"><span class="card-category-list-name">General</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Virtualization/"><span class="card-category-list-name">Virtualization</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Virtualization/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/blender/"><span class="card-category-list-name">blender</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/claudecode/"><span class="card-category-list-name">claudecode</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/"><span class="card-category-list-name">dcrawler改进</span><span class="card-category-list-count">3</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/Virtualization/" style="font-size: 1.1em; color: #999">Virtualization</a> <a href="/tags/java-generics/" style="font-size: 1.1em; color: #999">java/generics</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 1.37em; color: #99a4b2">编程思想</a> <a href="/tags/Container/" style="font-size: 1.1em; color: #999">Container</a> <a href="/tags/scp/" style="font-size: 1.1em; color: #999">scp</a> <a href="/tags/erasure/" style="font-size: 1.1em; color: #999">erasure</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/dualboot/" style="font-size: 1.1em; color: #999">dualboot</a> <a href="/tags/Hexo/" style="font-size: 1.23em; color: #999ea6">Hexo</a> <a href="/tags/ssh/" style="font-size: 1.1em; color: #999">ssh</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 1.37em; color: #99a4b2">java/泛型</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Obsidian/" style="font-size: 1.23em; color: #999ea6">Obsidian</a> <a href="/tags/ArchLinux/" style="font-size: 1.23em; color: #999ea6">ArchLinux</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 1.1em; color: #999">java/数组</a> <a href="/tags/git/" style="font-size: 1.5em; color: #99a9bf">git</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/java-onjava/" style="font-size: 1.1em; color: #999">java/onjava</a> <a href="/tags/pattern-generics/" style="font-size: 1.1em; color: #999">pattern/generics</a> <a href="/tags/conda/" style="font-size: 1.1em; color: #999">conda</a> <a href="/tags/ffmpeg/" style="font-size: 1.1em; color: #999">ffmpeg</a> <a href="/tags/migration/" style="font-size: 1.1em; color: #999">migration</a> <a href="/tags/LinuxOps/" style="font-size: 1.1em; color: #999">LinuxOps</a> <a href="/tags/networking/" style="font-size: 1.1em; color: #999">networking</a> <a href="/tags/archlinux/" style="font-size: 1.23em; color: #999ea6">archlinux</a> <a href="/tags/Docker/" style="font-size: 1.1em; color: #999">Docker</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.1em; color: #999">数据库</a> <a href="/tags/Networking/" style="font-size: 1.1em; color: #999">Networking</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 1.1em; color: #999">故障排查</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 1.1em; color: #999">java/字节码</a> <a href="/tags/btrfs/" style="font-size: 1.1em; color: #999">btrfs</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/Incus/" style="font-size: 1.23em; color: #999ea6">Incus</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
       
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
   
-    <article id="post-java编程思想/备忘" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%A4%87%E5%BF%98/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%A4%87%E5%BF%98/">备忘</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+    <ul class="card-archive-list">
       
-        <p>理由非常务实，这关乎你的“学习心流”和“知识迁移效率”：  </p>
-<p> 1. 基础卷已过半，不要“半途而废”<br> 你已经看到第 16 章（代码校验&#x2F;测试），这说明你已经翻过了 Java<br> 最枯燥的语法大山，正进入“工程化思维”的核心区（测试、异常、断言等）。<br>  * 第 16 章的代码校验：非常重要！无论是 Java 还是 AI 开发，测试（Unit Testing）是保证系统不崩溃的底线。<br>  * 剩下的章节：基础卷剩下的章节（如集合、IO 等）是 Java 的骨架。如果你现在分心去看 Python，Java<br>    的这套逻辑体系就会打断，回过头再看时，你需要花双倍的时间找回感觉。  </p>
-<p> 2. 利用“完结奖励”开启 Python<br> 当你读完《On Java 基础卷》的那一刻，你会有一种“阶段性大胜”的成就感。这时候把 Python<br> 作为“奖励”或者“调剂”开启，学习劲头会非常足。<br>  * Python 的“降维打击”：当你彻底理解了 Java 的强类型、接口和复杂的测试框架后，去看 Python<br>    简直就像从“开手动挡货车”切换到“开自动挡轿车”，你会学得极快。  </p>
-<p> 3. 为你量身定制的“双线作战”时间表：  </p>
-<p> 我建议你按照以下节奏走：  </p>
-<p>  * 第一阶段（接下来的 2-3 周）：<br>      * 主攻： 彻底读完《On Java 基础卷》（16-22 章左右）。<br>      * 目标： 理解 Java 的错误处理、集合框架底层、基本 IO 逻辑。<br>      * AI 预热： 每天只花 15 分钟刷一下 AI 的新闻或看一个 AI 应用的 Demo（不写代码，只看逻辑）。  </p>
-<p>  * 第二阶段（中间的 2 周）：<br>      * 主攻： Python 突击周。<br>      * 任务： 找一本快速入门书（如《Python 编程：从入门到实践》的前半部分），把 Python 的语法、列表推导式、装饰器过一遍。<br>      * 目标： 能用 Python 写出简单的爬虫或调用 AI API 的脚本。  </p>
-<p>  * 第三阶段（长期）：<br>      * 早晨&#x2F;精力充沛时： 攻克《On Java 进阶卷》（泛型、并发、流）。这是你的身价。<br>      * 晚上&#x2F;精力疲惫时： 玩 Python AI（调用模型、处理数据）。这是你的武器。</p>
-
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              May 2026
+            </span>
+            <span class="card-archive-list-count">49</span>
+          </a>
+        </li>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%A4%87%E5%BF%98/" data-id="cuidQfUhFqXCLaosIgubwbFh6" data-title="备忘" class="article-share-link"><span class="fa fa-share">Share</span></a>
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              April 2026
+            </span>
+            <span class="card-archive-list-count">8</span>
+          </a>
+        </li>
       
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/枚举 EnumSet 详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%9E%9A%E4%B8%BE%20EnumSet%20%E8%AF%A6%E8%A7%A3/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%9E%9A%E4%B8%BE%20EnumSet%20%E8%AF%A6%E8%A7%A3/">枚举 EnumSet 详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="枚举-EnumSet-详解"><a href="#枚举-EnumSet-详解" class="headerlink" title="枚举 EnumSet 详解"></a>枚举 EnumSet 详解</h1><h2 id="枚举类构造函数"><a href="#枚举类构造函数" class="headerlink" title="枚举类构造函数"></a>枚举类构造函数</h2><ul>
-<li>只能使用 <code>private</code> 修饰符</li>
-<li>即使不写，默认也是 private（不是包访问级别）</li>
-</ul>
-<h3 id="编译器生成的方法"><a href="#编译器生成的方法" class="headerlink" title="编译器生成的方法"></a>编译器生成的方法</h3><ul>
-<li><code>values()</code> — 返回所有枚举常量数组，每个枚举类独有</li>
-<li><code>valueOf(String)</code> — 简化的 valueOf 方法，内部调用 <code>Enum.valueOf(Class, String)</code></li>
-</ul>
-<h2 id="EnumSet-实现原理"><a href="#EnumSet-实现原理" class="headerlink" title="EnumSet 实现原理"></a>EnumSet 实现原理</h2><p>EnumSet 使用**位向量（bit vector）**实现，本质是一个 <code>long</code> 型数组。</p>
-<h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RegularEnumSet</span>&lt;E <span class="keyword">extends</span> <span class="title class_">Enum</span>&lt;E&gt;&gt; <span class="keyword">extends</span> <span class="title class_">EnumSet</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> <span class="variable">elements</span> <span class="operator">=</span> <span class="number">0L</span>;  <span class="comment">// 位向量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>每个枚举常量占 1 位（bit）</li>
-<li>≤64 个枚举 → 用单个 <code>long</code></li>
-<li><blockquote>
-<p>64 个枚举 → 用 <code>long[]</code>（JumboEnumSet）</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="核心操作"><a href="#核心操作" class="headerlink" title="核心操作"></a>核心操作</h3><p><strong>添加 add:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elements |= (<span class="number">1L</span> &lt;&lt; e.ordinal());</span><br></pre></td></tr></table></figure>
-<p>把对应 bit 位置为1。</p>
-<p><strong>删除 remove:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elements &amp;= ~(<span class="number">1L</span> &lt;&lt; e.ordinal());</span><br></pre></td></tr></table></figure>
-<p>把对应 bit 位清零。</p>
-<p><strong>判断 contains:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(elements &amp; (<span class="number">1L</span> &lt;&lt; e.ordinal())) != <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>检查对应 bit 位是否为1。</p>
-<h3 id="原理图"><a href="#原理图" class="headerlink" title="原理图"></a>原理图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">枚举: A, B, C, D, E  (ordinal: 0,1,2,3,4)</span><br><span class="line">add(A), add(C), add(E) 后:</span><br><span class="line"></span><br><span class="line">elements = 0b10101 (二进制)</span><br><span class="line">           ↑     ↑   ↑</span><br><span class="line">           E     C   A (低位到高位)</span><br></pre></td></tr></table></figure>
-
-<h3 id="性能特点"><a href="#性能特点" class="headerlink" title="性能特点"></a>性能特点</h3><table>
-<thead>
-<tr>
-<th>特点</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>空间效率</td>
-<td>每个枚举值只占 1 位</td>
-</tr>
-<tr>
-<td>时间效率</td>
-<td>添加&#x2F;删除&#x2F;查询都是 O(1) 位运算</td>
-</tr>
-<tr>
-<td>顺序</td>
-<td>按枚举声明顺序存储</td>
-</tr>
-</tbody></table>
-<h3 id="remove-中-与-的区别"><a href="#remove-中-与-的区别" class="headerlink" title="remove 中 &amp;&#x3D;~ 与 ^&#x3D; 的区别"></a>remove 中 &amp;&#x3D;~ 与 ^&#x3D; 的区别</h3><table>
-<thead>
-<tr>
-<th>元素是否在集合中</th>
-<th><code>&amp;= ~(1L&lt;&lt;n)</code> (remove)</th>
-<th><code>^= (1L&lt;&lt;n)</code> (toggle)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>在 (bit&#x3D;1)</td>
-<td>变成 0 ✓</td>
-<td>变成 0 ✓</td>
-</tr>
-<tr>
-<td>不在 (bit&#x3D;0)</td>
-<td>保持 0 ✓</td>
-<td><strong>变成 1 ✗</strong></td>
-</tr>
-</tbody></table>
-<p><code>^=</code> 是 toggle 操作，会把不存在的元素错误地添加进来。</p>
-<h2 id="相关类"><a href="#相关类" class="headerlink" title="相关类"></a>相关类</h2><ul>
-<li><code>RegularEnumSet</code> — 枚举 ≤64 个</li>
-<li><code>JumboEnumSet</code> — 枚举 &gt;64 个</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>[[枚举类]]（Thinking in Java 相关章节）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%9E%9A%E4%B8%BE%20EnumSet%20%E8%AF%A6%E8%A7%A3/" data-id="cuidqIrhSXr3-DdUxvivGpTU7" data-title="枚举 EnumSet 详解" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E9%97%AE%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E9%97%AE%E9%A2%98/">问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Java 8 之后允许接口出现 <strong>default 方法</strong> 和 <strong>static 方法</strong>，本质上是为了解决两个不同但都很重要的痛点。</p>
-<p>下面用最直接的方式说明「为什么加」以及「加了之后主要解决什么问题」。</p>
-<h3 id="1-default-方法（默认方法）为什么允许存在？"><a href="#1-default-方法（默认方法）为什么允许存在？" class="headerlink" title="1. default 方法（默认方法）为什么允许存在？"></a>1. default 方法（默认方法）为什么允许存在？</h3><p><strong>最核心、最真实的动机只有一个：</strong></p>
-<p><strong>让已有接口在不破坏海量已有实现类的情况下进化（向后兼容 + API 演进）</strong></p>
-<h4 id="经典场景（也是-Java-8-引入-default-方法的真正导火索）"><a href="#经典场景（也是-Java-8-引入-default-方法的真正导火索）" class="headerlink" title="经典场景（也是 Java 8 引入 default 方法的真正导火索）"></a>经典场景（也是 Java 8 引入 default 方法的真正导火索）</h4><p>Java 8 要引入函数式编程 → Stream API → 需要在集合框架里加一堆新方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">interface Collection&lt;E&gt; &#123;</span><br><span class="line">    // Java 8 新增</span><br><span class="line">    default Stream&lt;E&gt; stream() &#123;</span><br><span class="line">        return StreamSupport.stream(spliterator(), false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    default Stream&lt;E&gt; parallelStream() &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    default Spliterator&lt;E&gt; spliterator() &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果没有 default 方法，你加上面这些方法的结果就是：</p>
-<ul>
-<li>所有实现 Collection 的类（包括用户自己写的、第三方库写的）全部编译失败</li>
-<li>全世界 Java 代码瞬间崩掉几亿行</li>
-</ul>
-<p><strong>所以 default 方法的真正意义是：</strong></p>
-<ul>
-<li>允许库作者在<strong>已有接口上安全地添加新行为</strong></li>
-<li>已有实现类不用改动、不用重新编译 → <strong>二进制兼容</strong></li>
-<li>实现类可以选择「覆盖」这个默认实现，也可以直接用默认的</li>
-</ul>
-<h4 id="其他常见好处（次要，但也很实用）"><a href="#其他常见好处（次要，但也很实用）" class="headerlink" title="其他常见好处（次要，但也很实用）"></a>其他常见好处（次要，但也很实用）</h4><ul>
-<li>把“模版方法模式”从抽象类解放出来，能用接口实现（多继承友好）</li>
-<li>给函数式接口加便利方法（forEach、removeIf、replaceAll 等）</li>
-<li>减少工具类（如 Collections、Arrays）的出现，把工具方法写进接口里更内聚</li>
-</ul>
-<p>一句话总结 default 方法的出现理由：</p>
-<blockquote>
-<p>“我们想给 Collection、List、Map 等核心接口加 lambda&#x2F;Stream 相关的新功能，但又不能让全世界代码都编译不过去，所以只好让接口自己带默认实现。”</p>
-</blockquote>
-<h3 id="2-static-方法为什么允许出现在接口里？"><a href="#2-static-方法为什么允许出现在接口里？" class="headerlink" title="2. static 方法为什么允许出现在接口里？"></a>2. static 方法为什么允许出现在接口里？</h3><p><strong>核心动机：把“属于这个接口的工具方法”写在接口旁边，而不是散落到工具类里</strong></p>
-<h4 id="以前的痛点举例"><a href="#以前的痛点举例" class="headerlink" title="以前的痛点举例"></a>以前的痛点举例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Java 7 及以前</span><br><span class="line">Collections.sort(list);</span><br><span class="line">Collections.synchronizedList(list);</span><br><span class="line">Arrays.asList(...);</span><br><span class="line">Comparator.naturalOrder();   // 其实没有这个类</span><br></pre></td></tr></table></figure>
-
-<p>这些静态工具方法逻辑上明明跟某个接口高度相关，却只能塞到 Collections、Arrays、Comparator.comparing 这种工具类里，显得分散、不内聚。</p>
-<p>Java 8 之后可以这样写：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">interface Comparator&lt;T&gt; &#123;</span><br><span class="line">    // 比较逻辑（抽象方法）</span><br><span class="line"></span><br><span class="line">    static &lt;T&gt; Comparator&lt;T&gt; naturalOrder() &#123; ... &#125;</span><br><span class="line">    static &lt;T&gt; Comparator&lt;T&gt; reverseOrder() &#123; ... &#125;</span><br><span class="line">    static &lt;T,U&gt; Comparator&lt;T&gt; comparing(Function&lt;T,U&gt; keyExtractor) &#123; ... &#125;</span><br><span class="line">    static &lt;T&gt; Comparator&lt;T&gt; comparingInt(ToIntFunction&lt;T&gt; keyExtractor) &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">interface Collection&lt;E&gt; &#123;</span><br><span class="line">    static &lt;E&gt; Collection&lt;E&gt; empty() &#123; ... &#125;   // 类似 Collections.emptyList()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface Optional&lt;T&gt; &#123;</span><br><span class="line">    static &lt;T&gt; Optional&lt;T&gt; of(T value) &#123; ... &#125;</span><br><span class="line">    static &lt;T&gt; Optional&lt;T&gt; ofNullable(T value) &#123; ... &#125;</span><br><span class="line">    static &lt;T&gt; Optional&lt;T&gt; empty() &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="static-接口方法的优点总结"><a href="#static-接口方法的优点总结" class="headerlink" title="static 接口方法的优点总结"></a>static 接口方法的优点总结</h4><ul>
-<li><strong>高内聚</strong>：跟接口强相关的工厂方法、工具方法可以直接写在接口里</li>
-<li><strong>命名空间更清晰</strong>：直接写 Comparator.naturalOrder() 而不是 Comparators.naturalOrder()</li>
-<li><strong>减少无意义的工具类</strong>（Collections、Arrays 这种“万能工具袋”变少）</li>
-<li><strong>不能被覆盖</strong>，天然安全（不像 default 方法可能被子类改写）</li>
-</ul>
-<p>一句话总结 static 方法的出现理由：</p>
-<blockquote>
-<p>“让真正属于这个接口的静态工厂方法、工具方法有个合理的家，而不是永远塞在某个 XXXs 工具类里。”</p>
-</blockquote>
-<h3 id="快速对比表（面试-复习用）"><a href="#快速对比表（面试-复习用）" class="headerlink" title="快速对比表（面试&#x2F;复习用）"></a>快速对比表（面试&#x2F;复习用）</h3><table>
-<thead>
-<tr>
-<th>特性</th>
-<th>default 方法</th>
-<th>static 方法</th>
-<th>出现的主要目的</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>有方法体</td>
-<td>有</td>
-<td>有</td>
-<td>—</td>
-</tr>
-<tr>
-<td>可被实现类覆盖</td>
-<td>可以（override）</td>
-<td>不可以</td>
-<td>—</td>
-</tr>
-<tr>
-<td>调用方式</td>
-<td>实例.方法() 或 接口名.super.方法()</td>
-<td>接口名.方法()</td>
-<td>—</td>
-</tr>
-<tr>
-<td>主要解决的问题</td>
-<td><strong>接口进化时的二进制兼容</strong></td>
-<td><strong>工具方法&#x2F;工厂方法的归属清晰</strong></td>
-<td>默认 → 兼容老代码 static → 内聚</td>
-</tr>
-<tr>
-<td>典型代表</td>
-<td>Collection.stream() List.sort()</td>
-<td>Comparator.comparing() Optional.of()</td>
-<td>—</td>
-</tr>
-</tbody></table>
-<p>简单记忆口诀：</p>
-<ul>
-<li><strong>default</strong> &#x3D; “默认给你一个实现，让接口能安全加功能，不让老代码爆炸”</li>
-<li><strong>static</strong> &#x3D; “让接口自己带工具方法和工厂，别再到处 new XXXUtils 了”</li>
-</ul>
-<h2 id="各种访问权限"><a href="#各种访问权限" class="headerlink" title="各种访问权限"></a>各种访问权限</h2><p>1, 类（普通类，抽象类）只能是包访问权限或者public的，不能是private或者protected的。内部类可以有上面四种<br>2, 抽象类的抽象方法，默认包访问权限, 也可以是public和protected的，不允许是private的<br>3, 接口可以是包访问权限或者public的<br>4, 接口的所有方法都是abstract的（除了default的），只能是public的<br>5, 接口的default方法必定是public的，default不是访问权限的一种，访问权限只有public，protected, package-private, private四种</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E9%97%AE%E9%A2%98/" data-id="cuid3eUnzKX7PN1XTDQj9tIoF" data-title="问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/流" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%B5%81/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%B5%81/">流</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><table>
-<thead>
-<tr>
-<th>方式</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>Collection.stream()</code></td>
-<td>从 List&#x2F;Set 等集合创建</td>
-</tr>
-<tr>
-<td><code>Arrays.stream()</code></td>
-<td>从数组创建</td>
-</tr>
-<tr>
-<td><code>Stream.of()</code></td>
-<td>从单个元素或数组创建</td>
-</tr>
-<tr>
-<td><code>Stream.builder()</code></td>
-<td>需要逐步构建流</td>
-</tr>
-<tr>
-<td><code>Stream.iterate()</code></td>
-<td>需要按规律生成元素</td>
-</tr>
-<tr>
-<td><code>Stream.generate()</code></td>
-<td>需要随机或动态生成元素</td>
-</tr>
-<tr>
-<td><code>Files.lines()</code></td>
-<td>从文件读取行</td>
-</tr>
-<tr>
-<td><code>IntStream.range()</code></td>
-<td>生成数字范围</td>
-</tr>
-<tr>
-<td><code>Pattern.splitAsStream()</code></td>
-<td>字符串分割</td>
-</tr>
-<tr>
-<td><code>Random.ints()</code></td>
-<td>生成随机数</td>
-</tr>
-<tr>
-<td><code>Optional.stream()</code></td>
-<td>从 Optional 展开</td>
-</tr>
-<tr>
-<td><code>Stream.empty()</code></td>
-<td>创建空流</td>
-</tr>
-</tbody></table>
-<h3 id="终结操作"><a href="#终结操作" class="headerlink" title="终结操作"></a>终结操作</h3><p>toArray()<br>forEach<br>collect<br>reduce<br>allMatch, anyMatch, noneMatch<br>findFirst, findAny<br>count, max, min<br>average, max, min, sum, summaryStatistics</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%B5%81/" data-id="cuid5RCWZRACoREWMMukADzvT" data-title="流" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-python/python" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/python/python/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/python/python/">python</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="那python我需要看哪本书？或者给一个入门途径"><a href="#那python我需要看哪本书？或者给一个入门途径" class="headerlink" title="那python我需要看哪本书？或者给一个入门途径"></a>那python我需要看哪本书？或者给一个入门途径</h2><p>既然您已经有了 Java 开发经验，千万不要像小白一样从零开始看那种“什么是变量、什么是循环”的入门书，那会浪费您大量时间。  </p>
-<p> 作为 Java 程序员，您的 Python 学习路径应该是 “对照式学习” + “AI 场景导向”。  </p>
-<p> 以下是为您定制的 Python 入门方案：  </p>
-<p> 1. 推荐书籍（选一本即可）  </p>
-<p>  * 《Python 编程：从入门到实践》(Python Crash Course):  <br>      * 特点： 经典中的经典。虽然有一部分内容是零基础，但后半部分的实战（数据可视化、Web 项目、小游戏）非常扎实。你可以快速扫过前半部分，重点看后半部分的实战。▄<br>  * 《流畅的 Python》(Fluent Python):<br>      * 特点： Java 程序员的进阶神书。如果你想知道 Python 里的“接口”、“装饰器”、“多线程”和 Java 的有什么不同，这本书会让你拍案叫绝。建议在有了一两周基础后再翻阅。▄  </p>
-<p> 2. 高效入门途径：对比法 (Comparison Learning)  </p>
-<p> 第 1-3 天：语法平移（Java vs Python）L<br>  * 不要看视频，直接看文档或简明教程。L<br>  * 对比点：  <br>      * Java 的强类型 vs Python 的动态类型。n<br>      * Java 的 {} vs Python 的缩进。态<br>      * Java 的 ArrayList vs Python 的 list&#x2F;dict。<br>      * Java 的 Stream vs Python 的 List Comprehension（列表推导式，Python 的精髓）。  </p>
-<p> 第 4-7 天：核心库（AI 开发必备）  <br>  * NumPy: Python 里的矩阵运算库。AI 的所有数据最终都会变成矩阵（Array）。<br>  * Pandas: 像操作 Excel 一样操作大规模数据。<br>  * Requests: 调 AI 接口（如 OpenAI API、Gemini API）必备。  </p>
-<p> 第 8-14 天：AI 小实战<br>  * 去 Hugging Face 或 GitHub 找一个开源的 AI 项目。）<br>  * 尝试用 Python 写一个简单的 Prompt 调测脚本，或者做一个简单的 RAG (检索增强生成) 演示。  </p>
-<p> 3. 给 Java 程序员的 3 个“避坑”建议：t  </p>
-<p>  4. 别纠结“内存管理”： Python 的垃圾回收（GC）比 Java 暴力得多，也慢得多。在 Python 里，不要像 Java 那样通过各种设计模式去管理内存，Python 更讲究“怎么快怎么来”。▄<br>  5. 拥抱“鸭子类型” (Duck Typing): Java 里必须 implements Interface。Python 里，只要这个对象有 speak() 方法，它就是一只鸭子。这种灵活性一开始会让 Java 程序员觉得“不安全”，但它是▄<br>     Python 高效的核心。c<br>  6. 虚拟环境 (venv&#x2F;conda): Python 的包管理（pip）比 Maven 混乱得多。第一步就要学会创建虚拟环境，否则你的全局库会乱成一团糟。  </p>
-<p> 7. 推荐一个免费资源：o<br>  * 廖雪峰的 Python 教程: 适合快速过一遍语法。p<br>  * Google’s Python Class: 专门给有编程基础的人准备的，非常硬核。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/python/python/" data-id="cuidPwI33Ut4eMN-0Utn99zGI" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-python/archlinux安装conda" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/python/archlinux%E5%AE%89%E8%A3%85conda/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/python/archlinux%E5%AE%89%E8%A3%85conda/">archlinux安装conda</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S miniconda3</span><br></pre></td></tr></table></figure>
-
-<p>由于我使用的终端是fish,需要生成fish相关配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/miniconda3/bin/conda init fish</span><br></pre></td></tr></table></figure>
-<p>执行完成后，会在～&#x2F;.config&#x2F;fish&#x2F;config.fish文件也就是fish配置文件生成兼容配置</p>
-<p>关闭自动激活base环境</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda config --set auto_activate_base false</span><br></pre></td></tr></table></figure>
-
-<p>配置国内镜像源</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>每次执行conda指令会提示下面错误</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;frozen importlib._bootstrap&gt;:488: Warning: OpenSSL 3&#x27;s legacy provider failed to load.</span><br></pre></td></tr></table></figure>
-
-<p>安装相关包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S python-cryptography</span><br></pre></td></tr></table></figure>
-
-<p>然后在fish配置文件.config&#x2F;fish&#x2F;config.fish中增加下面配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set -gx CRYPTOGRAPHY_OPENSSL_NO_LEGACY 1</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/python/archlinux%E5%AE%89%E8%A3%85conda/" data-id="cuid-TR7KDXlE7HYVuL62jea5" data-title="archlinux安装conda" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/conda/" rel="tag">conda</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Linux/General/怎么将vim中复制的内容，复制到系统剪贴板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/Linux/General/%E6%80%8E%E4%B9%88%E5%B0%86vim%E4%B8%AD%E5%A4%8D%E5%88%B6%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%8C%E5%A4%8D%E5%88%B6%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%89%AA%E8%B4%B4%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/General/">General</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/Linux/General/%E6%80%8E%E4%B9%88%E5%B0%86vim%E4%B8%AD%E5%A4%8D%E5%88%B6%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%8C%E5%A4%8D%E5%88%B6%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%89%AA%E8%B4%B4%E6%9D%BF/">安装 gvim（会替换 vim，但命令仍然是 vim，不会影响使用）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在 <strong>Arch Linux + Ghostty</strong> 中，使用普通 vim（通过 pacman -S vim 安装）时，默认<strong>没有</strong>系统剪贴板支持（vim –version | grep clipboard 会显示 -clipboard）。</p>
-<p>下面是 <strong>2026 年最实用</strong>的几种解决方案，按推荐顺序排列：</p>
-<h3 id="1-最推荐方案：安装-gvim（简单有效）"><a href="#1-最推荐方案：安装-gvim（简单有效）" class="headerlink" title="1. 最推荐方案：安装 gvim（简单有效）"></a>1. 最推荐方案：安装 gvim（简单有效）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装 gvim（会替换 vim，但命令仍然是 vim，不会影响使用）</span><br><span class="line">sudo pacman -S gvim</span><br></pre></td></tr></table></figure>
-
-<p>安装后检查：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim --version | grep -E &quot;clipboard|xterm_clipboard&quot;</span><br></pre></td></tr></table></figure>
-
-<p>应该看到 +clipboard（可能还有 +xterm_clipboard）。</p>
-<h4 id="在-vimrc-中添加配置（推荐）"><a href="#在-vimrc-中添加配置（推荐）" class="headerlink" title="在 ~&#x2F;.vimrc 中添加配置（推荐）"></a>在 ~&#x2F;.vimrc 中添加配置（推荐）</h4><p>编辑配置文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano ~/.vimrc</span><br></pre></td></tr></table></figure>
-
-<p>添加下面这行（最常用）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set clipboard=unnamedplus</span><br></pre></td></tr></table></figure>
-
-<p><strong>解释</strong>：</p>
-<ul>
-<li>unnamedplus：让普通 y（yank）直接复制到系统剪贴板（”+ 寄存器，对应 Ctrl+V 粘贴）。</li>
-<li>如果你只想用 “+y 手动复制，可以不加这行。</li>
-</ul>
-<p>保存后重启 vim 测试。</p>
-<h3 id="2-如何在-Vim-中复制到系统剪贴板"><a href="#2-如何在-Vim-中复制到系统剪贴板" class="headerlink" title="2. 如何在 Vim 中复制到系统剪贴板"></a>2. 如何在 Vim 中复制到系统剪贴板</h3><p><strong>方式 A（推荐，设置后最方便）</strong> 选中文字后直接按 y 或 yy（复制当前行），内容就会自动进入系统剪贴板，可以在浏览器、其他终端等地方 <strong>Ctrl + V</strong> 粘贴。</p>
-<p><strong>方式 B（不改配置，手动指定）</strong></p>
-<ul>
-<li>进入可视模式（按 v 或 V）</li>
-<li>选中想要的内容</li>
-<li>按 “ + y （双引号 + 加号 + y）</li>
-</ul>
-<p>其他常用命令：</p>
-<ul>
-<li>复制当前行到系统剪贴板：”+yy</li>
-<li>复制到行尾：”+y$</li>
-<li>从系统剪贴板粘贴：”+p 或 “+P</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/Linux/General/%E6%80%8E%E4%B9%88%E5%B0%86vim%E4%B8%AD%E5%A4%8D%E5%88%B6%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%8C%E5%A4%8D%E5%88%B6%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%89%AA%E8%B4%B4%E6%9D%BF/" data-id="cuidwQZupJH0Prn_VTkocUNDW" data-title="安装 gvim（会替换 vim，但命令仍然是 vim，不会影响使用）" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第十九章反射/方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/%E6%96%B9%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a>►<a class="article-category-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/%E6%96%B9%E6%B3%95/">方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>isAssignableFrom()</strong> 是 Java 反射中非常重要且常用的一个方法，其作用是：</p>
-<blockquote>
-<p><strong>判断一个类是否可以被另一个类赋值（即类型兼容性检查）</strong></p>
-</blockquote>
-<h3 id="官方定义"><a href="#官方定义" class="headerlink" title="官方定义"></a>官方定义</h3><p>Java</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public boolean isAssignableFrom(Class&lt;?&gt; cls)</span><br></pre></td></tr></table></figure>
-
-<p><strong>含义</strong>： 判断 cls 这个类（或接口）是否能赋值给当前 Class 对象所代表的类型。</p>
-<p>简单说就是：<strong>“cls 是否是当前类型的子类、实现类、或者就是当前类型本身？”</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/%E6%96%B9%E6%B3%95/" data-id="cuidLjGSEY44UtaxRqRSue5vt" data-title="方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Linux/Virtualization/Docker/配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/Linux/Virtualization/Docker/%E9%85%8D%E7%BD%AE/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Virtualization/">Virtualization</a>►<a class="article-category-link" href="/categories/Linux/Virtualization/Docker/">Docker</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/Linux/Virtualization/Docker/%E9%85%8D%E7%BD%AE/">配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>修改docker root dir位置</p>
-<p>&#x2F;etc&#x2F;docker&#x2F;daemon.json</p>
-<h2 id="配置代理"><a href="#配置代理" class="headerlink" title="配置代理"></a>配置代理</h2><ol>
-<li>创建 dockerd 相关的 systemd 目录，这个目录下的配置将覆盖 dockerd 的默认配置</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/systemd/system/docker.service.d</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>新建配置文件 <code>/etc/systemd/system/docker.service.d/http-proxy.conf</code>，这个文件中将包含环境变量</li>
-</ol>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">Environment</span>=<span class="string">&quot;HTTP_PROXY=http://proxy.example.com&quot;</span></span><br><span class="line"><span class="attr">Environment</span>=<span class="string">&quot;HTTPS_PROXY=http://proxy.example.com&quot;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>如果你自己建了私有的镜像仓库，需要 dockerd 绕过代理服务器直连，那么配置 <code>NO_PROXY</code> 变量：</li>
-</ol>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">Environment</span>=<span class="string">&quot;HTTP_PROXY=http://proxy.example.com&quot;</span></span><br><span class="line"><span class="attr">Environment</span>=<span class="string">&quot;HTTPS_PROXY=http://proxy.example.com&quot;</span></span><br><span class="line"><span class="attr">Environment</span>=<span class="string">&quot;NO_PROXY=your-registry.com,10.10.10.10,*.example.com&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>多个 <code>NO_PROXY</code> 变量的值用逗号分隔，而且可以使用通配符（*），极端情况下，如果 <code>NO_PROXY=*</code>，那么所有请求都将不通过代理服务器。</p>
-<ol start="4">
-<li>重新加载配置文件，重启 dockerd</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> systemctl daemon-reload</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> systemctl restart docker</span></span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>检查确认环境变量已经正确配置：</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> systemctl show --property=Environment docker</span></span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>从 <code>docker info</code> 的结果中查看配置项。</li>
-</ol>
-<p><img src="https://www.lfhacks.com/resource/image/tech/pull-docker-images-behind-proxy/dockerproxy.png"></p>
-<p>这样配置后，应该可以正常拉取 docker 镜像。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/Linux/Virtualization/Docker/%E9%85%8D%E7%BD%AE/" data-id="cuidPoGWvyR7FRveyPYmiovnw" data-title="配置" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Linux/Arch Linux 从 ext4 重装迁移到 Btrfs 方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/04/26/Linux/Arch%20Linux%20%E4%BB%8E%20ext4%20%E9%87%8D%E8%A3%85%E8%BF%81%E7%A7%BB%E5%88%B0%20Btrfs%20%E6%96%B9%E6%A1%88/" class="article-date">
-  <time class="dt-published" datetime="2026-04-25T16:00:00.000Z" itemprop="datePublished">2026-04-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/04/26/Linux/Arch%20Linux%20%E4%BB%8E%20ext4%20%E9%87%8D%E8%A3%85%E8%BF%81%E7%A7%BB%E5%88%B0%20Btrfs%20%E6%96%B9%E6%A1%88/">Arch Linux 从 ext4 重装迁移到 Btrfs 方案</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Arch-Linux-从-ext4-重装迁移到-Btrfs-方案"><a href="#Arch-Linux-从-ext4-重装迁移到-Btrfs-方案" class="headerlink" title="Arch Linux 从 ext4 重装迁移到 Btrfs 方案"></a>Arch Linux 从 ext4 重装迁移到 Btrfs 方案</h1><p>目标：在保留 Windows 11 双系统的前提下，重装当前 Arch Linux，把根分区从 ext4 迁移到 Btrfs，并尽可能保留当前已安装软件、系统配置、用户配置、自定义环境变量等信息。</p>
-<blockquote>
-<p>结论：基于当前机器的实际结构，最稳妥的方案是：保留 <code>nvme0n1</code> 上的整个 Windows 盘完全不动，只重装 <code>nvme1n1</code> 上的 Arch；复用当前 Arch 自己的 EFI 分区 <code>/dev/nvme1n1p1</code>，把根分区 <code>/dev/nvme1n1p2</code> 改成 Btrfs，继续保留单独的 <code>/home</code> 分区 <code>/dev/nvme1n1p3</code>。</p>
-</blockquote>
-<hr>
-<h2 id="1-迁移目标"><a href="#1-迁移目标" class="headerlink" title="1. 迁移目标"></a>1. 迁移目标</h2><p>需要保留的内容：</p>
-<ul>
-<li>已安装软件列表</li>
-<li>AUR 软件列表</li>
-<li><code>/etc</code> 中的重要系统配置</li>
-<li>用户目录中的配置与数据</li>
-<li>shell &#x2F; systemd 用户环境中的自定义环境变量</li>
-<li>systemd 服务、timer、开发工具链配置</li>
-<li>SSH &#x2F; GPG &#x2F; 字体 &#x2F; 输入法 &#x2F; 编辑器 &#x2F; 终端等个人环境</li>
-</ul>
-<p>需要实现的内容：</p>
-<ul>
-<li>仅把 Arch 根分区 <code>/dev/nvme1n1p2</code> 从 ext4 改成 Btrfs</li>
-<li>继续保留单独的 <code>/home</code> 分区 <code>/dev/nvme1n1p3</code>，不在本次重装中格式化</li>
-<li>继续复用当前 Arch 的 EFI 分区 <code>/dev/nvme1n1p1</code>，挂载点仍为 <code>/efi</code></li>
-<li>Windows 11 所在整块磁盘 <code>nvme0n1</code> 保持不动</li>
-<li>启动方式继续沿用当前的 GRUB + UEFI</li>
-</ul>
-<hr>
-<h2 id="2-总体方案"><a href="#2-总体方案" class="headerlink" title="2. 总体方案"></a>2. 总体方案</h2><p>分五步执行：</p>
-<ol>
-<li>盘点当前系统状态</li>
-<li>做完整备份</li>
-<li>重装 Arch 到 Btrfs</li>
-<li>恢复软件和配置</li>
-<li>逐项验收</li>
-</ol>
-<p>推荐采用保守方案：</p>
-<ul>
-<li>先恢复包</li>
-<li>再恢复配置</li>
-<li>最后恢复大数据目录</li>
-</ul>
-<p>这样最容易排错，也最不容易把旧系统问题原样带回新系统。</p>
-<hr>
-<h2 id="3-重装前导出系统状态"><a href="#3-重装前导出系统状态" class="headerlink" title="3. 重装前导出系统状态"></a>3. 重装前导出系统状态</h2><p>建议先准备一个备份目录，例如外置盘或其它分区挂载到 <code>/mnt/backup</code>。</p>
-<h3 id="3-1-导出软件列表"><a href="#3-1-导出软件列表" class="headerlink" title="3.1 导出软件列表"></a>3.1 导出软件列表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /mnt/backup/arch-migration</span><br><span class="line"></span><br><span class="line">pacman -Qqe &gt; /mnt/backup/arch-migration/pkglist-explicit.txt</span><br><span class="line">pacman -Qqem &gt; /mnt/backup/arch-migration/pkglist-foreign.txt</span><br><span class="line">pacman -Qqm &gt; /mnt/backup/arch-migration/pkglist-aur.txt</span><br><span class="line">pacman -Q &gt; /mnt/backup/arch-migration/pkglist-full.txt</span><br></pre></td></tr></table></figure>
-
-<p>说明：</p>
-<ul>
-<li><code>pkglist-explicit.txt</code>：显式安装的软件</li>
-<li><code>pkglist-foreign.txt</code>：非官方仓库软件</li>
-<li><code>pkglist-aur.txt</code>：通常主要是 AUR 软件</li>
-<li><code>pkglist-full.txt</code>：完整留档</li>
-</ul>
-<h3 id="3-2-导出-systemd-服务信息"><a href="#3-2-导出-systemd-服务信息" class="headerlink" title="3.2 导出 systemd 服务信息"></a>3.2 导出 systemd 服务信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-unit-files --state=enabled &gt; /mnt/backup/arch-migration/systemd-enabled-system.txt</span><br><span class="line">systemctl --user list-unit-files --state=enabled &gt; /mnt/backup/arch-migration/systemd-enabled-user.txt</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3-导出分区和启动信息"><a href="#3-3-导出分区和启动信息" class="headerlink" title="3.3 导出分区和启动信息"></a>3.3 导出分区和启动信息</h3><p>这台机器当前的实际分区结构如下：</p>
-<ul>
-<li><code>nvme0n1</code>：Windows 11 所在磁盘<ul>
-<li><code>nvme0n1p1</code>：Windows EFI，100M，vfat</li>
-<li><code>nvme0n1p2</code>：MSR，16M</li>
-<li><code>nvme0n1p3</code>：Windows 系统分区，NTFS，199G</li>
-<li><code>nvme0n1p4</code>：Windows Recovery，NTFS，958M</li>
-<li><code>nvme0n1p5</code>：数据分区“新加卷”，NTFS，276.9G</li>
-</ul>
-</li>
-<li><code>nvme1n1</code>：当前 Arch 所在磁盘<ul>
-<li><code>nvme1n1p1</code>：Arch EFI，1G，vfat，当前挂载 <code>/efi</code></li>
-<li><code>nvme1n1p2</code>：Arch 根分区，300G，ext4，当前挂载 <code>/</code></li>
-<li><code>nvme1n1p3</code>：Arch <code>/home</code> 分区，1.6T，ext4，当前挂载 <code>/home</code></li>
-</ul>
-</li>
-</ul>
-<p>当前 EFI 启动项：</p>
-<ul>
-<li><code>Boot0003</code>：GRUB，位于 <code>nvme1n1p1</code> 上的 <code>\\EFI\\GRUB\\grubx64.efi</code></li>
-<li><code>Boot0004</code>：Windows Boot Manager，位于 <code>nvme0n1p1</code></li>
-</ul>
-<p>当前引导顺序是：</p>
-<ul>
-<li><code>BootOrder: 0003,0004,...</code></li>
-</ul>
-<p>这意味着当前机器已经是“Windows 一块盘 + Arch 一块盘”的双盘双系统结构，重装 Arch 时没有必要碰 Windows 那块盘。</p>
-<p>重装前仍建议导出当前现场信息：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lsblk -f &gt; /mnt/backup/arch-migration/lsblk-f.txt</span><br><span class="line">blkid &gt; /mnt/backup/arch-migration/blkid.txt</span><br><span class="line">efibootmgr -v &gt; /mnt/backup/arch-migration/efibootmgr.txt</span><br><span class="line"><span class="built_in">cat</span> /etc/fstab &gt; /mnt/backup/arch-migration/fstab.txt</span><br><span class="line"><span class="built_in">cat</span> /etc/default/grub &gt; /mnt/backup/arch-migration/grub-default.txt</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-4-导出环境变量信息"><a href="#3-4-导出环境变量信息" class="headerlink" title="3.4 导出环境变量信息"></a>3.4 导出环境变量信息</h3><p>重点不是变量值本身，而是变量定义所在的文件；但仍建议留一份现场值用于迁移后比对。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printenv</span> | <span class="built_in">sort</span> &gt; /mnt/backup/arch-migration/current-env.txt</span><br><span class="line">systemctl --user show-environment &gt; /mnt/backup/arch-migration/systemd-user-env.txt</span><br></pre></td></tr></table></figure>
-
-<p>常见环境变量来源：</p>
-<ul>
-<li><code>/etc/environment</code></li>
-<li><code>/etc/profile</code></li>
-<li><code>/etc/profile.d/*</code></li>
-<li><code>~/.profile</code></li>
-<li><code>~/.bash_profile</code></li>
-<li><code>~/.bashrc</code></li>
-<li><code>~/.zprofile</code></li>
-<li><code>~/.zshenv</code></li>
-<li><code>~/.zshrc</code></li>
-<li><code>~/.config/environment.d/*.conf</code></li>
-<li><code>~/.pam_environment</code></li>
-</ul>
-<hr>
-<h2 id="4-备份策略"><a href="#4-备份策略" class="headerlink" title="4. 备份策略"></a>4. 备份策略</h2><h3 id="4-1-必备备份项"><a href="#4-1-必备备份项" class="headerlink" title="4.1 必备备份项"></a>4.1 必备备份项</h3><p>至少备份：</p>
-<ul>
-<li><code>/home/&lt;用户名&gt;/</code></li>
-<li><code>/etc</code></li>
-<li><code>/usr/local</code></li>
-<li><code>/opt</code></li>
-<li><code>/var/lib</code> 中的重要服务数据</li>
-</ul>
-<p>用户目录里重点关注：</p>
-<ul>
-<li><code>~/.config</code></li>
-<li><code>~/.local/share</code></li>
-<li><code>~/.local/state</code></li>
-<li><code>~/.ssh</code></li>
-<li><code>~/.gnupg</code></li>
-<li>浏览器配置目录</li>
-<li><code>~/.cargo</code> &#x2F; <code>~/.rustup</code></li>
-<li><code>~/.pyenv</code> &#x2F; <code>~/.nvm</code></li>
-<li><code>~/.local/bin</code> &#x2F; <code>~/bin</code></li>
-</ul>
-<p>如果使用了这些服务，要单独确认其数据：</p>
-<ul>
-<li>Docker</li>
-<li>libvirt &#x2F; virt-manager</li>
-<li>PostgreSQL &#x2F; MariaDB &#x2F; MySQL &#x2F; Redis</li>
-<li>NetworkManager 连接配置</li>
-<li>虚拟机磁盘镜像</li>
-</ul>
-<h3 id="4-2-当前机器的-Docker-备份方案"><a href="#4-2-当前机器的-Docker-备份方案" class="headerlink" title="4.2 当前机器的 Docker 备份方案"></a>4.2 当前机器的 Docker 备份方案</h3><p>这台机器上的 Docker 不是默认配置，迁移时需要按当前实际情况备份。</p>
-<p>当前确认到的事实：</p>
-<ul>
-<li>Docker systemd 服务已启用且当前正在运行</li>
-<li>Docker <code>data-root</code> 在 <code>/home/bkx/environment/docker_root/</code>，不是默认的 <code>/var/lib/docker</code></li>
-<li><code>/etc/docker/daemon.json</code> 启用了自定义 <code>data-root</code></li>
-<li>当前使用 <code>overlayfs</code> 存储驱动</li>
-<li>当前启用了 <code>nvidia-container-runtime</code></li>
-<li>当前存在大量 named volume、多个 compose 项目，以及少量手动创建的容器</li>
-<li>当前 Docker CLI 用户配置目录在 <code>/home/bkx/.docker</code></li>
-</ul>
-<p>因此，Docker 相关内容不要只按“备份 <code>/var/lib/docker</code>”处理，而要按下面的实际路径备份。</p>
-<h4 id="4-2-1-必须备份的-Docker-路径"><a href="#4-2-1-必须备份的-Docker-路径" class="headerlink" title="4.2.1 必须备份的 Docker 路径"></a>4.2.1 必须备份的 Docker 路径</h4><ol>
-<li>daemon 配置：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> -a /etc/docker /mnt/backup/arch-migration/docker-etc</span><br></pre></td></tr></table></figure>
-
-<p>其中最关键的是：</p>
-<ul>
-<li><code>/etc/docker/daemon.json</code></li>
-</ul>
-<p>当前文件中的关键配置包括：</p>
-<ul>
-<li><code>data-root=/home/bkx/environment/docker_root/</code></li>
-<li><code>log-driver=json-file</code></li>
-<li><code>log-opts.max-file=10</code></li>
-<li><code>log-opts.max-size=10m</code></li>
-<li><code>runtimes.nvidia.path=nvidia-container-runtime</code></li>
-<li><code>features.buildkit=true</code></li>
-</ul>
-<ol start="2">
-<li>Docker 数据目录：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> rsync -aAXHv /home/bkx/environment/docker_root/ /mnt/backup/arch-migration/docker_root/</span><br></pre></td></tr></table></figure>
-
-<p>注意：虽然 <code>docker_root</code> 位于用户家目录树下，但其中很多文件是 root 拥有，必须用 <code>sudo</code> 备份。</p>
-<ol start="3">
-<li>Docker CLI 用户配置：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -aAXHv /home/bkx/.docker/ /mnt/backup/arch-migration/docker-cli-config/</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-2-2-当前机器上需要一并备份的-compose-项目目录"><a href="#4-2-2-当前机器上需要一并备份的-compose-项目目录" class="headerlink" title="4.2.2 当前机器上需要一并备份的 compose 项目目录"></a>4.2.2 当前机器上需要一并备份的 compose 项目目录</h4><p>当前检测到的 compose 项目包括：</p>
-<ul>
-<li><code>/home/bkx/Projects/NCE-Flow/docker-compose.yml</code></li>
-<li><code>/home/bkx/Projects/sub2api-deploy/docker-compose.yml</code></li>
-<li><code>/home/bkx/Projects/TypeWords/docker-compose.yml</code></li>
-<li><code>/home/bkx/Projects/firecrawl/docker-compose.yaml</code></li>
-<li><code>/home/bkx/environment/mysql/docker-compose.yaml</code></li>
-</ul>
-<p>建议把这些项目目录整体备份，因为除了 compose 文件本身，还可能包含 <code>.env</code>、bind mount 数据目录、初始化脚本和项目级配置。</p>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> rsync -aAXHv /home/bkx/Projects/NCE-Flow/ /mnt/backup/arch-migration/docker-projects/NCE-Flow/</span><br><span class="line"><span class="built_in">sudo</span> rsync -aAXHv /home/bkx/Projects/sub2api-deploy/ /mnt/backup/arch-migration/docker-projects/sub2api-deploy/</span><br><span class="line"><span class="built_in">sudo</span> rsync -aAXHv /home/bkx/Projects/TypeWords/ /mnt/backup/arch-migration/docker-projects/TypeWords/</span><br><span class="line"><span class="built_in">sudo</span> rsync -aAXHv /home/bkx/Projects/firecrawl/ /mnt/backup/arch-migration/docker-projects/firecrawl/</span><br><span class="line"><span class="built_in">sudo</span> rsync -aAXHv /home/bkx/environment/mysql/ /mnt/backup/arch-migration/docker-projects/mysql/</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-2-3-当前机器上已检测到的重要-bind-mount-路径"><a href="#4-2-3-当前机器上已检测到的重要-bind-mount-路径" class="headerlink" title="4.2.3 当前机器上已检测到的重要 bind mount 路径"></a>4.2.3 当前机器上已检测到的重要 bind mount 路径</h4><p>这些路径中的数据不完全依赖 Docker <code>data-root</code>，需要单独确认已经备份：</p>
-<ul>
-<li><code>/home/bkx/Projects/sub2api-deploy/data</code></li>
-<li><code>/home/bkx/Projects/sub2api-deploy/postgres_data</code></li>
-<li><code>/home/bkx/Projects/sub2api-deploy/redis_data</code></li>
-<li><code>/home/bkx/environment/mysql/conf/my.cnf</code></li>
-<li><code>/home/bkx/environment/mysql/data</code></li>
-<li><code>/home/bkx/environment/videolingo/_model_cache</code></li>
-<li><code>/home/bkx/environment/videolingo/hf_cache</code></li>
-<li><code>/home/bkx/environment/postgresql/postgresql18</code></li>
-<li><code>/home/bkx/environment/redis</code></li>
-</ul>
-<p>这些路径大多已经包含在 <code>/home</code> 总备份中，但迁移前最好单独核对一次，避免遗漏某些大目录或被排除规则跳过。</p>
-<h4 id="4-2-4-当前机器上已检测到的-named-volume-风险点"><a href="#4-2-4-当前机器上已检测到的-named-volume-风险点" class="headerlink" title="4.2.4 当前机器上已检测到的 named volume 风险点"></a>4.2.4 当前机器上已检测到的 named volume 风险点</h4><p>当前 Docker 中存在多组 local volume，其中至少包括：</p>
-<ul>
-<li><code>earthworm_data</code></li>
-<li><code>microwarp_warp-data</code></li>
-<li><code>new-api_pg_data</code></li>
-<li>以及多组哈希名 volume</li>
-</ul>
-<p>这些卷的真实数据位于：</p>
-<ul>
-<li><code>/home/bkx/environment/docker_root/volumes/</code></li>
-</ul>
-<p>只要完整备份 <code>docker_root</code>，这些卷数据就会被带走；如果只备份 compose 项目目录而不备份 <code>docker_root</code>，这些 named volume 数据会丢失。</p>
-<h4 id="4-2-5-当前机器上存在的“手动创建容器”"><a href="#4-2-5-当前机器上存在的“手动创建容器”" class="headerlink" title="4.2.5 当前机器上存在的“手动创建容器”"></a>4.2.5 当前机器上存在的“手动创建容器”</h4><p>当前发现以下容器没有 compose 标签，迁移后不能只靠 <code>docker compose up -d</code> 恢复：</p>
-<ul>
-<li><code>mm</code></li>
-<li><code>videolingo</code></li>
-<li><code>postgres18</code></li>
-<li><code>redis840</code></li>
-</ul>
-<p>其中已检测到的挂载关系：</p>
-<ul>
-<li><code>videolingo</code><ul>
-<li><code>/home/bkx/environment/videolingo/_model_cache -&gt; /app/_model_cache</code></li>
-<li><code>/home/bkx/environment/videolingo/hf_cache -&gt; /root/.cache/huggingface</code></li>
-</ul>
-</li>
-<li><code>postgres18</code><ul>
-<li><code>/home/bkx/environment/postgresql/postgresql18 -&gt; /var/lib/postgresql</code></li>
-</ul>
-</li>
-<li><code>redis840</code><ul>
-<li><code>/home/bkx/environment/redis -&gt; /data</code></li>
-<li><code>/home/bkx/environment/redis/redis.conf -&gt; /usr/local/etc/redis/redis.conf</code></li>
-</ul>
-</li>
-</ul>
-<p>迁移前建议额外导出这些手动容器的配置，方便重建：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker inspect mm &gt; /mnt/backup/arch-migration/docker-inspect-mm.json</span><br><span class="line">docker inspect videolingo &gt; /mnt/backup/arch-migration/docker-inspect-videolingo.json</span><br><span class="line">docker inspect postgres18 &gt; /mnt/backup/arch-migration/docker-inspect-postgres18.json</span><br><span class="line">docker inspect redis840 &gt; /mnt/backup/arch-migration/docker-inspect-redis840.json</span><br></pre></td></tr></table></figure>
-
-<p>如果希望迁移后恢复更轻松，最好在重装前把这些手动容器改写成 compose 文件一起保存。</p>
-<h4 id="4-2-6-建议导出-Docker-清单"><a href="#4-2-6-建议导出-Docker-清单" class="headerlink" title="4.2.6 建议导出 Docker 清单"></a>4.2.6 建议导出 Docker 清单</h4><p>迁移前额外导出以下清单：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker info &gt; /mnt/backup/arch-migration/docker-info.txt</span><br><span class="line">docker ps -a &gt; /mnt/backup/arch-migration/docker-ps-a.txt</span><br><span class="line">docker images &gt; /mnt/backup/arch-migration/docker-images.txt</span><br><span class="line">docker volume <span class="built_in">ls</span> &gt; /mnt/backup/arch-migration/docker-volume-ls.txt</span><br><span class="line">docker network <span class="built_in">ls</span> &gt; /mnt/backup/arch-migration/docker-network-ls.txt</span><br></pre></td></tr></table></figure>
-
-<p>如果想保留每个容器的详细定义：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect $(docker ps -aq) &gt; /mnt/backup/arch-migration/docker-inspect-all.json</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-2-7-推荐的-Docker-备份顺序"><a href="#4-2-7-推荐的-Docker-备份顺序" class="headerlink" title="4.2.7 推荐的 Docker 备份顺序"></a>4.2.7 推荐的 Docker 备份顺序</h4><p>为了避免数据库类容器写入中的不一致，建议先停容器再备份：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker ps -q &gt; /mnt/backup/arch-migration/docker-running-containers.txt</span><br><span class="line">docker stop $(docker ps -q)</span><br></pre></td></tr></table></figure>
-
-<p>然后依次备份：</p>
-<ol>
-<li><code>/etc/docker</code></li>
-<li><code>/home/bkx/environment/docker_root/</code></li>
-<li><code>/home/bkx/.docker/</code></li>
-<li>所有 compose 项目目录</li>
-<li>所有 bind mount 数据目录</li>
-<li><code>docker inspect</code> 与清单导出文件</li>
-</ol>
-<p>备份完成后，如果当前系统还要继续使用，再启动容器：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start $(<span class="built_in">cat</span> /mnt/backup/arch-migration/docker-running-containers.txt)</span><br></pre></td></tr></table></figure>
-
-<p>如果没有运行中的容器，上述命令可能报空参数错误，手动跳过即可。</p>
-<h4 id="4-2-8-重装后如何恢复-Docker"><a href="#4-2-8-重装后如何恢复-Docker" class="headerlink" title="4.2.8 重装后如何恢复 Docker"></a>4.2.8 重装后如何恢复 Docker</h4><p>新系统恢复顺序建议如下：</p>
-<ol>
-<li>安装 Docker 及相关工具</li>
-<li>恢复 <code>/etc/docker/daemon.json</code></li>
-<li>先创建自定义数据目录：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /home/bkx/environment/docker_root</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>把备份的 <code>docker_root</code> 恢复回原路径：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> rsync -aAXHv /mnt/backup/arch-migration/docker_root/ /home/bkx/environment/docker_root/</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>恢复 <code>/home/bkx/.docker</code></li>
-<li>启用并启动 Docker：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> docker</span><br><span class="line"><span class="built_in">sudo</span> systemctl start docker</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
-<li>恢复 compose 项目目录与 bind mount 数据</li>
-<li>在各 compose 项目目录中执行：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
-
-<ol start="9">
-<li>对手动容器，参考导出的 <code>docker inspect</code> 结果手动重建</li>
-</ol>
-<h4 id="4-2-9-Btrfs-布局上的额外建议"><a href="#4-2-9-Btrfs-布局上的额外建议" class="headerlink" title="4.2.9 Btrfs 布局上的额外建议"></a>4.2.9 Btrfs 布局上的额外建议</h4><p>因为这台机器比较重度使用 Docker，且 <code>data-root</code> 放在 <code>/home/bkx/environment/docker_root/</code>，重装时可以考虑二选一：</p>
-<ul>
-<li>保持现状，让它跟随 <code>@home</code> 子卷</li>
-<li>单独给 <code>/home/bkx/environment/docker_root</code> 建一个独立 Btrfs 子卷</li>
-</ul>
-<p>如果后续希望把 Docker 快照、回滚、空间管理与普通 home 数据分开，第二种更合适。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> rsync -aAXHv \</span><br><span class="line">  --exclude=&#123;<span class="string">&quot;/dev/*&quot;</span>,<span class="string">&quot;/proc/*&quot;</span>,<span class="string">&quot;/sys/*&quot;</span>,<span class="string">&quot;/tmp/*&quot;</span>,<span class="string">&quot;/run/*&quot;</span>,<span class="string">&quot;/mnt/*&quot;</span>,<span class="string">&quot;/media/*&quot;</span>,<span class="string">&quot;/lost+found&quot;</span>&#125; \</span><br><span class="line">  /etc /home /usr/local /opt /var/lib \</span><br><span class="line">  /mnt/backup/arch-migration/root-backup/</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-3-单独备份-pacman-相关配置"><a href="#4-3-单独备份-pacman-相关配置" class="headerlink" title="4.3 单独备份 pacman 相关配置"></a>4.3 单独备份 pacman 相关配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -a /etc/pacman.conf /mnt/backup/arch-migration/</span><br><span class="line"><span class="built_in">cp</span> -a /etc/pacman.d /mnt/backup/arch-migration/</span><br></pre></td></tr></table></figure>
-
-<p>如果用了第三方仓库、自定义 mirror、pacman hook、makepkg 配置，这一步非常重要。</p>
-<hr>
-<h2 id="5-新系统的-Btrfs-布局建议"><a href="#5-新系统的-Btrfs-布局建议" class="headerlink" title="5. 新系统的 Btrfs 布局建议"></a>5. 新系统的 Btrfs 布局建议</h2><p>基于当前机器的实际情况，最推荐的做法不是把整个系统重新分很多 Linux 分区，而是：</p>
-<ul>
-<li>保留现有的 <code>nvme1n1p1</code> 作为 EFI</li>
-<li>把 <code>nvme1n1p2</code> 从 ext4 重建为 Btrfs，专门作为根系统盘</li>
-<li>保留现有的 <code>nvme1n1p3</code> 继续作为独立 <code>/home</code> 分区</li>
-</ul>
-<p>也就是说，重装后的磁盘角色建议为：</p>
-<ul>
-<li><code>/dev/nvme1n1p1</code> → <code>/efi</code>，vfat，不格式化</li>
-<li><code>/dev/nvme1n1p2</code> → <code>/</code>，Btrfs，格式化</li>
-<li><code>/dev/nvme1n1p3</code> → <code>/home</code>，ext4，不格式化</li>
-</ul>
-<p>这样有几个现实好处：</p>
-<ul>
-<li>迁移改动面最小，只改根分区</li>
-<li>1.6T 的 <code>/home</code> 无需搬空后重建文件系统</li>
-<li>你现有大量用户数据、Docker bind mount、项目目录、缓存目录仍保持在单独 <code>/home</code> 分区上</li>
-<li>重装时最不容易误伤 Windows 或大体量数据</li>
-</ul>
-<p>推荐在 <code>nvme1n1p2</code> 上创建这些 Btrfs 子卷：</p>
-<ul>
-<li><code>@</code> → <code>/</code></li>
-<li><code>@var_log</code> → <code>/var/log</code></li>
-<li><code>@pkg</code> → <code>/var/cache/pacman/pkg</code></li>
-<li><code>@snapshots</code> → <code>/.snapshots</code></li>
-</ul>
-<p>因为当前 <code>/home</code> 本来就是独立分区，所以这里不再在根 Btrfs 里创建 <code>@home</code>。</p>
-<p>可选子卷：</p>
-<ul>
-<li><code>@docker</code> → <code>/var/lib/docker</code></li>
-<li><code>@libvirt</code> → <code>/var/lib/libvirt</code></li>
-<li><code>@docker_root</code> → <code>/home/bkx/environment/docker_root</code></li>
-</ul>
-<p>推荐挂载参数：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">noatime,compress=zstd,ssd,space_cache=v2</span><br></pre></td></tr></table></figure>
-
-<p>这样方便以后做快照管理，并把根目录、home、日志、包缓存拆开。</p>
-<hr>
-<h2 id="6-重装时的关键原则"><a href="#6-重装时的关键原则" class="headerlink" title="6. 重装时的关键原则"></a>6. 重装时的关键原则</h2><h3 id="6-1-当前机器上哪些分区能动，哪些绝对不要动"><a href="#6-1-当前机器上哪些分区能动，哪些绝对不要动" class="headerlink" title="6.1 当前机器上哪些分区能动，哪些绝对不要动"></a>6.1 当前机器上哪些分区能动，哪些绝对不要动</h3><p>这台机器上：</p>
-<h4 id="绝对不要动的分区"><a href="#绝对不要动的分区" class="headerlink" title="绝对不要动的分区"></a>绝对不要动的分区</h4><p>整块 <code>nvme0n1</code> 都是 Windows 相关内容，重装 Arch 时不要格式化、不要改分区表：</p>
-<ul>
-<li><code>/dev/nvme0n1p1</code>：Windows EFI</li>
-<li><code>/dev/nvme0n1p2</code>：Windows MSR</li>
-<li><code>/dev/nvme0n1p3</code>：Windows 系统分区</li>
-<li><code>/dev/nvme0n1p4</code>：Windows Recovery</li>
-<li><code>/dev/nvme0n1p5</code>：Windows 数据分区</li>
-</ul>
-<h4 id="本次重装中只格式化这个分区"><a href="#本次重装中只格式化这个分区" class="headerlink" title="本次重装中只格式化这个分区"></a>本次重装中只格式化这个分区</h4><ul>
-<li><code>/dev/nvme1n1p2</code>：当前 Arch 根分区，300G，ext4 → 目标改为 Btrfs</li>
-</ul>
-<h4 id="本次重装中保留不格式化的-Arch-分区"><a href="#本次重装中保留不格式化的-Arch-分区" class="headerlink" title="本次重装中保留不格式化的 Arch 分区"></a>本次重装中保留不格式化的 Arch 分区</h4><ul>
-<li><code>/dev/nvme1n1p1</code>：Arch EFI，1G，当前挂载 <code>/efi</code></li>
-<li><code>/dev/nvme1n1p3</code>：Arch <code>/home</code>，1.6T，当前 ext4</li>
-</ul>
-<h3 id="6-2-当前机器的重装流程概述"><a href="#6-2-当前机器的重装流程概述" class="headerlink" title="6.2 当前机器的重装流程概述"></a>6.2 当前机器的重装流程概述</h3><p>在 Arch ISO 环境中：</p>
-<ol>
-<li>挂载备份盘</li>
-<li>再次确认 <code>lsblk -f</code>，核对目标盘是 <code>nvme1n1</code></li>
-<li>只格式化 <code>/dev/nvme1n1p2</code> 为 Btrfs</li>
-<li>在 <code>/dev/nvme1n1p2</code> 上创建 Btrfs 子卷</li>
-<li>挂载 <code>/dev/nvme1n1p2</code> 到新系统根目录</li>
-<li>挂载 <code>/dev/nvme1n1p1</code> 到 <code>/mnt/efi</code></li>
-<li>挂载 <code>/dev/nvme1n1p3</code> 到 <code>/mnt/home</code></li>
-<li><code>pacstrap</code></li>
-<li><code>genfstab</code></li>
-<li><code>arch-chroot</code></li>
-<li>安装并重新生成 GRUB</li>
-<li>创建用户和基础系统配置</li>
-</ol>
-<hr>
-<h2 id="7-Btrfs-创建示例"><a href="#7-Btrfs-创建示例" class="headerlink" title="7. Btrfs 创建示例"></a>7. Btrfs 创建示例</h2><p>以下步骤直接基于这台机器当前的实际分区：</p>
-<ul>
-<li>Arch EFI：<code>/dev/nvme1n1p1</code></li>
-<li>Arch 根分区：<code>/dev/nvme1n1p2</code></li>
-<li>Arch <code>/home</code>：<code>/dev/nvme1n1p3</code></li>
-</ul>
-<h3 id="7-1-格式化根分区并创建子卷"><a href="#7-1-格式化根分区并创建子卷" class="headerlink" title="7.1 格式化根分区并创建子卷"></a>7.1 格式化根分区并创建子卷</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mkfs.btrfs -f /dev/nvme1n1p2</span><br><span class="line">mount /dev/nvme1n1p2 /mnt</span><br><span class="line"></span><br><span class="line">btrfs subvolume create /mnt/@</span><br><span class="line">btrfs subvolume create /mnt/@var_log</span><br><span class="line">btrfs subvolume create /mnt/@pkg</span><br><span class="line">btrfs subvolume create /mnt/@snapshots</span><br><span class="line"></span><br><span class="line">umount /mnt</span><br></pre></td></tr></table></figure>
-
-<h3 id="7-2-重新挂载子卷与现有分区"><a href="#7-2-重新挂载子卷与现有分区" class="headerlink" title="7.2 重新挂载子卷与现有分区"></a>7.2 重新挂载子卷与现有分区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mount -o noatime,compress=zstd,ssd,space_cache=v2,subvol=@ /dev/nvme1n1p2 /mnt</span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/&#123;home,efi,var/log,var/cache/pacman/pkg,.snapshots&#125;</span><br><span class="line">mount -o noatime,compress=zstd,ssd,space_cache=v2,subvol=@var_log /dev/nvme1n1p2 /mnt/var/log</span><br><span class="line">mount -o noatime,compress=zstd,ssd,space_cache=v2,subvol=@pkg /dev/nvme1n1p2 /mnt/var/cache/pacman/pkg</span><br><span class="line">mount -o noatime,compress=zstd,ssd,space_cache=v2,subvol=@snapshots /dev/nvme1n1p2 /mnt/.snapshots</span><br><span class="line">mount /dev/nvme1n1p1 /mnt/efi</span><br><span class="line">mount /dev/nvme1n1p3 /mnt/home</span><br></pre></td></tr></table></figure>
-
-<h3 id="7-3-关于-swapfile-的处理"><a href="#7-3-关于-swapfile-的处理" class="headerlink" title="7.3 关于 swapfile 的处理"></a>7.3 关于 swapfile 的处理</h3><p>当前系统使用的是根分区上的 <code>/swapfile</code>，大小 24G。由于根分区会被重建，旧的 <code>/swapfile</code> 会消失。</p>
-<p>因此新系统安装完成后，需要重新创建 swapfile，而不是尝试恢复旧文件。</p>
-<p>如果新系统根分区仍为 Btrfs，建议按 Arch Wiki 的 Btrfs 方式重新创建 swapfile；不要简单照搬 ext4 上的旧做法。</p>
-<h3 id="7-4-安装基础系统"><a href="#7-4-安装基础系统" class="headerlink" title="7.4 安装基础系统"></a>7.4 安装基础系统</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap -K /mnt base linux linux-firmware btrfs-progs networkmanager <span class="built_in">sudo</span> vim grub efibootmgr os-prober</span><br></pre></td></tr></table></figure>
-
-<p>如果机器需要微码、显卡驱动或无线驱动，记得一并装上。</p>
-<h3 id="7-5-生成-fstab-并进入新系统"><a href="#7-5-生成-fstab-并进入新系统" class="headerlink" title="7.5 生成 fstab 并进入新系统"></a>7.5 生成 fstab 并进入新系统</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
-
-<p>然后配置：</p>
-<ul>
-<li>时区</li>
-<li>locale</li>
-<li>hostname</li>
-<li>root 密码</li>
-<li>普通用户</li>
-<li>sudo</li>
-<li>NetworkManager</li>
-</ul>
-<p>例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> NetworkManager</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="8-启动器和双系统"><a href="#8-启动器和双系统" class="headerlink" title="8. 启动器和双系统"></a>8. 启动器和双系统</h2><p>这台机器当前已经使用 GRUB + UEFI，且当前 EFI 启动项明确指向 Arch 自己磁盘 <code>nvme1n1p1</code> 上的 <code>\\EFI\\GRUB\\grubx64.efi</code>。因此最省事的做法是继续沿用现有模式。</p>
-<h3 id="当前机器的-GRUB-恢复方式"><a href="#当前机器的-GRUB-恢复方式" class="headerlink" title="当前机器的 GRUB 恢复方式"></a>当前机器的 GRUB 恢复方式</h3><p>在 <code>arch-chroot</code> 中执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB</span><br></pre></td></tr></table></figure>
-
-<p>当前 <code>/etc/default/grub</code> 里尚未启用 <code>os-prober</code>。如果希望 GRUB 自动发现 Windows，可以：</p>
-<ol>
-<li>确保安装了 <code>os-prober</code></li>
-<li>把 <code>/etc/default/grub</code> 中加入：</li>
-</ol>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_DISABLE_OS_PROBER=false</span><br></pre></td></tr></table></figure>
-
-<p>然后重新生成配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-
-<p>恢复完成后，建议再次检查：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">efibootmgr -v</span><br></pre></td></tr></table></figure>
-
-<p>预期结果是：</p>
-<ul>
-<li>仍存在 <code>GRUB</code> 启动项</li>
-<li>仍存在 <code>Windows Boot Manager</code> 启动项</li>
-<li><code>BootOrder</code> 中 <code>GRUB</code> 继续排在前面或按你的偏好调整</li>
-</ul>
-<hr>
-<h2 id="9-恢复软件"><a href="#9-恢复软件" class="headerlink" title="9. 恢复软件"></a>9. 恢复软件</h2><h3 id="9-1-先恢复-pacman-配置"><a href="#9-1-先恢复-pacman-配置" class="headerlink" title="9.1 先恢复 pacman 配置"></a>9.1 先恢复 pacman 配置</h3><p>先把这些恢复回来：</p>
-<ul>
-<li><code>/etc/pacman.conf</code></li>
-<li><code>/etc/pacman.d/*</code></li>
-</ul>
-<p>然后执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Sy</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-2-恢复官方仓库软件"><a href="#9-2-恢复官方仓库软件" class="headerlink" title="9.2 恢复官方仓库软件"></a>9.2 恢复官方仓库软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S --needed - &lt; pkglist-explicit.txt</span><br></pre></td></tr></table></figure>
-
-<p>如果其中混有 AUR 包导致失败，属正常情况，可分开处理。</p>
-<h3 id="9-3-恢复-AUR-软件"><a href="#9-3-恢复-AUR-软件" class="headerlink" title="9.3 恢复 AUR 软件"></a>9.3 恢复 AUR 软件</h3><p>先安装 AUR helper，例如 <code>yay</code> 或 <code>paru</code>，再执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S --needed - &lt; pkglist-aur.txt</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="10-恢复配置和环境变量"><a href="#10-恢复配置和环境变量" class="headerlink" title="10. 恢复配置和环境变量"></a>10. 恢复配置和环境变量</h2><h3 id="10-1-恢复-etc"><a href="#10-1-恢复-etc" class="headerlink" title="10.1 恢复 /etc"></a>10.1 恢复 <code>/etc</code></h3><p>不建议直接整目录覆盖。优先按类别恢复。</p>
-<p>这台机器当前有几项需要特别留意：</p>
-<ul>
-<li><code>/etc/fstab</code> 当前使用 <code>/efi</code> 作为 EFI 挂载点，重装后应继续保持 <code>/efi</code>，不要误写成 <code>/boot</code></li>
-<li>当前存在 <code>/swapfile</code>，但根分区重建后必须重新创建，不要直接从备份覆盖旧 swapfile</li>
-<li><code>/etc/default/grub</code> 当前包含自定义内核参数：<code>loglevel=5 nowatchdog</code></li>
-<li>当前 GRUB 配置默认未启用 <code>os-prober</code>，如果你要保留自动发现 Windows，就需要手动重新加上</li>
-<li><code>/etc/docker/daemon.json</code> 指定了自定义 Docker <code>data-root</code>，恢复时必须带回</li>
-</ul>
-<p>优先恢复：</p>
-<ul>
-<li><code>/etc/pacman.conf</code></li>
-<li><code>/etc/pacman.d/*</code></li>
-<li><code>/etc/environment</code></li>
-<li><code>/etc/profile</code></li>
-<li><code>/etc/profile.d/*</code></li>
-<li><code>/etc/sudoers.d/*</code></li>
-<li><code>/etc/systemd/*</code></li>
-<li><code>/etc/udev/rules.d/*</code></li>
-<li><code>/etc/NetworkManager/system-connections/*</code></li>
-<li><code>/etc/docker/daemon.json</code></li>
-<li>图形相关配置</li>
-</ul>
-<p>需要手动合并的：</p>
-<ul>
-<li><code>/etc/fstab</code></li>
-<li><code>/etc/default/grub</code></li>
-<li><code>/etc/mkinitcpio.conf</code></li>
-</ul>
-<p>不建议直接覆盖的：</p>
-<ul>
-<li><code>/etc/passwd</code></li>
-<li><code>/etc/shadow</code></li>
-<li><code>/etc/group</code></li>
-</ul>
-<h3 id="10-2-恢复家目录"><a href="#10-2-恢复家目录" class="headerlink" title="10.2 恢复家目录"></a>10.2 恢复家目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rsync -aAXHv /path/to/backup/home/&lt;用户名&gt;/ /home/&lt;用户名&gt;/</span><br><span class="line"><span class="built_in">chown</span> -R &lt;用户名&gt;:&lt;用户名&gt; /home/&lt;用户名&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="10-3-环境变量恢复检查点"><a href="#10-3-环境变量恢复检查点" class="headerlink" title="10.3 环境变量恢复检查点"></a>10.3 环境变量恢复检查点</h3><p>重点检查这些文件：</p>
-<p>系统级：</p>
-<ul>
-<li><code>/etc/environment</code></li>
-<li><code>/etc/profile</code></li>
-<li><code>/etc/profile.d/*.sh</code></li>
-</ul>
-<p>用户级：</p>
-<ul>
-<li><code>~/.profile</code></li>
-<li><code>~/.bash_profile</code></li>
-<li><code>~/.bashrc</code></li>
-<li><code>~/.zprofile</code></li>
-<li><code>~/.zshenv</code></li>
-<li><code>~/.zshrc</code></li>
-<li><code>~/.config/environment.d/*.conf</code></li>
-</ul>
-<p>恢复后对比：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printenv</span> | <span class="built_in">sort</span></span><br><span class="line">systemctl --user show-environment</span><br></pre></td></tr></table></figure>
-
-<p>和备份前导出的 <code>current-env.txt</code>、<code>systemd-user-env.txt</code> 对照即可。</p>
-<hr>
-<h2 id="11-恢复服务和开发环境"><a href="#11-恢复服务和开发环境" class="headerlink" title="11. 恢复服务和开发环境"></a>11. 恢复服务和开发环境</h2><p>根据导出的 systemd 列表重新启用需要的服务：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> &lt;service&gt;</span><br><span class="line">systemctl --user <span class="built_in">enable</span> &lt;service&gt;</span><br></pre></td></tr></table></figure>
-
-<p>如果使用了这些开发环境，需要单独核对：</p>
-<ul>
-<li>rustup</li>
-<li>nvm</li>
-<li>pyenv</li>
-<li>conda &#x2F; mamba</li>
-<li>Go 环境变量</li>
-<li>Docker rootless &#x2F; daemon</li>
-<li>libvirt &#x2F; virt-manager</li>
-<li>SSH agent &#x2F; GPG agent</li>
-</ul>
-<hr>
-<h2 id="12-迁移后的验收清单"><a href="#12-迁移后的验收清单" class="headerlink" title="12. 迁移后的验收清单"></a>12. 迁移后的验收清单</h2><p>建议按顺序检查：</p>
-<ol>
-<li>启动菜单可见 Arch 和 Windows</li>
-<li>Arch 可正常进入</li>
-<li>Windows 可正常进入</li>
-<li>网络正常</li>
-<li>用户登录正常</li>
-<li>环境变量正确</li>
-<li>常用软件齐全</li>
-<li>AUR 软件可用</li>
-<li>桌面环境、字体、输入法正常</li>
-<li>SSH &#x2F; GPG &#x2F; 浏览器配置正常</li>
-<li>Docker &#x2F; 虚拟机 &#x2F; 数据库正常</li>
-<li>Btrfs 子卷挂载正确</li>
-</ol>
-<p>检查命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">findmnt -t btrfs</span><br><span class="line">btrfs subvolume list /</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="13-推荐执行方案"><a href="#13-推荐执行方案" class="headerlink" title="13. 推荐执行方案"></a>13. 推荐执行方案</h2><p>推荐采用“最稳版本”，并且直接按这台机器当前的分区来做：</p>
-<h3 id="迁移前"><a href="#迁移前" class="headerlink" title="迁移前"></a>迁移前</h3><ul>
-<li>备份 <code>/home</code></li>
-<li>备份 <code>/etc</code></li>
-<li>导出 pacman &#x2F; AUR 软件清单</li>
-<li>导出 environment &#x2F; systemd &#x2F; 分区信息</li>
-<li>单独核对 Docker <code>data-root</code>、compose 项目目录和 bind mount 数据</li>
-</ul>
-<h3 id="安装中"><a href="#安装中" class="headerlink" title="安装中"></a>安装中</h3><ul>
-<li>只格式化 <code>/dev/nvme1n1p2</code></li>
-<li><code>/dev/nvme1n1p1</code> 只挂载到 <code>/efi</code>，不格式化</li>
-<li><code>/dev/nvme1n1p3</code> 挂载到 <code>/home</code>，不格式化</li>
-<li>在 <code>/dev/nvme1n1p2</code> 上创建 Btrfs 子卷</li>
-<li>安装最小可启动系统并重装 GRUB</li>
-<li>安装完成后重新创建 swapfile</li>
-</ul>
-<h3 id="恢复后"><a href="#恢复后" class="headerlink" title="恢复后"></a>恢复后</h3><ul>
-<li>先恢复 pacman 配置</li>
-<li>再安装软件</li>
-<li>再恢复 <code>/etc</code> 关键配置</li>
-<li>再恢复用户家目录与 Docker 数据</li>
-<li>最后逐项验收 Arch、Windows、GRUB、Docker、环境变量是否都正常</li>
-</ul>
-<hr>
-<h2 id="14-特别提醒"><a href="#14-特别提醒" class="headerlink" title="14. 特别提醒"></a>14. 特别提醒</h2><ul>
-<li>绝对不要动整块 <code>nvme0n1</code> 上的任何 Windows 分区</li>
-<li>本次重装只格式化 <code>/dev/nvme1n1p2</code></li>
-<li><code>/dev/nvme1n1p1</code> 是当前 Arch 使用中的 EFI，继续挂载到 <code>/efi</code>，不要误挂到 <code>/boot</code></li>
-<li><code>/dev/nvme1n1p3</code> 是单独的 <code>/home</code> 分区，除非你明确决定重建 home，否则不要格式化</li>
-<li><code>fstab</code> 必须以新系统生成的 UUID 为准</li>
-<li>旧 <code>/swapfile</code> 不要直接恢复，要在新系统上重新创建</li>
-<li>新系统用户 UID&#x2F;GID 最好与旧系统一致</li>
-<li>当前没有看到 LUKS、LVM、Secure Boot 痕迹；如果后续确认启用了这些，再单独细化</li>
-<li>如果有 Docker、libvirt、PostgreSQL 等数据服务，恢复前务必先核对对应数据目录</li>
-</ul>
-<hr>
-<h2 id="15-当前机器配置快照"><a href="#15-当前机器配置快照" class="headerlink" title="15. 当前机器配置快照"></a>15. 当前机器配置快照</h2><p>以下信息来自当前系统现场，可作为重装时核对基准：</p>
-<h3 id="磁盘与分区"><a href="#磁盘与分区" class="headerlink" title="磁盘与分区"></a>磁盘与分区</h3><ul>
-<li><code>nvme0n1</code>：476.9G，Windows 磁盘<ul>
-<li><code>p1</code>：100M，vfat，UUID <code>B8F3-B44C</code></li>
-<li><code>p2</code>：16M，MSR</li>
-<li><code>p3</code>：199G，NTFS，UUID <code>9AB0006BB0005065</code></li>
-<li><code>p4</code>：958M，NTFS，UUID <code>1CC0C7ABC0C78A0A</code></li>
-<li><code>p5</code>：276.9G，NTFS，标签“新加卷”，UUID <code>D61471BB14719EE5</code></li>
-</ul>
-</li>
-<li><code>nvme1n1</code>：1.9T，Arch 磁盘<ul>
-<li><code>p1</code>：1G，vfat，UUID <code>D300-6838</code>，挂载 <code>/efi</code></li>
-<li><code>p2</code>：300G，ext4，UUID <code>1f6b34bd-9b0e-4933-966c-6cbdfa1703ff</code>，挂载 <code>/</code></li>
-<li><code>p3</code>：1.6T，ext4，UUID <code>f83c7b57-3c92-4555-b6f0-d12916801179</code>，挂载 <code>/home</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="启动项"><a href="#启动项" class="headerlink" title="启动项"></a>启动项</h3><ul>
-<li><code>Boot0003</code>：GRUB，当前默认启动项</li>
-<li><code>Boot0004</code>：Windows Boot Manager</li>
-<li>当前 <code>BootOrder</code>：<code>0003,0004,2001,2002,2003</code></li>
-</ul>
-<h3 id="当前-fstab-要点"><a href="#当前-fstab-要点" class="headerlink" title="当前 fstab 要点"></a>当前 fstab 要点</h3><ul>
-<li>根分区挂载：<code>/dev/nvme1n1p2</code> → <code>/</code></li>
-<li>EFI 挂载点：<code>/dev/nvme1n1p1</code> → <code>/efi</code></li>
-<li>home 挂载：<code>/dev/nvme1n1p3</code> → <code>/home</code></li>
-<li>存在 <code>/swapfile</code>：24G</li>
-</ul>
-<h3 id="当前-GRUB-要点"><a href="#当前-GRUB-要点" class="headerlink" title="当前 GRUB 要点"></a>当前 GRUB 要点</h3><ul>
-<li><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=5 nowatchdog&quot;</code></li>
-<li>当前未显式启用 <code>GRUB_DISABLE_OS_PROBER=false</code></li>
-</ul>
-<hr>
-<h2 id="16-下一步建议"><a href="#16-下一步建议" class="headerlink" title="16. 下一步建议"></a>16. 下一步建议</h2><p>下一步最实用的是在这份文档基础上继续细化成“重装前 &#x2F; 安装中 &#x2F; 恢复后”的逐条 checklist，并把需要手输的命令按当前分区名全部固定下来。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsblk -f</span><br><span class="line">blkid</span><br><span class="line">efibootmgr -v</span><br></pre></td></tr></table></figure>
-
-<p>如果后续需要，可以再基于真实分区表补一版“逐步执行手册”。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/04/26/Linux/Arch%20Linux%20%E4%BB%8E%20ext4%20%E9%87%8D%E8%A3%85%E8%BF%81%E7%A7%BB%E5%88%B0%20Btrfs%20%E6%96%B9%E6%A1%88/" data-id="cuidF5CRK4EeHqoMzaCD13Lmt" data-title="Arch Linux 从 ext4 重装迁移到 Btrfs 方案" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/migration/" rel="tag">migration</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/migration/" rel="tag">migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/ArchLinux/" style="font-size: 13.33px;">ArchLinux</a> <a href="/tags/Container/" style="font-size: 10px;">Container</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Incus/" style="font-size: 13.33px;">Incus</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LinuxOps/" style="font-size: 10px;">LinuxOps</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Networking/" style="font-size: 10px;">Networking</a> <a href="/tags/Obsidian/" style="font-size: 13.33px;">Obsidian</a> <a href="/tags/Virtualization/" style="font-size: 10px;">Virtualization</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/btrfs/" style="font-size: 10px;">btrfs</a> <a href="/tags/conda/" style="font-size: 10px;">conda</a> <a href="/tags/dualboot/" style="font-size: 10px;">dualboot</a> <a href="/tags/erasure/" style="font-size: 10px;">erasure</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java-generics/" style="font-size: 10px;">java/generics</a> <a href="/tags/java-onjava/" style="font-size: 10px;">java/onjava</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 10px;">java/字节码</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 10px;">java/数组</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 16.67px;">java/泛型</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/migration/" style="font-size: 10px;">migration</a> <a href="/tags/networking/" style="font-size: 10px;">networking</a> <a href="/tags/pattern-generics/" style="font-size: 10px;">pattern/generics</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 10px;">故障排查</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 16.67px;">编程思想</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/python/uv/">配置国内镜像</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">57</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-05-09T09:27:02.644Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

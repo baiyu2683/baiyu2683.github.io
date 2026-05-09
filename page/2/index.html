@@ -1,1223 +1,178 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
   
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
-<meta name="generator" content="Hexo 8.1.2"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/" title="🧪 一句话理解">🧪 一句话理解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.885Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/podman/">podman</a></span></div><div class="content">   维度 Distrobox Docker    🎯 设计目标 本地开发环境增强 应用打包 &amp; 部署   🏠 文件系统 默认共享主机 home 默认隔离   👤 用户 和主机同一个用户 通常是 root 或容器用户   🖥️ GUI支持 ✅ 很好（直接用主机显示） ❌ 麻烦（需额外配置）   🔧 使用体验 像“进入另一个Linux发行版” 像“运行一个应用环境”   📦 典型用途 开发、测试不同发行版 部署服务、微服务   🔌 与主机集成 很强（几乎无缝） 较弱（隔离优先）    🧪 一句话理解👉 Distrobox &#x3D; 给你多个“开发用Linux系统”👉 Docker &#x3D; 给程序准备“运行用盒子”  🖼️ 场景对比（最有用的部分）🧑‍💻 场景1：你现在这种情况（开发用）👉 比如你想：  在 Ubuntu 里装开发工具 但主机是 Arch &#x2F; Fedora 想直接用主机文件  用 Distrobox 👇（完美匹配）     ✔ 优点：  文件直接共用 不需要同步代码 GUI&#x2F;终端无缝 几乎没有学习成本...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%EF%BC%88%E6%99%BA%E8%83%BD%E8%BD%AC%E5%9E%8B%EF%BC%89/" title="🧭 场景一：带 `throw`（你的原始代码）">🧭 场景一：带 `throw`（你的原始代码）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.884Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span></div><div class="content">好，我们用“控制流图 + 作用域变化”来把这个问题彻底讲透。你会看到：s 其实不是“作用域变大”，而是“在某些路径上被证明一定存在”。 123456789static void f(Object o) &#123;    if (!(o instanceof String s)) &#123;      System.out.printf(&quot;Not a String&quot;);      throw new RuntimeException();    &#125;    // 此处s仍在作用域中!    // 将上面throw 语句注释的话，这里就找不到s定义了，也就是通常认为的效果    System.out.println(s.toUpperCase());  &#125;    🧭 场景一：带 throw（你的原始代码）12345if (!(o instanceof String s)) &#123;    System.out.println(&quot;Not a String&quot;);    throw new RuntimeException...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" title="3.9.1 指数记数法">3.9.1 指数记数法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.884Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span></div><div class="content">我记得指数记数法是有一个国际标准的，小数点多少位，指数多少位，怎么记录这些数字？ 单精度和多精度（通常指双精度、四倍精度等）数字表示法的国际标准是 IEEE 754（全称 IEEE Standard for Floating-Point Arithmetic）。 该标准由电气电子工程师学会 (IEEE) 制定，并被国际标准化组织 (ISO) 和国际电工委员会 (IEC) 采纳为国际标准，编号为 ISO&#x2F;IEC&#x2F;IEEE 60559。  📋 标准核心内容IEEE 754 规定了计算机中浮点数的存储格式、算术运算、舍入规则以及异常处理（如溢出、被零除、NaN 等）。 1. 常见精度格式在 IEEE 754 标准中，最常用的两种格式是单精度和双精度：    格式名称 别名 总位数 符号位 (Sign) 指数位 (Exponent) 尾数位 (Mantissa) 十进制精度    单精度 binary32 32 bit 1 bit 8 bit 23 bit ~7 位有效数字   双精度 binary64 64 bit 1 bit 11 bit 52 bit ~16 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="字符串">字符串</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.884Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span></div><div class="content">字面量和新建对象   特性 “asdf” (字面量) new String(“asdf”)    内存位置 字符串常量池  (String Pool) 堆内存 (Heap)   对象数量 最多创建 1 个对象 至少创建 2 个对象（如果池中没有）   复用性 高（全局共享一份） 低（每次 new 都会产生新对象）   == 比较 指向池中同一个地址，为 true 指向堆中不同地址，为 false   内存布局拆解当你执行这两行代码时，后台发生了完全不同的故事： A. String s1 = &quot;asdf&quot;; Java 检查字符串常量池。  如果 &quot;asdf&quot; 已经存在，直接返回引用。  如果不存在，在池中创建一个，然后返回引用。 这叫“驻留”（Interning），目的是为了省内存。   B. String s2 = new String(&quot;asdf&quot;); 编译器首先会在常量池中放入 &quot;asdf&quot;（如果不存在）。  在运行时，new 关键字强制在**堆（Heap）**中开辟一块全新的空间。  把常量池中...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" title="Java 泛型 (Generics) 核心笔记">Java 泛型 (Generics) 核心笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.884Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span></div><div class="content">Java 泛型 (Generics) 核心笔记1. 泛型的本质：参数化类型 (Parameterized Types)泛型是将类型本身作为参数传递给类、接口或方法。其核心目标是：在编译期进行类型检查，减少运行时的类型转换异常 (ClassCastException)。 优势 类型安全：编译器会拦截错误的类型插入。 消除强制转换：代码更简洁，可读性更强。 代码重用：编写一套逻辑，处理多种数据类型（如 ArrayList&lt;T&gt;）。   2. 核心难点：类型擦除 (Type Erasure)这是 Java 泛型最独特、也最受争议的特性。 原理Java 的泛型只存在于编译期。为了兼容旧版本的 JVM，编译器在生成字节码时，会将所有的泛型参数“擦除”：  如果没有边界，替换为 Object。 如果有边界（如 &lt;T extends Number&gt;），替换为边界类型（Number）。  擦除带来的限制 运行时无法获取泛型类型：无法执行 if (obj instanceof T)。 不能创建泛型数组：无法执行 new T[10]。 基本类型不能作为泛型参数：必须使用包装类...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9/switch%E9%80%89%E6%8B%A9%E5%9B%A0%E5%AD%90/" title="switch选择因子">switch选择因子</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.884Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span></div><div class="content">在 Java 的演进过程中，switch 能够处理的数据类型经历了几次重大的扩张。到了 Java 25，由于引入了模式匹配（Pattern Matching），几乎任何类型都可以作为 switch 的选择因子。 以下是按 Java 版本演进划分的类型支持：  1. 基础类型（JDK 1.0 - 5.0）这是最传统的 switch 支持，要求选择因子必须是能够自动转换为 int 的整型或特定类型：  byte, short, char, int  包装类：Byte, Short, Character, Integer（由于自动拆箱机制）  enum (枚举类型)：从 JDK 5 开始支持。    2. 字符串类型（JDK 7） String：从 JDK 7 开始，你可以直接对字符串进行分支判断。  注意：底层是通过字符串的 hashCode() 和 equals() 实现的。     3. 模式匹配类型（JDK 17 - 21&#x2F;25）这是 Java 现代化的核心。现在的 switch 不再仅仅是“相等判断”，而是“类型与结构的匹配”。  任何对象引用：你可以传入 Obje...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%B4%A2%E5%BC%95%20(MOC)/" title="Java 学习笔记索引 (MOC)">Java 学习笔记索引 (MOC)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.883Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span></div><div class="content">Java 学习笔记索引 (MOC) [!abstract] 简介本笔记作为《On Java 8》（Java 编程思想）学习过程中的核心导航页，利用 Obsidian 的双链机制整合了所有章节笔记。   🏗 基础语法 [[java编程思想&#x2F;基本数据类型|基本数据类型]] [[java编程思想&#x2F;第三章操作符&#x2F;字符串|操作符：字符串]] [[java编程思想&#x2F;第三章操作符&#x2F;3.9.1 指数记数法|操作符：3.9.1 指数记数法]] [[java编程思想&#x2F;第四章循环选择&#x2F;switch选择因子|流程控制：switch 选择因子]]   🧩 对象与进阶 [[java编程思想&#x2F;内部类|内部类]] [[java编程思想&#x2F;第二十章泛型&#x2F;Java_泛型核心知识点|第二十章：泛型 (Generics)]] [[java编程思想&#x2F;第十九章反射&#x2F;方法|第十九章：反射与方法]] [[java编程思想&#x2F;流|Java 8+ 流 (Streams)]]   🛡 异常与质量 [[j...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%BC%82%E5%B8%B8/Java_finally%E4%B8%AD%E5%BC%82%E5%B8%B8%E4%B8%A2%E5%A4%B1%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="Java 中 finally 块异常丢失及其解决方法">Java 中 finally 块异常丢失及其解决方法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.883Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span></div><div class="content">Java 中 finally 块异常丢失及其解决方法1. 问题背景：异常屏蔽 (Exception Masking)在 Java 中，一个方法只能向外抛出 一个 异常。如果在 try 块抛出异常的同时，finally 块也抛出了异常，那么 finally 块中的异常会“覆盖”掉 try 块中的主异常，导致主异常丢失。 示例代码（错误示范）12345678public void test() throws Exception &#123;    try &#123;        throw new Exception(&quot;主异常：业务逻辑报错&quot;);    &#125; finally &#123;        throw new Exception(&quot;finally 异常：清理资源报错&quot;);    &#125;&#125;// 调用者最终只能捕获到 &quot;finally 异常&quot;，主异常的信息完全丢失，极难调试。   2. 解决方案 A：Try-with-resources (Java 7+ 推荐)这是目前处理资源关闭时防止异...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/blender/%E9%97%AE%E9%A2%98/" title="问题">问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.882Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span></div><div class="content">圆柱倒角问题blender中新建了一个6边的圆柱体，对顶部的边进行倒角的时候，圆柱体的侧面没有参与倒角，只在圆柱体顶面有倒角，原因是什么？ 1. 核心原因：顶点没有合并（重叠顶点）这是最常见的情况。在创建圆柱体或进行某些操作（如错误的挤出）时，圆柱体的“顶面”和“侧面”虽然看起来在一起，但它们的点和点之间其实没有焊接上。  表现：倒角时，Blender 认为你只选中了一个独立的“圆盘”边缘，它只会向圆盘中心收缩，而不会拉动侧面的网格。  解决方法：  进入编辑模式 (Tab)。  全选所有点 (A)。  按下 M 键，选择 按距离合并 (Merge by Distance)。  观察屏幕下方是否显示“删除了 X 个顶点”。如果删除了点，再尝试倒角就正常了。   2. 物体缩放比例未应用 (Scale)如果你在“物体模式”下非等比例缩放过圆柱体（比如拉长了它），Blender 的倒角计算会发生畸变。  表现：倒角可能变得非常扁，或者在某个轴向上完全没反应，看起来就像侧面没参与一样。  解决方法：  回到物体模式 (Tab)。  按下 Ctrl + A，选择 缩放 (Scale)。 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/" title="2基础">2基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-05-09T01:34:34.879Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></span></div><div class="content"> 默认进入blender的界面，这个界面包括一个立方体，一个光源和一个照相机。这三个元素其实就是暗示我们做模型最重要的三个元素，有了这三个元素就能够做出一个模型了。 鼠标操作 控制观察视角 鼠标中键平移视图  Shift + 鼠标中键缩放视角 滚动鼠标中键滚轮  第一个是缩放第二个是移动第三个是摄像机视图，也就是最终渲染出来的视图第四个是正交视图 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556在 3D 建模和设计中，**正交视图 (Orthographic View)** 是一种特殊的观察方式，它与我们日常生活中的视觉感受（透视图）完全不同。### 1. 核心定义简单来说，正交视图就是**“没有近大远小”**的视图。- **平行投影**：在正交视图中，所有的投影线都是平行的。这意味着无论物体距离相机多远，它在屏幕上的大小都保持不变。    - **数学逻辑**：        - **正交投影**：$x_&#123;2d&...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/" title="Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a><time datetime="2026-05-09T08:30:00.000Z" title="Created 2026-05-09 16:30:00">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/" title="Hexo 与 Obsidian 协作集成方案">Hexo 与 Obsidian 协作集成方案</a><time datetime="2026-05-09T07:36:13.000Z" title="Created 2026-05-09 15:36:13">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/" title="1常用操作分类">1常用操作分类</a><time datetime="2026-05-09T03:06:20.000Z" title="Created 2026-05-09 11:06:20">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" title="PineScript_v6核心知识点">PineScript_v6核心知识点</a><time datetime="2026-05-09T01:34:34.886Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/python/uv/" title="配置国内镜像">配置国内镜像</a><time datetime="2026-05-09T01:34:34.886Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="View More">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Incus/"><span class="card-category-list-name">Incus</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/General/"><span class="card-category-list-name">General</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Virtualization/"><span class="card-category-list-name">Virtualization</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Virtualization/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/blender/"><span class="card-category-list-name">blender</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/claudecode/"><span class="card-category-list-name">claudecode</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/"><span class="card-category-list-name">dcrawler改进</span><span class="card-category-list-count">3</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/Virtualization/" style="font-size: 1.1em; color: #999">Virtualization</a> <a href="/tags/java-generics/" style="font-size: 1.1em; color: #999">java/generics</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 1.37em; color: #99a4b2">编程思想</a> <a href="/tags/Container/" style="font-size: 1.1em; color: #999">Container</a> <a href="/tags/scp/" style="font-size: 1.1em; color: #999">scp</a> <a href="/tags/erasure/" style="font-size: 1.1em; color: #999">erasure</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/dualboot/" style="font-size: 1.1em; color: #999">dualboot</a> <a href="/tags/Hexo/" style="font-size: 1.23em; color: #999ea6">Hexo</a> <a href="/tags/ssh/" style="font-size: 1.1em; color: #999">ssh</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 1.37em; color: #99a4b2">java/泛型</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Obsidian/" style="font-size: 1.23em; color: #999ea6">Obsidian</a> <a href="/tags/ArchLinux/" style="font-size: 1.23em; color: #999ea6">ArchLinux</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 1.1em; color: #999">java/数组</a> <a href="/tags/git/" style="font-size: 1.5em; color: #99a9bf">git</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/java-onjava/" style="font-size: 1.1em; color: #999">java/onjava</a> <a href="/tags/pattern-generics/" style="font-size: 1.1em; color: #999">pattern/generics</a> <a href="/tags/conda/" style="font-size: 1.1em; color: #999">conda</a> <a href="/tags/ffmpeg/" style="font-size: 1.1em; color: #999">ffmpeg</a> <a href="/tags/migration/" style="font-size: 1.1em; color: #999">migration</a> <a href="/tags/LinuxOps/" style="font-size: 1.1em; color: #999">LinuxOps</a> <a href="/tags/networking/" style="font-size: 1.1em; color: #999">networking</a> <a href="/tags/archlinux/" style="font-size: 1.23em; color: #999ea6">archlinux</a> <a href="/tags/Docker/" style="font-size: 1.1em; color: #999">Docker</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.1em; color: #999">数据库</a> <a href="/tags/Networking/" style="font-size: 1.1em; color: #999">Networking</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 1.1em; color: #999">故障排查</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 1.1em; color: #999">java/字节码</a> <a href="/tags/btrfs/" style="font-size: 1.1em; color: #999">btrfs</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/Incus/" style="font-size: 1.23em; color: #999ea6">Incus</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
       
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
   
-    <article id="post-Linux/Virtualization/podman/🧠 Distrobox vs Docker（核心差异一眼看懂）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.885Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/podman/">podman</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/">🧪 一句话理解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+    <ul class="card-archive-list">
       
-        <table>
-<thead>
-<tr>
-<th>维度</th>
-<th>Distrobox</th>
-<th>Docker</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>🎯 设计目标</td>
-<td><strong>本地开发环境增强</strong></td>
-<td><strong>应用打包 &amp; 部署</strong></td>
-</tr>
-<tr>
-<td>🏠 文件系统</td>
-<td>默认共享主机 home</td>
-<td>默认隔离</td>
-</tr>
-<tr>
-<td>👤 用户</td>
-<td>和主机同一个用户</td>
-<td>通常是 root 或容器用户</td>
-</tr>
-<tr>
-<td>🖥️ GUI支持</td>
-<td>✅ 很好（直接用主机显示）</td>
-<td>❌ 麻烦（需额外配置）</td>
-</tr>
-<tr>
-<td>🔧 使用体验</td>
-<td>像“进入另一个Linux发行版”</td>
-<td>像“运行一个应用环境”</td>
-</tr>
-<tr>
-<td>📦 典型用途</td>
-<td>开发、测试不同发行版</td>
-<td>部署服务、微服务</td>
-</tr>
-<tr>
-<td>🔌 与主机集成</td>
-<td>很强（几乎无缝）</td>
-<td>较弱（隔离优先）</td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="🧪-一句话理解"><a href="#🧪-一句话理解" class="headerlink" title="🧪 一句话理解"></a>🧪 一句话理解</h1><p>👉 <strong>Distrobox &#x3D; 给你多个“开发用Linux系统”</strong><br>👉 <strong>Docker &#x3D; 给程序准备“运行用盒子”</strong></p>
-<hr>
-<h1 id="🖼️-场景对比（最有用的部分）"><a href="#🖼️-场景对比（最有用的部分）" class="headerlink" title="🖼️ 场景对比（最有用的部分）"></a>🖼️ 场景对比（最有用的部分）</h1><h2 id="🧑‍💻-场景1：你现在这种情况（开发用）"><a href="#🧑‍💻-场景1：你现在这种情况（开发用）" class="headerlink" title="🧑‍💻 场景1：你现在这种情况（开发用）"></a>🧑‍💻 场景1：你现在这种情况（开发用）</h2><p>👉 比如你想：</p>
-<ul>
-<li>在 Ubuntu 里装开发工具</li>
-<li>但主机是 Arch &#x2F; Fedora</li>
-<li>想直接用主机文件</li>
-</ul>
-<h3 id="用-Distrobox-👇（完美匹配）"><a href="#用-Distrobox-👇（完美匹配）" class="headerlink" title="用 Distrobox 👇（完美匹配）"></a>用 Distrobox 👇（完美匹配）</h3><p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417191803931.png"></p>
-<p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417191913172.png"></p>
-<p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417191941203.png"></p>
-<p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417192336515.png"></p>
-<p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417192350590.png"></p>
-<p>✔ 优点：</p>
-<ul>
-<li>文件直接共用</li>
-<li>不需要同步代码</li>
-<li>GUI&#x2F;终端无缝</li>
-<li>几乎没有学习成本</li>
-</ul>
-<p>👉 这就是你现在看到“路径一样”的原因，本质是优点</p>
-<hr>
-<h2 id="🚀-场景2：部署应用-跑服务"><a href="#🚀-场景2：部署应用-跑服务" class="headerlink" title="🚀 场景2：部署应用 &#x2F; 跑服务"></a>🚀 场景2：部署应用 &#x2F; 跑服务</h2><p>👉 比如你要：</p>
-<ul>
-<li>跑一个 Web 服务</li>
-<li>做微服务架构</li>
-<li>部署到服务器</li>
-</ul>
-<h3 id="用-Docker-👇（行业标准）"><a href="#用-Docker-👇（行业标准）" class="headerlink" title="用 Docker 👇（行业标准）"></a>用 Docker 👇（行业标准）</h3><p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417192008862.png"></p>
-<p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417192035982.png"></p>
-<p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417192101965.png"></p>
-<p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417192218976.png"></p>
-<p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417192241166.png"></p>
-<p><img src="/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/file-20260417192256911.png"></p>
-<p>✔ 优点：</p>
-<ul>
-<li>强隔离（环境一致）</li>
-<li>可复制（开发&#x3D;生产）</li>
-<li>易部署（云原生）</li>
-</ul>
-<hr>
-<h2 id="🧪-场景3：你想“完全隔离环境”"><a href="#🧪-场景3：你想“完全隔离环境”" class="headerlink" title="🧪 场景3：你想“完全隔离环境”"></a>🧪 场景3：你想“完全隔离环境”</h2><p>👉 比如：</p>
-<ul>
-<li>测试危险软件</li>
-<li>不想污染主机</li>
-<li>想完全独立文件系统</li>
-</ul>
-<p>👉 结论：</p>
-<ul>
-<li>❌ Distrobox：不适合（默认共享）</li>
-<li>✅ Docker &#x2F; Podman：更合适</li>
-</ul>
-<hr>
-<h1 id="⚠️-很多人踩的坑（重点）"><a href="#⚠️-很多人踩的坑（重点）" class="headerlink" title="⚠️ 很多人踩的坑（重点）"></a>⚠️ 很多人踩的坑（重点）</h1><h3 id="❌-用-Docker-当开发环境"><a href="#❌-用-Docker-当开发环境" class="headerlink" title="❌ 用 Docker 当开发环境"></a>❌ 用 Docker 当开发环境</h3><p>结果：</p>
-<ul>
-<li>文件权限乱</li>
-<li>编辑器不好用</li>
-<li>挂载一堆 volume</li>
-</ul>
-<p>👉 痛苦指数：⭐⭐⭐⭐⭐</p>
-<hr>
-<h3 id="❌-用-Distrobox-做部署"><a href="#❌-用-Distrobox-做部署" class="headerlink" title="❌ 用 Distrobox 做部署"></a>❌ 用 Distrobox 做部署</h3><p>结果：</p>
-<ul>
-<li>不可复现</li>
-<li>不干净</li>
-<li>不可控</li>
-</ul>
-<p>👉 完全不推荐</p>
-<hr>
-<h1 id="🧭-给你的实用建议（结合你现在的情况）"><a href="#🧭-给你的实用建议（结合你现在的情况）" class="headerlink" title="🧭 给你的实用建议（结合你现在的情况）"></a>🧭 给你的实用建议（结合你现在的情况）</h1><p>你现在：</p>
-<ul>
-<li>✅ 用 Linux（还用了 distrobox）</li>
-<li>✅ 在折腾开发环境</li>
-</ul>
-<p>👉 最佳组合：</p>
-<h3 id="🥇-开发用"><a href="#🥇-开发用" class="headerlink" title="🥇 开发用"></a>🥇 开发用</h3><ul>
-<li>用 <strong>Distrobox（继续用就对了）</strong></li>
-</ul>
-<h3 id="🥈-部署-学习容器"><a href="#🥈-部署-学习容器" class="headerlink" title="🥈 部署&#x2F;学习容器"></a>🥈 部署&#x2F;学习容器</h3><ul>
-<li>学 <strong>Docker</strong></li>
-</ul>
-<hr>
-<h1 id="🔥-一个更高级的理解（很多人不知道）"><a href="#🔥-一个更高级的理解（很多人不知道）" class="headerlink" title="🔥 一个更高级的理解（很多人不知道）"></a>🔥 一个更高级的理解（很多人不知道）</h1><p>👉 Distrobox 其实是基于：</p>
-<ul>
-<li>Podman 或 Docker</li>
-</ul>
-<p>但它帮你做了：</p>
-<ul>
-<li>用户映射</li>
-<li>home挂载</li>
-<li>GUI集成</li>
-<li>shell集成</li>
-</ul>
-<p>👉 可以理解为：</p>
-<blockquote>
-<p><strong>Distrobox &#x3D; “开发者友好的 Docker 封装”</strong></p>
-</blockquote>
-<hr>
-<h1 id="✅-最终总结"><a href="#✅-最终总结" class="headerlink" title="✅ 最终总结"></a>✅ 最终总结</h1><p>👉 如果你是开发者：</p>
-<ul>
-<li>🧑‍💻 日常开发 → <strong>Distrobox</strong></li>
-<li>🚀 项目部署 → <strong>Docker</strong></li>
-<li>🔒 强隔离 → <strong>Docker &#x2F; Podman</strong></li>
-</ul>
-
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              May 2026
+            </span>
+            <span class="card-archive-list-count">49</span>
+          </a>
+        </li>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/" data-id="cuideZ-FX362zOm0NRTmswgPd" data-title="🧪 一句话理解" class="article-share-link"><span class="fa fa-share">Share</span></a>
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              April 2026
+            </span>
+            <span class="card-archive-list-count">8</span>
+          </a>
+        </li>
       
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/模式匹配（智能转型）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%EF%BC%88%E6%99%BA%E8%83%BD%E8%BD%AC%E5%9E%8B%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%EF%BC%88%E6%99%BA%E8%83%BD%E8%BD%AC%E5%9E%8B%EF%BC%89/">🧭 场景一：带 `throw`（你的原始代码）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>好，我们用“控制流图 + 作用域变化”来把这个问题彻底讲透。你会看到：<strong><code>s</code> 其实不是“作用域变大”，而是“在某些路径上被证明一定存在”。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f</span><span class="params">(Object o)</span> &#123;  </span><br><span class="line">  <span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> String s)) &#123;  </span><br><span class="line">    System.out.printf(<span class="string">&quot;Not a String&quot;</span>);  </span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>();  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="comment">// 此处s仍在作用域中!  </span></span><br><span class="line">  <span class="comment">// 将上面throw 语句注释的话，这里就找不到s定义了，也就是通常认为的效果  </span></span><br><span class="line">  System.out.println(s.toUpperCase());  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="🧭-场景一：带-throw（你的原始代码）"><a href="#🧭-场景一：带-throw（你的原始代码）" class="headerlink" title="🧭 场景一：带 throw（你的原始代码）"></a>🧭 场景一：带 <code>throw</code>（你的原始代码）</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> String s)) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Not a String&quot;</span>);</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>();</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(s.toUpperCase()); <span class="comment">// ✅ 合法</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="控制流图（关键）"><a href="#控制流图（关键）" class="headerlink" title="控制流图（关键）"></a>控制流图（关键）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">        [开始]</span><br><span class="line">           |</span><br><span class="line">           v</span><br><span class="line">   !(o instanceof String s) ?</span><br><span class="line">        /        \</span><br><span class="line">     true        false</span><br><span class="line">      |            |</span><br><span class="line">打印 + throw     s 已绑定</span><br><span class="line">      |            |</span><br><span class="line">   [方法结束]       v</span><br><span class="line">               使用 s ✅</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="🧠-编译器的推理"><a href="#🧠-编译器的推理" class="headerlink" title="🧠 编译器的推理"></a>🧠 编译器的推理</h2><ul>
-<li><p>走到 <code>System.out.println(s...)</code> 时：</p>
-<ul>
-<li><p><strong>左边分支（true）已经 throw → 不可能走到这里</strong></p>
-</li>
-<li><p><strong>只能从 false 分支来</strong></p>
-</li>
-</ul>
-</li>
-<li><p>false 分支意味着：</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!(...) == false  →  (o instanceof String s) == true</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>⇒ <code>s</code> 一定存在</p>
-</li>
-</ul>
-<p>👉 <strong>结论：s 在这里是“确定已赋值”</strong></p>
-<hr>
-<h1 id="🚫-场景二：去掉-throw"><a href="#🚫-场景二：去掉-throw" class="headerlink" title="🚫 场景二：去掉 throw"></a>🚫 场景二：去掉 <code>throw</code></h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> String s)) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Not a String&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(s.toUpperCase()); <span class="comment">// ❌ 编译错误</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="控制流图"><a href="#控制流图" class="headerlink" title="控制流图"></a>控制流图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">     [开始]</span><br><span class="line">        |</span><br><span class="line">        v</span><br><span class="line">!(o instanceof String s) ?</span><br><span class="line">     /        \</span><br><span class="line">  true        false</span><br><span class="line">   |            |</span><br><span class="line">  打印         s 已绑定</span><br><span class="line">   |            |</span><br><span class="line">   \________    |</span><br><span class="line">            \   |</span><br><span class="line">             v  v</span><br><span class="line">       使用 s ❌（不安全）</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="🧠-编译器的推理-1"><a href="#🧠-编译器的推理-1" class="headerlink" title="🧠 编译器的推理"></a>🧠 编译器的推理</h2><p>现在有两条路径都会到达下面：</p>
-<table>
-<thead>
-<tr>
-<th>路径</th>
-<th>s 是否存在</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>true 分支（不是 String）</td>
-<td>❌ 没有</td>
-</tr>
-<tr>
-<td>false 分支（是 String）</td>
-<td>✅ 有</td>
-</tr>
-</tbody></table>
-<p>👉 编译器无法保证 <code>s</code> 一定存在</p>
-<p>⇒ ❌ 拒绝编译</p>
-<hr>
-<h1 id="🔑-核心概念：Flow-Scoping（流敏感作用域）"><a href="#🔑-核心概念：Flow-Scoping（流敏感作用域）" class="headerlink" title="🔑 核心概念：Flow Scoping（流敏感作用域）"></a>🔑 核心概念：Flow Scoping（流敏感作用域）</h1><p>Java 在这里用的是：</p>
-<p>👉 Pattern Matching for instanceof<br>👉 + <strong>Flow-sensitive analysis（流分析）</strong></p>
-<hr>
-<h2 id="✅-可以让-s-在外部可用的写法"><a href="#✅-可以让-s-在外部可用的写法" class="headerlink" title="✅ 可以让 s 在外部可用的写法"></a>✅ 可以让 <code>s</code> 在外部可用的写法</h2><p>这些都成立：</p>
-<h3 id="1️⃣-throw"><a href="#1️⃣-throw" class="headerlink" title="1️⃣ throw"></a>1️⃣ throw</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> String s)) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>();</span><br><span class="line">System.out.println(s); <span class="comment">// ✅</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="2️⃣-return"><a href="#2️⃣-return" class="headerlink" title="2️⃣ return"></a>2️⃣ return</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> String s)) <span class="keyword">return</span>;</span><br><span class="line">System.out.println(s); <span class="comment">// ✅</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="3️⃣-continue（在循环中）"><a href="#3️⃣-continue（在循环中）" class="headerlink" title="3️⃣ continue（在循环中）"></a>3️⃣ continue（在循环中）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Object o : list) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> String s)) <span class="keyword">continue</span>;</span><br><span class="line">    System.out.println(s); <span class="comment">// ✅</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="4️⃣-else-分支"><a href="#4️⃣-else-分支" class="headerlink" title="4️⃣ else 分支"></a>4️⃣ else 分支</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (o <span class="keyword">instanceof</span> String s) &#123;</span><br><span class="line">    System.out.println(s); <span class="comment">// ✅</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 这里不能用 s</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="❗-一个容易踩坑的变体"><a href="#❗-一个容易踩坑的变体" class="headerlink" title="❗ 一个容易踩坑的变体"></a>❗ 一个容易踩坑的变体</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (o <span class="keyword">instanceof</span> String s &amp;&amp; s.length() &gt; <span class="number">3</span>) &#123;</span><br><span class="line">    System.out.println(s); <span class="comment">// ✅</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>👉 这里 <code>s</code> 只在 <code>if</code> 内有效<br>因为条件是 <strong>短路逻辑（&amp;&amp;）</strong></p>
-<hr>
-<h1 id="🧠-终极总结（一句话版）"><a href="#🧠-终极总结（一句话版）" class="headerlink" title="🧠 终极总结（一句话版）"></a>🧠 终极总结（一句话版）</h1><p>👉 <strong>变量 <code>s</code> 是否可用，不取决于 <code>{}</code>，而取决于：程序走到这里时，是否“必然已经匹配成功”。</strong></p>
-<hr>
-<h1 id="🎯-如果你想再深入一点"><a href="#🎯-如果你想再深入一点" class="headerlink" title="🎯 如果你想再深入一点"></a>🎯 如果你想再深入一点</h1><p>可以继续玩这些更有意思的点：</p>
-<ul>
-<li><p><code>switch</code> 里的 pattern matching（更复杂但更强大）</p>
-</li>
-<li><p><code>null</code> 在 pattern matching 里的特殊行为</p>
-</li>
-<li><p>多重 pattern + guard（类似函数式语言）</p>
-</li>
-</ul>
-<p>我可以带你看几个“看起来能编译但其实不能”的坑，挺有意思的 😄</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%EF%BC%88%E6%99%BA%E8%83%BD%E8%BD%AC%E5%9E%8B%EF%BC%89/" data-id="cuidqbLUNWRfNOBCMhp_rtveq" data-title="🧭 场景一：带 `throw`（你的原始代码）" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第三章操作符/3.9.1 指数记数法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/">3.9.1 指数记数法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>我记得指数记数法是有一个国际标准的，小数点多少位，指数多少位，怎么记录这些数字？</p>
-<p>单精度和多精度（通常指双精度、四倍精度等）数字表示法的国际标准是 <strong>IEEE 754</strong>（全称 <strong>IEEE Standard for Floating-Point Arithmetic</strong>）。</p>
-<p>该标准由电气电子工程师学会 (IEEE) 制定，并被国际标准化组织 (ISO) 和国际电工委员会 (IEC) 采纳为国际标准，编号为 <strong>ISO&#x2F;IEC&#x2F;IEEE 60559</strong>。</p>
-<hr>
-<h3 id="📋-标准核心内容"><a href="#📋-标准核心内容" class="headerlink" title="📋 标准核心内容"></a>📋 标准核心内容</h3><p>IEEE 754 规定了计算机中浮点数的存储格式、算术运算、舍入规则以及异常处理（如溢出、被零除、NaN 等）。</p>
-<h4 id="1-常见精度格式"><a href="#1-常见精度格式" class="headerlink" title="1. 常见精度格式"></a>1. 常见精度格式</h4><p>在 IEEE 754 标准中，最常用的两种格式是单精度和双精度：</p>
-<table>
-<thead>
-<tr>
-<th><strong>格式名称</strong></th>
-<th><strong>别名</strong></th>
-<th><strong>总位数</strong></th>
-<th><strong>符号位 (Sign)</strong></th>
-<th><strong>指数位 (Exponent)</strong></th>
-<th><strong>尾数位 (Mantissa)</strong></th>
-<th><strong>十进制精度</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>单精度</strong></td>
-<td>binary32</td>
-<td>32 bit</td>
-<td>1 bit</td>
-<td>8 bit</td>
-<td>23 bit</td>
-<td>~7 位有效数字</td>
-</tr>
-<tr>
-<td><strong>双精度</strong></td>
-<td>binary64</td>
-<td>64 bit</td>
-<td>1 bit</td>
-<td>11 bit</td>
-<td>52 bit</td>
-<td>~16 位有效数字</td>
-</tr>
-<tr>
-<td><strong>四倍精度</strong></td>
-<td>binary128</td>
-<td>128 bit</td>
-<td>1 bit</td>
-<td>15 bit</td>
-<td>112 bit</td>
-<td>~34 位有效数字</td>
-</tr>
-</tbody></table>
-<h4 id="2-数值的表示公式"><a href="#2-数值的表示公式" class="headerlink" title="2. 数值的表示公式"></a>2. 数值的表示公式</h4><p>一个浮点数的值通过以下公式计算：</p>
-<p>$$Value &#x3D; (-1)^S \times (1.f) \times 2^{E - Bias}$$</p>
-<ul>
-<li><p><strong>$S$ (Sign)</strong>：符号位。0 代表正数，1 代表负数。</p>
-</li>
-<li><p><strong>$f$ (Fraction&#x2F;Mantissa)</strong>：尾数的小数部分。隐含的高位为 1（规格化数）。</p>
-</li>
-<li><p><strong>$E$ (Exponent)</strong>：阶码（指数）。</p>
-</li>
-<li><p><strong>$Bias$ (偏移量)</strong>：为了表示负指数，标准规定了一个偏移值。单精度为 127，双精度为 1023。</p>
-</li>
-</ul>
-<hr>
-<h3 id="🔍-为什么这个标准很重要？"><a href="#🔍-为什么这个标准很重要？" class="headerlink" title="🔍 为什么这个标准很重要？"></a>🔍 为什么这个标准很重要？</h3><ol>
-<li><p><strong>跨平台一致性</strong>：无论你在 Intel CPU、ARM 架构还是英伟达 GPU 上运行，同样的浮点运算代码应该得到相同的结果。</p>
-</li>
-<li><p><strong>特殊的数值处理</strong>：标准定义了如何表示特殊状态：</p>
-<ul>
-<li><p><strong>NaN (Not a Number)</strong>：用于非法运算（如 $\sqrt{-1}$）。</p>
-</li>
-<li><p><strong>Infinity ($\infty$)</strong>：用于表示超出范围的极值。</p>
-</li>
-<li><p><strong>$\pm 0$</strong>：区分正零和负零。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>舍入模式</strong>：规定了四种（或更多）舍入规则，确保精度损失是可控且可预测的。</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" data-id="cuiduQxTPUTHi557g9BL5Jx0x" data-title="3.9.1 指数记数法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第三章操作符/字符串" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="字面量和新建对象"><a href="#字面量和新建对象" class="headerlink" title="字面量和新建对象"></a>字面量和新建对象</h3><table>
-<thead>
-<tr>
-<th><strong>特性</strong></th>
-<th><strong>“asdf” (字面量)</strong></th>
-<th><strong>new String(“asdf”)</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>内存位置</strong></td>
-<td><strong>字符串常量池</strong>  (String Pool)</td>
-<td><strong>堆内存</strong> (Heap)</td>
-</tr>
-<tr>
-<td><strong>对象数量</strong></td>
-<td>最多创建 <strong>1</strong> 个对象</td>
-<td>至少创建 <strong>2</strong> 个对象（如果池中没有）</td>
-</tr>
-<tr>
-<td><strong>复用性</strong></td>
-<td>高（全局共享一份）</td>
-<td>低（每次 <code>new</code> 都会产生新对象）</td>
-</tr>
-<tr>
-<td><strong><code>==</code> 比较</strong></td>
-<td>指向池中同一个地址，为 <code>true</code></td>
-<td>指向堆中不同地址，为 <code>false</code></td>
-</tr>
-</tbody></table>
-<h3 id="内存布局拆解"><a href="#内存布局拆解" class="headerlink" title="内存布局拆解"></a>内存布局拆解</h3><p>当你执行这两行代码时，后台发生了完全不同的故事：</p>
-<h4 id="A-String-s1-asdf"><a href="#A-String-s1-asdf" class="headerlink" title="A. String s1 = &quot;asdf&quot;;"></a>A. <code>String s1 = &quot;asdf&quot;;</code></h4><ol>
-<li><p>Java 检查<strong>字符串常量池</strong>。</p>
-</li>
-<li><p>如果 <code>&quot;asdf&quot;</code> 已经存在，直接返回引用。</p>
-</li>
-<li><p>如果不存在，在池中创建一个，然后返回引用。 <em>这叫“驻留”（Interning），目的是为了省内存。</em></p>
-</li>
-</ol>
-<h4 id="B-String-s2-new-String-asdf"><a href="#B-String-s2-new-String-asdf" class="headerlink" title="B. String s2 = new String(&quot;asdf&quot;);"></a>B. <code>String s2 = new String(&quot;asdf&quot;);</code></h4><ol>
-<li><p>编译器首先会在常量池中放入 <code>&quot;asdf&quot;</code>（如果不存在）。</p>
-</li>
-<li><p>在运行时，<code>new</code> 关键字强制在**堆（Heap）**中开辟一块全新的空间。</p>
-</li>
-<li><p>把常量池中 <code>&quot;asdf&quot;</code> 的内容拷贝一份到堆里。</p>
-</li>
-<li><p>返回堆内存的地址。</p>
-</li>
-</ol>
-<h4 id="intern-方法"><a href="#intern-方法" class="headerlink" title="intern()方法"></a>intern()方法</h4><p>将字符串放入常量池中，比如两个字符串拼接之后，然后返回这个引用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// intern()方法，池里有则直接返回引用，池里没有则放入并返回这个引用  </span></span><br><span class="line"><span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;he&quot;</span>) + <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;llo&quot;</span>);  </span><br><span class="line"><span class="comment">//此时池里没有&quot;hello&quot;字符串  </span></span><br><span class="line"><span class="comment">// 将hello字符串放入池中, s4指向池中的引用  </span></span><br><span class="line"><span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> s3.intern();</span><br></pre></td></tr></table></figure>
-
-<h2 id="底层存储结构改变"><a href="#底层存储结构改变" class="headerlink" title="底层存储结构改变"></a>底层存储结构改变</h2><p>在 <strong>Java 9 之前</strong>，字符串内部是用 <code>char[]</code> 数组存储的。由于 Java 采用 UTF-16 编码，每个 <code>char</code> 强制占用 <strong>2 个字节（16位）</strong>。 但在实际开发中，绝大多数字符串其实只包含 <strong>Latin-1</strong> 字符（如英文、数字、简单符号），这些字符用 1 个字节就能存下。这意味着以前一半的内存空间都被浪费（填了 0）了。</p>
-<p>为了解决这个问题，从 Java 9 开始引入了 <strong>“紧凑字符串”（Compact Strings）</strong>。</p>
-<hr>
-<h3 id="1-底层结构的改变"><a href="#1-底层结构的改变" class="headerlink" title="1. 底层结构的改变"></a>1. 底层结构的改变</h3><p>Java 修改了 <code>String</code> 类的内部实现，将 <code>char[]</code> 换成了 <code>byte[]</code>，并增加了一个 <code>coder</code> 标志位。</p>
-<ul>
-<li><p><strong>旧版 (JDK 8 及以前)</strong>： <code>private final char value[];</code> —— 每个字符死板占用 2 bytes。</p>
-</li>
-<li><p><strong>新版 (JDK 9 至今)</strong>： <code>private final byte[] value;</code> —— 灵活存储。 <code>private final byte coder;</code> —— 记录编码格式（0 代表 Latin-1，1 代表 UTF-16）。</p>
-</li>
-</ul>
-<hr>
-<h3 id="2-它是如何工作的？"><a href="#2-它是如何工作的？" class="headerlink" title="2. 它是如何工作的？"></a>2. 它是如何工作的？</h3><p>当你创建一个字符串时，Java 会自动判断：</p>
-<ul>
-<li><p><strong>全英文&#x2F;数字</strong>：<code>coder</code> 设为 0，每个字符占 <strong>1 byte</strong>。内存占用直接减半！</p>
-</li>
-<li><p><strong>含中文或其他特殊字符</strong>：<code>coder</code> 设为 1，退回到 UTF-16 模式，每个字符占 <strong>2 bytes</strong>（逻辑上和以前一样）。</p>
-</li>
-</ul>
-<p>这种切换对开发者是完全透明的，你不需要修改任何代码，升级 JDK 就能享受到内存红利。</p>
-<hr>
-<h3 id="3-性能影响：变慢了吗？"><a href="#3-性能影响：变慢了吗？" class="headerlink" title="3. 性能影响：变慢了吗？"></a>3. 性能影响：变慢了吗？</h3><p>很多人担心：每次操作字符串都要检查 <code>coder</code> 标志位，性能会不会下降？</p>
-<p><strong>结论是：基本没有，甚至更快。</strong></p>
-<ul>
-<li><p><strong>空间换时间</strong>：由于内存占用变小，GC（垃圾回收）的压力大幅减轻，整个系统的吞吐量反而提升了。</p>
-</li>
-<li><p><strong>向量化优化</strong>：现代 CPU 对 <code>byte[]</code> 的处理有非常强的指令集优化（SIMD），在字符串比较和拷贝时速度极快。</p>
-</li>
-</ul>
-<hr>
-<h3 id="4-一个直观的例子"><a href="#4-一个直观的例子" class="headerlink" title="4. 一个直观的例子"></a>4. 一个直观的例子</h3><p>假设你有一个包含 100 万个简单 ID 的列表：<code>&quot;ID123456...&quot;</code>。</p>
-<ul>
-<li><p><strong>JDK 8</strong>：大约占用 <strong>40MB</strong> 内存。</p>
-</li>
-<li><p><strong>JDK 9+</strong>：大约占用 <strong>20MB</strong> 内存。</p>
-</li>
-</ul>
-<p>在大型微服务应用中，字符串通常占堆内存的 25%-40%，这项优化能让整体内存占用下降 10%-15%，效果非常显著。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="cuid0DboRM2kdxg-Ws97mkXDM" data-title="字符串" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第二十章泛型/Java_泛型核心知识点" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">Java 泛型 (Generics) 核心笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-泛型-Generics-核心笔记"><a href="#Java-泛型-Generics-核心笔记" class="headerlink" title="Java 泛型 (Generics) 核心笔记"></a>Java 泛型 (Generics) 核心笔记</h1><h2 id="1-泛型的本质：参数化类型-Parameterized-Types"><a href="#1-泛型的本质：参数化类型-Parameterized-Types" class="headerlink" title="1. 泛型的本质：参数化类型 (Parameterized Types)"></a>1. 泛型的本质：参数化类型 (Parameterized Types)</h2><p>泛型是将<strong>类型本身</strong>作为参数传递给类、接口或方法。其核心目标是：<strong>在编译期进行类型检查，减少运行时的类型转换异常 (ClassCastException)</strong>。</p>
-<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ol>
-<li><strong>类型安全</strong>：编译器会拦截错误的类型插入。</li>
-<li><strong>消除强制转换</strong>：代码更简洁，可读性更强。</li>
-<li><strong>代码重用</strong>：编写一套逻辑，处理多种数据类型（如 <code>ArrayList&lt;T&gt;</code>）。</li>
-</ol>
-<hr>
-<h2 id="2-核心难点：类型擦除-Type-Erasure"><a href="#2-核心难点：类型擦除-Type-Erasure" class="headerlink" title="2. 核心难点：类型擦除 (Type Erasure)"></a>2. 核心难点：类型擦除 (Type Erasure)</h2><p>这是 Java 泛型最独特、也最受争议的特性。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>Java 的泛型只存在于<strong>编译期</strong>。为了兼容旧版本的 JVM，编译器在生成字节码时，会将所有的泛型参数“擦除”：</p>
-<ul>
-<li>如果没有边界，替换为 <code>Object</code>。</li>
-<li>如果有边界（如 <code>&lt;T extends Number&gt;</code>），替换为边界类型（<code>Number</code>）。</li>
-</ul>
-<h3 id="擦除带来的限制"><a href="#擦除带来的限制" class="headerlink" title="擦除带来的限制"></a>擦除带来的限制</h3><ol>
-<li><strong>运行时无法获取泛型类型</strong>：无法执行 <code>if (obj instanceof T)</code>。</li>
-<li><strong>不能创建泛型数组</strong>：无法执行 <code>new T[10]</code>。</li>
-<li><strong>基本类型不能作为泛型参数</strong>：必须使用包装类（如 <code>List&lt;Integer&gt;</code> 而非 <code>List&lt;int&gt;</code>）。</li>
-</ol>
-<hr>
-<h2 id="3-通配符与-PECS-原则"><a href="#3-通配符与-PECS-原则" class="headerlink" title="3. 通配符与 PECS 原则"></a>3. 通配符与 PECS 原则</h2><p>这是泛型进阶中最实用的规则，决定了泛型集合的读写权限。</p>
-<h3 id="PECS-原则-Producer-Extends-Consumer-Super"><a href="#PECS-原则-Producer-Extends-Consumer-Super" class="headerlink" title="PECS 原则 (Producer Extends, Consumer Super)"></a>PECS 原则 (Producer Extends, Consumer Super)</h3><ol>
-<li><p><strong>Producer Extends (<code>&lt;? extends T&gt;</code>)</strong>：</p>
-<ul>
-<li><strong>场景</strong>：如果你只需要从集合中<strong>读取</strong>数据（集合是生产者）。</li>
-<li><strong>权限</strong>：可以安全读取为 <code>T</code> 类型，但<strong>不能写入</strong>任何对象（除了 <code>null</code>）。</li>
-<li><strong>意义</strong>：确定了上限。</li>
-</ul>
-</li>
-<li><p><strong>Consumer Super (<code>&lt;? super T&gt;</code>)</strong>：</p>
-<ul>
-<li><strong>场景</strong>：如果你需要往集合中<strong>写入</strong>数据（集合是消费者）。</li>
-<li><strong>权限</strong>：可以安全写入 <code>T</code> 及其子类，但<strong>读取</strong>出来只能是 <code>Object</code> 类型。</li>
-<li><strong>意义</strong>：确定了下限。</li>
-</ul>
-</li>
-</ol>
-<h3 id="代码对比"><a href="#代码对比" class="headerlink" title="代码对比"></a>代码对比</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Number</span>&gt; list1 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;(); <span class="comment">// 合法：Integer 是 Number 的子类</span></span><br><span class="line"><span class="comment">// list1.add(10); // 报错：无法确定具体子类型，禁止写入</span></span><br><span class="line"></span><br><span class="line">List&lt;? <span class="built_in">super</span> Integer&gt; list2 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;(); <span class="comment">// 合法：Number 是 Integer 的父类</span></span><br><span class="line">list2.add(<span class="number">10</span>); <span class="comment">// 合法：可以安全写入 Integer 及其子类</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="4-泛型方法与泛型类"><a href="#4-泛型方法与泛型类" class="headerlink" title="4. 泛型方法与泛型类"></a>4. 泛型方法与泛型类</h2><ul>
-<li><strong>泛型类</strong>：<code>public class Box&lt;T&gt; { ... }</code> (T 在实例化类时确定)</li>
-<li><strong>泛型方法</strong>：<code>public &lt;E&gt; void process(E element) { ... }</code> (E 在调用方法时根据参数推断)</li>
-</ul>
-<hr>
-<p><strong>来源：</strong> 《On Java 8 - 第 20 章 泛型》学习整理</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" data-id="cuidoWw1bLWIDvZ5FxVnjLAym" data-title="Java 泛型 (Generics) 核心笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第四章循环选择/switch选择因子" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9/switch%E9%80%89%E6%8B%A9%E5%9B%A0%E5%AD%90/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9/switch%E9%80%89%E6%8B%A9%E5%9B%A0%E5%AD%90/">switch选择因子</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在 Java 的演进过程中，<code>switch</code> 能够处理的数据类型经历了几次重大的扩张。到了 <strong>Java 25</strong>，由于引入了<strong>模式匹配（Pattern Matching）</strong>，几乎任何类型都可以作为 <code>switch</code> 的选择因子。</p>
-<p>以下是按 Java 版本演进划分的类型支持：</p>
-<hr>
-<h3 id="1-基础类型（JDK-1-0-5-0）"><a href="#1-基础类型（JDK-1-0-5-0）" class="headerlink" title="1. 基础类型（JDK 1.0 - 5.0）"></a>1. 基础类型（JDK 1.0 - 5.0）</h3><p>这是最传统的 <code>switch</code> 支持，要求选择因子必须是能够自动转换为 <code>int</code> 的整型或特定类型：</p>
-<ul>
-<li><p><strong><code>byte</code></strong>, <strong><code>short</code></strong>, <strong><code>char</code></strong>, <strong><code>int</code></strong></p>
-</li>
-<li><p><strong>包装类</strong>：<code>Byte</code>, <code>Short</code>, <code>Character</code>, <code>Integer</code>（由于自动拆箱机制）</p>
-</li>
-<li><p><strong><code>enum</code></strong> (枚举类型)：从 JDK 5 开始支持。</p>
-</li>
-</ul>
-<hr>
-<h3 id="2-字符串类型（JDK-7）"><a href="#2-字符串类型（JDK-7）" class="headerlink" title="2. 字符串类型（JDK 7）"></a>2. 字符串类型（JDK 7）</h3><ul>
-<li><p><strong><code>String</code></strong>：从 JDK 7 开始，你可以直接对字符串进行分支判断。</p>
-<ul>
-<li><em>注意</em>：底层是通过字符串的 <code>hashCode()</code> 和 <code>equals()</code> 实现的。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="3-模式匹配类型（JDK-17-21-25）"><a href="#3-模式匹配类型（JDK-17-21-25）" class="headerlink" title="3. 模式匹配类型（JDK 17 - 21&#x2F;25）"></a>3. 模式匹配类型（JDK 17 - 21&#x2F;25）</h3><p>这是 Java 现代化的核心。现在的 <code>switch</code> 不再仅仅是“相等判断”，而是“类型与结构的匹配”。</p>
-<ul>
-<li><p><strong>任何对象引用</strong>：你可以传入 <code>Object</code> 类型的变量。</p>
-</li>
-<li><p><strong><code>Record</code> 类型</strong>：支持解构（Destructuring），可以直接匹配 Record 内部的字段。</p>
-</li>
-<li><p><strong><code>null</code></strong>：在以前的版本中，传入 <code>null</code> 会抛出 <code>NullPointerException</code>。但在现代 Java 中，你可以显式写出 <code>case null</code>。</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9/switch%E9%80%89%E6%8B%A9%E5%9B%A0%E5%AD%90/" data-id="cuidoOsVHzAEVI8yhCK8sXICr" data-title="switch选择因子" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/Java学习笔记索引 (MOC)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%B4%A2%E5%BC%95%20(MOC)/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.883Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%B4%A2%E5%BC%95%20(MOC)/">Java 学习笔记索引 (MOC)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-学习笔记索引-MOC"><a href="#Java-学习笔记索引-MOC" class="headerlink" title="Java 学习笔记索引 (MOC)"></a>Java 学习笔记索引 (MOC)</h1><blockquote>
-<p>[!abstract] 简介<br>本笔记作为《On Java 8》（Java 编程思想）学习过程中的核心导航页，利用 Obsidian 的双链机制整合了所有章节笔记。</p>
-</blockquote>
-<hr>
-<h2 id="🏗-基础语法"><a href="#🏗-基础语法" class="headerlink" title="🏗 基础语法"></a>🏗 基础语法</h2><ul>
-<li>[[java编程思想&#x2F;基本数据类型|基本数据类型]]</li>
-<li>[[java编程思想&#x2F;第三章操作符&#x2F;字符串|操作符：字符串]]</li>
-<li>[[java编程思想&#x2F;第三章操作符&#x2F;3.9.1 指数记数法|操作符：3.9.1 指数记数法]]</li>
-<li>[[java编程思想&#x2F;第四章循环选择&#x2F;switch选择因子|流程控制：switch 选择因子]]</li>
-</ul>
-<hr>
-<h2 id="🧩-对象与进阶"><a href="#🧩-对象与进阶" class="headerlink" title="🧩 对象与进阶"></a>🧩 对象与进阶</h2><ul>
-<li>[[java编程思想&#x2F;内部类|内部类]]</li>
-<li>[[java编程思想&#x2F;第二十章泛型&#x2F;Java_泛型核心知识点|第二十章：泛型 (Generics)]]</li>
-<li>[[java编程思想&#x2F;第十九章反射&#x2F;方法|第十九章：反射与方法]]</li>
-<li>[[java编程思想&#x2F;流|Java 8+ 流 (Streams)]]</li>
-</ul>
-<hr>
-<h2 id="🛡-异常与质量"><a href="#🛡-异常与质量" class="headerlink" title="🛡 异常与质量"></a>🛡 异常与质量</h2><ul>
-<li>[[java编程思想&#x2F;异常&#x2F;Java_finally中异常丢失及其解决方法|异常：finally 中异常丢失及其解决方法]]</li>
-<li>[[java编程思想&#x2F;问题|待解决问题与 FAQ]]</li>
-<li>[[java编程思想&#x2F;备忘|个人学习备忘录]]</li>
-</ul>
-<hr>
-<h2 id="📈-学习进度"><a href="#📈-学习进度" class="headerlink" title="📈 学习进度"></a>📈 学习进度</h2><ul>
-<li><input checked="" disabled="" type="checkbox"> 基础语法</li>
-<li><input checked="" disabled="" type="checkbox"> 第 16 章：代码校验</li>
-<li><input checked="" disabled="" type="checkbox"> 第 17 章：文件</li>
-<li><input checked="" disabled="" type="checkbox"> 第 19 章：反射</li>
-<li>[&#x2F;] 第 20 章：泛型 (进行中)</li>
-</ul>
-<hr>
-<p><strong>最后更新：</strong> 2026-04-02<br><strong>关联标签：</strong> #Java #MOC #学习路径</p>
-<ul>
-<li>[[Java泛型深度总结]]</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%B4%A2%E5%BC%95%20(MOC)/" data-id="cuidyORBVPV-ccdZeYgbKbLQd" data-title="Java 学习笔记索引 (MOC)" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/异常/Java_finally中异常丢失及其解决方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%BC%82%E5%B8%B8/Java_finally%E4%B8%AD%E5%BC%82%E5%B8%B8%E4%B8%A2%E5%A4%B1%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.883Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%BC%82%E5%B8%B8/Java_finally%E4%B8%AD%E5%BC%82%E5%B8%B8%E4%B8%A2%E5%A4%B1%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">Java 中 finally 块异常丢失及其解决方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-中-finally-块异常丢失及其解决方法"><a href="#Java-中-finally-块异常丢失及其解决方法" class="headerlink" title="Java 中 finally 块异常丢失及其解决方法"></a>Java 中 finally 块异常丢失及其解决方法</h1><h2 id="1-问题背景：异常屏蔽-Exception-Masking"><a href="#1-问题背景：异常屏蔽-Exception-Masking" class="headerlink" title="1. 问题背景：异常屏蔽 (Exception Masking)"></a>1. 问题背景：异常屏蔽 (Exception Masking)</h2><p>在 Java 中，一个方法只能向外抛出 <strong>一个</strong> 异常。如果在 <code>try</code> 块抛出异常的同时，<code>finally</code> 块也抛出了异常，那么 <code>finally</code> 块中的异常会“覆盖”掉 <code>try</code> 块中的主异常，导致主异常丢失。</p>
-<h3 id="示例代码（错误示范）"><a href="#示例代码（错误示范）" class="headerlink" title="示例代码（错误示范）"></a>示例代码（错误示范）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;主异常：业务逻辑报错&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;finally 异常：清理资源报错&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用者最终只能捕获到 &quot;finally 异常&quot;，主异常的信息完全丢失，极难调试。</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="2-解决方案-A：Try-with-resources-Java-7-推荐"><a href="#2-解决方案-A：Try-with-resources-Java-7-推荐" class="headerlink" title="2. 解决方案 A：Try-with-resources (Java 7+ 推荐)"></a>2. 解决方案 A：Try-with-resources (Java 7+ 推荐)</h2><p>这是目前处理资源关闭时防止异常丢失的标准做法。Java 会自动保留主异常，并将关闭资源时的异常标记为 <strong>Suppressed（被抑制的）</strong>。</p>
-<h3 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h3><ol>
-<li>优先抛出 <code>try</code> 块中的主异常。</li>
-<li>资源关闭产生的异常会被挂载到主异常下。</li>
-<li>可以通过 <code>e.getSuppressed()</code> 获取这些次要异常。</li>
-</ol>
-<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">MyResource</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyResource</span>()) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;核心业务逻辑报错&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    e.printStackTrace(); </span><br><span class="line">    <span class="comment">// 控制台会打印出主异常，并在下方显示 &quot;Suppressed: ...&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="3-解决方案-B：手动处理-addSuppressed"><a href="#3-解决方案-B：手动处理-addSuppressed" class="headerlink" title="3. 解决方案 B：手动处理 (addSuppressed)"></a>3. 解决方案 B：手动处理 (addSuppressed)</h2><p>如果你必须在 <code>finally</code> 中编写自定义逻辑（而非简单的资源关闭），可以使用 <code>Throwable.addSuppressed()</code> 手动关联异常。</p>
-<h3 id="示例代码-1"><a href="#示例代码-1" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Exception</span> <span class="variable">mainException</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;主异常&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    mainException = e;</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 自定义清理逻辑</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;finally 里的异常&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mainException != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 将 finally 异常挂载到主异常，防止丢失</span></span><br><span class="line">            mainException.addSuppressed(e);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="4-最佳实践"><a href="#4-最佳实践" class="headerlink" title="4. 最佳实践"></a>4. 最佳实践</h2><ol>
-<li><strong>优先使用 Try-with-resources</strong> 处理所有 <code>AutoCloseable</code> 资源。</li>
-<li><strong>避免在 finally 中抛出异常</strong>：尽量在 <code>finally</code> 内部使用 <code>try-catch</code> 消化掉清理逻辑的报错，或者仅记录日志。</li>
-<li><strong>严禁在 finally 中使用 return</strong>：这会导致 <code>try</code> 块抛出的异常被无声无息地丢弃。</li>
-</ol>
-<hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%BC%82%E5%B8%B8/Java_finally%E4%B8%AD%E5%BC%82%E5%B8%B8%E4%B8%A2%E5%A4%B1%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="cuidqmwO-zrNUXqdpQ14mv107" data-title="Java 中 finally 块异常丢失及其解决方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-blender/问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/blender/%E9%97%AE%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.882Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/blender/%E9%97%AE%E9%A2%98/">问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="圆柱倒角问题"><a href="#圆柱倒角问题" class="headerlink" title="圆柱倒角问题"></a>圆柱倒角问题</h2><p><strong>blender中新建了一个6边的圆柱体，对顶部的边进行倒角的时候，圆柱体的侧面没有参与倒角，只在圆柱体顶面有倒角，原因是什么？</strong></p>
-<h3 id="1-核心原因：顶点没有合并（重叠顶点）"><a href="#1-核心原因：顶点没有合并（重叠顶点）" class="headerlink" title="1. 核心原因：顶点没有合并（重叠顶点）"></a>1. 核心原因：顶点没有合并（重叠顶点）</h3><p>这是最常见的情况。在创建圆柱体或进行某些操作（如错误的挤出）时，圆柱体的“顶面”和“侧面”虽然看起来在一起，但它们的<strong>点和点之间其实没有焊接上</strong>。</p>
-<ul>
-<li><strong>表现</strong>：倒角时，Blender 认为你只选中了一个独立的“圆盘”边缘，它只会向圆盘中心收缩，而不会拉动侧面的网格。</li>
-</ul>
-<p><strong>解决方法：</strong></p>
-<ol>
-<li><p>进入<strong>编辑模式 (Tab)</strong>。</p>
-</li>
-<li><p>全选所有点 (<strong>A</strong>)。</p>
-</li>
-<li><p>按下 <strong><code>M</code></strong> 键，选择 <strong>按距离合并 (Merge by Distance)</strong>。</p>
-</li>
-<li><p>观察屏幕下方是否显示“删除了 X 个顶点”。如果删除了点，再尝试倒角就正常了。</p>
-</li>
-</ol>
-<h3 id="2-物体缩放比例未应用-Scale"><a href="#2-物体缩放比例未应用-Scale" class="headerlink" title="2. 物体缩放比例未应用 (Scale)"></a>2. 物体缩放比例未应用 (Scale)</h3><p><strong>如果你在“物体模式”下非等比例缩放过圆柱体（比如拉长了它），Blender 的倒角计算会发生畸变。</strong></p>
-<ul>
-<li><strong>表现</strong>：倒角可能变得非常扁，或者在某个轴向上完全没反应，看起来就像侧面没参与一样。</li>
-</ul>
-<p><strong>解决方法：</strong></p>
-<ol>
-<li><p>回到<strong>物体模式 (Tab)</strong>。</p>
-</li>
-<li><p>按下 <strong><code>Ctrl + A</code></strong>，选择 <strong>缩放 (Scale)</strong>。</p>
-</li>
-<li><p>你会发现右侧侧栏（快捷键 N）中的“缩放”数值全部变成了 <strong>1.0</strong>。</p>
-</li>
-<li><p>再次进入编辑模式进行倒角。</p>
-</li>
-</ol>
-<h3 id="3-开启了“钳制重叠”-Clamp-Overlap"><a href="#3-开启了“钳制重叠”-Clamp-Overlap" class="headerlink" title="3. 开启了“钳制重叠” (Clamp Overlap)"></a>3. 开启了“钳制重叠” (Clamp Overlap)</h3><p>如果你的圆柱体非常小，或者倒角量太大，倒角边缘会碰到其他的边。</p>
-<ul>
-<li><strong>表现</strong>：倒角滑块拉不动，或者拉到一半就卡住了，导致你觉得侧面没变化。</li>
-</ul>
-<p><strong>解决方法：</strong></p>
-<ul>
-<li><p>在执行倒角命令时，观察屏幕左下角的 <strong>倒角 (Bevel)</strong> 属性面板。</p>
-</li>
-<li><p>检查是否勾选了 <strong>钳制重叠 (Clamp Overlap)</strong>。</p>
-</li>
-<li><p>尝试<strong>关闭</strong>它，看看边线是否能继续移动（但注意关闭后可能会导致面与面穿插）。</p>
-</li>
-</ul>
-<h3 id="4-误用了“顶点倒角”"><a href="#4-误用了“顶点倒角”" class="headerlink" title="4. 误用了“顶点倒角”"></a>4. 误用了“顶点倒角”</h3><p>检查一下你按下的是不是 <strong><code>Ctrl + B</code></strong>。</p>
-<ul>
-<li><p><strong>Ctrl + B</strong> 是<strong>边倒角</strong>（正常切开转角）。</p>
-</li>
-<li><p><strong>Ctrl + Shift + B</strong> 是<strong>顶点倒角</strong>。如果你误用了后者，它只会把每一个角变成一个小平面，而不会影响侧面的边。</p>
-</li>
-</ul>
-<hr>
-<h3 id="总结排查步骤"><a href="#总结排查步骤" class="headerlink" title="总结排查步骤"></a>总结排查步骤</h3><p>如果你现在正对着那个圆柱体发愁，请按顺序执行以下“三部曲”，90% 的概率能解决：</p>
-<ol>
-<li><p><strong>物体模式</strong>下：<code>Ctrl + A</code> -&gt; 应用缩放。</p>
-</li>
-<li><p><strong>编辑模式</strong>下：<code>A</code>全选 -&gt; <code>M</code> -&gt; 按距离合并。</p>
-</li>
-<li><p><strong>确认选择</strong>：确保你选中的是圆柱体顶部那圈<strong>边</strong>（边选择模式），而不是整个顶面。</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/blender/%E9%97%AE%E9%A2%98/" data-id="cuid701nPCN-2ama-H9A5SWHu" data-title="问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-blender/2基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.879Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/">2基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658137.png"></p>
-<p>默认进入blender的界面，这个界面包括一个立方体，一个光源和一个照相机。<br>这三个元素其实就是暗示我们做模型最重要的三个元素，有了这三个元素就能够做出一个模型了。</p>
-<p><strong>鼠标操作</strong></p>
-<p>控制观察视角 鼠标中键<br>平移视图  Shift + 鼠标中键<br>缩放视角 滚动鼠标中键滚轮</p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658142.png"></p>
-<p>第一个是缩放<br>第二个是移动<br>第三个是摄像机视图，也就是最终渲染出来的视图<br>第四个是正交视图</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">在 3D 建模和设计中，<span class="strong">**正交视图 (Orthographic View)**</span> 是一种特殊的观察方式，它与我们日常生活中的视觉感受（透视图）完全不同。</span><br><span class="line"></span><br><span class="line"><span class="section">### 1. 核心定义</span></span><br><span class="line"></span><br><span class="line">简单来说，正交视图就是<span class="strong">**“没有近大远小”**</span>的视图。</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**平行投影**</span>：在正交视图中，所有的投影线都是平行的。这意味着无论物体距离相机多远，它在屏幕上的大小都保持不变。</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数学逻辑**：</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">    - **正交投影**：$x_&#123;2d&#125; = x$，$y_&#123;2d&#125; = y$（坐标直接映射，忽略距离 $z$ 对缩放的影响）。</span></span><br><span class="line"><span class="code">        </span></span><br><span class="line"><span class="code">    - **透视投影**：$x_&#123;2d&#125; = x/z$，$y_&#123;2d&#125; = y/z$（距离 $z$ 越大，呈现出的尺寸越小）。</span></span><br><span class="line"><span class="code">        </span></span><br><span class="line"><span class="code"></span></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">### 2. 正交视图 vs. 透视图</span></span><br><span class="line"></span><br><span class="line">|  <span class="strong">**特性**</span>  |  <span class="strong">**正交视图 (Orthographic)**</span>      |   <span class="strong">**透视图 (Perspective)**</span> |</span><br><span class="line">|-----------|----------------------------------|---------------------------|</span><br><span class="line">|<span class="strong">**视觉效果**</span>|扁平、不真实，像工程图纸。             |自然、写实，符合人眼视觉。     |</span><br><span class="line">|<span class="strong">**比例关系**</span>|<span class="strong">**平行线永远平行**</span>，比例绝对精确。     |平行线会汇聚于消失点，产生畸变。|</span><br><span class="line">|<span class="strong">**物体大小**</span>|距离远近不影响物体在画面的大小。       |距离越远，物体看起来越小。     |</span><br><span class="line">|<span class="strong">**主要用途**</span>|<span class="strong">**精准建模、对齐、查看比例、工程设计**</span>。|场景漫游、最终渲染、艺术构图。  |</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">### 3. 为什么在 Blender 中必须使用它？</span></span><br><span class="line"></span><br><span class="line">当你正在制作一个精密的零件或人体模型时，透视图的“近大远小”会干扰你的判断。例如：</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**对齐顶点**</span>：如果你想让两个物体处于同一水平线上，在透视图中因为角度问题，你很难看准；但在正交视图下，只要它们重合，就是绝对对齐的。</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **参考图建模**：当你导入汽车的“前视图”或“侧视图”底图进行建模时，必须在正交视图下操作，否则模型将无法匹配底图的准确比例。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code"></span></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">### 4. Blender 5.0 中的操作快捷键</span></span><br><span class="line"></span><br><span class="line">在 Blender 中切换视图非常频繁，建议记住以下快捷键：</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**数字小键盘 5**</span>：在“正交”和“透视”模式之间来回切换。</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数字小键盘 1**：正视图（Front，自动进入正交）。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数字小键盘 3**：右视图（Right，自动进入正交）。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数字小键盘 7**：顶视图（Top，自动进入正交）。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **Alt + 鼠标中键拖动**：可以快速吸附到最近的正交轴向视图。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="quote">&gt; <span class="strong">**小贴士**</span>：如果你发现屏幕左上角显示 <span class="strong">**“用户透视图” (User Perspective)**</span>，画面看起来很立体；点击 <span class="strong">**5**</span> 后会变成 <span class="strong">**“用户正交” (User Orthographic)**</span>，画面会瞬间变“扁”，这是正常的。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>如何控制模型</strong></p>
-<p>左侧有各种操作工具栏，先点击对应工具，然后模型上面会出现坐标轴等，鼠标可以按住操作。</p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658145.png"></p>
-<p>依次是框选工具，游标工具，移动工具，旋转工具，缩放工具，变换工具<br>框选工具长按，又有调整工具（移动），框选工具（四边形选择），刷选工具（鼠标滑动选择），套索工具（不规则套索）</p>
-<p>Shift + A  新建物体<br>G   移动模型， 移动时点击x，会在x轴移动，y和z轴同理。在G移动模式下，按住ctrl移动，可以吸附网格进行移动<br>S   缩放模型， 缩放是点击x，会在x轴缩放，y和z轴同理；先S，然后按住Shift + x&#x2F;y&#x2F;z，是禁止在当前方向上缩放，在另外两个方向上缩放；<strong>尽量不要再物体模式下缩放，而是在编辑模式下缩放。如果在物体模式下缩放了，需要按ctrl + a 应用缩放，不然其他倒角等操作会出现异常。</strong></p>
-<p>R   旋转模型， 按住x,y,z操作同上<br>H   隐藏物体</p>
-<p>Alt  + G  撤销移动<br>Alt  + S  撤销缩放<br>Alt  + R  撤销旋转</p>
-<p>Alt + H  隐藏物体</p>
-<p>Shift +  D   移动并复制，每个复制出来的都是独立的<br>Alt + D  关联复制，修改一个，所有复制出来的都会改</p>
-<p><strong>切换视图</strong></p>
-<p>坐标轴如下图所示</p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658159.png"></p>
-<p>右上角x,y，z轴可以点击</p>
-<p>小键盘快捷键：<br>1  前视图，从-Y轴正面看<br>3  右视图，从x轴看<br>7  顶视图，从z轴看<br>9  从当前轴的反向看，比如当前按了3进入右视图，再按9就变成从-x轴看，也就是左视图<br>.  也就是小键盘上的小数点，会将物体放大推到面前，方便查看</p>
-<p>对于没有小键盘的笔记本来说，按键盘右上角&#96;|～键，会出现切换视图轮盘，鼠标移动到哪个视图，松开按键就会切换</p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658164.png"></p>
-<p>3d建模基本流程<br>建模，布光，材质，渲染</p>
-<p>**认识界面</p>
-<p>什么是游标和原点</p>
-<p><strong>游标</strong></p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658167.png"></p>
-<p>模型中间圆圈叫做游标，两个作用<br>1。游标在哪里，你新建的物体就会出现在哪里，物体也可以移动到游标<br>2。游标可以作为物体旋转的轴心点使用</p>
-<p><strong>操作游标</strong><br>点击左侧游标工具，然后鼠标左键点击到哪里游标就到哪里<br>快捷键：<br>Shift + 鼠标右键   点击到哪里游标就到哪里<br>Shift + S  选中物体之后，出现一个操作轮盘，选择到游标，物体就会移动到游标所在的位置<br>Shift + c  游标回到坐标系原点</p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658174.png"><br>默认物体旋转是按照每个物体的原点旋转，可以在变换轴心点中选择游标，之后会按照游标进行旋转</p>
-<p><strong>原点</strong><br>鼠标点击物体选中之后，物体会出现一个黄色的点，就是物体的原点<br>物体缩放是从原点开始的，可以通过勾选下面的原点，移动物体的原点（移动快捷键G）</p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658177.png"></p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658190.png"></p>
-<p>可以将原点移动到坐标系中心，之后取消物体移动（Alt + G），可以发现物体的原点回到了世界中心，物体本身和原点还保持着之前的相对关系，但是并没有在世界中心</p>
-<p>也就是说程序只认识物体的原点，所有的操作都是按照原点操作</p>
-<p>将原点移动到物体默认位置： 右键物体 -&gt; 设置原点-&gt;原点到几何中心</p>
-<p>在G移动模式下，按住ctrl移动，可以吸附网格进行移动</p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658174.png"></p>
-<p>1, 边界框中心： 选中多个物体是，物体被最小的框包围时，框的中心点<br>2, 3D游标：坐标系上的圆圈<br>3, 各自的原点： 每个物体有自己的原点, 认为设置的橙色的点，<br>4, 质心点： 物体的重心，如果有多个物体是多个物体的重心（这里貌似blender翻译错误，英文是median point, 像是中心点，但不是质心点，实测不是中心，将原点移出物体之外，选择按照质心点旋转，仍然是按照原点旋转）<br>5, 活动元素： 选中多个元素时，最后选中的那个物体</p>
-<p><strong>坐标</strong></p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658194.png"></p>
-<p>1, 全局坐标，所有物体共有的坐标，界面上显示的x, y和z轴<br>2, 局部坐标，每个物体自己的坐标，跟随物体</p>
-<p>快捷键<br>g x&#x2F;y&#x2F;z  局部坐标x&#x2F;y&#x2F;z<br>g x&#x2F;y&#x2F;z x&#x2F;yz  全局坐标x&#x2F;y&#x2F;z</p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658196.png"></p>
-<p><strong>四种预览方式</strong></p>
-<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115232800030.png"></p>
-<p>1, 渲染预览，显示最终渲染结果预览，但是相对占资源，慢<br>2, 材质预览，可以预览材质的颜色和简单纹理，但是不计算光线追踪细节，比渲染预览快<br>3, 实体模式预览，不现实颜色和材质，建模时候使用，快，不占太多资源<br>4, 线框模式预览，可以显示内部和背面的走线，建模时候常用</p>
-<p>ctrl + L  关联材质</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/" data-id="cuidiBNECh0xT7QjDNt6y-qXY" data-title="2基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/migration/" rel="tag">migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/ArchLinux/" style="font-size: 13.33px;">ArchLinux</a> <a href="/tags/Container/" style="font-size: 10px;">Container</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Incus/" style="font-size: 13.33px;">Incus</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LinuxOps/" style="font-size: 10px;">LinuxOps</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Networking/" style="font-size: 10px;">Networking</a> <a href="/tags/Obsidian/" style="font-size: 13.33px;">Obsidian</a> <a href="/tags/Virtualization/" style="font-size: 10px;">Virtualization</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/btrfs/" style="font-size: 10px;">btrfs</a> <a href="/tags/conda/" style="font-size: 10px;">conda</a> <a href="/tags/dualboot/" style="font-size: 10px;">dualboot</a> <a href="/tags/erasure/" style="font-size: 10px;">erasure</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java-generics/" style="font-size: 10px;">java/generics</a> <a href="/tags/java-onjava/" style="font-size: 10px;">java/onjava</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 10px;">java/字节码</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 10px;">java/数组</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 16.67px;">java/泛型</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/migration/" style="font-size: 10px;">migration</a> <a href="/tags/networking/" style="font-size: 10px;">networking</a> <a href="/tags/pattern-generics/" style="font-size: 10px;">pattern/generics</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 10px;">故障排查</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 16.67px;">编程思想</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/python/uv/">配置国内镜像</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">57</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-05-09T09:27:02.644Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

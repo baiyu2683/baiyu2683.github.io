@@ -1,1106 +1,178 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/page/6/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
   
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
-<meta name="generator" content="Hexo 8.1.2"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/04/23/Linux/Networking/Linux%20%E4%BD%BF%E7%94%A8%20scp%20%E5%85%8D%E5%AF%86%E7%A0%81%E8%BF%9C%E7%A8%8B%E6%8B%B7%E8%B4%9D/" title="Linux 使用 scp 免密码远程拷贝">Linux 使用 scp 免密码远程拷贝</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-22T16:00:00.000Z" title="Created 2026-04-23 00:00:00">2026-04-23</time></span></div><div class="content">Linux 使用 scp 免密码远程拷贝scp 底层使用 [[SSH]] 连接。要让 scp 远程拷贝时不输入远程主机密码，标准做法是配置 SSH 密钥登录。  [!tip]推荐使用 SSH key。不要优先使用 sshpass，因为明文密码可能进入 shell 历史、进程列表或日志。  1. 在本机生成 SSH 密钥1ssh-keygen -t ed25519 -C &quot;your_email_or_name&quot;  一路回车即可。默认会生成： 12~/.ssh/id_ed25519~/.ssh/id_ed25519.pub  其中：  id_ed25519 是私钥，留在本机，不要复制给别人。 id_ed25519.pub 是公钥，可以放到远程主机。  2. 把公钥复制到远程主机推荐使用： 1ssh-copy-id user@remote_host  示例： 1ssh-copy-id root@192.168.1.10  如果远程 SSH 端口不是 22： 1ssh-copy-id -p 2222 user@remote_host  这一步通常需要输入一次远程主机密...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/04/16/Linux/Virtualization/Incus/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%EF%BC%9A%E5%AE%B9%E5%99%A8%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E5%A4%96%E7%BD%91/" title="[Incus] 解决容器无法访问外网问题 (与 Docker 规则冲突)">[Incus] 解决容器无法访问外网问题 (与 Docker 规则冲突)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-15T16:00:00.000Z" title="Created 2026-04-16 00:00:00">2026-04-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Incus/">Incus</a></span></div><div class="content">[Incus] 解决容器无法访问外网问题 (与 Docker 规则冲突)1. 问题描述在 Arch Linux 宿主机上，Incus 容器（如 ubuntu-gnome）虽然获取了 IP 地址，但无法访问外网（ping 不通公网 IP，也无法解析域名）。 2. 故障排查进入容器进行网络诊断： 12345# 测试 IP 连通性ping 8.8.8.8  # 失败# 查看路由表ip route      # 存在默认网关 (如 10.242.250.1)  在宿主机检查防火墙规则： 1sudo iptables -L FORWARD -n -v 关键发现：  Chain FORWARD (policy DROP)：转发链默认策略被设置为 DROP。 只有 Docker 相关的转发规则，缺乏 Incus 网桥（如 incusbr0）的放行规则。 原因：宿主机安装 Docker 后，Docker 会自动修改 iptables 策略，拦截非 Docker 管理的网桥流量。  3. 解决方案A. 临时修复 (立即生效)手动向 iptables 注入放行规则和 NAT 伪装规则： 123456...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/04/11/Linux/Virtualization/Incus/README/" title="Incus - 系统容器与虚拟机管理">Incus - 系统容器与虚拟机管理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-10T16:00:00.000Z" title="Created 2026-04-11 00:00:00">2026-04-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Incus/">Incus</a></span></div><div class="content">Incus: 现代系统容器与虚拟机管理器 [!abstract] 概述Incus 是由 Linux Containers (LXC) 社区维护的社区驱动项目，是 LXD 的社区分支 (Fork)。它旨在提供一个完全开源、无 CLA 限制的平台，用于在单一界面下管理 Linux 系统容器 and KVM 虚拟机。  1. 核心定位 系统容器 (System Containers): 运行完整的 Linux 发行版，表现得像物理机，但共享宿主机内核，性能几乎无损耗。 虚拟机 (VM): 支持运行非 Linux 系统（如 Windows），具备完全的内核隔离。  2. Arch Linux 安装与基础配置安装12sudo pacman -S incussudo systemctl enable --now incus  权限配置 用户组: 将用户加入 incus-admin 组以避免每次使用 sudo。12sudo usermod -aG incus-admin $USERnewgrp incus-admin # 立即生效 用户 ID 映射 (idmap): 非特权容器正常运行的关键。...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/04/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Chapter20_%E6%B3%9B%E5%9E%8B%E6%80%BB%E7%BB%93/" title="Java 泛型 Chapter 20 - Thinking in Java">Java 泛型 Chapter 20 - Thinking in Java</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-08T16:00:00.000Z" title="Created 2026-04-09 00:00:00">2026-04-09</time></span></div><div class="content">Chapter 20 泛型 - Thinking in Java 基于《On Java》Chapter 20 章节代码整理   1. 泛型基础概念1.1 泛型的本质参数化类型 — 将类型作为参数传递给类&#x2F;接口&#x2F;方法 1234567891011// 泛型类public class Holder&lt;T&gt; &#123;  private T value;  public T get() &#123; return value; &#125;  public void set(T val) &#123; value = val; &#125;&#125;// 使用Holder&lt;Apple&gt; apple = new Holder&lt;&gt;(new Apple());Apple a = apple.get();apple.set(a);  1.2 泛型方法方法级别独立使用泛型参数 12345678910public class GenericMethods &#123;  public &lt;T&gt; void f(T x) &#123; ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/04/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java%E6%B3%9B%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93/" title="Java 泛型深度总结">Java 泛型深度总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-08T16:00:00.000Z" title="Created 2026-04-09 00:00:00">2026-04-09</time></span></div><div class="content">Java 泛型深度总结 (Chapter 20) [!abstract] 核心哲学Java 泛型是为了在编译期提供类型安全检查，但在运行时通过类型擦除 (Erasure) 来保持与旧版本代码的兼容性。  1. 类型擦除 (Erasure) 的本质在运行时，所有的泛型信息 List&lt;T&gt; 都会被擦除为它的原始类型（通常是 Object，或者它的边界类型）。  [!danger] 擦除带来的后果  无法执行 instanceof T。 无法执行 new T()。 无法创建泛型数组 new T[10]。 运行时 ArrayList&lt;String&gt; 和 ArrayList&lt;Integer&gt; 是同一个 Class。   2. 补偿擦除的手段2.1 类型标签 (Type Tags)通过显式传递 Class&lt;T&gt; 来找回运行时的类型感知。 12345public class ClassTypeCapture&lt;T&gt; &#123;  Class&lt;T&gt; kind;  public ClassTypeCapture(Class&l...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA/" title="Java 泛型数组创建">Java 泛型数组创建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-04T16:00:00.000Z" title="Created 2026-04-05 00:00:00">2026-04-05</time></span></div><div class="content">Java 泛型数组创建由于 Java 的类型擦除机制，无法直接使用 new T[] 创建泛型数组。  [!warning] 类型擦除泛型信息在编译后被擦除，运行时 T 变为 Object，因此 new T[] 无法确定数组的实际类型。  三种创建方式1. (T[]) new Object[size] — 内部使用最简单的方式，适用于数组不对外暴露的场景。 12345678910111213141516171819public class GenericArray&lt;T&gt; &#123;  private T[] array;    public GenericArray(int sz) &#123;    array = (T[]) new Object[sz];  &#125;    public void put(int index, T item) &#123;    array[index] = item;  &#125;    public T get(int index) &#123;    return array[index];  &#125;    pu...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E8%BF%9B%E9%98%B6-%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BE%B9%E7%95%8C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/" title="Java 泛型进阶 - 通配符、边界与类型擦除">Java 泛型进阶 - 通配符、边界与类型擦除</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-04T16:00:00.000Z" title="Created 2026-04-05 00:00:00">2026-04-05</time></span></div><div class="content">Java 泛型进阶 [!info] 学习内容提交 d2aa42b — chapter20 generics 章节，20 个文件 882 行代码   一、类型擦除的本质泛型信息在编译后全部擦除为 Object，通过 javap -c 反编译验证： 1234567891011// 源码public class Holder&lt;T&gt; &#123;  private T value;  public T get() &#123; return value; &#125;  public void set(T val) &#123; value = val; &#125;&#125;// 字节码中Field value:Ljava/lang/Object;    // T → Objectget:()Ljava/lang/Object;          // 返回 Objectset:(Ljava/lang/Object;)V         // 参数 Object  编译器做的事：在调用处自动插入 checkcast 指令 123// Apple d = apple.get...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/5/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><span class="page-number current">6</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/" title="Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a><time datetime="2026-05-09T08:30:00.000Z" title="Created 2026-05-09 16:30:00">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/" title="Hexo 与 Obsidian 协作集成方案">Hexo 与 Obsidian 协作集成方案</a><time datetime="2026-05-09T07:36:13.000Z" title="Created 2026-05-09 15:36:13">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/" title="1常用操作分类">1常用操作分类</a><time datetime="2026-05-09T03:06:20.000Z" title="Created 2026-05-09 11:06:20">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" title="PineScript_v6核心知识点">PineScript_v6核心知识点</a><time datetime="2026-05-09T01:34:34.886Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/09/python/uv/" title="配置国内镜像">配置国内镜像</a><time datetime="2026-05-09T01:34:34.886Z" title="Created 2026-05-09 09:34:34">2026-05-09</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="View More">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Incus/"><span class="card-category-list-name">Incus</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/General/"><span class="card-category-list-name">General</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Virtualization/"><span class="card-category-list-name">Virtualization</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Virtualization/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/blender/"><span class="card-category-list-name">blender</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/claudecode/"><span class="card-category-list-name">claudecode</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/"><span class="card-category-list-name">dcrawler改进</span><span class="card-category-list-count">3</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/Virtualization/" style="font-size: 1.1em; color: #999">Virtualization</a> <a href="/tags/java-generics/" style="font-size: 1.1em; color: #999">java/generics</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 1.37em; color: #99a4b2">编程思想</a> <a href="/tags/Container/" style="font-size: 1.1em; color: #999">Container</a> <a href="/tags/scp/" style="font-size: 1.1em; color: #999">scp</a> <a href="/tags/erasure/" style="font-size: 1.1em; color: #999">erasure</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/dualboot/" style="font-size: 1.1em; color: #999">dualboot</a> <a href="/tags/Hexo/" style="font-size: 1.23em; color: #999ea6">Hexo</a> <a href="/tags/ssh/" style="font-size: 1.1em; color: #999">ssh</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 1.37em; color: #99a4b2">java/泛型</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Obsidian/" style="font-size: 1.23em; color: #999ea6">Obsidian</a> <a href="/tags/ArchLinux/" style="font-size: 1.23em; color: #999ea6">ArchLinux</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 1.1em; color: #999">java/数组</a> <a href="/tags/git/" style="font-size: 1.5em; color: #99a9bf">git</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/java-onjava/" style="font-size: 1.1em; color: #999">java/onjava</a> <a href="/tags/pattern-generics/" style="font-size: 1.1em; color: #999">pattern/generics</a> <a href="/tags/conda/" style="font-size: 1.1em; color: #999">conda</a> <a href="/tags/ffmpeg/" style="font-size: 1.1em; color: #999">ffmpeg</a> <a href="/tags/migration/" style="font-size: 1.1em; color: #999">migration</a> <a href="/tags/LinuxOps/" style="font-size: 1.1em; color: #999">LinuxOps</a> <a href="/tags/networking/" style="font-size: 1.1em; color: #999">networking</a> <a href="/tags/archlinux/" style="font-size: 1.23em; color: #999ea6">archlinux</a> <a href="/tags/Docker/" style="font-size: 1.1em; color: #999">Docker</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.1em; color: #999">数据库</a> <a href="/tags/Networking/" style="font-size: 1.1em; color: #999">Networking</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 1.1em; color: #999">故障排查</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 1.1em; color: #999">java/字节码</a> <a href="/tags/btrfs/" style="font-size: 1.1em; color: #999">btrfs</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/Incus/" style="font-size: 1.23em; color: #999ea6">Incus</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
       
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
   
-    <article id="post-Linux/Networking/Linux 使用 scp 免密码远程拷贝" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/04/23/Linux/Networking/Linux%20%E4%BD%BF%E7%94%A8%20scp%20%E5%85%8D%E5%AF%86%E7%A0%81%E8%BF%9C%E7%A8%8B%E6%8B%B7%E8%B4%9D/" class="article-date">
-  <time class="dt-published" datetime="2026-04-22T16:00:00.000Z" itemprop="datePublished">2026-04-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/04/23/Linux/Networking/Linux%20%E4%BD%BF%E7%94%A8%20scp%20%E5%85%8D%E5%AF%86%E7%A0%81%E8%BF%9C%E7%A8%8B%E6%8B%B7%E8%B4%9D/">Linux 使用 scp 免密码远程拷贝</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+    <ul class="card-archive-list">
       
-        <h1 id="Linux-使用-scp-免密码远程拷贝"><a href="#Linux-使用-scp-免密码远程拷贝" class="headerlink" title="Linux 使用 scp 免密码远程拷贝"></a>Linux 使用 scp 免密码远程拷贝</h1><p><code>scp</code> 底层使用 [[SSH]] 连接。要让 <code>scp</code> 远程拷贝时不输入远程主机密码，标准做法是配置 SSH 密钥登录。</p>
-<blockquote>
-<p>[!tip]<br>推荐使用 SSH key。不要优先使用 <code>sshpass</code>，因为明文密码可能进入 shell 历史、进程列表或日志。</p>
-</blockquote>
-<h2 id="1-在本机生成-SSH-密钥"><a href="#1-在本机生成-SSH-密钥" class="headerlink" title="1. 在本机生成 SSH 密钥"></a>1. 在本机生成 SSH 密钥</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;your_email_or_name&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>一路回车即可。默认会生成：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/id_ed25519</span><br><span class="line">~/.ssh/id_ed25519.pub</span><br></pre></td></tr></table></figure>
-
-<p>其中：</p>
-<ul>
-<li><code>id_ed25519</code> 是私钥，留在本机，不要复制给别人。</li>
-<li><code>id_ed25519.pub</code> 是公钥，可以放到远程主机。</li>
-</ul>
-<h2 id="2-把公钥复制到远程主机"><a href="#2-把公钥复制到远程主机" class="headerlink" title="2. 把公钥复制到远程主机"></a>2. 把公钥复制到远程主机</h2><p>推荐使用：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id user@remote_host</span><br></pre></td></tr></table></figure>
-
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id root@192.168.1.10</span><br></pre></td></tr></table></figure>
-
-<p>如果远程 SSH 端口不是 <code>22</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -p 2222 user@remote_host</span><br></pre></td></tr></table></figure>
-
-<p>这一步通常需要输入一次远程主机密码。</p>
-<h2 id="3-测试-SSH-免密登录"><a href="#3-测试-SSH-免密登录" class="headerlink" title="3. 测试 SSH 免密登录"></a>3. 测试 SSH 免密登录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@remote_host</span><br></pre></td></tr></table></figure>
-
-<p>如果能直接登录，不再要求输入远程用户密码，说明 SSH 免密配置成功。</p>
-<h2 id="4-使用-scp-免密拷贝"><a href="#4-使用-scp-免密拷贝" class="headerlink" title="4. 使用 scp 免密拷贝"></a>4. 使用 scp 免密拷贝</h2><p>从本地复制到远程：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp local_file user@remote_host:/remote/path/</span><br></pre></td></tr></table></figure>
-
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp app.tar.gz root@192.168.1.10:/opt/</span><br></pre></td></tr></table></figure>
-
-<p>从远程复制到本地：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp user@remote_host:/remote/file ./local_dir/</span><br></pre></td></tr></table></figure>
-
-<p>指定 SSH 端口：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P 2222 local_file user@remote_host:/remote/path/</span><br></pre></td></tr></table></figure>
-
-<p>注意：<code>scp</code> 使用大写 <code>-P</code> 指定端口，<code>ssh</code> 和 <code>ssh-copy-id</code> 使用小写 <code>-p</code>。</p>
-<h2 id="可选：使用-ssh-agent-缓存私钥密码"><a href="#可选：使用-ssh-agent-缓存私钥密码" class="headerlink" title="可选：使用 ssh-agent 缓存私钥密码"></a>可选：使用 ssh-agent 缓存私钥密码</h2><p>如果生成密钥时给私钥设置了 passphrase，可以用 <code>ssh-agent</code> 缓存，避免每次输入私钥密码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(ssh-agent -s)</span>&quot;</span></span><br><span class="line">ssh-add ~/.ssh/id_ed25519</span><br></pre></td></tr></table></figure>
-
-<h2 id="可选：配置-SSH-alias"><a href="#可选：配置-SSH-alias" class="headerlink" title="可选：配置 SSH alias"></a>可选：配置 SSH alias</h2><p>编辑：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/config</span><br></pre></td></tr></table></figure>
-
-<p>加入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host myserver</span><br><span class="line">    HostName 192.168.1.10</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    IdentityFile ~/.ssh/id_ed25519</span><br></pre></td></tr></table></figure>
-
-<p>之后可以直接使用：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh myserver</span><br><span class="line">scp app.tar.gz myserver:/opt/</span><br></pre></td></tr></table></figure>
-
-<h2 id="不推荐：sshpass"><a href="#不推荐：sshpass" class="headerlink" title="不推荐：sshpass"></a>不推荐：sshpass</h2><p><code>sshpass</code> 可以把密码写进命令中：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sshpass -p <span class="string">&#x27;password&#x27;</span> scp file user@host:/path/</span><br></pre></td></tr></table></figure>
-
-<p>但这通常不安全，密码可能暴露在：</p>
-<ul>
-<li>shell 历史记录</li>
-<li>进程列表</li>
-<li>CI&#x2F;CD 日志</li>
-<li>命令审计日志</li>
-</ul>
-<p>除非是临时脚本或受控环境，否则优先使用 SSH 密钥登录。</p>
-<h2 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h2><p>检查远程用户的公钥文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@remote_host <span class="string">&#x27;ls -la ~/.ssh &amp;&amp; cat ~/.ssh/authorized_keys&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>如果权限不正确，可在远程主机上修复：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 700 ~/.ssh</span><br><span class="line"><span class="built_in">chmod</span> 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-
-<p>调试 SSH 登录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -v user@remote_host</span><br></pre></td></tr></table></figure>
-
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              May 2026
+            </span>
+            <span class="card-archive-list-count">49</span>
+          </a>
+        </li>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/04/23/Linux/Networking/Linux%20%E4%BD%BF%E7%94%A8%20scp%20%E5%85%8D%E5%AF%86%E7%A0%81%E8%BF%9C%E7%A8%8B%E6%8B%B7%E8%B4%9D/" data-id="cuidCmNoG2LoVPdL_V0cR_aMv" data-title="Linux 使用 scp 免密码远程拷贝" class="article-share-link"><span class="fa fa-share">Share</span></a>
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              April 2026
+            </span>
+            <span class="card-archive-list-count">8</span>
+          </a>
+        </li>
       
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Linux/Virtualization/Incus/故障排查：容器无法连接外网" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/04/16/Linux/Virtualization/Incus/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%EF%BC%9A%E5%AE%B9%E5%99%A8%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E5%A4%96%E7%BD%91/" class="article-date">
-  <time class="dt-published" datetime="2026-04-15T16:00:00.000Z" itemprop="datePublished">2026-04-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Incus/">Incus</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/04/16/Linux/Virtualization/Incus/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%EF%BC%9A%E5%AE%B9%E5%99%A8%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E5%A4%96%E7%BD%91/">[Incus] 解决容器无法访问外网问题 (与 Docker 规则冲突)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Incus-解决容器无法访问外网问题-与-Docker-规则冲突"><a href="#Incus-解决容器无法访问外网问题-与-Docker-规则冲突" class="headerlink" title="[Incus] 解决容器无法访问外网问题 (与 Docker 规则冲突)"></a>[Incus] 解决容器无法访问外网问题 (与 Docker 规则冲突)</h1><h2 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1. 问题描述"></a>1. 问题描述</h2><p>在 Arch Linux 宿主机上，Incus 容器（如 <code>ubuntu-gnome</code>）虽然获取了 IP 地址，但无法访问外网（ping 不通公网 IP，也无法解析域名）。</p>
-<h2 id="2-故障排查"><a href="#2-故障排查" class="headerlink" title="2. 故障排查"></a>2. 故障排查</h2><p>进入容器进行网络诊断：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试 IP 连通性</span></span><br><span class="line">ping 8.8.8.8  <span class="comment"># 失败</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看路由表</span></span><br><span class="line">ip route      <span class="comment"># 存在默认网关 (如 10.242.250.1)</span></span><br></pre></td></tr></table></figure>
-
-<p>在宿主机检查防火墙规则：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> iptables -L FORWARD -n -v</span><br></pre></td></tr></table></figure>
-<p><strong>关键发现</strong>：</p>
-<ul>
-<li><code>Chain FORWARD (policy DROP)</code>：转发链默认策略被设置为 <strong>DROP</strong>。</li>
-<li>只有 Docker 相关的转发规则，缺乏 Incus 网桥（如 <code>incusbr0</code>）的放行规则。</li>
-<li><strong>原因</strong>：宿主机安装 Docker 后，Docker 会自动修改 iptables 策略，拦截非 Docker 管理的网桥流量。</li>
-</ul>
-<h2 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3. 解决方案"></a>3. 解决方案</h2><h3 id="A-临时修复-立即生效"><a href="#A-临时修复-立即生效" class="headerlink" title="A. 临时修复 (立即生效)"></a>A. 临时修复 (立即生效)</h3><p>手动向 iptables 注入放行规则和 NAT 伪装规则：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 允许 Incus 网桥的出入流量转发</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -I FORWARD -i incusbr0 -j ACCEPT</span><br><span class="line"><span class="built_in">sudo</span> iptables -I FORWARD -o incusbr0 -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 开启 NAT 伪装 (MASQUERADE)</span></span><br><span class="line"><span class="comment"># 注意：10.242.250.0/24 需替换为你的 incusbr0 实际网段</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -t nat -I POSTROUTING -s 10.242.250.0/24 ! -d 10.242.250.0/24 -j MASQUERADE</span><br></pre></td></tr></table></figure>
-
-<h3 id="B-永久修复-Arch-Linux-持久化"><a href="#B-永久修复-Arch-Linux-持久化" class="headerlink" title="B. 永久修复 (Arch Linux 持久化)"></a>B. 永久修复 (Arch Linux 持久化)</h3><p>由于上述命令在重启后会失效，需使用 <code>iptables.service</code> 进行持久化。</p>
-<ol>
-<li><p><strong>保存当前规则到配置文件</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> iptables-save -f /etc/iptables/iptables.rules</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>启用 iptables 开机自启服务</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now iptables.service</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="4-验证结果"><a href="#4-验证结果" class="headerlink" title="4. 验证结果"></a>4. 验证结果</h2><p>再次进入容器测试：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incus <span class="built_in">exec</span> ubuntu-gnome -- ping -c 3 www.baidu.com</span><br></pre></td></tr></table></figure>
-<p>如果出现 <code>0% packet loss</code>，则表示网络已完全恢复。</p>
-<h2 id="5-补充说明"><a href="#5-补充说明" class="headerlink" title="5. 补充说明"></a>5. 补充说明</h2><ul>
-<li>如果未来修改了 Incus 的网络配置（如更改了子网网段），需要重新运行 <code>iptables-save</code> 以更新持久化规则。</li>
-<li>如果系统同时开启了 IPv6，建议对 <code>ip6tables</code> 执行相同操作。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/04/16/Linux/Virtualization/Incus/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%EF%BC%9A%E5%AE%B9%E5%99%A8%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E5%A4%96%E7%BD%91/" data-id="cuido6h4PzTC3hu2MkxaFN29k" data-title="[Incus] 解决容器无法访问外网问题 (与 Docker 规则冲突)" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Linux/Virtualization/Incus/README" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/04/11/Linux/Virtualization/Incus/README/" class="article-date">
-  <time class="dt-published" datetime="2026-04-10T16:00:00.000Z" itemprop="datePublished">2026-04-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Incus/">Incus</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/04/11/Linux/Virtualization/Incus/README/">Incus - 系统容器与虚拟机管理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Incus-现代系统容器与虚拟机管理器"><a href="#Incus-现代系统容器与虚拟机管理器" class="headerlink" title="Incus: 现代系统容器与虚拟机管理器"></a>Incus: 现代系统容器与虚拟机管理器</h1><blockquote>
-<p>[!abstract] 概述<br><strong>Incus</strong> 是由 Linux Containers (LXC) 社区维护的社区驱动项目，是 <strong>LXD</strong> 的社区分支 (Fork)。它旨在提供一个完全开源、无 CLA 限制的平台，用于在单一界面下管理 Linux 系统容器 and KVM 虚拟机。</p>
-</blockquote>
-<h2 id="1-核心定位"><a href="#1-核心定位" class="headerlink" title="1. 核心定位"></a>1. 核心定位</h2><ul>
-<li><strong>系统容器 (System Containers)</strong>: 运行完整的 Linux 发行版，表现得像物理机，但共享宿主机内核，性能几乎无损耗。</li>
-<li><strong>虚拟机 (VM)</strong>: 支持运行非 Linux 系统（如 Windows），具备完全的内核隔离。</li>
-</ul>
-<h2 id="2-Arch-Linux-安装与基础配置"><a href="#2-Arch-Linux-安装与基础配置" class="headerlink" title="2. Arch Linux 安装与基础配置"></a>2. Arch Linux 安装与基础配置</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S incus</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now incus</span><br></pre></td></tr></table></figure>
-
-<h3 id="权限配置"><a href="#权限配置" class="headerlink" title="权限配置"></a>权限配置</h3><ol>
-<li><strong>用户组</strong>: 将用户加入 <code>incus-admin</code> 组以避免每次使用 <code>sudo</code>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG incus-admin <span class="variable">$USER</span></span><br><span class="line">newgrp incus-admin <span class="comment"># 立即生效</span></span><br></pre></td></tr></table></figure></li>
-<li><strong>用户 ID 映射 (idmap)</strong>: 非特权容器正常运行的关键。<br>编辑 <code>/etc/subuid</code> 和 <code>/etc/subgid</code>，添加：<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root:1000000:65536</span><br><span class="line">your_username:1000000:65536</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> incus admin init</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-存储优化-解决根目录空间不足"><a href="#3-存储优化-解决根目录空间不足" class="headerlink" title="3. 存储优化 (解决根目录空间不足)"></a>3. 存储优化 (解决根目录空间不足)</h2><blockquote>
-<p>[!important] 存储策略<br>默认存储在 <code>/var/lib/incus</code> (根目录)。如果根目录空间较小，建议将存储池迁移到较大的分区（如 <code>/home</code>）。</p>
-</blockquote>
-<h3 id="创建新存储池"><a href="#创建新存储池" class="headerlink" title="创建新存储池"></a>创建新存储池</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 /home 下创建目录</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /home/incus-data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 Incus 中创建 dir 类型存储池</span></span><br><span class="line">incus storage create large-pool <span class="built_in">dir</span> <span class="built_in">source</span>=/home/incus-data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将其设为默认存储池</span></span><br><span class="line">incus profile device <span class="built_in">set</span> default root pool=large-pool</span><br></pre></td></tr></table></figure>
-
-<h3 id="验证存储位置"><a href="#验证存储位置" class="headerlink" title="验证存储位置"></a>验证存储位置</h3><ul>
-<li>使用 <code>incus storage list</code> 查看池状态。</li>
-<li>使用 <code>df -h /home</code> 观察安装系统后的空间消耗。</li>
-<li><strong>注意</strong>: <code>/var/lib/incus/storage-pools/large-pool</code> 是 <code>/home</code> 的挂载点，不会占用根目录空间。</li>
-</ul>
-<h2 id="4-常用操作指令"><a href="#4-常用操作指令" class="headerlink" title="4. 常用操作指令"></a>4. 常用操作指令</h2><table>
-<thead>
-<tr>
-<th align="left">操作</th>
-<th align="left">命令</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">查找镜像</td>
-<td align="left"><code>incus image list images:</code></td>
-</tr>
-<tr>
-<td align="left">初始化容器（不启动）</td>
-<td align="left"><code>incus init images:ubuntu/24.04 my-container</code></td>
-</tr>
-<tr>
-<td align="left">启动容器</td>
-<td align="left"><code>incus start &lt;name&gt;</code></td>
-</tr>
-<tr>
-<td align="left">初始化并启动容器(init + start)</td>
-<td align="left"><code>incus launch images:ubuntu/24.04 my-ubuntu</code></td>
-</tr>
-<tr>
-<td align="left">启动虚拟机</td>
-<td align="left"><code>incus launch images:ubuntu/24.04 my-vm --vm</code></td>
-</tr>
-<tr>
-<td align="left">进入实例</td>
-<td align="left"><code>incus exec my-ubuntu -- bash</code></td>
-</tr>
-<tr>
-<td align="left">查看状态</td>
-<td align="left"><code>incus list</code></td>
-</tr>
-<tr>
-<td align="left">停止&#x2F;删除</td>
-<td align="left"><code>incus stop &lt;name&gt;</code> &#x2F; <code>incus delete &lt;name&gt; --force</code></td>
-</tr>
-<tr>
-<td align="left">文件传输</td>
-<td align="left"><code>incus file push/pull &lt;src&gt; &lt;dest&gt;</code></td>
-</tr>
-<tr>
-<td align="left">清理镜像缓存</td>
-<td align="left"><code>incus image prune</code></td>
-</tr>
-</tbody></table>
-<h2 id="5-互通与硬件穿透"><a href="#5-互通与硬件穿透" class="headerlink" title="5. 互通与硬件穿透"></a>5. 互通与硬件穿透</h2><h3 id="共享文件夹"><a href="#共享文件夹" class="headerlink" title="共享文件夹"></a>共享文件夹</h3><p>将宿主机的目录挂载到容器内：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incus config device add &lt;name&gt; &lt;share-name&gt; disk <span class="built_in">source</span>=/path/on/arch path=/mnt/shared</span><br></pre></td></tr></table></figure>
-
-<h3 id="GPU-穿透"><a href="#GPU-穿透" class="headerlink" title="GPU 穿透"></a>GPU 穿透</h3><p>为容器开启 GPU 加速：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incus config device add &lt;name&gt; gpu-device gpu</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-故障排查-Troubleshooting"><a href="#6-故障排查-Troubleshooting" class="headerlink" title="6. 故障排查 (Troubleshooting)"></a>6. 故障排查 (Troubleshooting)</h2><ul>
-<li>[[故障排查：容器无法连接外网]]</li>
-</ul>
-<hr>
-<h2 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h2><ul>
-<li>[[Arch Linux 配置记录]]</li>
-<li>[[Linux 虚拟化技术概览]]</li>
-<li><a target="_blank" rel="noopener" href="https://linuxcontainers.org/incus/">Incus 官方文档</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/04/11/Linux/Virtualization/Incus/README/" data-id="cuidowxs7DDx8wV2L5ZL9wgnD" data-title="Incus - 系统容器与虚拟机管理" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第二十章泛型/Chapter20_泛型总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/04/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Chapter20_%E6%B3%9B%E5%9E%8B%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2026-04-08T16:00:00.000Z" itemprop="datePublished">2026-04-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/04/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Chapter20_%E6%B3%9B%E5%9E%8B%E6%80%BB%E7%BB%93/">Java 泛型 Chapter 20 - Thinking in Java</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Chapter-20-泛型-Thinking-in-Java"><a href="#Chapter-20-泛型-Thinking-in-Java" class="headerlink" title="Chapter 20 泛型 - Thinking in Java"></a>Chapter 20 泛型 - Thinking in Java</h1><blockquote>
-<p>基于《On Java》Chapter 20 章节代码整理</p>
-</blockquote>
-<hr>
-<h2 id="1-泛型基础概念"><a href="#1-泛型基础概念" class="headerlink" title="1. 泛型基础概念"></a>1. 泛型基础概念</h2><h3 id="1-1-泛型的本质"><a href="#1-1-泛型的本质" class="headerlink" title="1.1 泛型的本质"></a>1.1 泛型的本质</h3><p><strong>参数化类型</strong> — 将类型作为参数传递给类&#x2F;接口&#x2F;方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 泛型类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Holder</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T value;</span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> value; &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(T val)</span> &#123; value = val; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">Holder&lt;Apple&gt; apple = <span class="keyword">new</span> <span class="title class_">Holder</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Apple</span>());</span><br><span class="line"><span class="type">Apple</span> <span class="variable">a</span> <span class="operator">=</span> apple.get();</span><br><span class="line">apple.set(a);</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-泛型方法"><a href="#1-2-泛型方法" class="headerlink" title="1.2 泛型方法"></a>1.2 泛型方法</h3><p>方法级别独立使用泛型参数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericMethods</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">f</span><span class="params">(T x)</span> &#123;</span><br><span class="line">    System.out.println(x.getClass().getName());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用时自动推断类型</span></span><br><span class="line">gm.f(<span class="string">&quot;&quot;</span>);   <span class="comment">// String</span></span><br><span class="line">gm.f(<span class="number">1</span>);    <span class="comment">// Integer</span></span><br><span class="line">gm.f(<span class="number">1.0</span>);  <span class="comment">// Double</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="2-类型擦除-Type-Erasure"><a href="#2-类型擦除-Type-Erasure" class="headerlink" title="2. 类型擦除 (Type Erasure)"></a>2. 类型擦除 (Type Erasure)</h2><h3 id="2-1-擦除原理"><a href="#2-1-擦除原理" class="headerlink" title="2.1 擦除原理"></a>2.1 擦除原理</h3><p>Java 泛型仅存在于<strong>编译期</strong>。编译后：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Holder</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T value;</span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> value; &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(T val)</span> &#123; value = val; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译后字节码（反编译）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Holder</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> Object value;  <span class="comment">// T → Object</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> value; &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(Object val)</span> &#123; <span class="built_in">this</span>.value = val; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>编译器在调用处自动插入 <code>checkcast</code> 指令进行类型转换。</p>
-<h3 id="2-2-擦除带来的限制"><a href="#2-2-擦除带来的限制" class="headerlink" title="2.2 擦除带来的限制"></a>2.2 擦除带来的限制</h3><table>
-<thead>
-<tr>
-<th>限制</th>
-<th>代码示例</th>
-<th>解决方案</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>无法 instanceof</td>
-<td><code>if (obj instanceof T)</code> ❌</td>
-<td>使用 <code>Object</code></td>
-</tr>
-<tr>
-<td>无法实例化泛型</td>
-<td><code>new T()</code> ❌</td>
-<td>反射 + Class token</td>
-</tr>
-<tr>
-<td>无法创建泛型数组</td>
-<td><code>new T[10]</code> ❌</td>
-<td>见下文</td>
-</tr>
-<tr>
-<td>无法创建具体类型数组返回</td>
-<td><code>(T[]) new Object[]</code> 返回会抛异常</td>
-<td><code>Array.newInstance()</code></td>
-</tr>
-</tbody></table>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 泛型不能用于 catch 子句</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (T e) &#123;  <span class="comment">// ❌</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="3-通配符与-PECS-原则"><a href="#3-通配符与-PECS-原则" class="headerlink" title="3. 通配符与 PECS 原则"></a>3. 通配符与 PECS 原则</h2><h3 id="3-1-三种通配符形式"><a href="#3-1-三种通配符形式" class="headerlink" title="3.1 三种通配符形式"></a>3.1 三种通配符形式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Holder&lt;T&gt;           <span class="comment">// 精确类型</span></span><br><span class="line">Holder&lt;?&gt;           <span class="comment">// 无界通配符</span></span><br><span class="line">Holder&lt;? <span class="keyword">extends</span> <span class="title class_">T</span>&gt; <span class="comment">// 上界通配符</span></span><br><span class="line">Holder&lt;? <span class="built_in">super</span> T&gt;   <span class="comment">// 下界通配符</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-PECS-原则"><a href="#3-2-PECS-原则" class="headerlink" title="3.2 PECS 原则"></a>3.2 PECS 原则</h3><table>
-<thead>
-<tr>
-<th>通配符</th>
-<th>读写权限</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>? extends T</code></td>
-<td>能读（T），不能写</td>
-<td><strong>生产者</strong>（只读）</td>
-</tr>
-<tr>
-<td><code>? super T</code></td>
-<td>能写（T 及子类），只能读 Object</td>
-<td><strong>消费者</strong>（只写）</td>
-</tr>
-<tr>
-<td><code>T</code></td>
-<td>都能</td>
-<td>既读又写</td>
-</tr>
-</tbody></table>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Producer Extends - 生产者只读</span></span><br><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Number</span>&gt; nums = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line"><span class="type">Number</span> <span class="variable">n</span> <span class="operator">=</span> nums.get(<span class="number">0</span>);  <span class="comment">// OK</span></span><br><span class="line"><span class="comment">// nums.add(10);        // ❌ 编译错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Consumer Super - 消费者只写</span></span><br><span class="line">List&lt;? <span class="built_in">super</span> Integer&gt; ints = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;();</span><br><span class="line">ints.add(<span class="number">10</span>);           <span class="comment">// OK，可以写 Integer 及子类</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> ints.get(<span class="number">0</span>);  <span class="comment">// 只能返回 Object</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3-捕获转换"><a href="#3-3-捕获转换" class="headerlink" title="3.3 捕获转换"></a>3.3 捕获转换</h3><p>通配符可以通过泛型方法”捕获”具体类型：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">(Holder&lt;T&gt; holder)</span> &#123;</span><br><span class="line">  <span class="type">T</span> <span class="variable">t</span> <span class="operator">=</span> holder.get();  <span class="comment">// 获取具体类型</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f2</span><span class="params">(Holder&lt;?&gt; holder)</span> &#123;</span><br><span class="line">  f1(holder);  <span class="comment">// 编译器捕获 ? 为具体类型 T</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="4-泛型数组创建"><a href="#4-泛型数组创建" class="headerlink" title="4. 泛型数组创建"></a>4. 泛型数组创建</h2><h3 id="4-1-三种创建方式"><a href="#4-1-三种创建方式" class="headerlink" title="4.1 三种创建方式"></a>4.1 三种创建方式</h3><h4 id="方式-1：new-Object-内部使用"><a href="#方式-1：new-Object-内部使用" class="headerlink" title="方式 1：new Object[] 内部使用"></a>方式 1：<code>new Object[]</code> 内部使用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericArray</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T[] array;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">GenericArray</span><span class="params">(<span class="type">int</span> sz)</span> &#123;</span><br><span class="line">    array = (T[]) <span class="keyword">new</span> <span class="title class_">Object</span>[sz];  <span class="comment">// 警告：未检查类型转换</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> array[index];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> T[] rep() &#123;</span><br><span class="line">    <span class="keyword">return</span> array;  <span class="comment">// 运行时 ClassCastException!</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="方式-2：反射-Class-Token"><a href="#方式-2：反射-Class-Token" class="headerlink" title="方式 2：反射 + Class Token"></a>方式 2：反射 + Class Token</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericArrayWithTypeToken</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T[] array;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">GenericArrayWithTypeToken</span><span class="params">(Class&lt;T&gt; type, <span class="type">int</span> sz)</span> &#123;</span><br><span class="line">    array = (T[]) Array.newInstance(type, sz);  <span class="comment">// 运行时类型正确</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="方式-3：原始类型数组"><a href="#方式-3：原始类型数组" class="headerlink" title="方式 3：原始类型数组"></a>方式 3：原始类型数组</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Generic&lt;Integer&gt;[] gia;</span><br><span class="line">gia = (Generic&lt;Integer&gt;[]) <span class="keyword">new</span> <span class="title class_">Generic</span>[SIZE];  <span class="comment">// OK</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-2-最佳实践"><a href="#4-2-最佳实践" class="headerlink" title="4.2 最佳实践"></a>4.2 最佳实践</h3><p>能用 <code>List&lt;T&gt;</code> 代替泛型数组：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ListOfGenerics</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> List&lt;T&gt; array = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(T item)</span> &#123; array.add(item); &#125;</span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123; <span class="keyword">return</span> array.get(index); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="5-泛型边界"><a href="#5-泛型边界" class="headerlink" title="5. 泛型边界"></a>5. 泛型边界</h2><h3 id="5-1-单一边界"><a href="#5-1-单一边界" class="headerlink" title="5.1 单一边界"></a>5.1 单一边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">WithColor</span>&lt;T <span class="keyword">extends</span> <span class="title class_">HasColor</span>&gt; &#123;</span><br><span class="line">  T item;</span><br><span class="line">  Color <span class="title function_">getColor</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.getColor();  <span class="comment">// 可调用边界方法</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-2-多重边界"><a href="#5-2-多重边界" class="headerlink" title="5.2 多重边界"></a>5.2 多重边界</h3><ul>
-<li><strong>类必须在接口前面</strong></li>
-<li><strong>只能有一个类</strong>，可以有多个接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solid</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Coord</span> &amp; HasColor &amp; Weight&gt; &#123;</span><br><span class="line">  T item;</span><br><span class="line">  Color <span class="title function_">getColor</span><span class="params">()</span> &#123; <span class="keyword">return</span> item.getColor(); &#125;</span><br><span class="line">  <span class="type">int</span> <span class="title function_">weight</span><span class="params">()</span> &#123; <span class="keyword">return</span> item.weight(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-3-继承边界"><a href="#5-3-继承边界" class="headerlink" title="5.3 继承边界"></a>5.3 继承边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HoldItem</span>&lt;T&gt; &#123; T item; T <span class="title function_">getItem</span><span class="params">()</span> &#123; <span class="keyword">return</span> item; &#125; &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WithColor</span>&lt;T <span class="keyword">extends</span> <span class="title class_">HasColor</span>&gt; <span class="keyword">extends</span> <span class="title class_">HoldItem</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solid</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Coord</span> &amp; HasColor &amp; Weight&gt; <span class="keyword">extends</span> <span class="title class_">WithColor</span>&lt;T&gt; &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="6-自限定泛型"><a href="#6-自限定泛型" class="headerlink" title="6. 自限定泛型"></a>6. 自限定泛型</h2><h3 id="6-1-什么是自限定"><a href="#6-1-什么是自限定" class="headerlink" title="6.1 什么是自限定"></a>6.1 什么是自限定</h3><p>强制类必须将自己的类型作为参数传给基类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SelfBounded</span>&lt;T <span class="keyword">extends</span> <span class="title class_">SelfBounded</span>&lt;T&gt;&gt; &#123;</span><br><span class="line">  T element;</span><br><span class="line">  SelfBounded&lt;T&gt; <span class="title function_">set</span><span class="params">(T arg)</span> &#123;</span><br><span class="line">    element = arg;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  T <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> element; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> <span class="keyword">extends</span> <span class="title class_">SelfBounded</span>&lt;A&gt; &#123;&#125;  <span class="comment">// 必须传 A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> <span class="keyword">extends</span> <span class="title class_">SelfBounded</span>&lt;A&gt; &#123;&#125;  <span class="comment">// 也可以传父类</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="6-2-奇异递归泛型-CRG"><a href="#6-2-奇异递归泛型-CRG" class="headerlink" title="6.2 奇异递归泛型 (CRG)"></a>6.2 奇异递归泛型 (CRG)</h3><p>类的基类中使用了该类本身作为泛型参数：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Generic</span>&lt;T&gt; &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CuriouslyRecurringGeneric</span> <span class="keyword">extends</span> <span class="title class_">Generic</span>&lt;CuriouslyRecurringGeneric&gt; &#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="7-泛型与类型层级"><a href="#7-泛型与类型层级" class="headerlink" title="7. 泛型与类型层级"></a>7. 泛型与类型层级</h2><h3 id="7-1-数组协变-vs-集合不变"><a href="#7-1-数组协变-vs-集合不变" class="headerlink" title="7.1 数组协变 vs 集合不变"></a>7.1 数组协变 vs 集合不变</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组协变（运行时检查）</span></span><br><span class="line">Fruit[] fruits = <span class="keyword">new</span> <span class="title class_">Apple</span>[<span class="number">10</span>];</span><br><span class="line">fruits[<span class="number">0</span>] = <span class="keyword">new</span> <span class="title class_">Fruit</span>();  <span class="comment">// 编译OK，运行抛 ArrayStoreException</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 集合不变（编译时检查）</span></span><br><span class="line">List&lt;Fruit&gt; fruits = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Apple&gt;();  <span class="comment">// 编译错误</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="7-2-通配符实现安全协变"><a href="#7-2-通配符实现安全协变" class="headerlink" title="7.2 通配符实现安全协变"></a>7.2 通配符实现安全协变</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Fruit</span>&gt; fruits = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Apple&gt;();</span><br><span class="line"><span class="type">Fruit</span> <span class="variable">f</span> <span class="operator">=</span> fruits.get(<span class="number">0</span>);    <span class="comment">// OK，返回 Fruit</span></span><br><span class="line"><span class="comment">// fruits.add(new Apple()); // ❌ 编译错误</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="7-3-泛型返回值"><a href="#7-3-泛型返回值" class="headerlink" title="7.3 泛型返回值"></a>7.3 泛型返回值</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">  Apple <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Apple</span>(); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> <span class="keyword">extends</span> <span class="title class_">A</span> &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  Apple <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Apple</span>(); &#125;  <span class="comment">// 保持一致</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 不能返回更具体的类型！</span></span><br><span class="line">  <span class="comment">// @Override</span></span><br><span class="line">  <span class="comment">// Gala get() &#123; return new Gala(); &#125;  // ❌</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="8-实战示例"><a href="#8-实战示例" class="headerlink" title="8. 实战示例"></a>8. 实战示例</h2><h3 id="8-1-泛型栈-LinkedStack"><a href="#8-1-泛型栈-LinkedStack" class="headerlink" title="8.1 泛型栈 (LinkedStack)"></a>8.1 泛型栈 (LinkedStack)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LinkedStack</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> Node&lt;T&gt; top = <span class="keyword">new</span> <span class="title class_">Node</span>&lt;&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(T item)</span> &#123;</span><br><span class="line">    top = <span class="keyword">new</span> <span class="title class_">Node</span>&lt;&gt;(item, top);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">T</span> <span class="variable">result</span> <span class="operator">=</span> top.item;</span><br><span class="line">    <span class="keyword">if</span> (!top.end()) top = top.next;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;U&gt; &#123;</span><br><span class="line">    U item;</span><br><span class="line">    Node&lt;U&gt; next;</span><br><span class="line">    Node() &#123; item = <span class="literal">null</span>; next = <span class="literal">null</span>; &#125;</span><br><span class="line">    Node(U item, Node&lt;U&gt; next) &#123;</span><br><span class="line">      <span class="built_in">this</span>.item = item;</span><br><span class="line">      <span class="built_in">this</span>.next = next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">end</span><span class="params">()</span> &#123; <span class="keyword">return</span> item == <span class="literal">null</span> &amp;&amp; next == <span class="literal">null</span>; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="8-2-元组返回多值"><a href="#8-2-元组返回多值" class="headerlink" title="8.2 元组返回多值"></a>8.2 元组返回多值</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 Tuple2, Tuple3 等</span></span><br><span class="line">Tuple2&lt;String, Integer&gt; <span class="title function_">f</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tuple2</span>&lt;&gt;(<span class="string">&quot;hi&quot;</span>, <span class="number">47</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Tuple3&lt;Amphibian, String, Integer&gt; <span class="title function_">g</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Tuple3</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Amphibian</span>(), <span class="string">&quot;hi&quot;</span>, <span class="number">47</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="8-3-装饰器模式"><a href="#8-3-装饰器模式" class="headerlink" title="8.3 装饰器模式"></a>8.3 装饰器模式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BasicClazz</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> String value;</span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> value; &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setValue</span><span class="params">(String value)</span> &#123; <span class="built_in">this</span>.value = value; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Decorator</span> <span class="keyword">extends</span> <span class="title class_">BasicClazz</span> &#123;</span><br><span class="line">  <span class="keyword">protected</span> BasicClazz basic;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Decorator</span><span class="params">(BasicClazz basic)</span> &#123; <span class="built_in">this</span>.basic = basic; &#125;</span><br><span class="line">  <span class="meta">@Override</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setValue</span><span class="params">(String value)</span> &#123; basic.setValue(value); &#125;</span><br><span class="line">  <span class="meta">@Override</span> <span class="keyword">public</span> String <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> basic.get(); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TimeStamped</span> <span class="keyword">extends</span> <span class="title class_">Decorator</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">timeStamp</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">  <span class="keyword">public</span> <span class="type">long</span> <span class="title function_">getStamp</span><span class="params">()</span> &#123; <span class="keyword">return</span> timeStamp; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="9-总结"><a href="#9-总结" class="headerlink" title="9. 总结"></a>9. 总结</h2><table>
-<thead>
-<tr>
-<th>概念</th>
-<th>要点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>类型擦除</strong></td>
-<td>泛型只存在于编译期，运行时的 <code>T</code> 变成 <code>Object</code></td>
-</tr>
-<tr>
-<td><strong>PECS</strong></td>
-<td><code>extends</code> 生产者只读，<code>super</code> 消费者只写</td>
-</tr>
-<tr>
-<td><strong>泛型数组</strong></td>
-<td>使用 <code>List&lt;T&gt;</code> 或 <code>Array.newInstance()</code></td>
-</tr>
-<tr>
-<td><strong>边界</strong></td>
-<td><code>T extends A &amp; B</code>，类必须在接口前</td>
-</tr>
-<tr>
-<td><strong>自限定</strong></td>
-<td><code>T extends SelfBounded&lt;T&gt;</code>，强制约束子类类型</td>
-</tr>
-<tr>
-<td><strong>协变</strong></td>
-<td>数组运行时检查，集合用通配符实现安全协变</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h2><ul>
-<li>[[Java_泛型核心知识点]]</li>
-<li>[[泛型数组创建]]</li>
-<li>[[泛型进阶-通配符边界与类型擦除]]</li>
-<li>[[类型擦除]]</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/04/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Chapter20_%E6%B3%9B%E5%9E%8B%E6%80%BB%E7%BB%93/" data-id="cuidv3JNf4yt8PNRcHMnQQyDt" data-title="Java 泛型 Chapter 20 - Thinking in Java" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第二十章泛型/Java泛型深度总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/04/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java%E6%B3%9B%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2026-04-08T16:00:00.000Z" itemprop="datePublished">2026-04-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/04/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java%E6%B3%9B%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93/">Java 泛型深度总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-泛型深度总结-Chapter-20"><a href="#Java-泛型深度总结-Chapter-20" class="headerlink" title="Java 泛型深度总结 (Chapter 20)"></a>Java 泛型深度总结 (Chapter 20)</h1><blockquote>
-<p>[!abstract] 核心哲学<br>Java 泛型是为了在编译期提供<strong>类型安全检查</strong>，但在运行时通过<strong>类型擦除 (Erasure)</strong> 来保持与旧版本代码的兼容性。</p>
-</blockquote>
-<h2 id="1-类型擦除-Erasure-的本质"><a href="#1-类型擦除-Erasure-的本质" class="headerlink" title="1. 类型擦除 (Erasure) 的本质"></a>1. 类型擦除 (Erasure) 的本质</h2><p>在运行时，所有的泛型信息 <code>List&lt;T&gt;</code> 都会被擦除为它的原始类型（通常是 <code>Object</code>，或者它的边界类型）。</p>
-<blockquote>
-<p>[!danger] 擦除带来的后果</p>
-<ul>
-<li>无法执行 <code>instanceof T</code>。</li>
-<li>无法执行 <code>new T()</code>。</li>
-<li>无法创建泛型数组 <code>new T[10]</code>。</li>
-<li>运行时 <code>ArrayList&lt;String&gt;</code> 和 <code>ArrayList&lt;Integer&gt;</code> 是同一个 Class。</li>
-</ul>
-</blockquote>
-<h2 id="2-补偿擦除的手段"><a href="#2-补偿擦除的手段" class="headerlink" title="2. 补偿擦除的手段"></a>2. 补偿擦除的手段</h2><h3 id="2-1-类型标签-Type-Tags"><a href="#2-1-类型标签-Type-Tags" class="headerlink" title="2.1 类型标签 (Type Tags)"></a>2.1 类型标签 (Type Tags)</h3><p>通过显式传递 <code>Class&lt;T&gt;</code> 来找回运行时的类型感知。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ClassTypeCapture</span>&lt;T&gt; &#123;</span><br><span class="line">  Class&lt;T&gt; kind;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ClassTypeCapture</span><span class="params">(Class&lt;T&gt; kind)</span> &#123; <span class="built_in">this</span>.kind = kind; &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">f</span><span class="params">(Object arg)</span> &#123; <span class="keyword">return</span> kind.isInstance(arg); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-工厂模式-Factory-Pattern"><a href="#2-2-工厂模式-Factory-Pattern" class="headerlink" title="2.2 工厂模式 (Factory Pattern)"></a>2.2 工厂模式 (Factory Pattern)</h3><p>利用接口避开 <code>new T()</code> 的限制。</p>
-<ul>
-<li>使用 <code>IFactory&lt;T&gt;</code>。</li>
-<li>使用 Java 8+ 的 <code>Supplier&lt;T&gt;</code>。</li>
-</ul>
-<h3 id="2-3-泛型数组的正确姿势"><a href="#2-3-泛型数组的正确姿势" class="headerlink" title="2.3 泛型数组的正确姿势"></a>2.3 泛型数组的正确姿势</h3><p>不要尝试直接转型 <code>(T[]) new Object[sz]</code>，应使用 <code>Array.newInstance()</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">GenericArrayWithTypeToken</span><span class="params">(Class&lt;T&gt; type, <span class="type">int</span> sz)</span> &#123;</span><br><span class="line">    array = (T[]) java.lang.reflect.Array.newInstance(type, sz);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-通配符与-PECS-原则"><a href="#3-通配符与-PECS-原则" class="headerlink" title="3. 通配符与 PECS 原则"></a>3. 通配符与 PECS 原则</h2><p>通配符解决了泛型的<strong>不可变性 (Invariance)</strong> 问题。</p>
-<blockquote>
-<p>[!tip] PECS 原则 (Producer Extends, Consumer Super)</p>
-<ul>
-<li><strong>P</strong>roducer <strong>E</strong>xtends: 如果你需要一个提供 T 的容器，使用 <code>&lt;? extends T&gt;</code> (协变)。</li>
-<li><strong>C</strong>onsumer <strong>S</strong>uper: 如果你需要一个接收 T 的容器，使用 <code>&lt;? super T&gt;</code> (逆变)。</li>
-</ul>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th align="left">语法</th>
-<th align="left">读能力 (Get)</th>
-<th align="left">写能力 (Put)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>&lt;? extends T&gt;</code></td>
-<td align="left">可以读出 T 或其父类</td>
-<td align="left">无法写入（除 null 外）</td>
-</tr>
-<tr>
-<td align="left"><code>&lt;? super T&gt;</code></td>
-<td align="left">只能读出 Object</td>
-<td align="left">可以写入 T 及其子类</td>
-</tr>
-</tbody></table>
-<h2 id="4-进阶模式：自限定类型-Self-Bounding"><a href="#4-进阶模式：自限定类型-Self-Bounding" class="headerlink" title="4. 进阶模式：自限定类型 (Self-Bounding)"></a>4. 进阶模式：自限定类型 (Self-Bounding)</h2><p>用于在继承体系中捕获“当前子类”的类型，常见于流式 API (Fluent API)。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SelfBounded</span>&lt;T <span class="keyword">extends</span> <span class="title class_">SelfBounded</span>&lt;T&gt;&gt; &#123;</span><br><span class="line">    T <span class="title function_">set</span><span class="params">(T arg)</span> &#123; <span class="keyword">return</span> (T)<span class="built_in">this</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-进化：超级类型令牌-Super-Type-Token"><a href="#5-进化：超级类型令牌-Super-Type-Token" class="headerlink" title="5. 进化：超级类型令牌 (Super Type Token)"></a>5. 进化：超级类型令牌 (Super Type Token)</h2><p>利用匿名内部类捕获被擦除的带参数类型（如 <code>List&lt;String&gt;</code>）。这是 Gson, Hibernate 等框架实现的核心原理。</p>
-<hr>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
-<li>[[Java学习笔记索引 (MOC)]]</li>
-<li>[[Java反射机制]]</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/04/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java%E6%B3%9B%E5%9E%8B%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93/" data-id="cuidH-PU2tEQnqyRsEmdI7V4T" data-title="Java 泛型深度总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第二十章泛型/泛型数组创建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA/" class="article-date">
-  <time class="dt-published" datetime="2026-04-04T16:00:00.000Z" itemprop="datePublished">2026-04-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA/">Java 泛型数组创建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-泛型数组创建"><a href="#Java-泛型数组创建" class="headerlink" title="Java 泛型数组创建"></a>Java 泛型数组创建</h1><p>由于 Java 的<strong>类型擦除</strong>机制，无法直接使用 <code>new T[]</code> 创建泛型数组。</p>
-<blockquote>
-<p>[!warning] 类型擦除<br>泛型信息在编译后被擦除，运行时 <code>T</code> 变为 <code>Object</code>，因此 <code>new T[]</code> 无法确定数组的实际类型。</p>
-</blockquote>
-<h2 id="三种创建方式"><a href="#三种创建方式" class="headerlink" title="三种创建方式"></a>三种创建方式</h2><h3 id="1-T-new-Object-size-—-内部使用"><a href="#1-T-new-Object-size-—-内部使用" class="headerlink" title="1. (T[]) new Object[size] — 内部使用"></a>1. <code>(T[]) new Object[size]</code> — 内部使用</h3><p>最简单的方式，适用于数组不对外暴露的场景。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericArray</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T[] array;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">GenericArray</span><span class="params">(<span class="type">int</span> sz)</span> &#123;</span><br><span class="line">    array = (T[]) <span class="keyword">new</span> <span class="title class_">Object</span>[sz];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(<span class="type">int</span> index, T item)</span> &#123;</span><br><span class="line">    array[index] = item;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> array[index];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> T[] rep() &#123;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>[!danger] 运行时陷阱<br>数组实际类型是 <code>Object[]</code>，通过 <code>rep()</code> 返回后强转为具体类型（如 <code>Integer[]</code>）会抛出 <code>ClassCastException</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GenericArray&lt;Integer&gt; gia = <span class="keyword">new</span> <span class="title class_">GenericArray</span>&lt;&gt;(<span class="number">10</span>);</span><br><span class="line">Object[] oa = gia.rep();      <span class="comment">// OK</span></span><br><span class="line">Integer[] ia = gia.rep();     <span class="comment">// ClassCastException!</span></span><br></pre></td></tr></table></figure></blockquote>
-<h3 id="2-Array-newInstance-Class-size-—-反射方式"><a href="#2-Array-newInstance-Class-size-—-反射方式" class="headerlink" title="2. Array.newInstance(Class&lt;T&gt;, size) — 反射方式"></a>2. <code>Array.newInstance(Class&lt;T&gt;, size)</code> — 反射方式</h3><p>需要传入 <code>Class&lt;T&gt;</code> token，返回的数组<strong>运行时类型正确</strong>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Array;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayMaker</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> Class&lt;T&gt; kind;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ArrayMaker</span><span class="params">(Class&lt;T&gt; kind)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.kind = kind;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">  T[] create(<span class="type">int</span> size) &#123;</span><br><span class="line">    <span class="keyword">return</span> (T[]) Array.newInstance(kind, size);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>优点</strong>：数组运行时类型是 <code>T[]</code> 而非 <code>Object[]</code>，可以安全返回。</p>
-<h3 id="3-Generic-new-Generic-size-—-参数化类型数组"><a href="#3-Generic-new-Generic-size-—-参数化类型数组" class="headerlink" title="3. (Generic&lt;T&gt;[]) new Generic[size] — 参数化类型数组"></a>3. <code>(Generic&lt;T&gt;[]) new Generic[size]</code> — 参数化类型数组</h3><p>创建泛型参数化类型的数组时，用<strong>原始类型</strong>（raw type）创建再强转。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Generic&lt;Integer&gt;[] gia;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误：Object[] 无法强转为参数化类型数组</span></span><br><span class="line"><span class="comment">// gia = (Generic&lt;Integer&gt;[]) new Object[SIZE];  // ClassCastException</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确：用原始类型创建</span></span><br><span class="line">gia = (Generic&lt;Integer&gt;[]) <span class="keyword">new</span> <span class="title class_">Generic</span>[SIZE];</span><br></pre></td></tr></table></figure>
-
-<h2 id="对比总结"><a href="#对比总结" class="headerlink" title="对比总结"></a>对比总结</h2><table>
-<thead>
-<tr>
-<th>方式</th>
-<th>运行时类型</th>
-<th>需要 Class Token</th>
-<th>可安全返回</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>(T[]) new Object[]</code></td>
-<td><code>Object[]</code></td>
-<td>否</td>
-<td>否</td>
-</tr>
-<tr>
-<td><code>Array.newInstance()</code></td>
-<td><code>T[]</code></td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td><code>(Generic&lt;T&gt;[]) new Generic[]</code></td>
-<td><code>Generic[]</code></td>
-<td>否</td>
-<td>是</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>[!tip] 选择建议</p>
-<ul>
-<li>数组仅内部使用，不暴露 → 方式 1</li>
-<li>需要返回数组或保持类型安全 → 方式 2</li>
-<li>创建具体泛型类的数组 → 方式 3</li>
-</ul>
-</blockquote>
-<h2 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h2><ul>
-<li>[[类型擦除]]</li>
-<li>[[Java 泛型基础]]</li>
-<li>[[反射创建对象]]</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA/" data-id="cuidt9gSJ4Yd1LFrKdVYmiJfu" data-title="Java 泛型数组创建" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第二十章泛型/泛型进阶-通配符边界与类型擦除" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E8%BF%9B%E9%98%B6-%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BE%B9%E7%95%8C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/" class="article-date">
-  <time class="dt-published" datetime="2026-04-04T16:00:00.000Z" itemprop="datePublished">2026-04-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E8%BF%9B%E9%98%B6-%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BE%B9%E7%95%8C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/">Java 泛型进阶 - 通配符、边界与类型擦除</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-泛型进阶"><a href="#Java-泛型进阶" class="headerlink" title="Java 泛型进阶"></a>Java 泛型进阶</h1><blockquote>
-<p>[!info] 学习内容<br>提交 <code>d2aa42b</code> — chapter20 generics 章节，20 个文件 882 行代码</p>
-</blockquote>
-<hr>
-<h2 id="一、类型擦除的本质"><a href="#一、类型擦除的本质" class="headerlink" title="一、类型擦除的本质"></a>一、类型擦除的本质</h2><p>泛型信息在编译后全部擦除为 <code>Object</code>，通过 <code>javap -c</code> 反编译验证：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Holder</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T value;</span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> value; &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(T val)</span> &#123; value = val; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字节码中</span></span><br><span class="line">Field value:Ljava/lang/Object;    <span class="comment">// T → Object</span></span><br><span class="line">get:()Ljava/lang/Object;          <span class="comment">// 返回 Object</span></span><br><span class="line">set:(Ljava/lang/Object;)V         <span class="comment">// 参数 Object</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>编译器做的事</strong>：在调用处自动插入 <code>checkcast</code> 指令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// Apple d = apple.get();</span><br><span class="line">invokevirtual #19   // get() → Object</span><br><span class="line">checkcast #13       // 强转为 Apple</span><br></pre></td></tr></table></figure>
-
-<h3 id="方法调用指令"><a href="#方法调用指令" class="headerlink" title="方法调用指令"></a>方法调用指令</h3><table>
-<thead>
-<tr>
-<th>指令</th>
-<th>用途</th>
-<th>动态分派</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>invokevirtual</code></td>
-<td>普通实例方法</td>
-<td>是（多态）</td>
-</tr>
-<tr>
-<td><code>invokespecial</code></td>
-<td>构造器&#x2F;私有&#x2F;super</td>
-<td>否（静态绑定）</td>
-</tr>
-<tr>
-<td><code>invokeinterface</code></td>
-<td>接口方法</td>
-<td>是</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="二、泛型数组创建"><a href="#二、泛型数组创建" class="headerlink" title="二、泛型数组创建"></a>二、泛型数组创建</h2><p>由于 <code>new T[]</code> 不合法，有三种变通方式：</p>
-<h3 id="方式-1：-T-new-Object-sz"><a href="#方式-1：-T-new-Object-sz" class="headerlink" title="方式 1：(T[]) new Object[sz]"></a>方式 1：<code>(T[]) new Object[sz]</code></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericArray</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T[] array;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">GenericArray</span><span class="params">(<span class="type">int</span> sz)</span> &#123;</span><br><span class="line">    array = (T[]) <span class="keyword">new</span> <span class="title class_">Object</span>[sz];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>[!danger] 运行时陷阱<br>数组实际类型是 <code>Object[]</code>，<code>rep()</code> 返回后强转为 <code>Integer[]</code> 会抛 <code>ClassCastException</code></p>
-</blockquote>
-<h3 id="方式-2：内部-Object-，get-时转型"><a href="#方式-2：内部-Object-，get-时转型" class="headerlink" title="方式 2：内部 Object[]，get 时转型"></a>方式 2：内部 <code>Object[]</code>，get 时转型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericArray2</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> Object[] array;</span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (T) array[index];  <span class="comment">// 单个元素转型安全</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> T[] rep() &#123;</span><br><span class="line">    <span class="keyword">return</span> (T[]) array;       <span class="comment">// 整体转型仍会报错</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="方式-3：类型标记-反射"><a href="#方式-3：类型标记-反射" class="headerlink" title="方式 3：类型标记 + 反射"></a>方式 3：类型标记 + 反射</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericArrayWithTypeToken</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T[] array;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">GenericArrayWithTypeToken</span><span class="params">(Class&lt;T&gt; type, <span class="type">int</span> sz)</span> &#123;</span><br><span class="line">    array = (T[]) Array.newInstance(type, sz);  <span class="comment">// 运行时类型正确</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="三、协变与不变"><a href="#三、协变与不变" class="headerlink" title="三、协变与不变"></a>三、协变与不变</h2><h3 id="数组协变（运行时检查）"><a href="#数组协变（运行时检查）" class="headerlink" title="数组协变（运行时检查）"></a>数组协变（运行时检查）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Fruit[] fruit = <span class="keyword">new</span> <span class="title class_">Apple</span>[<span class="number">10</span>];  <span class="comment">// OK</span></span><br><span class="line">fruit[<span class="number">0</span>] = <span class="keyword">new</span> <span class="title class_">Apple</span>();         <span class="comment">// OK</span></span><br><span class="line">fruit[<span class="number">1</span>] = <span class="keyword">new</span> <span class="title class_">Fruit</span>();         <span class="comment">// 编译 OK，运行抛 ArrayStoreException</span></span><br></pre></td></tr></table></figure>
-
-<p>数组在运行时知道元素类型，写入时检查，不匹配抛异常。</p>
-<h3 id="集合不变（编译时检查）"><a href="#集合不变（编译时检查）" class="headerlink" title="集合不变（编译时检查）"></a>集合不变（编译时检查）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编译错误</span></span><br><span class="line"><span class="comment">// List&lt;Fruit&gt; fruitList = new ArrayList&lt;Apple&gt;();</span></span><br></pre></td></tr></table></figure>
-
-<p>泛型设计为不变，<code>List&lt;Fruit&gt;</code> 和 <code>List&lt;Apple&gt;</code> 是完全无关的类型。</p>
-<h3 id="通配符实现协变（编译时安全）"><a href="#通配符实现协变（编译时安全）" class="headerlink" title="通配符实现协变（编译时安全）"></a>通配符实现协变（编译时安全）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Fruit</span>&gt; fruitList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Apple&gt;();  <span class="comment">// OK</span></span><br><span class="line"><span class="type">Fruit</span> <span class="variable">f</span> <span class="operator">=</span> fruitList.get(<span class="number">0</span>);    <span class="comment">// OK，返回 Fruit</span></span><br><span class="line">fruitList.add(<span class="keyword">new</span> <span class="title class_">Apple</span>());    <span class="comment">// 编译错误！不能写</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>编译器智能</strong>：<code>add(E e)</code> 中 <code>E</code> 是 <code>? extends Fruit</code>，不确定具体是哪个子类，所以拒绝所有写入（除了 <code>null</code>）。但 <code>contains(Object)</code> 参数是 <code>Object</code>，可以调用。</p>
-<hr>
-<h2 id="四、PECS-原则"><a href="#四、PECS-原则" class="headerlink" title="四、PECS 原则"></a>四、PECS 原则</h2><blockquote>
-<p>[!tip] PECS — Producer Extends, Consumer Super<br>来自 <code>java.util.Collections</code> 的设计原则</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>场景</th>
-<th>通配符</th>
-<th>能读</th>
-<th>能写</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>生产者</strong>（只读）</td>
-<td><code>? extends T</code></td>
-<td>✅ 返回 T</td>
-<td>❌</td>
-</tr>
-<tr>
-<td><strong>消费者</strong>（只写）</td>
-<td><code>? super T</code></td>
-<td>❌ 返回 Object</td>
-<td>✅ 写入 T 及子类</td>
-</tr>
-<tr>
-<td><strong>既读又写</strong></td>
-<td>精确类型 <code>T</code></td>
-<td>✅</td>
-<td>✅</td>
-</tr>
-</tbody></table>
-<h3 id="extends-T-—-上界通配符（Producer）"><a href="#extends-T-—-上界通配符（Producer）" class="headerlink" title="? extends T — 上界通配符（Producer）"></a><code>? extends T</code> — 上界通配符（Producer）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;T&gt; T <span class="title function_">wildSubtype</span><span class="params">(Holder&lt;? extends T&gt; holder, T arg)</span> &#123;</span><br><span class="line">  <span class="comment">// holder.set(arg);  // 编译错误</span></span><br><span class="line">  <span class="keyword">return</span> holder.get();  <span class="comment">// OK，返回 T</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="super-T-—-下界通配符（Consumer）"><a href="#super-T-—-下界通配符（Consumer）" class="headerlink" title="? super T — 下界通配符（Consumer）"></a><code>? super T</code> — 下界通配符（Consumer）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">writeTo</span><span class="params">(List&lt;? <span class="built_in">super</span> Apple&gt; apples)</span> &#123;</span><br><span class="line">  apples.add(<span class="keyword">new</span> <span class="title class_">Apple</span>());     <span class="comment">// OK</span></span><br><span class="line">  apples.add(<span class="keyword">new</span> <span class="title class_">Jonathan</span>());  <span class="comment">// OK，Jonathan 是 Apple 子类</span></span><br><span class="line">  <span class="comment">// apples.add(new Fruit());  // 编译错误</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">wildSupertype</span><span class="params">(Holder&lt;? <span class="built_in">super</span> T&gt; holder, T arg)</span> &#123;</span><br><span class="line">  holder.set(arg);       <span class="comment">// OK</span></span><br><span class="line">  <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> holder.get();  <span class="comment">// 只能返回 Object</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="对比表"><a href="#对比表" class="headerlink" title="对比表"></a>对比表</h3><table>
-<thead>
-<tr>
-<th>调用方式</th>
-<th><code>Holder&lt;T&gt;</code></th>
-<th><code>Holder&lt;?&gt;</code></th>
-<th><code>Holder&lt;? extends T&gt;</code></th>
-<th><code>Holder&lt;? super T&gt;</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>set(T)</code></td>
-<td>✅</td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-<tr>
-<td><code>get()</code> → T</td>
-<td>✅</td>
-<td>→ Object</td>
-<td>✅</td>
-<td>→ Object</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="五、捕获转换"><a href="#五、捕获转换" class="headerlink" title="五、捕获转换"></a>五、捕获转换</h2><p><code>Holder&lt;?&gt;</code> 无法直接调用需要具体类型的方法，但可以通过泛型方法”捕获”通配符：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">(Holder&lt;T&gt; holder)</span> &#123;</span><br><span class="line">  <span class="type">T</span> <span class="variable">t</span> <span class="operator">=</span> holder.get();           <span class="comment">// 可以获取具体类型</span></span><br><span class="line">  System.out.println(t.getClass().getSimpleName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f2</span><span class="params">(Holder&lt;?&gt; holder)</span> &#123;</span><br><span class="line">  f1(holder);  <span class="comment">// 通配符传入泛型方法，编译器捕获 ? 为某个具体类型</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>原理</strong>：<code>f2</code> 接收 <code>Holder&lt;?&gt;</code> 时类型未知，但调用 <code>f1(holder)</code> 时，编译器将 <code>?</code> 捕获为某个具体类型 <code>T</code>，从而在 <code>f1</code> 内部可以正常使用。</p>
-<hr>
-<h2 id="六、泛型边界"><a href="#六、泛型边界" class="headerlink" title="六、泛型边界"></a>六、泛型边界</h2><h3 id="单一边界"><a href="#单一边界" class="headerlink" title="单一边界"></a>单一边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">WithColor</span>&lt;T <span class="keyword">extends</span> <span class="title class_">HasColor</span>&gt; &#123;</span><br><span class="line">  T item;</span><br><span class="line">  java.awt.Color <span class="title function_">getColor</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.getColor();  <span class="comment">// 可以调用边界方法</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="多重边界"><a href="#多重边界" class="headerlink" title="多重边界"></a>多重边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类必须在接口前面，只能有一个类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solid</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Coord</span> &amp; HasColor &amp; Weight&gt; &#123;</span><br><span class="line">  T item;</span><br><span class="line">  java.awt.Color <span class="title function_">getColor</span><span class="params">()</span> &#123; <span class="keyword">return</span> item.getColor(); &#125;</span><br><span class="line">  <span class="type">int</span> <span class="title function_">getX</span><span class="params">()</span> &#123; <span class="keyword">return</span> item.x; &#125;</span><br><span class="line">  <span class="type">int</span> <span class="title function_">weight</span><span class="params">()</span> &#123; <span class="keyword">return</span> item.weight(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="继承边界"><a href="#继承边界" class="headerlink" title="继承边界"></a>继承边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HoldItem</span>&lt;T&gt; &#123; T item; T <span class="title function_">getItem</span><span class="params">()</span> &#123; <span class="keyword">return</span> item; &#125; &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WithColor2</span>&lt;T <span class="keyword">extends</span> <span class="title class_">HasColor</span>&gt; <span class="keyword">extends</span> <span class="title class_">HoldItem</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WithColorCoord2</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Coord</span> &amp; HasColor&gt; <span class="keyword">extends</span> <span class="title class_">WithColor2</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solid2</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Coord</span> &amp; HasColor &amp; Weight&gt; <span class="keyword">extends</span> <span class="title class_">WithColorCoord2</span>&lt;T&gt; &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-
-<p>子类逐层叠加边界，每层只增加新的约束。</p>
-<h3 id="泛型方法中的边界"><a href="#泛型方法中的边界" class="headerlink" title="泛型方法中的边界"></a>泛型方法中的边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;POWER <span class="keyword">extends</span> <span class="title class_">SuperHearing</span>&gt; <span class="keyword">void</span> <span class="title function_">useSuperHearing</span><span class="params">(SuperHero&lt;POWER&gt; hero)</span> &#123;</span><br><span class="line">  hero.getPower().hearSubtleNoises();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多重边界</span></span><br><span class="line"><span class="keyword">static</span> &lt;POWER <span class="keyword">extends</span> <span class="title class_">SuperHearing</span> &amp; SuperSmell&gt; <span class="keyword">void</span> <span class="title function_">superFind</span><span class="params">(SuperHero&lt;POWER&gt; hero)</span> &#123;</span><br><span class="line">  hero.getPower().hearSubtleNoises();</span><br><span class="line">  hero.getPower().trackBySmell();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>[!warning] 通配符不支持多重边界</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">SuperHearing</span>&gt; audioPeople;  <span class="comment">// OK</span></span><br><span class="line"><span class="comment">// List&lt;? extends SuperHearing &amp; SuperSmell&gt; dogPs;  // 编译错误</span></span><br></pre></td></tr></table></figure></blockquote>
-<hr>
-<h2 id="七、无界通配符"><a href="#七、无界通配符" class="headerlink" title="七、无界通配符 ?"></a>七、无界通配符 <code>?</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;?&gt; list;        <span class="comment">// 无界通配符</span></span><br><span class="line">List list;           <span class="comment">// 原始类型（raw type）</span></span><br><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Object</span>&gt; list;  <span class="comment">// 等价于 List&lt;?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>三者效果基本相同，但 <code>List&lt;?&gt;</code> 比原始类型更安全——编译器会阻止向 <code>List&lt;?&gt;</code> 写入非 <code>null</code> 值。</p>
-<h3 id="原始类型-vs-的关键区别"><a href="#原始类型-vs-的关键区别" class="headerlink" title="原始类型 vs ? 的关键区别"></a>原始类型 vs <code>?</code> 的关键区别</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">rawArgs</span><span class="params">(Holder holder, Object arg)</span> &#123;</span><br><span class="line">  holder.set(arg);        <span class="comment">// 原始类型：允许写入（不安全）</span></span><br><span class="line">  <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> holder.get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">unboundedArg</span><span class="params">(Holder&lt;?&gt; holder, Object arg)</span> &#123;</span><br><span class="line">  <span class="comment">// holder.set(arg);     // ? 通配符：拒绝写入（安全）</span></span><br><span class="line">  <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> holder.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="八、用-List-替代泛型数组"><a href="#八、用-List-替代泛型数组" class="headerlink" title="八、用 List&lt;T&gt; 替代泛型数组"></a>八、用 <code>List&lt;T&gt;</code> 替代泛型数组</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ListOfGenerics</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> List&lt;T&gt; array = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(T item)</span> &#123; array.add(item); &#125;</span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123; <span class="keyword">return</span> array.get(index); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这是最推荐的”泛型数组”替代方案，完全类型安全。</p>
-<hr>
-<h2 id="九、实战：泛型读取"><a href="#九、实战：泛型读取" class="headerlink" title="九、实战：泛型读取"></a>九、实战：泛型读取</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 精确类型 — 不变</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Reader</span>&lt;T&gt; &#123;</span><br><span class="line">  T <span class="title function_">readExact</span><span class="params">(List&lt;T&gt; list)</span> &#123; <span class="keyword">return</span> list.get(<span class="number">0</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用通配符 — 协变</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">CovariantReader</span>&lt;T&gt; &#123;</span><br><span class="line">  T <span class="title function_">readCovariant</span><span class="params">(List&lt;? extends T&gt; list)</span> &#123; <span class="keyword">return</span> list.get(<span class="number">0</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">Reader&lt;Fruit&gt; reader = <span class="keyword">new</span> <span class="title class_">Reader</span>&lt;&gt;();</span><br><span class="line">reader.readExact(fruit);    <span class="comment">// OK</span></span><br><span class="line"><span class="comment">// reader.readExact(apples); // 编译错误，泛型不变</span></span><br><span class="line"></span><br><span class="line">CovariantReader&lt;Fruit&gt; cr = <span class="keyword">new</span> <span class="title class_">CovariantReader</span>&lt;&gt;();</span><br><span class="line">cr.readCovariant(fruit);    <span class="comment">// OK</span></span><br><span class="line">cr.readCovariant(apples);   <span class="comment">// OK，通配符允许子类</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h2><ul>
-<li>[[泛型数组创建]]</li>
-<li>[[类型擦除]]</li>
-<li>[[Java 泛型基础]]</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E8%BF%9B%E9%98%B6-%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BE%B9%E7%95%8C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/" data-id="cuidqF2fw8Dxc-mKHTL4L9Ci-" data-title="Java 泛型进阶 - 通配符、边界与类型擦除" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/migration/" rel="tag">migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/ArchLinux/" style="font-size: 13.33px;">ArchLinux</a> <a href="/tags/Container/" style="font-size: 10px;">Container</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Incus/" style="font-size: 13.33px;">Incus</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LinuxOps/" style="font-size: 10px;">LinuxOps</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Networking/" style="font-size: 10px;">Networking</a> <a href="/tags/Obsidian/" style="font-size: 13.33px;">Obsidian</a> <a href="/tags/Virtualization/" style="font-size: 10px;">Virtualization</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/btrfs/" style="font-size: 10px;">btrfs</a> <a href="/tags/conda/" style="font-size: 10px;">conda</a> <a href="/tags/dualboot/" style="font-size: 10px;">dualboot</a> <a href="/tags/erasure/" style="font-size: 10px;">erasure</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java-generics/" style="font-size: 10px;">java/generics</a> <a href="/tags/java-onjava/" style="font-size: 10px;">java/onjava</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 10px;">java/字节码</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 10px;">java/数组</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 16.67px;">java/泛型</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/migration/" style="font-size: 10px;">migration</a> <a href="/tags/networking/" style="font-size: 10px;">networking</a> <a href="/tags/pattern-generics/" style="font-size: 10px;">pattern/generics</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 10px;">故障排查</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 16.67px;">编程思想</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/09/python/uv/">配置国内镜像</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">57</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-05-09T09:27:02.644Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
