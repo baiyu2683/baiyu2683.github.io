@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 泛型 (Generics) 核心笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java 泛型 (Generics) 核心笔记1. 泛型的本质：参数化类型 (Parameterized Types)泛型是将类型本身作为参数传递给类、接口或方法。其核心目标是：在编译期进行类型检查，减少运行时的类型转换异常 (ClassCastException)。 优势 类型安全：编译器会拦截错误的类型插入。 消除强制转换：代码更简洁，可读性更强。 代码重用：编写一套逻辑，处理多种数据类型（如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 泛型 (Generics) 核心笔记">
+<meta property="og:url" content="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java 泛型 (Generics) 核心笔记1. 泛型的本质：参数化类型 (Parameterized Types)泛型是将类型本身作为参数传递给类、接口或方法。其核心目标是：在编译期进行类型检查，减少运行时的类型转换异常 (ClassCastException)。 优势 类型安全：编译器会拦截错误的类型插入。 消除强制转换：代码更简洁，可读性更强。 代码重用：编写一套逻辑，处理多种数据类型（如">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-09T01:34:34.884Z">
+<meta property="article:modified_time" content="2026-05-09T02:18:24.379Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-java编程思想/第二十章泛型/Java_泛型核心知识点" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 泛型 (Generics) 核心笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-泛型-Generics-核心笔记"><a href="#Java-泛型-Generics-核心笔记" class="headerlink" title="Java 泛型 (Generics) 核心笔记"></a>Java 泛型 (Generics) 核心笔记</h1><h2 id="1-泛型的本质：参数化类型-Parameterized-Types"><a href="#1-泛型的本质：参数化类型-Parameterized-Types" class="headerlink" title="1. 泛型的本质：参数化类型 (Parameterized Types)"></a>1. 泛型的本质：参数化类型 (Parameterized Types)</h2><p>泛型是将<strong>类型本身</strong>作为参数传递给类、接口或方法。其核心目标是：<strong>在编译期进行类型检查，减少运行时的类型转换异常 (ClassCastException)</strong>。</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ol>
+<li><strong>类型安全</strong>：编译器会拦截错误的类型插入。</li>
+<li><strong>消除强制转换</strong>：代码更简洁，可读性更强。</li>
+<li><strong>代码重用</strong>：编写一套逻辑，处理多种数据类型（如 <code>ArrayList&lt;T&gt;</code>）。</li>
+</ol>
+<hr>
+<h2 id="2-核心难点：类型擦除-Type-Erasure"><a href="#2-核心难点：类型擦除-Type-Erasure" class="headerlink" title="2. 核心难点：类型擦除 (Type Erasure)"></a>2. 核心难点：类型擦除 (Type Erasure)</h2><p>这是 Java 泛型最独特、也最受争议的特性。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>Java 的泛型只存在于<strong>编译期</strong>。为了兼容旧版本的 JVM，编译器在生成字节码时，会将所有的泛型参数“擦除”：</p>
+<ul>
+<li>如果没有边界，替换为 <code>Object</code>。</li>
+<li>如果有边界（如 <code>&lt;T extends Number&gt;</code>），替换为边界类型（<code>Number</code>）。</li>
+</ul>
+<h3 id="擦除带来的限制"><a href="#擦除带来的限制" class="headerlink" title="擦除带来的限制"></a>擦除带来的限制</h3><ol>
+<li><strong>运行时无法获取泛型类型</strong>：无法执行 <code>if (obj instanceof T)</code>。</li>
+<li><strong>不能创建泛型数组</strong>：无法执行 <code>new T[10]</code>。</li>
+<li><strong>基本类型不能作为泛型参数</strong>：必须使用包装类（如 <code>List&lt;Integer&gt;</code> 而非 <code>List&lt;int&gt;</code>）。</li>
+</ol>
+<hr>
+<h2 id="3-通配符与-PECS-原则"><a href="#3-通配符与-PECS-原则" class="headerlink" title="3. 通配符与 PECS 原则"></a>3. 通配符与 PECS 原则</h2><p>这是泛型进阶中最实用的规则，决定了泛型集合的读写权限。</p>
+<h3 id="PECS-原则-Producer-Extends-Consumer-Super"><a href="#PECS-原则-Producer-Extends-Consumer-Super" class="headerlink" title="PECS 原则 (Producer Extends, Consumer Super)"></a>PECS 原则 (Producer Extends, Consumer Super)</h3><ol>
+<li><p><strong>Producer Extends (<code>&lt;? extends T&gt;</code>)</strong>：</p>
+<ul>
+<li><strong>场景</strong>：如果你只需要从集合中<strong>读取</strong>数据（集合是生产者）。</li>
+<li><strong>权限</strong>：可以安全读取为 <code>T</code> 类型，但<strong>不能写入</strong>任何对象（除了 <code>null</code>）。</li>
+<li><strong>意义</strong>：确定了上限。</li>
+</ul>
+</li>
+<li><p><strong>Consumer Super (<code>&lt;? super T&gt;</code>)</strong>：</p>
+<ul>
+<li><strong>场景</strong>：如果你需要往集合中<strong>写入</strong>数据（集合是消费者）。</li>
+<li><strong>权限</strong>：可以安全写入 <code>T</code> 及其子类，但<strong>读取</strong>出来只能是 <code>Object</code> 类型。</li>
+<li><strong>意义</strong>：确定了下限。</li>
+</ul>
+</li>
+</ol>
+<h3 id="代码对比"><a href="#代码对比" class="headerlink" title="代码对比"></a>代码对比</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Number</span>&gt; list1 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;(); <span class="comment">// 合法：Integer 是 Number 的子类</span></span><br><span class="line"><span class="comment">// list1.add(10); // 报错：无法确定具体子类型，禁止写入</span></span><br><span class="line"></span><br><span class="line">List&lt;? <span class="built_in">super</span> Integer&gt; list2 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;(); <span class="comment">// 合法：Number 是 Integer 的父类</span></span><br><span class="line">list2.add(<span class="number">10</span>); <span class="comment">// 合法：可以安全写入 Integer 及其子类</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-泛型方法与泛型类"><a href="#4-泛型方法与泛型类" class="headerlink" title="4. 泛型方法与泛型类"></a>4. 泛型方法与泛型类</h2><ul>
+<li><strong>泛型类</strong>：<code>public class Box&lt;T&gt; { ... }</code> (T 在实例化类时确定)</li>
+<li><strong>泛型方法</strong>：<code>public &lt;E&gt; void process(E element) { ... }</code> (E 在调用方法时根据参数推断)</li>
+</ul>
+<hr>
+<p><strong>来源：</strong> 《On Java 8 - 第 20 章 泛型》学习整理</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" data-id="cuidJ3CBCqFaIbXMAP4QdGieM" data-title="Java 泛型 (Generics) 核心笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/%E5%AD%97%E7%AC%A6%E4%B8%B2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          字符串
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9/switch%E9%80%89%E6%8B%A9%E5%9B%A0%E5%AD%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">switch选择因子</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/tp-file-folder-true/"><% tp.file.folder(true) %></a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/migration/" rel="tag">migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArchLinux/" style="font-size: 13.33px;">ArchLinux</a> <a href="/tags/Container/" style="font-size: 10px;">Container</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Incus/" style="font-size: 13.33px;">Incus</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LinuxOps/" style="font-size: 10px;">LinuxOps</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Networking/" style="font-size: 10px;">Networking</a> <a href="/tags/Obsidian/" style="font-size: 13.33px;">Obsidian</a> <a href="/tags/Virtualization/" style="font-size: 10px;">Virtualization</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/btrfs/" style="font-size: 10px;">btrfs</a> <a href="/tags/conda/" style="font-size: 10px;">conda</a> <a href="/tags/dualboot/" style="font-size: 10px;">dualboot</a> <a href="/tags/erasure/" style="font-size: 10px;">erasure</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java-generics/" style="font-size: 10px;">java/generics</a> <a href="/tags/java-onjava/" style="font-size: 10px;">java/onjava</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 10px;">java/字节码</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 10px;">java/数组</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 16.67px;">java/泛型</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/migration/" style="font-size: 10px;">migration</a> <a href="/tags/networking/" style="font-size: 10px;">networking</a> <a href="/tags/pattern-generics/" style="font-size: 10px;">pattern/generics</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 10px;">故障排查</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 16.67px;">编程思想</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/template/hexo/">&lt;% tp.file.title %&gt;</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

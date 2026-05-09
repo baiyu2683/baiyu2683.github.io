@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-hexo/Hexo与Obsidian协作：解决因水平分割线导致的YAML解析错误" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T08:30:00.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Hexo-与-Obsidian-协作：解决因水平分割线导致的-YAML-解析错误"><a href="#Hexo-与-Obsidian-协作：解决因水平分割线导致的-YAML-解析错误" class="headerlink" title="Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误"></a>Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</h1><p>在使用 Obsidian 编写 Hexo 博客文章时，可能会遇到类似 <code>YAMLException: end of the stream or a document separator is expected</code> 的错误。本文记录了该问题的成因及其自动化解决方案。</p>
+<h2 id="1-问题现象"><a href="#1-问题现象" class="headerlink" title="1. 问题现象"></a>1. 问题现象</h2><p>当执行 <code>hexo generate</code> 或启动 <code>hexo server</code> 时，部分笔记报错：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR Process failed: _posts/xxx.md</span><br><span class="line">YAMLException: end of the stream or a document separator is expected (6:1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-根本原因"><a href="#2-根本原因" class="headerlink" title="2. 根本原因"></a>2. 根本原因</h2><p>Hexo 使用 <code>hexo-front-matter</code> 插件来解析文章开头的 YAML 配置。其解析逻辑如下：</p>
+<ol>
+<li>如果文件以 <code>---</code> 开头，则解析两个 <code>---</code> 之间的内容作为 YAML。</li>
+<li><strong>如果文件不以 <code>---</code> 开头，但正文中出现了 <code>---</code>（水平分割线）</strong>，解析器会尝试将第一个 <code>---</code> 之前的内容作为 YAML 解析。</li>
+</ol>
+<p>由于 Obsidian 用户经常在笔记顶部直接书写内容（不加 Front-matter），并使用 <code>---</code> 作为视觉分割线，这会导致 Hexo 将正文内容误判为 YAML，从而引发解析错误。</p>
+<h2 id="3-解决方案：自动化补全-Front-matter"><a href="#3-解决方案：自动化补全-Front-matter" class="headerlink" title="3. 解决方案：自动化补全 Front-matter"></a>3. 解决方案：自动化补全 Front-matter</h2><p>为了修复此问题且不破坏现有笔记结构，我们采用“自动化补全”的策略：识别所有受影响的文件，并为其添加最基本的 YAML 配置块（至少包含 <code>title</code>）。</p>
+<h3 id="修复脚本逻辑"><a href="#修复脚本逻辑" class="headerlink" title="修复脚本逻辑"></a>修复脚本逻辑</h3><p>我们使用脚本扫描 <code>source/_posts</code> 目录，对符合以下条件的 <code>.md</code> 文件进行处理：</p>
+<ul>
+<li>不以 <code>---</code> 开头。</li>
+<li>包含至少一行内容为 <code>---</code> 的水平分割线。</li>
+</ul>
+<p><strong>处理步骤：</strong></p>
+<ol>
+<li><strong>提取标题</strong>：优先寻找正文中第一个 <code># </code> 开头的标题；若无，则使用文件名。</li>
+<li><strong>插入配置</strong>：在文件最顶部插入 YAML 块。</li>
+</ol>
+<h3 id="修复后的效果"><a href="#修复后的效果" class="headerlink" title="修复后的效果"></a>修复后的效果</h3><p>文件内容将从：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 我的笔记</span></span><br><span class="line"><span class="section">正文内容...</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line">更多内容...</span><br></pre></td></tr></table></figure>
+<p>变为：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"><span class="section">title: &quot;我的笔记&quot;</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 我的笔记</span></span><br><span class="line"><span class="section">正文内容...</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line">更多内容...</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-验证与预防"><a href="#4-验证与预防" class="headerlink" title="4. 验证与预防"></a>4. 验证与预防</h2><h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>修复完成后运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate</span><br></pre></td></tr></table></figure>
+<p>如果输出 <code>INFO  X files generated</code> 且无 ERROR，则表示修复成功。</p>
+<h3 id="预防建议"><a href="#预防建议" class="headerlink" title="预防建议"></a>预防建议</h3><ul>
+<li><strong>Obsidian 模板</strong>：建议在 Obsidian 中为 Hexo 笔记设置模板，默认包含 <code>---</code> 块。</li>
+<li><strong>Lint 工具</strong>：可以使用 Obsidian 的 Linter 插件自动强制添加 Front-matter。</li>
+<li><strong>分割线替代</strong>：如果不想添加 Front-matter，可以将 <code>---</code> 替换为 <code>***</code> 或 <code>___</code>，它们在 Markdown 中同样表示分割线，但不会触发 Hexo 的 YAML 解析器。</li>
+</ul>
+<hr>
+<p><em>注：本文由 Gemini CLI 自动生成并存储于笔记库中。</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/" data-id="cuides8C1_3QUTHoUmJNaI7Fn" data-title="Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-template/hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/template/hexo/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T07:48:46.762Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/tp-file-folder-true/"><% tp.file.folder(true) %></a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/template/hexo/">&lt;% tp.file.title %&gt;</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/template/hexo/" data-id="cuidPPFBPV0pp9s5N66f7XayS" data-title="&lt;% tp.file.title %&gt;" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hexo/Hexo与Obsidian协作集成方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T07:36:13.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Hexo-与-Obsidian-协作集成方案"><a href="#Hexo-与-Obsidian-协作集成方案" class="headerlink" title="Hexo 与 Obsidian 协作集成方案"></a>Hexo 与 Obsidian 协作集成方案</h1><p>本方案旨在解决 Obsidian 与 Hexo 在图片链接语法（WikiLinks）和 Front-matter（YAML 元数据）上的不兼容问题，实现“一套笔记，双端同步”的无缝体验。</p>
+<h2 id="1-核心需求"><a href="#1-核心需求" class="headerlink" title="1. 核心需求"></a>1. 核心需求</h2><ul>
+<li><strong>图片兼容性</strong>：Obsidian 使用 <code>![](image.png)</code>，Hexo 默认不识别。</li>
+<li><strong>元数据自动化</strong>：Obsidian 笔记通常缺失 Hexo 要求的 <code>title</code>, <code>date</code>, <code>categories</code> 等。</li>
+<li><strong>无损协作</strong>：不修改 Obsidian 源码的前提下，使 Hexo 能正确渲染。</li>
+</ul>
+<h2 id="2-解决方案架构"><a href="#2-解决方案架构" class="headerlink" title="2. 解决方案架构"></a>2. 解决方案架构</h2><h3 id="2-1-图片渲染：原生资源支持-动态转换"><a href="#2-1-图片渲染：原生资源支持-动态转换" class="headerlink" title="2.1 图片渲染：原生资源支持 + 动态转换"></a>2.1 图片渲染：原生资源支持 + 动态转换</h3><p>放弃不稳定的第三方插件，采用 Hexo 原生能力与轻量级脚本结合的方式。</p>
+<ol>
+<li><p><strong>开启资源文件夹</strong> (<code>_config.yml</code>):</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p><em>作用：使 Hexo 自动处理与文章同名的资源文件夹，并正确映射图片路径。</em></p>
+</li>
+<li><p><strong>WikiLink 桥接脚本</strong> (<code>scripts/obsidian_bridge.js</code>):</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo.<span class="property">extend</span>.<span class="property">filter</span>.<span class="title function_">register</span>(<span class="string">&#x27;before_post_render&#x27;</span>, <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="comment">// 将 ![](image.png) 转换为 ![](image.png)</span></span><br><span class="line">  data.<span class="property">content</span> = data.<span class="property">content</span>.<span class="title function_">replace</span>(<span class="regexp">/!\[\[(.*?)(?:\|.*?)?\]\]/g</span>, <span class="string">&#x27;![]($1)&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> data;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><em>作用：在渲染前动态转换语法，不影响源文件。</em></p>
+</li>
+</ol>
+<h3 id="2-2-元数据管理：存量修复-增量模板"><a href="#2-2-元数据管理：存量修复-增量模板" class="headerlink" title="2.2 元数据管理：存量修复 + 增量模板"></a>2.2 元数据管理：存量修复 + 增量模板</h3><ol>
+<li><p><strong>存量自动化脚本</strong> (<code>auto_front_matter.py</code>):</p>
+<ul>
+<li><strong>逻辑</strong>：扫描 <code>source/_posts</code>，若缺失 <code>---</code> 则自动补全。</li>
+<li><strong>标题提取</strong>：优先提取正文 <code>#</code> 标题，次选文件名。</li>
+<li><strong>分类推断</strong>：基于文件夹层级自动生成 <code>categories</code>。</li>
+<li><strong>日期获取</strong>：基于文件修改时间生成 <code>date</code>。</li>
+</ul>
+</li>
+<li><p><strong>增量推荐方案</strong> (Obsidian 端):</p>
+<ul>
+<li><strong>插件</strong>：安装 <code>Templater</code>。</li>
+<li><strong>模板</strong>：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">&quot;&lt;% tp.file.title %&gt;&quot;</span></span><br><span class="line"><span class="attr">date:</span> &lt;%<span class="language-ruby"> tp.date.now(<span class="string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span>) </span>%&gt;</span><br><span class="line"><span class="attr">categories:</span> [&lt;%<span class="language-ruby"> tp.file.folder(<span class="literal">true</span>) </span>%&gt;]</span><br><span class="line"><span class="attr">tags:</span> []</span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="3-运维说明"><a href="#3-运维说明" class="headerlink" title="3. 运维说明"></a>3. 运维说明</h2><h3 id="3-1-批量处理命令"><a href="#3-1-批量处理命令" class="headerlink" title="3.1 批量处理命令"></a>3.1 批量处理命令</h3><p>若发现大量新同步的笔记没有 Front-matter，运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 auto_front_matter.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-常见问题排查"><a href="#3-2-常见问题排查" class="headerlink" title="3.2 常见问题排查"></a>3.2 常见问题排查</h3><ul>
+<li><strong>图片不显示</strong>：检查图片是否存放在与文章同名的文件夹内，或是否存在于 <code>source/_posts</code> 下的正确层级。</li>
+<li><strong>分类错误</strong>：Hexo 的分类严格遵循文件夹结构，请确保笔记存放位置正确。</li>
+</ul>
+<hr>
+<p><em>文档版本：1.0 | 更新日期：2026-05-09</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/" data-id="cuidDEWMh4eaSz1PVBLVPl_cv" data-title="Hexo 与 Obsidian 协作集成方案" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-blender/1常用操作分类" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T03:06:20.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blender/">blender</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/file-20260115213648962.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/" data-id="cuid_9fxWrVUYlyBSCrJC4uKo" data-title="1常用操作分类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-TradingView/PineScript_v6核心知识点" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.886Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-语言定义与执行机制"><a href="#1-语言定义与执行机制" class="headerlink" title="1. 语言定义与执行机制"></a>1. 语言定义与执行机制</h2><p>Pine Script 是 TradingView 开发的一种轻量级脚本语言，专门用于编写技术指标和策略。</p>
+<h3 id="执行模型-Execution-Model"><a href="#执行模型-Execution-Model" class="headerlink" title="执行模型 (Execution Model)"></a>执行模型 (Execution Model)</h3><ul>
+<li><strong>逐棒执行 (Per-bar Execution)：</strong> 脚本在图表的每一根 K 线上从左向右依次运行。</li>
+<li><strong>计算逻辑：</strong> 每一根 K 线上，变量会根据当前及历史数据重新计算。</li>
+</ul>
+<hr>
+<h2 id="2-核心数据结构：时间序列-Series"><a href="#2-核心数据结构：时间序列-Series" class="headerlink" title="2. 核心数据结构：时间序列 (Series)"></a>2. 核心数据结构：时间序列 (Series)</h2><ul>
+<li><strong>Series (序列)：</strong> Pine Script 的基本数据结构。例如 <code>close</code> 代表从第一根 K 线到当前 K 线的收盘价序列。</li>
+<li><strong>回溯操作符 <code>[]</code>：</strong> 通过 <code>close[1]</code> 获取上一根 K 线的收盘价，<code>close[n]</code> 获取历史第 n 根的数据。</li>
+</ul>
+<hr>
+<h2 id="3-类型系统与修饰符"><a href="#3-类型系统与修饰符" class="headerlink" title="3. 类型系统与修饰符"></a>3. 类型系统与修饰符</h2><h3 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h3><ul>
+<li><code>int</code>, <code>float</code>, <code>bool</code>, <code>color</code>, <code>string</code>。</li>
+</ul>
+<h3 id="类型限定符-Qualifiers"><a href="#类型限定符-Qualifiers" class="headerlink" title="类型限定符 (Qualifiers)"></a>类型限定符 (Qualifiers)</h3><ul>
+<li><strong>const：</strong> 编译时确定的常量。</li>
+<li><strong>input：</strong> 由用户在设置面板输入的参数。</li>
+<li><strong>simple：</strong> 在第一根 K 线确定后不再改变的值。</li>
+<li><strong>series：</strong> 随 K 线变化而变化的动态序列。</li>
+</ul>
+<h3 id="v6-新增高级类型"><a href="#v6-新增高级类型" class="headerlink" title="v6 新增高级类型"></a>v6 新增高级类型</h3><ul>
+<li><strong>UDT (User-defined Types)：</strong> 用户定义的复合类型（对象）。</li>
+<li><strong>Enums (枚举)：</strong> 用于定义一组具名的常量集合。</li>
+</ul>
+<hr>
+<h2 id="4-主要组件分类"><a href="#4-主要组件分类" class="headerlink" title="4. 主要组件分类"></a>4. 主要组件分类</h2><ol>
+<li><strong>Indicator (指标)：</strong> 用于在图表上绘制线条、形状或看板，不涉及买卖模拟。</li>
+<li><strong>Strategy (策略)：</strong> 包含买卖逻辑（<code>strategy.entry()</code>, <code>strategy.exit()</code>），支持回测和绩效分析。</li>
+<li><strong>Library (库)：</strong> 包含可重用的函数或自定义类型，供其他脚本调用。</li>
+</ol>
+<hr>
+<h2 id="5-可视化与交互工具"><a href="#5-可视化与交互工具" class="headerlink" title="5. 可视化与交互工具"></a>5. 可视化与交互工具</h2><ul>
+<li><strong>绘图函数：</strong> <code>plot()</code>, <code>plotshape()</code>, <code>plotchar()</code>。</li>
+<li><strong>动态对象：</strong> <ul>
+<li><code>line</code>: 绘制趋势线、水平线。</li>
+<li><code>box</code>: 绘制矩形区域。</li>
+<li><code>table</code>: 创建悬浮或固定位置的数据看板。</li>
+</ul>
+</li>
+<li><strong>Alerts (警报)：</strong> 通过 <code>alert()</code> 或 <code>alertcondition()</code> 触发实时通知。</li>
+</ul>
+<hr>
+<h2 id="6-v6-版本核心更新"><a href="#6-v6-版本核心更新" class="headerlink" title="6. v6 版本核心更新"></a>6. v6 版本核心更新</h2><ul>
+<li><strong>性能优化：</strong> 提高了大规模计算和绘图的执行效率。</li>
+<li><strong>原生枚举支持：</strong> 提升了代码的可读性和参数设置的规范性。</li>
+<li><strong>布尔值逻辑优化：</strong> 改进了布尔值在序列计算中的处理速度。</li>
+<li><strong>增强的对象操作：</strong> 提供了更灵活的自定义对象初始化和属性访问语法。</li>
+</ul>
+<hr>
+<p><strong>来源：</strong> TradingView Pine Script v6 官方文档概要</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" data-id="cuidIIfmxEnd0Pjm70MBTqRGK" data-title="PineScript_v6核心知识点" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python/uv" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/python/uv/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.886Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/uv/">uv</a>►<a class="article-category-link" href="/categories/uv/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/python/uv/">配置国内镜像</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="配置国内镜像"><a href="#配置国内镜像" class="headerlink" title="配置国内镜像"></a>配置国内镜像</h1><h2 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a>临时使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv pip install numpy --default-index https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+
+<h2 id="个人全局配置"><a href="#个人全局配置" class="headerlink" title="个人全局配置"></a>个人全局配置</h2><p>在终端中配置环境变量:  UV_DEFAULT_INDEX</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -gx UV_DEFAULT_INDEX https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><p>写在项目根目录的pyproject.toml文件中</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[[tool.uv.index]]</span></span><br><span class="line"><span class="attr">url</span>=<span class="string">&quot;https://pypi.tuna.tsinghua.edu.cn/simple&quot;</span></span><br><span class="line"><span class="attr">default</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="查看配置"><a href="#查看配置" class="headerlink" title="查看配置"></a>查看配置</h2><p>-v参数可以查看日志，查看是否有配置的地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv pip install -v requests</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="🚀-uv-最常用用法（从零到能用）"><a href="#🚀-uv-最常用用法（从零到能用）" class="headerlink" title="🚀 uv 最常用用法（从零到能用）"></a>🚀 uv 最常用用法（从零到能用）</h1><h2 id="✅-1-创建项目（推荐）"><a href="#✅-1-创建项目（推荐）" class="headerlink" title="✅ 1. 创建项目（推荐）"></a>✅ 1. 创建项目（推荐）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv init</span><br></pre></td></tr></table></figure>
+
+<p>👉 会生成 <code>pyproject.toml</code>（现代 Python 项目标配）</p>
+<hr>
+<h2 id="✅-2-创建虚拟环境"><a href="#✅-2-创建虚拟环境" class="headerlink" title="✅ 2. 创建虚拟环境"></a>✅ 2. 创建虚拟环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv venv</span><br></pre></td></tr></table></figure>
+
+<p>激活：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .venv/bin/activate</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="✅-3-安装依赖"><a href="#✅-3-安装依赖" class="headerlink" title="✅ 3. 安装依赖"></a>✅ 3. 安装依赖</h2><h3 id="✔-项目方式（推荐）"><a href="#✔-项目方式（推荐）" class="headerlink" title="✔ 项目方式（推荐）"></a>✔ 项目方式（推荐）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv add requests</span><br></pre></td></tr></table></figure>
+
+<p>👉 自动写入 <code>pyproject.toml</code></p>
+<hr>
+<h3 id="✔-临时方式（类似-pip）"><a href="#✔-临时方式（类似-pip）" class="headerlink" title="✔ 临时方式（类似 pip）"></a>✔ 临时方式（类似 pip）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv pip install requests</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="✅-4-运行-Python"><a href="#✅-4-运行-Python" class="headerlink" title="✅ 4. 运行 Python"></a>✅ 4. 运行 Python</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv run python main.py</span><br></pre></td></tr></table></figure>
+
+<p>👉 自动使用虚拟环境（不用手动激活）</p>
+<hr>
+<h2 id="✅-5-安装指定-Python-版本"><a href="#✅-5-安装指定-Python-版本" class="headerlink" title="✅ 5. 安装指定 Python 版本"></a>✅ 5. 安装指定 Python 版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv python install 3.12</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="✅-6-同步依赖（类似-npm-install）"><a href="#✅-6-同步依赖（类似-npm-install）" class="headerlink" title="✅ 6. 同步依赖（类似 npm install）"></a>✅ 6. 同步依赖（类似 npm install）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv <span class="built_in">sync</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="🔥-两种使用模式（核心区别）"><a href="#🔥-两种使用模式（核心区别）" class="headerlink" title="🔥 两种使用模式（核心区别）"></a>🔥 两种使用模式（核心区别）</h1><h2 id="🟢-模式一：现代项目（推荐）"><a href="#🟢-模式一：现代项目（推荐）" class="headerlink" title="🟢 模式一：现代项目（推荐）"></a>🟢 模式一：现代项目（推荐）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uv init  </span><br><span class="line">uv add fastapi  </span><br><span class="line">uv run main.py</span><br></pre></td></tr></table></figure>
+
+<p>✔ 有 <code>pyproject.toml</code><br>✔ 可复现<br>✔ 团队协作友好</p>
+<hr>
+<h2 id="🟡-模式二：传统方式"><a href="#🟡-模式二：传统方式" class="headerlink" title="🟡 模式二：传统方式"></a>🟡 模式二：传统方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uv venv  </span><br><span class="line"><span class="built_in">source</span> .venv/bin/activate  </span><br><span class="line">uv pip install requests</span><br></pre></td></tr></table></figure>
+
+<p>✔ 类似 <code>pip + venv</code><br>✔ 简单直接</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/python/uv/" data-id="cuidXUI-DKs52hEnuw2xC6ZHK" data-title="配置国内镜像" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python/第二章 网络编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/python/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.886Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/python/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>AF_UNIX, AF_INET, AF_TIPC, AF_NETLINK分类指的是什么？具体含义。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/python/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" data-id="cuidGmibWLcZK2xtwqcG5j8sl" data-title="问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-数据库/学习路径" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.886Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/">学习路径</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>要达到“精通”水平，不能只看语法，必须深入到<strong>数据库底层原理、优化器逻辑、架构设计以及分布式理论</strong>。</p>
+<p>2026 年，数据库领域已经从单纯的关系型扩展到了云原生和多模态。我为你精选了一份进阶书单，按学习阶段排列：</p>
+<hr>
+<h3 id="第一阶段：深挖-SQL-表达力与“奇技淫巧”"><a href="#第一阶段：深挖-SQL-表达力与“奇技淫巧”" class="headerlink" title="第一阶段：深挖 SQL 表达力与“奇技淫巧”"></a>第一阶段：深挖 SQL 表达力与“奇技淫巧”</h3><p><em>当你不再满足于简单的 CRUD，而想用 SQL 解决复杂逻辑时必读。</em></p>
+<ul>
+<li><p><strong>《SQL Cookbook (第2版)》</strong> (Anthony Molinaro)</p>
+<ul>
+<li><strong>核心价值</strong>：它是 SQL 界的“食谱”。书中涵盖了大量如何用 SQL 进行行列转换、复杂报表统计、分层查询的方法。</li>
+</ul>
+</li>
+<li><p><strong>《SQL 进阶教程》</strong> (MICK)</p>
+<ul>
+<li><strong>核心价值</strong>：这本书会彻底改变你对 SQL 的认知（例如：面向集合的思维方式）。它深入讲解了 CASE 表达式、窗口函数和自连接的高阶用法。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="第二阶段：性能调优与索引专家"><a href="#第二阶段：性能调优与索引专家" class="headerlink" title="第二阶段：性能调优与索引专家"></a>第二阶段：性能调优与索引专家</h3><p><em>精通 SQL 的标志是：看到一条慢 SQL，你不仅能改好它，还能解释为什么优化器选错了路。</em></p>
+<ul>
+<li><p><strong>《SQL 性能解释》 (SQL Performance Explained)</strong> (Markus Winand)</p>
+<ul>
+<li><strong>核心价值</strong>：<strong>强烈推荐</strong>。它不讲语法，只讲索引（B-Tree）。读完后，你会真正明白联合索引的顺序该怎么放，以及为什么 <code>LIKE &#39;%xxx&#39;</code> 会失效。</li>
+</ul>
+</li>
+<li><p><strong>《高性能 MySQL (第4版)》</strong> (Baron Schwartz 等)</p>
+<ul>
+<li><strong>核心价值</strong>：MySQL 领域的“圣经”。虽然版本更新到了第 4 版，但关于 MVCC、锁、查询优化器的核心逻辑依然是面试和实战的最高准则。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="第三阶段：底层原理与架构设计（大厂必备）"><a href="#第三阶段：底层原理与架构设计（大厂必备）" class="headerlink" title="第三阶段：底层原理与架构设计（大厂必备）"></a>第三阶段：底层原理与架构设计（大厂必备）</h3><p><em>要达到专家级，必须理解数据库是如何在磁盘和内存之间调度数据的。</em></p>
+<ul>
+<li><p><strong>《MySQL 技术内幕：InnoDB 存储引擎》</strong> (姜承尧)</p>
+<ul>
+<li><strong>核心价值</strong>：国产精品。深度解析 InnoDB 的页结构、Buffer Pool、重做日志 (Redo Log) 等，是理解事务一致性的必修课。</li>
+</ul>
+</li>
+<li><p><strong>《数据密集型应用系统设计》 (DDIA)</strong> (Martin Kleppmann)</p>
+<ul>
+<li><strong>核心价值</strong>：<strong>业内封神之作</strong>。如果你想涉足分布式数据库、时序数据库，这本书是所有分布式架构的根基。它讲解了分区、复制、事务隔离级别在分布式系统中的本质。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="第四阶段：分布式与时序专题"><a href="#第四阶段：分布式与时序专题" class="headerlink" title="第四阶段：分布式与时序专题"></a>第四阶段：分布式与时序专题</h3><ul>
+<li><p><strong>分布式</strong>：可以关注 <strong>《分布式数据库 TiDB ：原理、优化与架构设计》</strong>，它是目前国产分布式数据库中社区做得最好的，能帮你理解 Raft 协议在数据库中的应用。</p>
+</li>
+<li><p><strong>时序</strong>：推荐 <strong>《时序大数据平台：TDengine 核心原理与实战》</strong>。它详细介绍了如何处理每秒数百万次的写入，以及“超级表”这一创新的建模思路。</p>
+</li>
+</ul>
+<hr>
+<h3 id="💡-专家建议的学习路径："><a href="#💡-专家建议的学习路径：" class="headerlink" title="💡 专家建议的学习路径："></a>💡 专家建议的学习路径：</h3><ol>
+<li><p><strong>先读《SQL 性能解释》</strong>：这是投入产出比最高的书，能立刻解决你 80% 的查询卡顿问题。</p>
+</li>
+<li><p><strong>刷 LeetCode SQL 模块（Hard 难度）</strong>：书看累了就去练手，练习窗口函数和递归查询。</p>
+</li>
+<li><p><strong>看官方文档</strong>：MySQL 8.0 的 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/">Reference Manual</a> 是最权威的。遇到不确定的参数，文档永远是最后的真相。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" data-id="cuidRi_2yslOkZ1i_LQJJljI3" data-title="学习路径" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux/Networking/Wireshark非Root抓包设置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/Linux/Networking/Wireshark%E9%9D%9ERoot%E6%8A%93%E5%8C%85%E8%AE%BE%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.885Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/Linux/Networking/Wireshark%E9%9D%9ERoot%E6%8A%93%E5%8C%85%E8%AE%BE%E7%BD%AE/">Wireshark 非 Root 抓包设置 (Arch Linux)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Wireshark-非-Root-抓包设置-Arch-Linux"><a href="#Wireshark-非-Root-抓包设置-Arch-Linux" class="headerlink" title="Wireshark 非 Root 抓包设置 (Arch Linux)"></a>Wireshark 非 Root 抓包设置 (Arch Linux)</h1><p>在 Arch Linux (KDE) 环境下，出于安全考虑，普通用户默认无法直接在本地接口抓包。本笔记记录了赋予普通用户抓包权限的标准流程。</p>
+<h2 id="1-将当前用户添加到-wireshark-组"><a href="#1-将当前用户添加到-wireshark-组" class="headerlink" title="1. 将当前用户添加到 wireshark 组"></a>1. 将当前用户添加到 wireshark 组</h2><p>Wireshark 安装后通常会自动创建一个 <code>wireshark</code> 系统组。你需要将当前用户加入该组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG wireshark <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：修改组权限后，通常需要注销并重新登录系统才能全局生效。</p>
+</blockquote>
+<h2 id="2-赋予-dumpcap-必要的系统权限-Capabilities"><a href="#2-赋予-dumpcap-必要的系统权限-Capabilities" class="headerlink" title="2. 赋予 dumpcap 必要的系统权限 (Capabilities)"></a>2. 赋予 dumpcap 必要的系统权限 (Capabilities)</h2><p><code>dumpcap</code> 是 Wireshark 底层负责抓包的进程。通过 Linux 的 <strong>Capabilities</strong> 机制，可以仅授予该进程网络相关的特权，而无需以 root 身份运行整个 Wireshark 界面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改 dumpcap 的所属组为 wireshark</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chgrp</span> wireshark /usr/bin/dumpcap</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋予抓包相关的系统权限 (cap_net_raw 和 cap_net_admin)</span></span><br><span class="line"><span class="comment"># eip 分别代表 Effective, Inheritable, Permitted</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">setcap</span> cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-立即生效（无需重启）"><a href="#3-立即生效（无需重启）" class="headerlink" title="3. 立即生效（无需重启）"></a>3. 立即生效（无需重启）</h2><p>如果你不想立即重启或注销，可以在当前终端执行以下命令使组权限生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newgrp wireshark</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-验证与启动"><a href="#4-验证与启动" class="headerlink" title="4. 验证与启动"></a>4. 验证与启动</h2><ol>
+<li><p>检查权限是否设置成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getcap</span> /usr/bin/dumpcap</span><br></pre></td></tr></table></figure>
+<p>预期输出包含：<code>/usr/bin/dumpcap cap_net_admin,cap_net_raw=eip</code></p>
+</li>
+<li><p>启动 Wireshark：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wireshark &amp;</span><br></pre></td></tr></table></figure>
+<p>现在你应该能在主界面看到网卡列表（如 <code>wlan0</code>, <code>eth0</code> 等）并开始抓包。</p>
+</li>
+</ol>
+<h2 id="⚠️-安全警告"><a href="#⚠️-安全警告" class="headerlink" title="⚠️ 安全警告"></a>⚠️ 安全警告</h2><p><strong>绝对不要使用 <code>sudo wireshark</code> 启动程序。</strong><br>Wireshark 包含大量复杂的协议解析代码，以 root 权限运行会极大增加系统受攻击的风险。使用上述 <code>setcap</code> 方案是 Linux 下最推荐的安全实践。</p>
+<h2 id="附录：常用用户组管理命令"><a href="#附录：常用用户组管理命令" class="headerlink" title="附录：常用用户组管理命令"></a>附录：常用用户组管理命令</h2><p>在配置 Wireshark、Docker 或其他需要特定权限的服务时，经常需要管理用户组。</p>
+<h3 id="1-添加用户到组-Add"><a href="#1-添加用户到组-Add" class="headerlink" title="1. 添加用户到组 (Add)"></a>1. 添加用户到组 (Add)</h3><p>推荐使用 <code>usermod</code> 的追加模式，以免覆盖现有的组。</p>
+<ul>
+<li><strong>方法一：使用 <code>usermod</code> (推荐)</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -a: append (追加), -G: groups (指定组名)</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -aG &lt;组名&gt; &lt;用户名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><strong>方法二：使用 <code>gpasswd</code></strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> gpasswd -a &lt;用户名&gt; &lt;组名&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-从组中删除用户-Remove"><a href="#2-从组中删除用户-Remove" class="headerlink" title="2. 从组中删除用户 (Remove)"></a>2. 从组中删除用户 (Remove)</h3><ul>
+<li><strong>方法一：使用 <code>gpasswd</code> (最简单、安全)</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -d: delete (从组中删除)</span></span><br><span class="line"><span class="built_in">sudo</span> gpasswd -d &lt;用户名&gt; &lt;组名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><strong>方法二：使用 <code>usermod</code> (不推荐，需谨慎)</strong><br><code>usermod -G</code> 会<strong>重置</strong>用户的附加组列表。如果漏掉现有组（如 <code>wheel</code>），会导致失去 <code>sudo</code> 权限。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新设置附加组列表（排除掉想删除的组）</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -G &lt;保留组1,保留组2,...&gt; &lt;用户名&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-查询与验证"><a href="#3-查询与验证" class="headerlink" title="3. 查询与验证"></a>3. 查询与验证</h3><ul>
+<li><strong>查看当前用户所属的所有组：</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">groups</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>查看特定用户所属的组：</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">id</span> &lt;用户名&gt;</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="built_in">groups</span> &lt;用户名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><strong>查看系统中所有的组名：</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cut</span> -d: -f1 /etc/group</span><br><span class="line"><span class="comment"># 或者 (更通用的方式)</span></span><br><span class="line">getent group | <span class="built_in">cut</span> -d: -f1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-权限生效注意事项"><a href="#4-权限生效注意事项" class="headerlink" title="4. 权限生效注意事项"></a>4. 权限生效注意事项</h3><ul>
+<li><strong>全局生效：</strong> 修改组权限后，必须<strong>注销并重新登录</strong>（或重启系统），桌面环境和已运行的程序才能识别新权限。</li>
+<li><strong>当前终端立即生效：</strong> 可以使用 <code>newgrp &lt;组名&gt;</code> 命令在当前 shell 会话中临时切换到该组权限。</li>
+</ul>
+<hr>
+<p><strong>Last Updated:</strong> 2026-04-12<br><strong>Tags:</strong> #linux #archlinux #wireshark #security #network #user-management</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/Linux/Networking/Wireshark%E9%9D%9ERoot%E6%8A%93%E5%8C%85%E8%AE%BE%E7%BD%AE/" data-id="cuid6EKBGjuHmgf250o6dArCk" data-title="Wireshark 非 Root 抓包设置 (Arch Linux)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux/Virtualization/Docker/Docker免Sudo配置与安全权限" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/Linux/Virtualization/Docker/Docker%E5%85%8DSudo%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AE%89%E5%85%A8%E6%9D%83%E9%99%90/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.885Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/Linux/Virtualization/Docker/Docker%E5%85%8DSudo%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AE%89%E5%85%A8%E6%9D%83%E9%99%90/">Docker 免 Sudo 配置与安全权限</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Docker-免-Sudo-配置与安全权限"><a href="#Docker-免-Sudo-配置与安全权限" class="headerlink" title="Docker 免 Sudo 配置与安全权限"></a>Docker 免 Sudo 配置与安全权限</h1><p>在 Linux 系统中，默认情况下只有 <code>root</code> 用户才能运行 Docker。为了提高开发效率，常见的做法是将当前用户加入 <code>docker</code> 用户组，从而免去每次输入 <code>sudo</code> 的麻烦。</p>
+<h2 id="1-免-Sudo-配置步骤"><a href="#1-免-Sudo-配置步骤" class="headerlink" title="1. 免 Sudo 配置步骤"></a>1. 免 Sudo 配置步骤</h2><p>执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 创建 docker 组 (通常安装 docker 时已自动创建)</span></span><br><span class="line"><span class="built_in">sudo</span> groupadd docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 将当前用户加入 docker 组</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -aG docker <span class="variable">$USER</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 立即刷新组权限（或注销并重新登录、重启系统）</span></span><br><span class="line">newgrp docker</span><br></pre></td></tr></table></figure>
+
+<p><strong>验证是否成功：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此时不带 sudo 应该能正常列出容器</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-⚠️-极其重要的安全警告-Root-Equivalence"><a href="#2-⚠️-极其重要的安全警告-Root-Equivalence" class="headerlink" title="2. ⚠️ 极其重要的安全警告 (Root Equivalence)"></a>2. ⚠️ 极其重要的安全警告 (Root Equivalence)</h2><p>虽然免 Sudo 带来了便利，但必须清醒地意识到：<strong>将用户加入 <code>docker</code> 组，在安全性上几乎等同于给该用户提供了无密码的 Root 权限。</strong></p>
+<h3 id="为什么不安全？"><a href="#为什么不安全？" class="headerlink" title="为什么不安全？"></a>为什么不安全？</h3><p>一个属于 <code>docker</code> 组的普通用户，可以运行如下命令通过容器挂载宿主机的根目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --<span class="built_in">rm</span> -v /:/host_root alpine sh</span><br></pre></td></tr></table></figure>
+
+<p>进入容器后，该用户可以通过 <code>/host_root</code> 路径直接修改宿主机上的任意敏感文件（如 <code>/etc/shadow</code>, <code>/etc/sudoers</code>），从而绕过系统的所有权限控制。</p>
+<h3 id="适用场景建议"><a href="#适用场景建议" class="headerlink" title="适用场景建议"></a>适用场景建议</h3><ul>
+<li><strong>本地开发机：</strong> 为了方便，推荐使用此配置。</li>
+<li><strong>多用户服务器&#x2F;生产环境：</strong> <strong>绝对不要</strong> 随意把非管理员用户加入 <code>docker</code> 组。</li>
+<li><strong>更安全的方案：</strong> 如果需要极致安全，可以配置 <strong>Docker Rootless Mode</strong>（无根模式），它可以在没有 root 权限的情况下运行守护进程和容器。</li>
+</ul>
+<hr>
+<h2 id="3-常见权限问题处理"><a href="#3-常见权限问题处理" class="headerlink" title="3. 常见权限问题处理"></a>3. 常见权限问题处理</h2><p>如果加入组后仍然报错 <code>Permission denied</code>，请检查：</p>
+<ol>
+<li><strong>套接字权限：</strong> <code>ls -l /var/run/docker.sock</code>（所属组应为 <code>docker</code>）。</li>
+<li><strong>会话刷新：</strong> 如果 <code>groups</code> 命令结果中没有 <code>docker</code>，请务必执行 <strong>注销并重新登录</strong>。</li>
+</ol>
+<hr>
+<p><strong>Last Updated:</strong> 2026-04-12<br><strong>Tags:</strong> #linux #docker #security #privilege-escalation #devops</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/Linux/Virtualization/Docker/Docker%E5%85%8DSudo%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AE%89%E5%85%A8%E6%9D%83%E9%99%90/" data-id="cuid01ehHztfKqXT71ZDWkKiz" data-title="Docker 免 Sudo 配置与安全权限" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/tp-file-folder-true/"><% tp.file.folder(true) %></a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/migration/" rel="tag">migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArchLinux/" style="font-size: 13.33px;">ArchLinux</a> <a href="/tags/Container/" style="font-size: 10px;">Container</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Incus/" style="font-size: 13.33px;">Incus</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LinuxOps/" style="font-size: 10px;">LinuxOps</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Networking/" style="font-size: 10px;">Networking</a> <a href="/tags/Obsidian/" style="font-size: 13.33px;">Obsidian</a> <a href="/tags/Virtualization/" style="font-size: 10px;">Virtualization</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/btrfs/" style="font-size: 10px;">btrfs</a> <a href="/tags/conda/" style="font-size: 10px;">conda</a> <a href="/tags/dualboot/" style="font-size: 10px;">dualboot</a> <a href="/tags/erasure/" style="font-size: 10px;">erasure</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java-generics/" style="font-size: 10px;">java/generics</a> <a href="/tags/java-onjava/" style="font-size: 10px;">java/onjava</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 10px;">java/字节码</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 10px;">java/数组</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 16.67px;">java/泛型</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/migration/" style="font-size: 10px;">migration</a> <a href="/tags/networking/" style="font-size: 10px;">networking</a> <a href="/tags/pattern-generics/" style="font-size: 10px;">pattern/generics</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 10px;">故障排查</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 16.67px;">编程思想</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/template/hexo/">&lt;% tp.file.title %&gt;</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

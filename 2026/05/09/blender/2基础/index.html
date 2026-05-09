@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>2基础 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="默认进入blender的界面，这个界面包括一个立方体，一个光源和一个照相机。这三个元素其实就是暗示我们做模型最重要的三个元素，有了这三个元素就能够做出一个模型了。 鼠标操作 控制观察视角 鼠标中键平移视图  Shift + 鼠标中键缩放视角 滚动鼠标中键滚轮  第一个是缩放第二个是移动第三个是摄像机视图，也就是最终渲染出来的视图第四个是正交视图 1234567891011121314151617">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2基础">
+<meta property="og:url" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="默认进入blender的界面，这个界面包括一个立方体，一个光源和一个照相机。这三个元素其实就是暗示我们做模型最重要的三个元素，有了这三个元素就能够做出一个模型了。 鼠标操作 控制观察视角 鼠标中键平移视图  Shift + 鼠标中键缩放视角 滚动鼠标中键滚轮  第一个是缩放第二个是移动第三个是摄像机视图，也就是最终渲染出来的视图第四个是正交视图 1234567891011121314151617">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658137.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658142.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658145.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658159.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658164.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658167.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658174.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658177.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658190.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658174.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658194.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658196.png">
+<meta property="og:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115232800030.png">
+<meta property="article:published_time" content="2026-05-09T01:34:34.879Z">
+<meta property="article:modified_time" content="2026-05-09T02:18:24.378Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658137.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-blender/2基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.879Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      2基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658137.png"></p>
+<p>默认进入blender的界面，这个界面包括一个立方体，一个光源和一个照相机。<br>这三个元素其实就是暗示我们做模型最重要的三个元素，有了这三个元素就能够做出一个模型了。</p>
+<p><strong>鼠标操作</strong></p>
+<p>控制观察视角 鼠标中键<br>平移视图  Shift + 鼠标中键<br>缩放视角 滚动鼠标中键滚轮</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658142.png"></p>
+<p>第一个是缩放<br>第二个是移动<br>第三个是摄像机视图，也就是最终渲染出来的视图<br>第四个是正交视图</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">在 3D 建模和设计中，<span class="strong">**正交视图 (Orthographic View)**</span> 是一种特殊的观察方式，它与我们日常生活中的视觉感受（透视图）完全不同。</span><br><span class="line"></span><br><span class="line"><span class="section">### 1. 核心定义</span></span><br><span class="line"></span><br><span class="line">简单来说，正交视图就是<span class="strong">**“没有近大远小”**</span>的视图。</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**平行投影**</span>：在正交视图中，所有的投影线都是平行的。这意味着无论物体距离相机多远，它在屏幕上的大小都保持不变。</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数学逻辑**：</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">    - **正交投影**：$x_&#123;2d&#125; = x$，$y_&#123;2d&#125; = y$（坐标直接映射，忽略距离 $z$ 对缩放的影响）。</span></span><br><span class="line"><span class="code">        </span></span><br><span class="line"><span class="code">    - **透视投影**：$x_&#123;2d&#125; = x/z$，$y_&#123;2d&#125; = y/z$（距离 $z$ 越大，呈现出的尺寸越小）。</span></span><br><span class="line"><span class="code">        </span></span><br><span class="line"><span class="code"></span></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">### 2. 正交视图 vs. 透视图</span></span><br><span class="line"></span><br><span class="line">|  <span class="strong">**特性**</span>  |  <span class="strong">**正交视图 (Orthographic)**</span>      |   <span class="strong">**透视图 (Perspective)**</span> |</span><br><span class="line">|-----------|----------------------------------|---------------------------|</span><br><span class="line">|<span class="strong">**视觉效果**</span>|扁平、不真实，像工程图纸。             |自然、写实，符合人眼视觉。     |</span><br><span class="line">|<span class="strong">**比例关系**</span>|<span class="strong">**平行线永远平行**</span>，比例绝对精确。     |平行线会汇聚于消失点，产生畸变。|</span><br><span class="line">|<span class="strong">**物体大小**</span>|距离远近不影响物体在画面的大小。       |距离越远，物体看起来越小。     |</span><br><span class="line">|<span class="strong">**主要用途**</span>|<span class="strong">**精准建模、对齐、查看比例、工程设计**</span>。|场景漫游、最终渲染、艺术构图。  |</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">### 3. 为什么在 Blender 中必须使用它？</span></span><br><span class="line"></span><br><span class="line">当你正在制作一个精密的零件或人体模型时，透视图的“近大远小”会干扰你的判断。例如：</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**对齐顶点**</span>：如果你想让两个物体处于同一水平线上，在透视图中因为角度问题，你很难看准；但在正交视图下，只要它们重合，就是绝对对齐的。</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **参考图建模**：当你导入汽车的“前视图”或“侧视图”底图进行建模时，必须在正交视图下操作，否则模型将无法匹配底图的准确比例。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code"></span></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">### 4. Blender 5.0 中的操作快捷键</span></span><br><span class="line"></span><br><span class="line">在 Blender 中切换视图非常频繁，建议记住以下快捷键：</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**数字小键盘 5**</span>：在“正交”和“透视”模式之间来回切换。</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数字小键盘 1**：正视图（Front，自动进入正交）。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数字小键盘 3**：右视图（Right，自动进入正交）。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数字小键盘 7**：顶视图（Top，自动进入正交）。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **Alt + 鼠标中键拖动**：可以快速吸附到最近的正交轴向视图。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="quote">&gt; <span class="strong">**小贴士**</span>：如果你发现屏幕左上角显示 <span class="strong">**“用户透视图” (User Perspective)**</span>，画面看起来很立体；点击 <span class="strong">**5**</span> 后会变成 <span class="strong">**“用户正交” (User Orthographic)**</span>，画面会瞬间变“扁”，这是正常的。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>如何控制模型</strong></p>
+<p>左侧有各种操作工具栏，先点击对应工具，然后模型上面会出现坐标轴等，鼠标可以按住操作。</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658145.png"></p>
+<p>依次是框选工具，游标工具，移动工具，旋转工具，缩放工具，变换工具<br>框选工具长按，又有调整工具（移动），框选工具（四边形选择），刷选工具（鼠标滑动选择），套索工具（不规则套索）</p>
+<p>Shift + A  新建物体<br>G   移动模型， 移动时点击x，会在x轴移动，y和z轴同理。在G移动模式下，按住ctrl移动，可以吸附网格进行移动<br>S   缩放模型， 缩放是点击x，会在x轴缩放，y和z轴同理；先S，然后按住Shift + x&#x2F;y&#x2F;z，是禁止在当前方向上缩放，在另外两个方向上缩放；<strong>尽量不要再物体模式下缩放，而是在编辑模式下缩放。如果在物体模式下缩放了，需要按ctrl + a 应用缩放，不然其他倒角等操作会出现异常。</strong></p>
+<p>R   旋转模型， 按住x,y,z操作同上<br>H   隐藏物体</p>
+<p>Alt  + G  撤销移动<br>Alt  + S  撤销缩放<br>Alt  + R  撤销旋转</p>
+<p>Alt + H  隐藏物体</p>
+<p>Shift +  D   移动并复制，每个复制出来的都是独立的<br>Alt + D  关联复制，修改一个，所有复制出来的都会改</p>
+<p><strong>切换视图</strong></p>
+<p>坐标轴如下图所示</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658159.png"></p>
+<p>右上角x,y，z轴可以点击</p>
+<p>小键盘快捷键：<br>1  前视图，从-Y轴正面看<br>3  右视图，从x轴看<br>7  顶视图，从z轴看<br>9  从当前轴的反向看，比如当前按了3进入右视图，再按9就变成从-x轴看，也就是左视图<br>.  也就是小键盘上的小数点，会将物体放大推到面前，方便查看</p>
+<p>对于没有小键盘的笔记本来说，按键盘右上角&#96;|～键，会出现切换视图轮盘，鼠标移动到哪个视图，松开按键就会切换</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658164.png"></p>
+<p>3d建模基本流程<br>建模，布光，材质，渲染</p>
+<p>**认识界面</p>
+<p>什么是游标和原点</p>
+<p><strong>游标</strong></p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658167.png"></p>
+<p>模型中间圆圈叫做游标，两个作用<br>1。游标在哪里，你新建的物体就会出现在哪里，物体也可以移动到游标<br>2。游标可以作为物体旋转的轴心点使用</p>
+<p><strong>操作游标</strong><br>点击左侧游标工具，然后鼠标左键点击到哪里游标就到哪里<br>快捷键：<br>Shift + 鼠标右键   点击到哪里游标就到哪里<br>Shift + S  选中物体之后，出现一个操作轮盘，选择到游标，物体就会移动到游标所在的位置<br>Shift + c  游标回到坐标系原点</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658174.png"><br>默认物体旋转是按照每个物体的原点旋转，可以在变换轴心点中选择游标，之后会按照游标进行旋转</p>
+<p><strong>原点</strong><br>鼠标点击物体选中之后，物体会出现一个黄色的点，就是物体的原点<br>物体缩放是从原点开始的，可以通过勾选下面的原点，移动物体的原点（移动快捷键G）</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658177.png"></p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658190.png"></p>
+<p>可以将原点移动到坐标系中心，之后取消物体移动（Alt + G），可以发现物体的原点回到了世界中心，物体本身和原点还保持着之前的相对关系，但是并没有在世界中心</p>
+<p>也就是说程序只认识物体的原点，所有的操作都是按照原点操作</p>
+<p>将原点移动到物体默认位置： 右键物体 -&gt; 设置原点-&gt;原点到几何中心</p>
+<p>在G移动模式下，按住ctrl移动，可以吸附网格进行移动</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658174.png"></p>
+<p>1, 边界框中心： 选中多个物体是，物体被最小的框包围时，框的中心点<br>2, 3D游标：坐标系上的圆圈<br>3, 各自的原点： 每个物体有自己的原点, 认为设置的橙色的点，<br>4, 质心点： 物体的重心，如果有多个物体是多个物体的重心（这里貌似blender翻译错误，英文是median point, 像是中心点，但不是质心点，实测不是中心，将原点移出物体之外，选择按照质心点旋转，仍然是按照原点旋转）<br>5, 活动元素： 选中多个元素时，最后选中的那个物体</p>
+<p><strong>坐标</strong></p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658194.png"></p>
+<p>1, 全局坐标，所有物体共有的坐标，界面上显示的x, y和z轴<br>2, 局部坐标，每个物体自己的坐标，跟随物体</p>
+<p>快捷键<br>g x&#x2F;y&#x2F;z  局部坐标x&#x2F;y&#x2F;z<br>g x&#x2F;y&#x2F;z x&#x2F;yz  全局坐标x&#x2F;y&#x2F;z</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658196.png"></p>
+<p><strong>四种预览方式</strong></p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115232800030.png"></p>
+<p>1, 渲染预览，显示最终渲染结果预览，但是相对占资源，慢<br>2, 材质预览，可以预览材质的颜色和简单纹理，但是不计算光线追踪细节，比渲染预览快<br>3, 实体模式预览，不现实颜色和材质，建模时候使用，快，不占太多资源<br>4, 线框模式预览，可以显示内部和背面的走线，建模时候常用</p>
+<p>ctrl + L  关联材质</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/" data-id="cuidKfw_b0drQ81YQqdMKpCG1" data-title="2基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/05/09/blender/%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/05/09/ffmpeg%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">FFmpeg 视频压缩</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/tp-file-folder-true/"><% tp.file.folder(true) %></a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/migration/" rel="tag">migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArchLinux/" style="font-size: 13.33px;">ArchLinux</a> <a href="/tags/Container/" style="font-size: 10px;">Container</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Incus/" style="font-size: 13.33px;">Incus</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LinuxOps/" style="font-size: 10px;">LinuxOps</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Networking/" style="font-size: 10px;">Networking</a> <a href="/tags/Obsidian/" style="font-size: 13.33px;">Obsidian</a> <a href="/tags/Virtualization/" style="font-size: 10px;">Virtualization</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/btrfs/" style="font-size: 10px;">btrfs</a> <a href="/tags/conda/" style="font-size: 10px;">conda</a> <a href="/tags/dualboot/" style="font-size: 10px;">dualboot</a> <a href="/tags/erasure/" style="font-size: 10px;">erasure</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java-generics/" style="font-size: 10px;">java/generics</a> <a href="/tags/java-onjava/" style="font-size: 10px;">java/onjava</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 10px;">java/字节码</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 10px;">java/数组</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 16.67px;">java/泛型</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/migration/" style="font-size: 10px;">migration</a> <a href="/tags/networking/" style="font-size: 10px;">networking</a> <a href="/tags/pattern-generics/" style="font-size: 10px;">pattern/generics</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 10px;">故障排查</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 16.67px;">编程思想</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/template/hexo/">&lt;% tp.file.title %&gt;</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

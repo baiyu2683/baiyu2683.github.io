@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Wireshark 非 Root 抓包设置 (Arch Linux) | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Wireshark 非 Root 抓包设置 (Arch Linux)在 Arch Linux (KDE) 环境下，出于安全考虑，普通用户默认无法直接在本地接口抓包。本笔记记录了赋予普通用户抓包权限的标准流程。 1. 将当前用户添加到 wireshark 组Wireshark 安装后通常会自动创建一个 wireshark 系统组。你需要将当前用户加入该组。 1sudo usermod -aG wir">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wireshark 非 Root 抓包设置 (Arch Linux)">
+<meta property="og:url" content="http://example.com/2026/05/09/Linux/Networking/Wireshark%E9%9D%9ERoot%E6%8A%93%E5%8C%85%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Wireshark 非 Root 抓包设置 (Arch Linux)在 Arch Linux (KDE) 环境下，出于安全考虑，普通用户默认无法直接在本地接口抓包。本笔记记录了赋予普通用户抓包权限的标准流程。 1. 将当前用户添加到 wireshark 组Wireshark 安装后通常会自动创建一个 wireshark 系统组。你需要将当前用户加入该组。 1sudo usermod -aG wir">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-09T01:34:34.885Z">
+<meta property="article:modified_time" content="2026-05-09T02:18:24.379Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux/Networking/Wireshark非Root抓包设置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/Linux/Networking/Wireshark%E9%9D%9ERoot%E6%8A%93%E5%8C%85%E8%AE%BE%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.885Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Wireshark 非 Root 抓包设置 (Arch Linux)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Wireshark-非-Root-抓包设置-Arch-Linux"><a href="#Wireshark-非-Root-抓包设置-Arch-Linux" class="headerlink" title="Wireshark 非 Root 抓包设置 (Arch Linux)"></a>Wireshark 非 Root 抓包设置 (Arch Linux)</h1><p>在 Arch Linux (KDE) 环境下，出于安全考虑，普通用户默认无法直接在本地接口抓包。本笔记记录了赋予普通用户抓包权限的标准流程。</p>
+<h2 id="1-将当前用户添加到-wireshark-组"><a href="#1-将当前用户添加到-wireshark-组" class="headerlink" title="1. 将当前用户添加到 wireshark 组"></a>1. 将当前用户添加到 wireshark 组</h2><p>Wireshark 安装后通常会自动创建一个 <code>wireshark</code> 系统组。你需要将当前用户加入该组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG wireshark <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：修改组权限后，通常需要注销并重新登录系统才能全局生效。</p>
+</blockquote>
+<h2 id="2-赋予-dumpcap-必要的系统权限-Capabilities"><a href="#2-赋予-dumpcap-必要的系统权限-Capabilities" class="headerlink" title="2. 赋予 dumpcap 必要的系统权限 (Capabilities)"></a>2. 赋予 dumpcap 必要的系统权限 (Capabilities)</h2><p><code>dumpcap</code> 是 Wireshark 底层负责抓包的进程。通过 Linux 的 <strong>Capabilities</strong> 机制，可以仅授予该进程网络相关的特权，而无需以 root 身份运行整个 Wireshark 界面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改 dumpcap 的所属组为 wireshark</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chgrp</span> wireshark /usr/bin/dumpcap</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋予抓包相关的系统权限 (cap_net_raw 和 cap_net_admin)</span></span><br><span class="line"><span class="comment"># eip 分别代表 Effective, Inheritable, Permitted</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">setcap</span> cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-立即生效（无需重启）"><a href="#3-立即生效（无需重启）" class="headerlink" title="3. 立即生效（无需重启）"></a>3. 立即生效（无需重启）</h2><p>如果你不想立即重启或注销，可以在当前终端执行以下命令使组权限生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newgrp wireshark</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-验证与启动"><a href="#4-验证与启动" class="headerlink" title="4. 验证与启动"></a>4. 验证与启动</h2><ol>
+<li><p>检查权限是否设置成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getcap</span> /usr/bin/dumpcap</span><br></pre></td></tr></table></figure>
+<p>预期输出包含：<code>/usr/bin/dumpcap cap_net_admin,cap_net_raw=eip</code></p>
+</li>
+<li><p>启动 Wireshark：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wireshark &amp;</span><br></pre></td></tr></table></figure>
+<p>现在你应该能在主界面看到网卡列表（如 <code>wlan0</code>, <code>eth0</code> 等）并开始抓包。</p>
+</li>
+</ol>
+<h2 id="⚠️-安全警告"><a href="#⚠️-安全警告" class="headerlink" title="⚠️ 安全警告"></a>⚠️ 安全警告</h2><p><strong>绝对不要使用 <code>sudo wireshark</code> 启动程序。</strong><br>Wireshark 包含大量复杂的协议解析代码，以 root 权限运行会极大增加系统受攻击的风险。使用上述 <code>setcap</code> 方案是 Linux 下最推荐的安全实践。</p>
+<h2 id="附录：常用用户组管理命令"><a href="#附录：常用用户组管理命令" class="headerlink" title="附录：常用用户组管理命令"></a>附录：常用用户组管理命令</h2><p>在配置 Wireshark、Docker 或其他需要特定权限的服务时，经常需要管理用户组。</p>
+<h3 id="1-添加用户到组-Add"><a href="#1-添加用户到组-Add" class="headerlink" title="1. 添加用户到组 (Add)"></a>1. 添加用户到组 (Add)</h3><p>推荐使用 <code>usermod</code> 的追加模式，以免覆盖现有的组。</p>
+<ul>
+<li><strong>方法一：使用 <code>usermod</code> (推荐)</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -a: append (追加), -G: groups (指定组名)</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -aG &lt;组名&gt; &lt;用户名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><strong>方法二：使用 <code>gpasswd</code></strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> gpasswd -a &lt;用户名&gt; &lt;组名&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-从组中删除用户-Remove"><a href="#2-从组中删除用户-Remove" class="headerlink" title="2. 从组中删除用户 (Remove)"></a>2. 从组中删除用户 (Remove)</h3><ul>
+<li><strong>方法一：使用 <code>gpasswd</code> (最简单、安全)</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -d: delete (从组中删除)</span></span><br><span class="line"><span class="built_in">sudo</span> gpasswd -d &lt;用户名&gt; &lt;组名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><strong>方法二：使用 <code>usermod</code> (不推荐，需谨慎)</strong><br><code>usermod -G</code> 会<strong>重置</strong>用户的附加组列表。如果漏掉现有组（如 <code>wheel</code>），会导致失去 <code>sudo</code> 权限。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新设置附加组列表（排除掉想删除的组）</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -G &lt;保留组1,保留组2,...&gt; &lt;用户名&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-查询与验证"><a href="#3-查询与验证" class="headerlink" title="3. 查询与验证"></a>3. 查询与验证</h3><ul>
+<li><strong>查看当前用户所属的所有组：</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">groups</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>查看特定用户所属的组：</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">id</span> &lt;用户名&gt;</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="built_in">groups</span> &lt;用户名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><strong>查看系统中所有的组名：</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cut</span> -d: -f1 /etc/group</span><br><span class="line"><span class="comment"># 或者 (更通用的方式)</span></span><br><span class="line">getent group | <span class="built_in">cut</span> -d: -f1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-权限生效注意事项"><a href="#4-权限生效注意事项" class="headerlink" title="4. 权限生效注意事项"></a>4. 权限生效注意事项</h3><ul>
+<li><strong>全局生效：</strong> 修改组权限后，必须<strong>注销并重新登录</strong>（或重启系统），桌面环境和已运行的程序才能识别新权限。</li>
+<li><strong>当前终端立即生效：</strong> 可以使用 <code>newgrp &lt;组名&gt;</code> 命令在当前 shell 会话中临时切换到该组权限。</li>
+</ul>
+<hr>
+<p><strong>Last Updated:</strong> 2026-04-12<br><strong>Tags:</strong> #linux #archlinux #wireshark #security #network #user-management</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/Linux/Networking/Wireshark%E9%9D%9ERoot%E6%8A%93%E5%8C%85%E8%AE%BE%E7%BD%AE/" data-id="cuid6EKBGjuHmgf250o6dArCk" data-title="Wireshark 非 Root 抓包设置 (Arch Linux)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/05/09/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          学习路径
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/05/09/Linux/Virtualization/Docker/Docker%E5%85%8DSudo%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AE%89%E5%85%A8%E6%9D%83%E9%99%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Docker 免 Sudo 配置与安全权限</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/tp-file-folder-true/"><% tp.file.folder(true) %></a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/migration/" rel="tag">migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArchLinux/" style="font-size: 13.33px;">ArchLinux</a> <a href="/tags/Container/" style="font-size: 10px;">Container</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Incus/" style="font-size: 13.33px;">Incus</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LinuxOps/" style="font-size: 10px;">LinuxOps</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Networking/" style="font-size: 10px;">Networking</a> <a href="/tags/Obsidian/" style="font-size: 13.33px;">Obsidian</a> <a href="/tags/Virtualization/" style="font-size: 10px;">Virtualization</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/btrfs/" style="font-size: 10px;">btrfs</a> <a href="/tags/conda/" style="font-size: 10px;">conda</a> <a href="/tags/dualboot/" style="font-size: 10px;">dualboot</a> <a href="/tags/erasure/" style="font-size: 10px;">erasure</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java-generics/" style="font-size: 10px;">java/generics</a> <a href="/tags/java-onjava/" style="font-size: 10px;">java/onjava</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 10px;">java/字节码</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 10px;">java/数组</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 16.67px;">java/泛型</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/migration/" style="font-size: 10px;">migration</a> <a href="/tags/networking/" style="font-size: 10px;">networking</a> <a href="/tags/pattern-generics/" style="font-size: 10px;">pattern/generics</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 10px;">故障排查</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 16.67px;">编程思想</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/template/hexo/">&lt;% tp.file.title %&gt;</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

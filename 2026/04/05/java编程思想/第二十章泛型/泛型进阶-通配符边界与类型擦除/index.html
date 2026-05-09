@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 泛型进阶 - 通配符、边界与类型擦除 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java 泛型进阶 [!info] 学习内容提交 d2aa42b — chapter20 generics 章节，20 个文件 882 行代码   一、类型擦除的本质泛型信息在编译后全部擦除为 Object，通过 javap -c 反编译验证： 1234567891011&#x2F;&#x2F; 源码public class Holder&lt;T&gt; &#123;  private T value;  publ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 泛型进阶 - 通配符、边界与类型擦除">
+<meta property="og:url" content="http://example.com/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E8%BF%9B%E9%98%B6-%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BE%B9%E7%95%8C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java 泛型进阶 [!info] 学习内容提交 d2aa42b — chapter20 generics 章节，20 个文件 882 行代码   一、类型擦除的本质泛型信息在编译后全部擦除为 Object，通过 javap -c 反编译验证： 1234567891011&#x2F;&#x2F; 源码public class Holder&lt;T&gt; &#123;  private T value;  publ">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-04-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-09T01:34:34.884Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="java&#x2F;字节码">
+<meta property="article:tag" content="java&#x2F;泛型">
+<meta property="article:tag" content="编程思想">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-java编程思想/第二十章泛型/泛型进阶-通配符边界与类型擦除" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E8%BF%9B%E9%98%B6-%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BE%B9%E7%95%8C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/" class="article-date">
+  <time class="dt-published" datetime="2026-04-04T16:00:00.000Z" itemprop="datePublished">2026-04-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 泛型进阶 - 通配符、边界与类型擦除
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-泛型进阶"><a href="#Java-泛型进阶" class="headerlink" title="Java 泛型进阶"></a>Java 泛型进阶</h1><blockquote>
+<p>[!info] 学习内容<br>提交 <code>d2aa42b</code> — chapter20 generics 章节，20 个文件 882 行代码</p>
+</blockquote>
+<hr>
+<h2 id="一、类型擦除的本质"><a href="#一、类型擦除的本质" class="headerlink" title="一、类型擦除的本质"></a>一、类型擦除的本质</h2><p>泛型信息在编译后全部擦除为 <code>Object</code>，通过 <code>javap -c</code> 反编译验证：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Holder</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T value;</span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> value; &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(T val)</span> &#123; value = val; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字节码中</span></span><br><span class="line">Field value:Ljava/lang/Object;    <span class="comment">// T → Object</span></span><br><span class="line">get:()Ljava/lang/Object;          <span class="comment">// 返回 Object</span></span><br><span class="line">set:(Ljava/lang/Object;)V         <span class="comment">// 参数 Object</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>编译器做的事</strong>：在调用处自动插入 <code>checkcast</code> 指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// Apple d = apple.get();</span><br><span class="line">invokevirtual #19   // get() → Object</span><br><span class="line">checkcast #13       // 强转为 Apple</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法调用指令"><a href="#方法调用指令" class="headerlink" title="方法调用指令"></a>方法调用指令</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>用途</th>
+<th>动态分派</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>invokevirtual</code></td>
+<td>普通实例方法</td>
+<td>是（多态）</td>
+</tr>
+<tr>
+<td><code>invokespecial</code></td>
+<td>构造器&#x2F;私有&#x2F;super</td>
+<td>否（静态绑定）</td>
+</tr>
+<tr>
+<td><code>invokeinterface</code></td>
+<td>接口方法</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、泛型数组创建"><a href="#二、泛型数组创建" class="headerlink" title="二、泛型数组创建"></a>二、泛型数组创建</h2><p>由于 <code>new T[]</code> 不合法，有三种变通方式：</p>
+<h3 id="方式-1：-T-new-Object-sz"><a href="#方式-1：-T-new-Object-sz" class="headerlink" title="方式 1：(T[]) new Object[sz]"></a>方式 1：<code>(T[]) new Object[sz]</code></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericArray</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T[] array;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">GenericArray</span><span class="params">(<span class="type">int</span> sz)</span> &#123;</span><br><span class="line">    array = (T[]) <span class="keyword">new</span> <span class="title class_">Object</span>[sz];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!danger] 运行时陷阱<br>数组实际类型是 <code>Object[]</code>，<code>rep()</code> 返回后强转为 <code>Integer[]</code> 会抛 <code>ClassCastException</code></p>
+</blockquote>
+<h3 id="方式-2：内部-Object-，get-时转型"><a href="#方式-2：内部-Object-，get-时转型" class="headerlink" title="方式 2：内部 Object[]，get 时转型"></a>方式 2：内部 <code>Object[]</code>，get 时转型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericArray2</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> Object[] array;</span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (T) array[index];  <span class="comment">// 单个元素转型安全</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> T[] rep() &#123;</span><br><span class="line">    <span class="keyword">return</span> (T[]) array;       <span class="comment">// 整体转型仍会报错</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式-3：类型标记-反射"><a href="#方式-3：类型标记-反射" class="headerlink" title="方式 3：类型标记 + 反射"></a>方式 3：类型标记 + 反射</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericArrayWithTypeToken</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> T[] array;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">GenericArrayWithTypeToken</span><span class="params">(Class&lt;T&gt; type, <span class="type">int</span> sz)</span> &#123;</span><br><span class="line">    array = (T[]) Array.newInstance(type, sz);  <span class="comment">// 运行时类型正确</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、协变与不变"><a href="#三、协变与不变" class="headerlink" title="三、协变与不变"></a>三、协变与不变</h2><h3 id="数组协变（运行时检查）"><a href="#数组协变（运行时检查）" class="headerlink" title="数组协变（运行时检查）"></a>数组协变（运行时检查）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Fruit[] fruit = <span class="keyword">new</span> <span class="title class_">Apple</span>[<span class="number">10</span>];  <span class="comment">// OK</span></span><br><span class="line">fruit[<span class="number">0</span>] = <span class="keyword">new</span> <span class="title class_">Apple</span>();         <span class="comment">// OK</span></span><br><span class="line">fruit[<span class="number">1</span>] = <span class="keyword">new</span> <span class="title class_">Fruit</span>();         <span class="comment">// 编译 OK，运行抛 ArrayStoreException</span></span><br></pre></td></tr></table></figure>
+
+<p>数组在运行时知道元素类型，写入时检查，不匹配抛异常。</p>
+<h3 id="集合不变（编译时检查）"><a href="#集合不变（编译时检查）" class="headerlink" title="集合不变（编译时检查）"></a>集合不变（编译时检查）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编译错误</span></span><br><span class="line"><span class="comment">// List&lt;Fruit&gt; fruitList = new ArrayList&lt;Apple&gt;();</span></span><br></pre></td></tr></table></figure>
+
+<p>泛型设计为不变，<code>List&lt;Fruit&gt;</code> 和 <code>List&lt;Apple&gt;</code> 是完全无关的类型。</p>
+<h3 id="通配符实现协变（编译时安全）"><a href="#通配符实现协变（编译时安全）" class="headerlink" title="通配符实现协变（编译时安全）"></a>通配符实现协变（编译时安全）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Fruit</span>&gt; fruitList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Apple&gt;();  <span class="comment">// OK</span></span><br><span class="line"><span class="type">Fruit</span> <span class="variable">f</span> <span class="operator">=</span> fruitList.get(<span class="number">0</span>);    <span class="comment">// OK，返回 Fruit</span></span><br><span class="line">fruitList.add(<span class="keyword">new</span> <span class="title class_">Apple</span>());    <span class="comment">// 编译错误！不能写</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>编译器智能</strong>：<code>add(E e)</code> 中 <code>E</code> 是 <code>? extends Fruit</code>，不确定具体是哪个子类，所以拒绝所有写入（除了 <code>null</code>）。但 <code>contains(Object)</code> 参数是 <code>Object</code>，可以调用。</p>
+<hr>
+<h2 id="四、PECS-原则"><a href="#四、PECS-原则" class="headerlink" title="四、PECS 原则"></a>四、PECS 原则</h2><blockquote>
+<p>[!tip] PECS — Producer Extends, Consumer Super<br>来自 <code>java.util.Collections</code> 的设计原则</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>通配符</th>
+<th>能读</th>
+<th>能写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>生产者</strong>（只读）</td>
+<td><code>? extends T</code></td>
+<td>✅ 返回 T</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>消费者</strong>（只写）</td>
+<td><code>? super T</code></td>
+<td>❌ 返回 Object</td>
+<td>✅ 写入 T 及子类</td>
+</tr>
+<tr>
+<td><strong>既读又写</strong></td>
+<td>精确类型 <code>T</code></td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h3 id="extends-T-—-上界通配符（Producer）"><a href="#extends-T-—-上界通配符（Producer）" class="headerlink" title="? extends T — 上界通配符（Producer）"></a><code>? extends T</code> — 上界通配符（Producer）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;T&gt; T <span class="title function_">wildSubtype</span><span class="params">(Holder&lt;? extends T&gt; holder, T arg)</span> &#123;</span><br><span class="line">  <span class="comment">// holder.set(arg);  // 编译错误</span></span><br><span class="line">  <span class="keyword">return</span> holder.get();  <span class="comment">// OK，返回 T</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="super-T-—-下界通配符（Consumer）"><a href="#super-T-—-下界通配符（Consumer）" class="headerlink" title="? super T — 下界通配符（Consumer）"></a><code>? super T</code> — 下界通配符（Consumer）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">writeTo</span><span class="params">(List&lt;? <span class="built_in">super</span> Apple&gt; apples)</span> &#123;</span><br><span class="line">  apples.add(<span class="keyword">new</span> <span class="title class_">Apple</span>());     <span class="comment">// OK</span></span><br><span class="line">  apples.add(<span class="keyword">new</span> <span class="title class_">Jonathan</span>());  <span class="comment">// OK，Jonathan 是 Apple 子类</span></span><br><span class="line">  <span class="comment">// apples.add(new Fruit());  // 编译错误</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">wildSupertype</span><span class="params">(Holder&lt;? <span class="built_in">super</span> T&gt; holder, T arg)</span> &#123;</span><br><span class="line">  holder.set(arg);       <span class="comment">// OK</span></span><br><span class="line">  <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> holder.get();  <span class="comment">// 只能返回 Object</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="对比表"><a href="#对比表" class="headerlink" title="对比表"></a>对比表</h3><table>
+<thead>
+<tr>
+<th>调用方式</th>
+<th><code>Holder&lt;T&gt;</code></th>
+<th><code>Holder&lt;?&gt;</code></th>
+<th><code>Holder&lt;? extends T&gt;</code></th>
+<th><code>Holder&lt;? super T&gt;</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>set(T)</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>get()</code> → T</td>
+<td>✅</td>
+<td>→ Object</td>
+<td>✅</td>
+<td>→ Object</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、捕获转换"><a href="#五、捕获转换" class="headerlink" title="五、捕获转换"></a>五、捕获转换</h2><p><code>Holder&lt;?&gt;</code> 无法直接调用需要具体类型的方法，但可以通过泛型方法”捕获”通配符：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">(Holder&lt;T&gt; holder)</span> &#123;</span><br><span class="line">  <span class="type">T</span> <span class="variable">t</span> <span class="operator">=</span> holder.get();           <span class="comment">// 可以获取具体类型</span></span><br><span class="line">  System.out.println(t.getClass().getSimpleName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f2</span><span class="params">(Holder&lt;?&gt; holder)</span> &#123;</span><br><span class="line">  f1(holder);  <span class="comment">// 通配符传入泛型方法，编译器捕获 ? 为某个具体类型</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>原理</strong>：<code>f2</code> 接收 <code>Holder&lt;?&gt;</code> 时类型未知，但调用 <code>f1(holder)</code> 时，编译器将 <code>?</code> 捕获为某个具体类型 <code>T</code>，从而在 <code>f1</code> 内部可以正常使用。</p>
+<hr>
+<h2 id="六、泛型边界"><a href="#六、泛型边界" class="headerlink" title="六、泛型边界"></a>六、泛型边界</h2><h3 id="单一边界"><a href="#单一边界" class="headerlink" title="单一边界"></a>单一边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">WithColor</span>&lt;T <span class="keyword">extends</span> <span class="title class_">HasColor</span>&gt; &#123;</span><br><span class="line">  T item;</span><br><span class="line">  java.awt.Color <span class="title function_">getColor</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.getColor();  <span class="comment">// 可以调用边界方法</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多重边界"><a href="#多重边界" class="headerlink" title="多重边界"></a>多重边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类必须在接口前面，只能有一个类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solid</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Coord</span> &amp; HasColor &amp; Weight&gt; &#123;</span><br><span class="line">  T item;</span><br><span class="line">  java.awt.Color <span class="title function_">getColor</span><span class="params">()</span> &#123; <span class="keyword">return</span> item.getColor(); &#125;</span><br><span class="line">  <span class="type">int</span> <span class="title function_">getX</span><span class="params">()</span> &#123; <span class="keyword">return</span> item.x; &#125;</span><br><span class="line">  <span class="type">int</span> <span class="title function_">weight</span><span class="params">()</span> &#123; <span class="keyword">return</span> item.weight(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="继承边界"><a href="#继承边界" class="headerlink" title="继承边界"></a>继承边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HoldItem</span>&lt;T&gt; &#123; T item; T <span class="title function_">getItem</span><span class="params">()</span> &#123; <span class="keyword">return</span> item; &#125; &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WithColor2</span>&lt;T <span class="keyword">extends</span> <span class="title class_">HasColor</span>&gt; <span class="keyword">extends</span> <span class="title class_">HoldItem</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WithColorCoord2</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Coord</span> &amp; HasColor&gt; <span class="keyword">extends</span> <span class="title class_">WithColor2</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solid2</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Coord</span> &amp; HasColor &amp; Weight&gt; <span class="keyword">extends</span> <span class="title class_">WithColorCoord2</span>&lt;T&gt; &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>子类逐层叠加边界，每层只增加新的约束。</p>
+<h3 id="泛型方法中的边界"><a href="#泛型方法中的边界" class="headerlink" title="泛型方法中的边界"></a>泛型方法中的边界</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;POWER <span class="keyword">extends</span> <span class="title class_">SuperHearing</span>&gt; <span class="keyword">void</span> <span class="title function_">useSuperHearing</span><span class="params">(SuperHero&lt;POWER&gt; hero)</span> &#123;</span><br><span class="line">  hero.getPower().hearSubtleNoises();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多重边界</span></span><br><span class="line"><span class="keyword">static</span> &lt;POWER <span class="keyword">extends</span> <span class="title class_">SuperHearing</span> &amp; SuperSmell&gt; <span class="keyword">void</span> <span class="title function_">superFind</span><span class="params">(SuperHero&lt;POWER&gt; hero)</span> &#123;</span><br><span class="line">  hero.getPower().hearSubtleNoises();</span><br><span class="line">  hero.getPower().trackBySmell();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!warning] 通配符不支持多重边界</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">SuperHearing</span>&gt; audioPeople;  <span class="comment">// OK</span></span><br><span class="line"><span class="comment">// List&lt;? extends SuperHearing &amp; SuperSmell&gt; dogPs;  // 编译错误</span></span><br></pre></td></tr></table></figure></blockquote>
+<hr>
+<h2 id="七、无界通配符"><a href="#七、无界通配符" class="headerlink" title="七、无界通配符 ?"></a>七、无界通配符 <code>?</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;?&gt; list;        <span class="comment">// 无界通配符</span></span><br><span class="line">List list;           <span class="comment">// 原始类型（raw type）</span></span><br><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Object</span>&gt; list;  <span class="comment">// 等价于 List&lt;?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>三者效果基本相同，但 <code>List&lt;?&gt;</code> 比原始类型更安全——编译器会阻止向 <code>List&lt;?&gt;</code> 写入非 <code>null</code> 值。</p>
+<h3 id="原始类型-vs-的关键区别"><a href="#原始类型-vs-的关键区别" class="headerlink" title="原始类型 vs ? 的关键区别"></a>原始类型 vs <code>?</code> 的关键区别</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">rawArgs</span><span class="params">(Holder holder, Object arg)</span> &#123;</span><br><span class="line">  holder.set(arg);        <span class="comment">// 原始类型：允许写入（不安全）</span></span><br><span class="line">  <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> holder.get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">unboundedArg</span><span class="params">(Holder&lt;?&gt; holder, Object arg)</span> &#123;</span><br><span class="line">  <span class="comment">// holder.set(arg);     // ? 通配符：拒绝写入（安全）</span></span><br><span class="line">  <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> holder.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="八、用-List-替代泛型数组"><a href="#八、用-List-替代泛型数组" class="headerlink" title="八、用 List&lt;T&gt; 替代泛型数组"></a>八、用 <code>List&lt;T&gt;</code> 替代泛型数组</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ListOfGenerics</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">private</span> List&lt;T&gt; array = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(T item)</span> &#123; array.add(item); &#125;</span><br><span class="line">  <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123; <span class="keyword">return</span> array.get(index); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是最推荐的”泛型数组”替代方案，完全类型安全。</p>
+<hr>
+<h2 id="九、实战：泛型读取"><a href="#九、实战：泛型读取" class="headerlink" title="九、实战：泛型读取"></a>九、实战：泛型读取</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 精确类型 — 不变</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Reader</span>&lt;T&gt; &#123;</span><br><span class="line">  T <span class="title function_">readExact</span><span class="params">(List&lt;T&gt; list)</span> &#123; <span class="keyword">return</span> list.get(<span class="number">0</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用通配符 — 协变</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">CovariantReader</span>&lt;T&gt; &#123;</span><br><span class="line">  T <span class="title function_">readCovariant</span><span class="params">(List&lt;? extends T&gt; list)</span> &#123; <span class="keyword">return</span> list.get(<span class="number">0</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">Reader&lt;Fruit&gt; reader = <span class="keyword">new</span> <span class="title class_">Reader</span>&lt;&gt;();</span><br><span class="line">reader.readExact(fruit);    <span class="comment">// OK</span></span><br><span class="line"><span class="comment">// reader.readExact(apples); // 编译错误，泛型不变</span></span><br><span class="line"></span><br><span class="line">CovariantReader&lt;Fruit&gt; cr = <span class="keyword">new</span> <span class="title class_">CovariantReader</span>&lt;&gt;();</span><br><span class="line">cr.readCovariant(fruit);    <span class="comment">// OK</span></span><br><span class="line">cr.readCovariant(apples);   <span class="comment">// OK，通配符允许子类</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h2><ul>
+<li>[[泛型数组创建]]</li>
+<li>[[类型擦除]]</li>
+<li>[[Java 泛型基础]]</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E8%BF%9B%E9%98%B6-%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BE%B9%E7%95%8C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/" data-id="cuidRNDy_-Cu7Gghw4icqHv3N" data-title="Java 泛型进阶 - 通配符、边界与类型擦除" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/04/05/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 泛型数组创建
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/tp-file-folder-true/"><% tp.file.folder(true) %></a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Container/" rel="tag">Container</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Incus/" rel="tag">Incus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxOps/" rel="tag">LinuxOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networking/" rel="tag">Networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Obsidian/" rel="tag">Obsidian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Virtualization/" rel="tag">Virtualization</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/btrfs/" rel="tag">btrfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conda/" rel="tag">conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dualboot/" rel="tag">dualboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/erasure/" rel="tag">erasure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-generics/" rel="tag">java&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-onjava/" rel="tag">java&#x2F;onjava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">java&#x2F;字节码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%95%B0%E7%BB%84/" rel="tag">java&#x2F;数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-%E6%B3%9B%E5%9E%8B/" rel="tag">java&#x2F;泛型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/migration/" rel="tag">migration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/networking/" rel="tag">networking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pattern-generics/" rel="tag">pattern&#x2F;generics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/" rel="tag">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag">故障排查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" rel="tag">编程思想</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ArchLinux/" style="font-size: 13.33px;">ArchLinux</a> <a href="/tags/Container/" style="font-size: 10px;">Container</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Incus/" style="font-size: 13.33px;">Incus</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LinuxOps/" style="font-size: 10px;">LinuxOps</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Networking/" style="font-size: 10px;">Networking</a> <a href="/tags/Obsidian/" style="font-size: 13.33px;">Obsidian</a> <a href="/tags/Virtualization/" style="font-size: 10px;">Virtualization</a> <a href="/tags/archlinux/" style="font-size: 13.33px;">archlinux</a> <a href="/tags/btrfs/" style="font-size: 10px;">btrfs</a> <a href="/tags/conda/" style="font-size: 10px;">conda</a> <a href="/tags/dualboot/" style="font-size: 10px;">dualboot</a> <a href="/tags/erasure/" style="font-size: 10px;">erasure</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java-generics/" style="font-size: 10px;">java/generics</a> <a href="/tags/java-onjava/" style="font-size: 10px;">java/onjava</a> <a href="/tags/java-%E5%AD%97%E8%8A%82%E7%A0%81/" style="font-size: 10px;">java/字节码</a> <a href="/tags/java-%E6%95%B0%E7%BB%84/" style="font-size: 10px;">java/数组</a> <a href="/tags/java-%E6%B3%9B%E5%9E%8B/" style="font-size: 16.67px;">java/泛型</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/migration/" style="font-size: 10px;">migration</a> <a href="/tags/networking/" style="font-size: 10px;">networking</a> <a href="/tags/pattern-generics/" style="font-size: 10px;">pattern/generics</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scp/" style="font-size: 10px;">scp</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" style="font-size: 10px;">故障排查</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" style="font-size: 16.67px;">编程思想</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">May 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%9B%A0%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2%E7%BA%BF%E5%AF%BC%E8%87%B4%E7%9A%84YAML%E8%A7%A3%E6%9E%90%E9%94%99%E8%AF%AF/">Hexo 与 Obsidian 协作：解决因水平分割线导致的 YAML 解析错误</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/template/hexo/">&lt;% tp.file.title %&gt;</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/blender/1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB/">1常用操作分类</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
