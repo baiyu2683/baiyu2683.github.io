@@ -71,6 +71,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-dcrawler改进/2026.4.19" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/">2026.4.19</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[PROJECT] 改进 Java 8 分布式爬虫 dcrawler：先补回归覆盖，再做解耦和现代化。<br>[STACK] Java 8 target, Maven multi-module, Spring Boot 1.4, Vert.x, HttpClient, JUnit, Fastjson, Log4j 1.x, JDK 21 build<br>[ARCH] CrawlerSpiderStarter 初始化 Spring&#x2F;JPA&#x2F;Vert.x&#x2F;Jetty。 PointScheduler -&gt; CrawlerDownloader -&gt; CrawlerParser -&gt; Storage。 Filter&#x2F;Downloader&#x2F;Storage&#x2F;Processor 分模块但仍有耦合。<br>[MODULES] * dc-spider-core: Point&#x2F;Config&#x2F;Crawltrace&#x2F;服务模型 * dc-spider-processor: 模板解析与 golden fixtures * dc-downloader-httpclient: HTTP&#x2F;代理下载 * dc-storage: 存储抽象与 TRS 契约 * dc-spider-filter: Bloom&#x2F;Map filter HTTP 服务 * dc-commons: URL&#x2F;时间&#x2F;压缩&#x2F;HKey&#x2F;String 工具<br>[DECISIONS] * 保持 source&#x2F;target 1.8 → 兼容旧运行环境 * tests profile 启用测试 → 保留默认 skip * Phase 2 优先 → 重构前锁定行为 * 改动保持 staged → 便于交接<br>[CONSTRAINTS] * 不回滚已有 staged 改动 * 不引入外部网络依赖测试 * 不做大版本依赖升级 * .codex 保持 untracked<br>[NEXT] 继续 Phase 2：补不依赖 Spring&#x2F;网络&#x2F;持久大文件的本地契约测试，优先 Processor 剩余 fixture 诊断或 Filter&#x2F;Storage 边界；每轮跑定向 mvn -Ptests 并 git add。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/" data-id="cuidsiLu5WnyAz9zlOKfB6Qi1" data-title="2026.4.19" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-claudecode/Git 提交信息与拆分" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/05/09/claudecode/Git%20%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8B%86%E5%88%86/" class="article-date">
@@ -210,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/Git%20%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8B%86%E5%88%86/" data-id="cuidqGGuYFyH2qzhHTHyp9iI_" data-title="Git 提交信息与拆分" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/claudecode/Git%20%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8B%86%E5%88%86/" data-id="cuidW4UTgiGdE8cnV439CYHE1" data-title="Git 提交信息与拆分" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -224,9 +267,9 @@
 
 
   
-    <article id="post-claudecode/PR、评审与合并" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-claudecode/Git worktree 日常协作笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/" class="article-date">
+    <a href="/2026/05/09/claudecode/Git%20worktree%20%E6%97%A5%E5%B8%B8%E5%8D%8F%E4%BD%9C%E7%AC%94%E8%AE%B0/" class="article-date">
   <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
 </a>
     
@@ -242,7 +285,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/">PR、评审与合并</a>
+      <a class="p-name article-title" href="/2026/05/09/claudecode/Git%20worktree%20%E6%97%A5%E5%B8%B8%E5%8D%8F%E4%BD%9C%E7%AC%94%E8%AE%B0/">Git worktree 日常协作笔记</a>
     </h1>
   
 
@@ -250,67 +293,23 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="PR、评审与合并"><a href="#PR、评审与合并" class="headerlink" title="PR、评审与合并"></a>PR、评审与合并</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>这篇笔记解决的问题是：代码已经在功能分支里，接下来应该怎么发 PR、怎么 review、怎么合并。</p>
-<h2 id="什么时候发-PR"><a href="#什么时候发-PR" class="headerlink" title="什么时候发 PR"></a>什么时候发 PR</h2><p>通常在以下情况发 PR：</p>
+        <h1 id="Git-worktree-日常协作笔记"><a href="#Git-worktree-日常协作笔记" class="headerlink" title="Git worktree 日常协作笔记"></a>Git worktree 日常协作笔记</h1><p>这篇笔记已经被拆分进一套更完整的团队协作手册中。</p>
+<p>建议从这里开始：</p>
 <ul>
-<li>当前任务已经形成一段相对完整的改动</li>
-<li>代码已经可以让别人 review</li>
-<li>你准备进入合并流程</li>
+<li>[[团队协作总览]]</li>
 </ul>
-<h2 id="PR-里至少写什么"><a href="#PR-里至少写什么" class="headerlink" title="PR 里至少写什么"></a>PR 里至少写什么</h2><p>建议最少写清楚：</p>
+<p>按场景查阅：</p>
 <ul>
-<li>这次改了什么</li>
-<li>为什么这样改</li>
-<li>还有没有已知限制</li>
-<li>review 时最值得重点看的地方</li>
+<li>[[日常开发流程]]</li>
+<li>[[PR、评审与合并]]</li>
+<li>[[冲突处理与常见问题]]</li>
 </ul>
-<h2 id="小团队下的最低-review-要求"><a href="#小团队下的最低-review-要求" class="headerlink" title="小团队下的最低 review 要求"></a>小团队下的最低 review 要求</h2><p>适合小团队的最低要求：</p>
-<ul>
-<li>改动较小且风险低时，可以快速 review</li>
-<li>改动较大、影响共享逻辑、或可能影响稳定性时，最好等另一个人看过</li>
-<li>如果只是你个人维护的内容，可以按自己的节奏合并，但仍建议保留 PR 记录</li>
-</ul>
-<h2 id="什么时候可以自己合并"><a href="#什么时候可以自己合并" class="headerlink" title="什么时候可以自己合并"></a>什么时候可以自己合并</h2><p>通常可以自己合并：</p>
-<ul>
-<li>只有你自己在维护该模块</li>
-<li>改动很小，且影响范围清楚</li>
-<li>团队已经约定这类改动无需等待额外 review</li>
-</ul>
-<p>通常不建议自己直接合并：</p>
-<ul>
-<li>改动涉及公共基础能力</li>
-<li>改动较大</li>
-<li>其他人正在并行依赖这部分代码</li>
-</ul>
-<h2 id="默认合并建议"><a href="#默认合并建议" class="headerlink" title="默认合并建议"></a>默认合并建议</h2><p>小团队默认建议优先使用 <strong>squash merge</strong>。</p>
-<p>原因：</p>
-<ul>
-<li>PR 内可以保留开发过程中的多个小提交</li>
-<li>合并到 <code>master</code> 后历史更整洁</li>
-<li>回看主分支历史时更容易理解</li>
-</ul>
-<p>如果团队明确希望保留完整分支提交历史，再考虑普通 merge。</p>
-<h2 id="PR-合并后本地要做什么"><a href="#PR-合并后本地要做什么" class="headerlink" title="PR 合并后本地要做什么"></a>PR 合并后本地要做什么</h2><p>先回到主仓库所在的 <code>master</code> worktree，再执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
-<p>不要在当前功能 worktree 里直接切回 <code>master</code>。同步完成后，再清理已经完成的分支和 worktree：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git worktree remove ../wt-foo</span><br><span class="line">git branch -d feature/foo</span><br></pre></td></tr></table></figure>
-
-<p>先默认尝试 <code>git branch -d feature/foo</code>。如果因为 squash merge，Git 仍然认为这个分支没有合并，可以在确认远端 PR 已经合并后改用 <code>git branch -D feature/foo</code>。</p>
-<p>如果远端分支也需要删：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete feature/foo</span><br></pre></td></tr></table></figure>
-
-<h2 id="常见误区"><a href="#常见误区" class="headerlink" title="常见误区"></a>常见误区</h2><h3 id="误区-1：PR-合并后，还要不要本地再-merge-一遍？"><a href="#误区-1：PR-合并后，还要不要本地再-merge-一遍？" class="headerlink" title="误区 1：PR 合并后，还要不要本地再 merge 一遍？"></a>误区 1：PR 合并后，还要不要本地再 merge 一遍？</h3><p>通常不需要。</p>
-<p>一般是远端 PR 合并完成后，你本地更新 <code>master</code> 即可。</p>
-<h3 id="误区-2：是不是把-worktree-推到远端？"><a href="#误区-2：是不是把-worktree-推到远端？" class="headerlink" title="误区 2：是不是把 worktree 推到远端？"></a>误区 2：是不是把 worktree 推到远端？</h3><p>不是。</p>
-<p>推到远端的是分支，worktree 只是本地目录。</p>
-<h3 id="误区-3：是不是每个-PR-都必须很正式？"><a href="#误区-3：是不是每个-PR-都必须很正式？" class="headerlink" title="误区 3：是不是每个 PR 都必须很正式？"></a>误区 3：是不是每个 PR 都必须很正式？</h3><p>对小团队来说，不需要过度流程化，但至少要保证别人能看懂改动目的。</p>
-<p>遇到 pull 冲突、清理失败等问题，转到 [[冲突处理与常见问题]]。</p>
+<p>如果你只关心一个问题，可以直接跳到对应子笔记；如果你想看整套流程，先看总览。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/" data-id="cuid6vFq-AkTYpbOWfd6W7pmO" data-title="PR、评审与合并" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/claudecode/Git%20worktree%20%E6%97%A5%E5%B8%B8%E5%8D%8F%E4%BD%9C%E7%AC%94%E8%AE%B0/" data-id="cuid-GYMYUM0oru1KWhRvgtn9" data-title="Git worktree 日常协作笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -420,7 +419,107 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" data-id="cuidqQdAykE9gAxqA2DvbXIvz" data-title="冲突处理与常见问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/claudecode/%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" data-id="cuidmo1EBaUL6Nn8349H13HQ_" data-title="冲突处理与常见问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-claudecode/PR、评审与合并" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/">PR、评审与合并</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="PR、评审与合并"><a href="#PR、评审与合并" class="headerlink" title="PR、评审与合并"></a>PR、评审与合并</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>这篇笔记解决的问题是：代码已经在功能分支里，接下来应该怎么发 PR、怎么 review、怎么合并。</p>
+<h2 id="什么时候发-PR"><a href="#什么时候发-PR" class="headerlink" title="什么时候发 PR"></a>什么时候发 PR</h2><p>通常在以下情况发 PR：</p>
+<ul>
+<li>当前任务已经形成一段相对完整的改动</li>
+<li>代码已经可以让别人 review</li>
+<li>你准备进入合并流程</li>
+</ul>
+<h2 id="PR-里至少写什么"><a href="#PR-里至少写什么" class="headerlink" title="PR 里至少写什么"></a>PR 里至少写什么</h2><p>建议最少写清楚：</p>
+<ul>
+<li>这次改了什么</li>
+<li>为什么这样改</li>
+<li>还有没有已知限制</li>
+<li>review 时最值得重点看的地方</li>
+</ul>
+<h2 id="小团队下的最低-review-要求"><a href="#小团队下的最低-review-要求" class="headerlink" title="小团队下的最低 review 要求"></a>小团队下的最低 review 要求</h2><p>适合小团队的最低要求：</p>
+<ul>
+<li>改动较小且风险低时，可以快速 review</li>
+<li>改动较大、影响共享逻辑、或可能影响稳定性时，最好等另一个人看过</li>
+<li>如果只是你个人维护的内容，可以按自己的节奏合并，但仍建议保留 PR 记录</li>
+</ul>
+<h2 id="什么时候可以自己合并"><a href="#什么时候可以自己合并" class="headerlink" title="什么时候可以自己合并"></a>什么时候可以自己合并</h2><p>通常可以自己合并：</p>
+<ul>
+<li>只有你自己在维护该模块</li>
+<li>改动很小，且影响范围清楚</li>
+<li>团队已经约定这类改动无需等待额外 review</li>
+</ul>
+<p>通常不建议自己直接合并：</p>
+<ul>
+<li>改动涉及公共基础能力</li>
+<li>改动较大</li>
+<li>其他人正在并行依赖这部分代码</li>
+</ul>
+<h2 id="默认合并建议"><a href="#默认合并建议" class="headerlink" title="默认合并建议"></a>默认合并建议</h2><p>小团队默认建议优先使用 <strong>squash merge</strong>。</p>
+<p>原因：</p>
+<ul>
+<li>PR 内可以保留开发过程中的多个小提交</li>
+<li>合并到 <code>master</code> 后历史更整洁</li>
+<li>回看主分支历史时更容易理解</li>
+</ul>
+<p>如果团队明确希望保留完整分支提交历史，再考虑普通 merge。</p>
+<h2 id="PR-合并后本地要做什么"><a href="#PR-合并后本地要做什么" class="headerlink" title="PR 合并后本地要做什么"></a>PR 合并后本地要做什么</h2><p>先回到主仓库所在的 <code>master</code> worktree，再执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<p>不要在当前功能 worktree 里直接切回 <code>master</code>。同步完成后，再清理已经完成的分支和 worktree：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git worktree remove ../wt-foo</span><br><span class="line">git branch -d feature/foo</span><br></pre></td></tr></table></figure>
+
+<p>先默认尝试 <code>git branch -d feature/foo</code>。如果因为 squash merge，Git 仍然认为这个分支没有合并，可以在确认远端 PR 已经合并后改用 <code>git branch -D feature/foo</code>。</p>
+<p>如果远端分支也需要删：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete feature/foo</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见误区"><a href="#常见误区" class="headerlink" title="常见误区"></a>常见误区</h2><h3 id="误区-1：PR-合并后，还要不要本地再-merge-一遍？"><a href="#误区-1：PR-合并后，还要不要本地再-merge-一遍？" class="headerlink" title="误区 1：PR 合并后，还要不要本地再 merge 一遍？"></a>误区 1：PR 合并后，还要不要本地再 merge 一遍？</h3><p>通常不需要。</p>
+<p>一般是远端 PR 合并完成后，你本地更新 <code>master</code> 即可。</p>
+<h3 id="误区-2：是不是把-worktree-推到远端？"><a href="#误区-2：是不是把-worktree-推到远端？" class="headerlink" title="误区 2：是不是把 worktree 推到远端？"></a>误区 2：是不是把 worktree 推到远端？</h3><p>不是。</p>
+<p>推到远端的是分支，worktree 只是本地目录。</p>
+<h3 id="误区-3：是不是每个-PR-都必须很正式？"><a href="#误区-3：是不是每个-PR-都必须很正式？" class="headerlink" title="误区 3：是不是每个 PR 都必须很正式？"></a>误区 3：是不是每个 PR 都必须很正式？</h3><p>对小团队来说，不需要过度流程化，但至少要保证别人能看懂改动目的。</p>
+<p>遇到 pull 冲突、清理失败等问题，转到 [[冲突处理与常见问题]]。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/" data-id="cuidZLPwk9EQOi2wMkYBlkxZo" data-title="PR、评审与合并" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -518,56 +617,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%80%BB%E8%A7%88/" data-id="cuidZzlopr9UU2eCdfEJBKxzm" data-title="团队协作总览" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/claudecode/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%80%BB%E8%A7%88/" data-id="cuid_qIE6NIMx6uVYxGrHO2va" data-title="团队协作总览" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-dcrawler改进/2026.4.18" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.18/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.18/">2026.4.18</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>这是之前对项目进行改进工作的进度，继续进行<br>[PROJECT] 改进 Java 8 分布式爬虫 dcrawler：先补回归覆盖，再做解耦和现代化。<br>[STACK] Java 8 target, Maven multi-module, Spring Boot 1.4, Vert.x, HttpClient, JUnit, Fastjson, Log4j 1.x, JDK 21 build<br>[ARCH] CrawlerSpiderStarter 初始化 Spring&#x2F;JPA&#x2F;Vert.x&#x2F;Jetty。 PointScheduler -&gt; CrawlerDownloader -&gt; CrawlerParser -&gt; Storage。 Filter&#x2F;Downloader&#x2F;Storage&#x2F;Processor 分模块但依赖仍耦合。</p>
-<p>[MODULES] * dc-spider-core: Point&#x2F;Config&#x2F;Crawltrace&#x2F;服务模型 * dc-spider-processor: 模板解析与 golden fixtures * dc-downloader-httpclient: HTTP&#x2F;代理下载 * dc-storage: 存储抽象与分发契约 * dc-spider-filter: Bloom&#x2F;Map filter HTTP 服务 * dc-commons: 工具、时间、编码、压缩<br>[DECISIONS] * 保持 source&#x2F;target 1.8 → 先兼容 JDK21，不升级字节码 * tests profile 启用测试 → 保留默认 skip 行为 * Phase 2 优先 → 重构前锁定行为 * 改动保持 staged → 便于交接 [CONSTRAINTS] * 不回滚已有 staged 改动 * 不引入外部网络依赖测试 * 不做大版本依赖升级 * .codex 保持 untracked<br>[NEXT] 继续 Phase 2：优先诊断 <code>weiboarticleapi2.trs</code> 编码&#x2F;emoji 期望漂移；若风险高，改补 downloader&#x2F;filter 本地 mock 边界测试。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.18/" data-id="cuidzrE4eYJ2pVy23pKwTiW9C" data-title="2026.4.18" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
     </footer>
   </div>
   
@@ -628,7 +683,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/" data-id="cuid8c_w2RAABejzEFB2EM784" data-title="通过sub2api访问gpt5.4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/" data-id="cuid9A1vsHs6ZFuYU-ys50-qn" data-title="通过sub2api访问gpt5.4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -729,116 +784,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/" data-id="cuid9QnUTH2ifm5lvWNOLfWAT" data-title="日常开发流程" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/claudecode/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/" data-id="cuidwAlIqFk1NBKKnsY_qi3a9" data-title="日常开发流程" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-dcrawler改进/2026.4.19" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/">2026.4.19</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[PROJECT] 改进 Java 8 分布式爬虫 dcrawler：先补回归覆盖，再做解耦和现代化。<br>[STACK] Java 8 target, Maven multi-module, Spring Boot 1.4, Vert.x, HttpClient, JUnit, Fastjson, Log4j 1.x, JDK 21 build<br>[ARCH] CrawlerSpiderStarter 初始化 Spring&#x2F;JPA&#x2F;Vert.x&#x2F;Jetty。 PointScheduler -&gt; CrawlerDownloader -&gt; CrawlerParser -&gt; Storage。 Filter&#x2F;Downloader&#x2F;Storage&#x2F;Processor 分模块但仍有耦合。<br>[MODULES] * dc-spider-core: Point&#x2F;Config&#x2F;Crawltrace&#x2F;服务模型 * dc-spider-processor: 模板解析与 golden fixtures * dc-downloader-httpclient: HTTP&#x2F;代理下载 * dc-storage: 存储抽象与 TRS 契约 * dc-spider-filter: Bloom&#x2F;Map filter HTTP 服务 * dc-commons: URL&#x2F;时间&#x2F;压缩&#x2F;HKey&#x2F;String 工具<br>[DECISIONS] * 保持 source&#x2F;target 1.8 → 兼容旧运行环境 * tests profile 启用测试 → 保留默认 skip * Phase 2 优先 → 重构前锁定行为 * 改动保持 staged → 便于交接<br>[CONSTRAINTS] * 不回滚已有 staged 改动 * 不引入外部网络依赖测试 * 不做大版本依赖升级 * .codex 保持 untracked<br>[NEXT] 继续 Phase 2：补不依赖 Spring&#x2F;网络&#x2F;持久大文件的本地契约测试，优先 Processor 剩余 fixture 诊断或 Filter&#x2F;Storage 边界；每轮跑定向 mvn -Ptests 并 git add。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/" data-id="cuidV9lYkn3upJsi_zfvCmauL" data-title="2026.4.19" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-dcrawler改进/codex重构压缩上下文" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/codex%E9%87%8D%E6%9E%84%E5%8E%8B%E7%BC%A9%E4%B8%8A%E4%B8%8B%E6%96%87/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/codex%E9%87%8D%E6%9E%84%E5%8E%8B%E7%BC%A9%E4%B8%8A%E4%B8%8B%E6%96%87/">codex重构压缩上下文</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>&#x2F;compact_save_v2</p>
-<p>压缩当前会话为“可重构上下文状态”，用于跨会话恢复：<br>格式如下：<br>[PROJECT]<br>一句话目标<br>[STACK]<br>技术栈（逗号分隔）<br>[ARCH]<br>当前架构（≤3行）<br>[MODULES]</p>
-<ul>
-<li>模块A: 职责</li>
-<li>模块B: 职责<br>[DECISIONS]</li>
-<li>xxx → 原因（极简）<br>[CONSTRAINTS]</li>
-<li>xxx<br>[NEXT]<br>下一步操作（必须具体）</li>
-</ul>
-<p>限制：≤220 token<br>输出在 code block 中</p>
-<p>&#x2F;load_context_v2</p>
-<p>你现在是这个项目的“持续重构助手”，规则：</p>
-<ul>
-<li>严格基于项目记录文件中和我提供的上下文工作</li>
-<li>不重复问已有信息</li>
-<li>输出优先：结构清晰 + 可执行</li>
-<li>默认我在做“渐进式重构”（不是推倒重写）</li>
-<li>每次更新都要要求记录到项目记录文件，方便后续查阅和恢复会话</li>
-</ul>
-<p>准备好后回复：READY</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/codex%E9%87%8D%E6%9E%84%E5%8E%8B%E7%BC%A9%E4%B8%8A%E4%B8%8B%E6%96%87/" data-id="cuidRJyA3KcTRZKpdEZLzAnNa" data-title="codex重构压缩上下文" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
     </footer>
   </div>
   
@@ -885,7 +836,137 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%86%85%E9%83%A8%E7%B1%BB/" data-id="cuidWfkT2MDET3DUAb6Tsvdvl" data-title="内部类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%86%85%E9%83%A8%E7%B1%BB/" data-id="cuidMQfTFC0QwprUiczbFvGT-" data-title="内部类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-java编程思想/基本数据类型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本数据类型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Java 中的基本数据类型（Primitive Types）共有 <strong>8 种</strong>。它们是由语言预定义的，直接存储在栈（Stack）中，因此在内存操作上非常高效。</p>
+<p>我们可以根据它们存储的数据性质，将其分为 <strong>4 大类</strong>：</p>
+<h3 id="1-整数类型-Integer-Types"><a href="#1-整数类型-Integer-Types" class="headerlink" title="1. 整数类型 (Integer Types)"></a>1. 整数类型 (Integer Types)</h3><p>用于存储不带小数点的整数。Java 的整数类型都是有符号的（即支持正负数）。</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>大小 (位&#x2F;比特)</strong></th>
+<th><strong>字节 (Bytes)</strong></th>
+<th><strong>范围</strong></th>
+<th><strong>默认值</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>byte</code></strong></td>
+<td>8-bit</td>
+<td>1</td>
+<td>-128 到 127</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><strong><code>short</code></strong></td>
+<td>16-bit</td>
+<td>2</td>
+<td>-32,768 到 32,767</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><strong><code>int</code></strong></td>
+<td>32-bit</td>
+<td>4</td>
+<td>约 ±21 亿</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><strong><code>long</code></strong></td>
+<td>64-bit</td>
+<td>8</td>
+<td>非常大 (需以 <code>L</code> 或 <code>l</code> 结尾)</td>
+<td><code>0L</code></td>
+</tr>
+</tbody></table>
+<h3 id="2-浮点类型-Floating-Point-Types"><a href="#2-浮点类型-Floating-Point-Types" class="headerlink" title="2. 浮点类型 (Floating-Point Types)"></a>2. 浮点类型 (Floating-Point Types)</h3><p>用于存储带小数点的数值，遵循 <strong>IEEE 754</strong> 标准。</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>大小 (位)</strong></th>
+<th><strong>字节</strong></th>
+<th><strong>精度</strong></th>
+<th><strong>默认值</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>float</code></strong></td>
+<td>32-bit</td>
+<td>4</td>
+<td>单精度 (需以 <code>f</code> 或 <code>F</code> 结尾)</td>
+<td><code>0.0f</code></td>
+</tr>
+<tr>
+<td><strong><code>double</code></strong></td>
+<td>64-bit</td>
+<td>8</td>
+<td>双精度 (Java 默认的小数类型)</td>
+<td><code>0.0d</code></td>
+</tr>
+</tbody></table>
+<h3 id="3-字符类型-Character-Type"><a href="#3-字符类型-Character-Type" class="headerlink" title="3. 字符类型 (Character Type)"></a>3. 字符类型 (Character Type)</h3><p>用于存储单个字符。</p>
+<ul>
+<li><p><strong><code>char</code></strong>: 占用 <strong>16 位 (2 字节)</strong>。</p>
+</li>
+<li><p>它使用 <strong>Unicode (UTF-16)</strong> 编码。</p>
+</li>
+<li><p>范围：<code>&#39;\u0000&#39;</code> (即 0) 到 <code>&#39;\uffff&#39;</code> (即 65,535)。</p>
+</li>
+<li><p>默认值：<code>&#39;\u0000&#39;</code>。</p>
+</li>
+</ul>
+<h3 id="4-布尔类型-Boolean-Type"><a href="#4-布尔类型-Boolean-Type" class="headerlink" title="4. 布尔类型 (Boolean Type)"></a>4. 布尔类型 (Boolean Type)</h3><p>用于逻辑判断。</p>
+<ul>
+<li><p><strong><code>boolean</code></strong>: 只有两个可能的值：<code>true</code> 和 <code>false</code>。</p>
+</li>
+<li><p><strong>大小</strong>：JVM 规范并没有明确规定其占用的大小（通常在内存中占用 1 字节或 4 字节，取决于 JVM 的实现）。</p>
+</li>
+<li><p>默认值：<code>false</code>。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cuidItPf6BwC5PpIhj61gJ-Js" data-title="基本数据类型" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -912,7 +993,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/tp-file-folder-true/"><% tp.file.folder(true) %></a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
     </div>
   </div>
 
@@ -958,10 +1039,6 @@
           </li>
         
           <li>
-            <a href="/2026/05/09/template/hexo/">&lt;% tp.file.title %&gt;</a>
-          </li>
-        
-          <li>
             <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
           </li>
         
@@ -971,6 +1048,10 @@
         
           <li>
             <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/python/uv/">配置国内镜像</a>
           </li>
         
       </ul>

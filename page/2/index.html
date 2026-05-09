@@ -250,139 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/" data-id="cuidW6sybSlQC0XT_F__gGwrg" data-title="🧪 一句话理解" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Linux/Virtualization/podman/Distrobox Ubuntu 容器无法启动（乱码报错）解决方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/Linux/Virtualization/podman/Distrobox%20Ubuntu%20%E5%AE%B9%E5%99%A8%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%EF%BC%88%E4%B9%B1%E7%A0%81%E6%8A%A5%E9%94%99%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.885Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/podman/">podman</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/Linux/Virtualization/podman/Distrobox%20Ubuntu%20%E5%AE%B9%E5%99%A8%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%EF%BC%88%E4%B9%B1%E7%A0%81%E6%8A%A5%E9%94%99%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Distrobox Ubuntu 容器无法启动（乱码报错）解决方案</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="适用环境：Arch-Linux-KDE-Distrobox-Podman"><a href="#适用环境：Arch-Linux-KDE-Distrobox-Podman" class="headerlink" title="适用环境：Arch Linux + KDE + Distrobox + Podman"></a><strong>适用环境：Arch Linux + KDE + Distrobox + Podman</strong></h2><hr>
-<h2 id="🧩-问题现象"><a href="#🧩-问题现象" class="headerlink" title="🧩 问题现象"></a>🧩 问题现象</h2><p>创建 Ubuntu 容器后无法进入，报错类似：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">failed to fulfil mount request: open /��o\x7f: no such file or directory  </span><br><span class="line">OCI runtime attempted to invoke a command that was not found</span><br></pre></td></tr></table></figure>
-
-<p>同时日志中可能出现：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Using OCI runtime &quot;/usr/bin/runc&quot;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h2 id="🎯-问题原因（核心）"><a href="#🎯-问题原因（核心）" class="headerlink" title="🎯 问题原因（核心）"></a>🎯 问题原因（核心）</h2><p>最常见原因如下：</p>
-<ol>
-<li><p><strong>Podman 使用了 <code>runc</code> 而不是 <code>crun</code></strong></p>
-<ul>
-<li>在 Arch + cgroup v2 下应使用 <code>crun</code></li>
-<li>使用 <code>runc</code> 可能导致容器初始化失败（已知问题）</li>
-</ul>
-</li>
-<li><p><strong>rootless Podman 未正确配置</strong></p>
-<ul>
-<li>缺少 <code>/etc/subuid</code> 和 <code>/etc/subgid</code> 映射</li>
-</ul>
-</li>
-<li><p><strong>容器初始化过程中状态损坏</strong></p>
-<ul>
-<li>需要删除并重新创建</li>
-</ul>
-</li>
-<li><p><strong>环境变量污染（低概率）</strong></p>
-<ul>
-<li>如 <code>LC_ALL</code>、<code>TMPDIR</code> 等异常</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="✅-一键修复步骤（推荐）"><a href="#✅-一键修复步骤（推荐）" class="headerlink" title="✅ 一键修复步骤（推荐）"></a>✅ 一键修复步骤（推荐）</h2><h3 id="1️⃣-安装必要组件"><a href="#1️⃣-安装必要组件" class="headerlink" title="1️⃣ 安装必要组件"></a>1️⃣ 安装必要组件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu podman distrobox crun</span><br></pre></td></tr></table></figure>
-
-<h3 id="2️⃣-强制-Podman-使用-crun"><a href="#2️⃣-强制-Podman-使用-crun" class="headerlink" title="2️⃣ 强制 Podman 使用 crun"></a>2️⃣ 强制 Podman 使用 <code>crun</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/.config/containers</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &gt; ~/.config/containers/containers.conf &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">[engine]</span><br><span class="line">runtime = <span class="string">&quot;crun&quot;</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-
-<p>验证：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">podman info --format <span class="string">&#x27;&#123;&#123;.Host.OCIRuntime.Name&#125;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>输出应为:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crun</span><br></pre></td></tr></table></figure>
-
-<h3 id="3️⃣-修复-rootless-配置"><a href="#3️⃣-修复-rootless-配置" class="headerlink" title="3️⃣ 修复 rootless 配置"></a>3️⃣ 修复 rootless 配置</h3><p>检查：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;^<span class="variable">$USER</span>:&quot;</span> /etc/subuid</span><br><span class="line">grep <span class="string">&quot;^<span class="variable">$USER</span>:&quot;</span> /etc/subgid</span><br></pre></td></tr></table></figure>
-
-<p>如果没有输出，执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod --add-subuids 100000-165535 --add-subgids 100000-165535 <span class="string">&quot;<span class="variable">$USER</span>&quot;</span></span><br></pre></td></tr></table></figure>
-<p>⚠️ <strong>重要：重新登录系统后再继续</strong></p>
-<h3 id="4️⃣-清理旧容器"><a href="#4️⃣-清理旧容器" class="headerlink" title="4️⃣ 清理旧容器"></a>4️⃣ 清理旧容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">distrobox <span class="built_in">rm</span> ubuntu 2&gt;/dev/null</span><br><span class="line">podman <span class="built_in">rm</span> -f ubuntu 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
-
-<h3 id="5️⃣-迁移-Podman-配置"><a href="#5️⃣-迁移-Podman-配置" class="headerlink" title="5️⃣ 迁移 Podman 配置"></a>5️⃣ 迁移 Podman 配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">podman system migrate</span><br></pre></td></tr></table></figure>
-
-<h3 id="6️⃣-测试-Podman-是否正常"><a href="#6️⃣-测试-Podman-是否正常" class="headerlink" title="6️⃣ 测试 Podman 是否正常"></a>6️⃣ 测试 Podman 是否正常</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">podman run --<span class="built_in">rm</span> -it ubuntu:24.04 bash</span><br></pre></td></tr></table></figure>
-
-<h3 id="7️⃣-重新创建-Distrobox-容器"><a href="#7️⃣-重新创建-Distrobox-容器" class="headerlink" title="7️⃣ 重新创建 Distrobox 容器"></a>7️⃣ 重新创建 Distrobox 容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">distrobox create --name ubuntu --image ubuntu:24.04</span><br><span class="line">distrobox enter ubuntu</span><br></pre></td></tr></table></figure>
-
-<h2 id="🔍-可选排查（如果仍然失败）"><a href="#🔍-可选排查（如果仍然失败）" class="headerlink" title="🔍 可选排查（如果仍然失败）"></a>🔍 可选排查（如果仍然失败）</h2><h3 id="检查环境变量"><a href="#检查环境变量" class="headerlink" title="检查环境变量"></a>检查环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$HOME</span>&quot;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$XDG_RUNTIME_DIR</span>&quot;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$TMPDIR</span>&quot;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$LANG</span>&quot;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$LC_ALL</span>&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>建议临时使用安全环境测试：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> LC_ALL TMPDIR</span><br><span class="line"><span class="built_in">export</span> LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
-
-<p>查看详细日志</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LANG=C LC_ALL=C distrobox enter ubuntu --verbose</span><br><span class="line">podman logs ubuntu</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="🧠-总结"><a href="#🧠-总结" class="headerlink" title="🧠 总结"></a>🧠 总结</h2><table>
-<thead>
-<tr>
-<th>问题</th>
-<th>解决方法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>使用 runc</td>
-<td>切换到 crun</td>
-</tr>
-<tr>
-<td>容器启动失败</td>
-<td>删除并重建</td>
-</tr>
-<tr>
-<td>rootless 不完整</td>
-<td>配置 subuid&#x2F;subgid</td>
-</tr>
-<tr>
-<td>报错乱码</td>
-<td>使用 LANG&#x3D;C 查看真实错误</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/Linux/Virtualization/podman/Distrobox%20Ubuntu%20%E5%AE%B9%E5%99%A8%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%EF%BC%88%E4%B9%B1%E7%A0%81%E6%8A%A5%E9%94%99%EF%BC%89%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="cuidZzEi93heasr2wG6Y0cEkP" data-title="Distrobox Ubuntu 容器无法启动（乱码报错）解决方案" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/" data-id="cuidKTI094hYnOtI3fv29TkRS" data-title="🧪 一句话理解" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -504,120 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%EF%BC%88%E6%99%BA%E8%83%BD%E8%BD%AC%E5%9E%8B%EF%BC%89/" data-id="cuidJjiBKMEODRom6a8LrUPxZ" data-title="🧭 场景一：带 `throw`（你的原始代码）" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第三章操作符/3.9.1 指数记数法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/">3.9.1 指数记数法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>我记得指数记数法是有一个国际标准的，小数点多少位，指数多少位，怎么记录这些数字？</p>
-<p>单精度和多精度（通常指双精度、四倍精度等）数字表示法的国际标准是 <strong>IEEE 754</strong>（全称 <strong>IEEE Standard for Floating-Point Arithmetic</strong>）。</p>
-<p>该标准由电气电子工程师学会 (IEEE) 制定，并被国际标准化组织 (ISO) 和国际电工委员会 (IEC) 采纳为国际标准，编号为 <strong>ISO&#x2F;IEC&#x2F;IEEE 60559</strong>。</p>
-<hr>
-<h3 id="📋-标准核心内容"><a href="#📋-标准核心内容" class="headerlink" title="📋 标准核心内容"></a>📋 标准核心内容</h3><p>IEEE 754 规定了计算机中浮点数的存储格式、算术运算、舍入规则以及异常处理（如溢出、被零除、NaN 等）。</p>
-<h4 id="1-常见精度格式"><a href="#1-常见精度格式" class="headerlink" title="1. 常见精度格式"></a>1. 常见精度格式</h4><p>在 IEEE 754 标准中，最常用的两种格式是单精度和双精度：</p>
-<table>
-<thead>
-<tr>
-<th><strong>格式名称</strong></th>
-<th><strong>别名</strong></th>
-<th><strong>总位数</strong></th>
-<th><strong>符号位 (Sign)</strong></th>
-<th><strong>指数位 (Exponent)</strong></th>
-<th><strong>尾数位 (Mantissa)</strong></th>
-<th><strong>十进制精度</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>单精度</strong></td>
-<td>binary32</td>
-<td>32 bit</td>
-<td>1 bit</td>
-<td>8 bit</td>
-<td>23 bit</td>
-<td>~7 位有效数字</td>
-</tr>
-<tr>
-<td><strong>双精度</strong></td>
-<td>binary64</td>
-<td>64 bit</td>
-<td>1 bit</td>
-<td>11 bit</td>
-<td>52 bit</td>
-<td>~16 位有效数字</td>
-</tr>
-<tr>
-<td><strong>四倍精度</strong></td>
-<td>binary128</td>
-<td>128 bit</td>
-<td>1 bit</td>
-<td>15 bit</td>
-<td>112 bit</td>
-<td>~34 位有效数字</td>
-</tr>
-</tbody></table>
-<h4 id="2-数值的表示公式"><a href="#2-数值的表示公式" class="headerlink" title="2. 数值的表示公式"></a>2. 数值的表示公式</h4><p>一个浮点数的值通过以下公式计算：</p>
-<p>$$Value &#x3D; (-1)^S \times (1.f) \times 2^{E - Bias}$$</p>
-<ul>
-<li><p><strong>$S$ (Sign)</strong>：符号位。0 代表正数，1 代表负数。</p>
-</li>
-<li><p><strong>$f$ (Fraction&#x2F;Mantissa)</strong>：尾数的小数部分。隐含的高位为 1（规格化数）。</p>
-</li>
-<li><p><strong>$E$ (Exponent)</strong>：阶码（指数）。</p>
-</li>
-<li><p><strong>$Bias$ (偏移量)</strong>：为了表示负指数，标准规定了一个偏移值。单精度为 127，双精度为 1023。</p>
-</li>
-</ul>
-<hr>
-<h3 id="🔍-为什么这个标准很重要？"><a href="#🔍-为什么这个标准很重要？" class="headerlink" title="🔍 为什么这个标准很重要？"></a>🔍 为什么这个标准很重要？</h3><ol>
-<li><p><strong>跨平台一致性</strong>：无论你在 Intel CPU、ARM 架构还是英伟达 GPU 上运行，同样的浮点运算代码应该得到相同的结果。</p>
-</li>
-<li><p><strong>特殊的数值处理</strong>：标准定义了如何表示特殊状态：</p>
-<ul>
-<li><p><strong>NaN (Not a Number)</strong>：用于非法运算（如 $\sqrt{-1}$）。</p>
-</li>
-<li><p><strong>Infinity ($\infty$)</strong>：用于表示超出范围的极值。</p>
-</li>
-<li><p><strong>$\pm 0$</strong>：区分正零和负零。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>舍入模式</strong>：规定了四种（或更多）舍入规则，确保精度损失是可控且可预测的。</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" data-id="cuidLlRMzCbLbIZrU6HIu-Ms5" data-title="3.9.1 指数记数法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%EF%BC%88%E6%99%BA%E8%83%BD%E8%BD%AC%E5%9E%8B%EF%BC%89/" data-id="cuidDiWmyJnaz2YjOqpAUf71t" data-title="🧭 场景一：带 `throw`（你的原始代码）" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -743,7 +498,120 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="cuidIjQSlloD7Djxt8X-H2Mdr" data-title="字符串" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="cuid7j0aNkixm96abmAqo9bE7" data-title="字符串" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-java编程思想/第三章操作符/3.9.1 指数记数法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/">3.9.1 指数记数法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>我记得指数记数法是有一个国际标准的，小数点多少位，指数多少位，怎么记录这些数字？</p>
+<p>单精度和多精度（通常指双精度、四倍精度等）数字表示法的国际标准是 <strong>IEEE 754</strong>（全称 <strong>IEEE Standard for Floating-Point Arithmetic</strong>）。</p>
+<p>该标准由电气电子工程师学会 (IEEE) 制定，并被国际标准化组织 (ISO) 和国际电工委员会 (IEC) 采纳为国际标准，编号为 <strong>ISO&#x2F;IEC&#x2F;IEEE 60559</strong>。</p>
+<hr>
+<h3 id="📋-标准核心内容"><a href="#📋-标准核心内容" class="headerlink" title="📋 标准核心内容"></a>📋 标准核心内容</h3><p>IEEE 754 规定了计算机中浮点数的存储格式、算术运算、舍入规则以及异常处理（如溢出、被零除、NaN 等）。</p>
+<h4 id="1-常见精度格式"><a href="#1-常见精度格式" class="headerlink" title="1. 常见精度格式"></a>1. 常见精度格式</h4><p>在 IEEE 754 标准中，最常用的两种格式是单精度和双精度：</p>
+<table>
+<thead>
+<tr>
+<th><strong>格式名称</strong></th>
+<th><strong>别名</strong></th>
+<th><strong>总位数</strong></th>
+<th><strong>符号位 (Sign)</strong></th>
+<th><strong>指数位 (Exponent)</strong></th>
+<th><strong>尾数位 (Mantissa)</strong></th>
+<th><strong>十进制精度</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>单精度</strong></td>
+<td>binary32</td>
+<td>32 bit</td>
+<td>1 bit</td>
+<td>8 bit</td>
+<td>23 bit</td>
+<td>~7 位有效数字</td>
+</tr>
+<tr>
+<td><strong>双精度</strong></td>
+<td>binary64</td>
+<td>64 bit</td>
+<td>1 bit</td>
+<td>11 bit</td>
+<td>52 bit</td>
+<td>~16 位有效数字</td>
+</tr>
+<tr>
+<td><strong>四倍精度</strong></td>
+<td>binary128</td>
+<td>128 bit</td>
+<td>1 bit</td>
+<td>15 bit</td>
+<td>112 bit</td>
+<td>~34 位有效数字</td>
+</tr>
+</tbody></table>
+<h4 id="2-数值的表示公式"><a href="#2-数值的表示公式" class="headerlink" title="2. 数值的表示公式"></a>2. 数值的表示公式</h4><p>一个浮点数的值通过以下公式计算：</p>
+<p>$$Value &#x3D; (-1)^S \times (1.f) \times 2^{E - Bias}$$</p>
+<ul>
+<li><p><strong>$S$ (Sign)</strong>：符号位。0 代表正数，1 代表负数。</p>
+</li>
+<li><p><strong>$f$ (Fraction&#x2F;Mantissa)</strong>：尾数的小数部分。隐含的高位为 1（规格化数）。</p>
+</li>
+<li><p><strong>$E$ (Exponent)</strong>：阶码（指数）。</p>
+</li>
+<li><p><strong>$Bias$ (偏移量)</strong>：为了表示负指数，标准规定了一个偏移值。单精度为 127，双精度为 1023。</p>
+</li>
+</ul>
+<hr>
+<h3 id="🔍-为什么这个标准很重要？"><a href="#🔍-为什么这个标准很重要？" class="headerlink" title="🔍 为什么这个标准很重要？"></a>🔍 为什么这个标准很重要？</h3><ol>
+<li><p><strong>跨平台一致性</strong>：无论你在 Intel CPU、ARM 架构还是英伟达 GPU 上运行，同样的浮点运算代码应该得到相同的结果。</p>
+</li>
+<li><p><strong>特殊的数值处理</strong>：标准定义了如何表示特殊状态：</p>
+<ul>
+<li><p><strong>NaN (Not a Number)</strong>：用于非法运算（如 $\sqrt{-1}$）。</p>
+</li>
+<li><p><strong>Infinity ($\infty$)</strong>：用于表示超出范围的极值。</p>
+</li>
+<li><p><strong>$\pm 0$</strong>：区分正零和负零。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>舍入模式</strong>：规定了四种（或更多）舍入规则，确保精度损失是可控且可预测的。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" data-id="cuid2gQjZTEi76oTUH7MLHQTu" data-title="3.9.1 指数记数法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -826,7 +694,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" data-id="cuidJ3CBCqFaIbXMAP4QdGieM" data-title="Java 泛型 (Generics) 核心笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" data-id="cuidtud1axsUe90ohA_vi51FG" data-title="Java 泛型 (Generics) 核心笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -894,7 +762,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9/switch%E9%80%89%E6%8B%A9%E5%9B%A0%E5%AD%90/" data-id="cuidlG94AHA4iMaUOQx_3vhcY" data-title="switch选择因子" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9/switch%E9%80%89%E6%8B%A9%E5%9B%A0%E5%AD%90/" data-id="cuidFeoYjrFL3M_sWfCdrByA9" data-title="switch选择因子" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -968,7 +836,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%B4%A2%E5%BC%95%20(MOC)/" data-id="cuidi_mIma5MIuEaT0FXtxLLd" data-title="Java 学习笔记索引 (MOC)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%B4%A2%E5%BC%95%20(MOC)/" data-id="cuidmeCWI5Fbu-Vb2AOQiDNUZ" data-title="Java 学习笔记索引 (MOC)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1029,7 +897,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%BC%82%E5%B8%B8/Java_finally%E4%B8%AD%E5%BC%82%E5%B8%B8%E4%B8%A2%E5%A4%B1%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="cuidgL6FwotOJOJht2ZeFUznF" data-title="Java 中 finally 块异常丢失及其解决方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%BC%82%E5%B8%B8/Java_finally%E4%B8%AD%E5%BC%82%E5%B8%B8%E4%B8%A2%E5%A4%B1%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="cuidzV983HSJUzTq_wVDaJWJd" data-title="Java 中 finally 块异常丢失及其解决方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1128,7 +996,95 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/blender/%E9%97%AE%E9%A2%98/" data-id="cuidRTVSNJW5viGGCt-qCJPKG" data-title="问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/blender/%E9%97%AE%E9%A2%98/" data-id="cuidbZwcGsTWSta4lcF3At64o" data-title="问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-blender/2基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.879Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/">2基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658137.png"></p>
+<p>默认进入blender的界面，这个界面包括一个立方体，一个光源和一个照相机。<br>这三个元素其实就是暗示我们做模型最重要的三个元素，有了这三个元素就能够做出一个模型了。</p>
+<p><strong>鼠标操作</strong></p>
+<p>控制观察视角 鼠标中键<br>平移视图  Shift + 鼠标中键<br>缩放视角 滚动鼠标中键滚轮</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658142.png"></p>
+<p>第一个是缩放<br>第二个是移动<br>第三个是摄像机视图，也就是最终渲染出来的视图<br>第四个是正交视图</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">在 3D 建模和设计中，<span class="strong">**正交视图 (Orthographic View)**</span> 是一种特殊的观察方式，它与我们日常生活中的视觉感受（透视图）完全不同。</span><br><span class="line"></span><br><span class="line"><span class="section">### 1. 核心定义</span></span><br><span class="line"></span><br><span class="line">简单来说，正交视图就是<span class="strong">**“没有近大远小”**</span>的视图。</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**平行投影**</span>：在正交视图中，所有的投影线都是平行的。这意味着无论物体距离相机多远，它在屏幕上的大小都保持不变。</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数学逻辑**：</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">    - **正交投影**：$x_&#123;2d&#125; = x$，$y_&#123;2d&#125; = y$（坐标直接映射，忽略距离 $z$ 对缩放的影响）。</span></span><br><span class="line"><span class="code">        </span></span><br><span class="line"><span class="code">    - **透视投影**：$x_&#123;2d&#125; = x/z$，$y_&#123;2d&#125; = y/z$（距离 $z$ 越大，呈现出的尺寸越小）。</span></span><br><span class="line"><span class="code">        </span></span><br><span class="line"><span class="code"></span></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">### 2. 正交视图 vs. 透视图</span></span><br><span class="line"></span><br><span class="line">|  <span class="strong">**特性**</span>  |  <span class="strong">**正交视图 (Orthographic)**</span>      |   <span class="strong">**透视图 (Perspective)**</span> |</span><br><span class="line">|-----------|----------------------------------|---------------------------|</span><br><span class="line">|<span class="strong">**视觉效果**</span>|扁平、不真实，像工程图纸。             |自然、写实，符合人眼视觉。     |</span><br><span class="line">|<span class="strong">**比例关系**</span>|<span class="strong">**平行线永远平行**</span>，比例绝对精确。     |平行线会汇聚于消失点，产生畸变。|</span><br><span class="line">|<span class="strong">**物体大小**</span>|距离远近不影响物体在画面的大小。       |距离越远，物体看起来越小。     |</span><br><span class="line">|<span class="strong">**主要用途**</span>|<span class="strong">**精准建模、对齐、查看比例、工程设计**</span>。|场景漫游、最终渲染、艺术构图。  |</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">### 3. 为什么在 Blender 中必须使用它？</span></span><br><span class="line"></span><br><span class="line">当你正在制作一个精密的零件或人体模型时，透视图的“近大远小”会干扰你的判断。例如：</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**对齐顶点**</span>：如果你想让两个物体处于同一水平线上，在透视图中因为角度问题，你很难看准；但在正交视图下，只要它们重合，就是绝对对齐的。</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **参考图建模**：当你导入汽车的“前视图”或“侧视图”底图进行建模时，必须在正交视图下操作，否则模型将无法匹配底图的准确比例。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code"></span></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">### 4. Blender 5.0 中的操作快捷键</span></span><br><span class="line"></span><br><span class="line">在 Blender 中切换视图非常频繁，建议记住以下快捷键：</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**数字小键盘 5**</span>：在“正交”和“透视”模式之间来回切换。</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数字小键盘 1**：正视图（Front，自动进入正交）。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数字小键盘 3**：右视图（Right，自动进入正交）。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **数字小键盘 7**：顶视图（Top，自动进入正交）。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">- **Alt + 鼠标中键拖动**：可以快速吸附到最近的正交轴向视图。</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="quote">&gt; <span class="strong">**小贴士**</span>：如果你发现屏幕左上角显示 <span class="strong">**“用户透视图” (User Perspective)**</span>，画面看起来很立体；点击 <span class="strong">**5**</span> 后会变成 <span class="strong">**“用户正交” (User Orthographic)**</span>，画面会瞬间变“扁”，这是正常的。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>如何控制模型</strong></p>
+<p>左侧有各种操作工具栏，先点击对应工具，然后模型上面会出现坐标轴等，鼠标可以按住操作。</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658145.png"></p>
+<p>依次是框选工具，游标工具，移动工具，旋转工具，缩放工具，变换工具<br>框选工具长按，又有调整工具（移动），框选工具（四边形选择），刷选工具（鼠标滑动选择），套索工具（不规则套索）</p>
+<p>Shift + A  新建物体<br>G   移动模型， 移动时点击x，会在x轴移动，y和z轴同理。在G移动模式下，按住ctrl移动，可以吸附网格进行移动<br>S   缩放模型， 缩放是点击x，会在x轴缩放，y和z轴同理；先S，然后按住Shift + x&#x2F;y&#x2F;z，是禁止在当前方向上缩放，在另外两个方向上缩放；<strong>尽量不要再物体模式下缩放，而是在编辑模式下缩放。如果在物体模式下缩放了，需要按ctrl + a 应用缩放，不然其他倒角等操作会出现异常。</strong></p>
+<p>R   旋转模型， 按住x,y,z操作同上<br>H   隐藏物体</p>
+<p>Alt  + G  撤销移动<br>Alt  + S  撤销缩放<br>Alt  + R  撤销旋转</p>
+<p>Alt + H  隐藏物体</p>
+<p>Shift +  D   移动并复制，每个复制出来的都是独立的<br>Alt + D  关联复制，修改一个，所有复制出来的都会改</p>
+<p><strong>切换视图</strong></p>
+<p>坐标轴如下图所示</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658159.png"></p>
+<p>右上角x,y，z轴可以点击</p>
+<p>小键盘快捷键：<br>1  前视图，从-Y轴正面看<br>3  右视图，从x轴看<br>7  顶视图，从z轴看<br>9  从当前轴的反向看，比如当前按了3进入右视图，再按9就变成从-x轴看，也就是左视图<br>.  也就是小键盘上的小数点，会将物体放大推到面前，方便查看</p>
+<p>对于没有小键盘的笔记本来说，按键盘右上角&#96;|～键，会出现切换视图轮盘，鼠标移动到哪个视图，松开按键就会切换</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658164.png"></p>
+<p>3d建模基本流程<br>建模，布光，材质，渲染</p>
+<p>**认识界面</p>
+<p>什么是游标和原点</p>
+<p><strong>游标</strong></p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658167.png"></p>
+<p>模型中间圆圈叫做游标，两个作用<br>1。游标在哪里，你新建的物体就会出现在哪里，物体也可以移动到游标<br>2。游标可以作为物体旋转的轴心点使用</p>
+<p><strong>操作游标</strong><br>点击左侧游标工具，然后鼠标左键点击到哪里游标就到哪里<br>快捷键：<br>Shift + 鼠标右键   点击到哪里游标就到哪里<br>Shift + S  选中物体之后，出现一个操作轮盘，选择到游标，物体就会移动到游标所在的位置<br>Shift + c  游标回到坐标系原点</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658174.png"><br>默认物体旋转是按照每个物体的原点旋转，可以在变换轴心点中选择游标，之后会按照游标进行旋转</p>
+<p><strong>原点</strong><br>鼠标点击物体选中之后，物体会出现一个黄色的点，就是物体的原点<br>物体缩放是从原点开始的，可以通过勾选下面的原点，移动物体的原点（移动快捷键G）</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658177.png"></p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658190.png"></p>
+<p>可以将原点移动到坐标系中心，之后取消物体移动（Alt + G），可以发现物体的原点回到了世界中心，物体本身和原点还保持着之前的相对关系，但是并没有在世界中心</p>
+<p>也就是说程序只认识物体的原点，所有的操作都是按照原点操作</p>
+<p>将原点移动到物体默认位置： 右键物体 -&gt; 设置原点-&gt;原点到几何中心</p>
+<p>在G移动模式下，按住ctrl移动，可以吸附网格进行移动</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658174.png"></p>
+<p>1, 边界框中心： 选中多个物体是，物体被最小的框包围时，框的中心点<br>2, 3D游标：坐标系上的圆圈<br>3, 各自的原点： 每个物体有自己的原点, 认为设置的橙色的点，<br>4, 质心点： 物体的重心，如果有多个物体是多个物体的重心（这里貌似blender翻译错误，英文是median point, 像是中心点，但不是质心点，实测不是中心，将原点移出物体之外，选择按照质心点旋转，仍然是按照原点旋转）<br>5, 活动元素： 选中多个元素时，最后选中的那个物体</p>
+<p><strong>坐标</strong></p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658194.png"></p>
+<p>1, 全局坐标，所有物体共有的坐标，界面上显示的x, y和z轴<br>2, 局部坐标，每个物体自己的坐标，跟随物体</p>
+<p>快捷键<br>g x&#x2F;y&#x2F;z  局部坐标x&#x2F;y&#x2F;z<br>g x&#x2F;y&#x2F;z x&#x2F;yz  全局坐标x&#x2F;y&#x2F;z</p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115213658196.png"></p>
+<p><strong>四种预览方式</strong></p>
+<p><img src="/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/file-20260115232800030.png"></p>
+<p>1, 渲染预览，显示最终渲染结果预览，但是相对占资源，慢<br>2, 材质预览，可以预览材质的颜色和简单纹理，但是不计算光线追踪细节，比渲染预览快<br>3, 实体模式预览，不现实颜色和材质，建模时候使用，快，不占太多资源<br>4, 线框模式预览，可以显示内部和背面的走线，建模时候常用</p>
+<p>ctrl + L  关联材质</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/" data-id="cuidqvet-r0NvuXlSqw6FY22Y" data-title="2基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1155,7 +1111,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/tp-file-folder-true/"><% tp.file.folder(true) %></a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Incus/">Incus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/General/">General</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/">Virtualization</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Virtualization/Docker/">Docker</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blender/">blender</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/claudecode/">claudecode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">java编程思想</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%E5%8F%8D%E5%B0%84/">第十九章反射</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/podman/">podman</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uv/">uv</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/uv/python/">python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li></ul>
     </div>
   </div>
 
@@ -1201,10 +1157,6 @@
           </li>
         
           <li>
-            <a href="/2026/05/09/template/hexo/">&lt;% tp.file.title %&gt;</a>
-          </li>
-        
-          <li>
             <a href="/2026/05/09/hexo/Hexo%E4%B8%8EObsidian%E5%8D%8F%E4%BD%9C%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88/">Hexo 与 Obsidian 协作集成方案</a>
           </li>
         
@@ -1214,6 +1166,10 @@
         
           <li>
             <a href="/2026/05/09/TradingView/PineScript_v6%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/">PineScript_v6核心知识点</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/09/python/uv/">配置国内镜像</a>
           </li>
         
       </ul>
