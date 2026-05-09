@@ -71,6 +71,417 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-blender/3.2 建模" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blender/">blender</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/">3.2 建模</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/file-20260119195138551.png"></p>
+<p><img src="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/file-20260119195238783.png"></p>
+<p><strong>四大：挤出、内插、循环切割、倒角</strong></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>快捷键</th>
+<th>补充</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>挤出</td>
+<td>e</td>
+<td></td>
+</tr>
+<tr>
+<td>连续挤出</td>
+<td>e,  ctrl + 鼠标右键</td>
+<td>按e开始挤出，然后按住ctrl，点击鼠标右键可以连续挤出操作</td>
+</tr>
+<tr>
+<td>内插&#x2F;向内挤出</td>
+<td>i</td>
+<td></td>
+</tr>
+<tr>
+<td>倒角</td>
+<td>ctrl + b</td>
+<td>鼠标滚轮可以增加或者减少倒角面数，控制倒角是否圆滑</td>
+</tr>
+<tr>
+<td>循环切割</td>
+<td>ctrl + r</td>
+<td>按住鼠标左键可以移动循环边，鼠标滚轮可以增加减少循环边</td>
+</tr>
+</tbody></table>
+<p>挤出流型说明：<br><img src="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/file-20260119201327499.png"></p>
+<p><img src="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/file-20260119201450512.png"><br>选中一个面向下挤出，此时四角的边会有重复的在一起。</p>
+<p><img src="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/file-20260119201541678.png"><br><img src="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/file-20260119202147245.png"><br>使用挤出流型，不会出现重复的边。</p>
+<p><strong>六小： 合并&#x2F;断开&#x2F;填充&#x2F;切刀&#x2F;桥接&#x2F;分离</strong></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>快捷键</th>
+<th>补充</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>合并</td>
+<td>m</td>
+<td></td>
+</tr>
+<tr>
+<td>断开</td>
+<td>v</td>
+<td></td>
+</tr>
+<tr>
+<td>填充</td>
+<td>f</td>
+<td>需要选中循环边</td>
+</tr>
+<tr>
+<td>栅格填充</td>
+<td></td>
+<td>面菜单里面的，仅限偶数边，奇数边无法填充，可以选择栅格数量</td>
+</tr>
+<tr>
+<td>切刀工具</td>
+<td>k</td>
+<td>按鼠标右键或者空格键退出</td>
+</tr>
+<tr>
+<td>桥接</td>
+<td>ctrl + e</td>
+<td>ctrl +e会打开菜单，选择桥接循环边。只有一个物体的不同部分可以桥接，多个物体无法桥接，需要先使用ctrl + j将多个物体合并为一个物体</td>
+</tr>
+<tr>
+<td>多个物体合并为一个物体</td>
+<td>ctrl + j</td>
+<td></td>
+</tr>
+<tr>
+<td>断开</td>
+<td>p</td>
+<td></td>
+</tr>
+<tr>
+<td><img src="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/file-20260119205956209.png"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/file-20260119210019445.png"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>设置跨分是为了建模时尽量形成四边形而不是三角形</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/blender/3.2%20%E5%BB%BA%E6%A8%A1/" data-id="cuidgetjN6hi7byESQtiSfXDh" data-title="3.2 建模" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-blender/3.3 修改器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blender/">blender</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/">3.3 修改器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="为什么使用修改器"><a href="#为什么使用修改器" class="headerlink" title="为什么使用修改器"></a>为什么使用修改器</h2><ol>
+<li>建模快，效率高，能快速直观地实现一个效果</li>
+<li>非破坏性。可以在不改变原来模型的基础上，很精地控制参数</li>
+<li>灵活，可重复使用，可叠加多个效果。需要说明的是修改器应用是从上到下应用的，顺序会影响结果。</li>
+</ol>
+<h2 id="修改器"><a href="#修改器" class="headerlink" title="修改器"></a>修改器</h2><h3 id="1-表面细分修改器"><a href="#1-表面细分修改器" class="headerlink" title="1 表面细分修改器"></a>1 表面细分修改器</h3><p>将网格的面分割成更小的面，使其看起来更平滑，可以修改修改器的参数使其表面更加平滑</p>
+<p><img src="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260120210051957.png"><br>给一个立方体增加一个表面细分修改器，其变成一个球形了，tab进入修改模式可以看到实际还是一个立方体</p>
+<h3 id="2-实体化修改器"><a href="#2-实体化修改器" class="headerlink" title="2 实体化修改器"></a>2 实体化修改器</h3><p>获取任意网格的表面，然后为之添加深度，使之变厚</p>
+<p><img src="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260120210527550.png"><br>新建一个平面，为其添加实体化修改器，修改厚度参数。</p>
+<h3 id="3-倒角修改器"><a href="#3-倒角修改器" class="headerlink" title="3 倒角修改器"></a>3 倒角修改器</h3><p>宽度是坡口形成的两条新边的距离，段数是增加细分。</p>
+<p><img src="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260120211557713.png"></p>
+<h3 id="4-布尔修改器"><a href="#4-布尔修改器" class="headerlink" title="4 布尔修改器"></a>4 布尔修改器</h3><p>可以对两个物体进行交集、差集、并集运算，偶尔会出现奇怪的问题，慎用</p>
+<p><img src="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260120212121548.png"></p>
+<p>给立方体增加一个布尔修改器，然后物体使用吸管选择圆柱体，之后隐藏圆柱体，就能看到差集效果，另外还有并集和交集两种可选<br><img src="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260120212252715.png"><br>差集隐藏柱体之后的效果</p>
+<p><img src="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260120212337691.png"><br>并集效果</p>
+<p><img src="/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260120212412886.png"><br>交集效果</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/blender/3.3%20%E4%BF%AE%E6%94%B9%E5%99%A8/" data-id="cuid45T1SLRvxrbneZyM-RcNl" data-title="3.3 修改器" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-blender/3.4 建模马拉松" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/blender/3.4%20%E5%BB%BA%E6%A8%A1%E9%A9%AC%E6%8B%89%E6%9D%BE/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blender/">blender</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/blender/3.4%20%E5%BB%BA%E6%A8%A1%E9%A9%AC%E6%8B%89%E6%9D%BE/">3.4 建模马拉松</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="蘑菇建模"><a href="#蘑菇建模" class="headerlink" title="蘑菇建模"></a>蘑菇建模</h3><p>简易形变修改器 + 吸附工具</p>
+<h3 id="树桩建模"><a href="#树桩建模" class="headerlink" title="树桩建模"></a>树桩建模</h3><p>衰减编辑 + 分离 + 拉平选中点</p>
+<p><img src="/2026/05/09/blender/3.4%20%E5%BB%BA%E6%A8%A1%E9%A9%AC%E6%8B%89%E6%9D%BE/file-20260129190113395.png"><br>之后选择面或者别的元素，点击G移动，然后会出现一个圆环，通过滑动鼠标滚轮，控制圆环大小，圆环内的部分都会被影响到。</p>
+<p><img src="/2026/05/09/blender/3.4%20%E5%BB%BA%E6%A8%A1%E9%A9%AC%E6%8B%89%E6%9D%BE/file-20260129190606319.png"><br>由于移动的关系，下面的点不在一个平面上，可以进入透视模式，选中下平面所有的点，因为是垂直于z轴的，使用快捷键S + z  + 0</p>
+<h3 id="花朵建模"><a href="#花朵建模" class="headerlink" title="花朵建模"></a>花朵建模</h3><p>旋绕工具</p>
+<p><img src="/2026/05/09/blender/3.4%20%E5%BB%BA%E6%A8%A1%E9%A9%AC%E6%8B%89%E6%9D%BE/file-20260129193325975.png"></p>
+<p>编辑模式旋绕工具，可以设置按照哪个轴旋绕，可以设置旋绕角度，默认是连续生成的<br>勾选使用副本之后，变成断开的<br><img src="/2026/05/09/blender/3.4%20%E5%BB%BA%E6%A8%A1%E9%A9%AC%E6%8B%89%E6%9D%BE/file-20260129193454223.png"></p>
+<h3 id="树干建模"><a href="#树干建模" class="headerlink" title="树干建模"></a>树干建模</h3><p>缩裹修改器： 让物体沿着物体的表面曲线贴合在物体表面</p>
+<h3 id="龟背竹建模"><a href="#龟背竹建模" class="headerlink" title="龟背竹建模"></a>龟背竹建模</h3><p>拓扑建模 + 合并断开切刀</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/blender/3.4%20%E5%BB%BA%E6%A8%A1%E9%A9%AC%E6%8B%89%E6%9D%BE/" data-id="cuid5_cyinXPpQPSXqmRJcX8l" data-title="3.4 建模马拉松" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-blender/3.5 阵列修改器与晶格形变" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/blender/3.5%20%E9%98%B5%E5%88%97%E4%BF%AE%E6%94%B9%E5%99%A8%E4%B8%8E%E6%99%B6%E6%A0%BC%E5%BD%A2%E5%8F%98/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blender/">blender</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/blender/3.5%20%E9%98%B5%E5%88%97%E4%BF%AE%E6%94%B9%E5%99%A8%E4%B8%8E%E6%99%B6%E6%A0%BC%E5%BD%A2%E5%8F%98/">3.5 阵列修改器与晶格形变</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="晶格形变"><a href="#晶格形变" class="headerlink" title="晶格形变"></a>晶格形变</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/blender/3.5%20%E9%98%B5%E5%88%97%E4%BF%AE%E6%94%B9%E5%99%A8%E4%B8%8E%E6%99%B6%E6%A0%BC%E5%BD%A2%E5%8F%98/" data-id="cuidHgOTT25LwM2BweDZ2mI60" data-title="3.5 阵列修改器与晶格形变" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-blender/3.6 曲线修改器，蒙皮修改器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blender/">blender</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/">蒙皮修改器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="曲线修改器"><a href="#曲线修改器" class="headerlink" title="曲线修改器"></a>曲线修改器</h3><h4 id="贝塞尔曲线"><a href="#贝塞尔曲线" class="headerlink" title="#贝塞尔曲线"></a>#贝塞尔曲线</h4><p>通过两个轴来控制曲线走向</p>
+<p><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206144805481.png"><br>曲线闭合方法：<br>1, 选择两个点，f,   可以将两个点连接起来，曲线就闭合起来了<br>2, 选择曲线上的一个点，Alt + c</p>
+<p>曲线断开方法：<br>选择两个点，x，删除分段数，会删除两个点中间的线。不能删除点，删除线之后曲线会自动变小，但是还是闭合的</p>
+<p>实现一个管子</p>
+<p>通过设置曲线的深度，使曲线形成一个管状，然后可以对其进行挤出旋转等操作，形成一个管子<br><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206151037166.png"></p>
+<p><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206151528761.png"><br>Alt + s  缩放管子粗细</p>
+<p>倒角- 物体</p>
+<p>设置的物体相当于曲线的横截面<br><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206152418853.png"><br><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206152439441.png"><br><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206152507482.png"><br>然后通过缩放，挤出等操作，可以做出动漫人物的头发等<br><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206152559740.png"></p>
+<h4 id="圆环"><a href="#圆环" class="headerlink" title="#圆环"></a>#圆环</h4><p>圆环就是一个闭合的贝塞尔曲线</p>
+<h3 id="NURBS曲线"><a href="#NURBS曲线" class="headerlink" title="#NURBS曲线"></a>#NURBS曲线</h3><p>Non-Uniform Rational B-Spline 非均匀有理B样条<br>通过一些点来拟合，控制曲线的走向<br><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206150051431.png"><br><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206150200883.png"><br>将点e挤出，曲线会跟着线拟合</p>
+<h3 id="NURBS圆环"><a href="#NURBS圆环" class="headerlink" title="#NURBS圆环"></a>#NURBS圆环</h3><p>NURBS生成的一个圆，也是NURBS曲线的闭合</p>
+<p><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206150631626.png"></p>
+<h3 id="路径曲线"><a href="#路径曲线" class="headerlink" title="#路径曲线"></a>#路径曲线</h3><p>线的开头结尾和点重合</p>
+<p><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206145935083.png"><br>通过移动线上的点，拟合出一条曲线</p>
+<h3 id="曲线修改器-1"><a href="#曲线修改器-1" class="headerlink" title="#曲线修改器"></a>#曲线修改器</h3><p>默认简易型便修改器，跟着原点旋转，曲线修改器可以让物体跟着曲线进行形变</p>
+<p><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206155832161.png"></p>
+<p>注意的点：<br>路径曲线是有方向的，新建时默认朝向x正轴，物体会沿着路径的的方向进行形变，有方向。<br><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260206160148431.png"></p>
+<p>旋转时，正数是顺时针旋转，负数时逆时针旋转</p>
+<h3 id="父子级关系详解"><a href="#父子级关系详解" class="headerlink" title="#父子级关系详解"></a>#父子级关系详解</h3><p>将物体b绑定为物体a的子级：<br>1, 先选中b<br>2, 然后选中a<br>3, Ctrl  + p，选择物体</p>
+<p>之后移动a(也就是父物体)，子级会跟着移动</p>
+<p>一个子级只可以有一个父级，一个父级可以有很多子级</p>
+<h1 id="蒙皮修改器"><a href="#蒙皮修改器" class="headerlink" title="蒙皮修改器"></a>蒙皮修改器</h1><p>在线上增加了一层遮罩的效果</p>
+<p>可以在任意一个点上进行挤出、移动、放大缩小等操作</p>
+<p>缩放  Ctrl  +  a</p>
+<p>可以很方便的用来做树木等分支</p>
+<p><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260207104830487.png"></p>
+<p><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260207110437345.png"><br><img src="/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/file-20260207110453097.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/blender/3.6%20%E6%9B%B2%E7%BA%BF%E4%BF%AE%E6%94%B9%E5%99%A8%EF%BC%8C%E8%92%99%E7%9A%AE%E4%BF%AE%E6%94%B9%E5%99%A8/" data-id="cuid2hleBg6jFcHUZKyvUDIxS" data-title="蒙皮修改器" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-dcrawler改进/2026.4.18" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.18/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.18/">2026.4.18</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>这是之前对项目进行改进工作的进度，继续进行<br>[PROJECT] 改进 Java 8 分布式爬虫 dcrawler：先补回归覆盖，再做解耦和现代化。<br>[STACK] Java 8 target, Maven multi-module, Spring Boot 1.4, Vert.x, HttpClient, JUnit, Fastjson, Log4j 1.x, JDK 21 build<br>[ARCH] CrawlerSpiderStarter 初始化 Spring&#x2F;JPA&#x2F;Vert.x&#x2F;Jetty。 PointScheduler -&gt; CrawlerDownloader -&gt; CrawlerParser -&gt; Storage。 Filter&#x2F;Downloader&#x2F;Storage&#x2F;Processor 分模块但依赖仍耦合。</p>
+<p>[MODULES] * dc-spider-core: Point&#x2F;Config&#x2F;Crawltrace&#x2F;服务模型 * dc-spider-processor: 模板解析与 golden fixtures * dc-downloader-httpclient: HTTP&#x2F;代理下载 * dc-storage: 存储抽象与分发契约 * dc-spider-filter: Bloom&#x2F;Map filter HTTP 服务 * dc-commons: 工具、时间、编码、压缩<br>[DECISIONS] * 保持 source&#x2F;target 1.8 → 先兼容 JDK21，不升级字节码 * tests profile 启用测试 → 保留默认 skip 行为 * Phase 2 优先 → 重构前锁定行为 * 改动保持 staged → 便于交接 [CONSTRAINTS] * 不回滚已有 staged 改动 * 不引入外部网络依赖测试 * 不做大版本依赖升级 * .codex 保持 untracked<br>[NEXT] 继续 Phase 2：优先诊断 <code>weiboarticleapi2.trs</code> 编码&#x2F;emoji 期望漂移；若风险高，改补 downloader&#x2F;filter 本地 mock 边界测试。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.18/" data-id="cuid-HGxJVx28JFsx8nBTfChE" data-title="2026.4.18" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-dcrawler改进/2026.4.19" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/" class="article-date">
@@ -102,7 +513,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/" data-id="cuidsiLu5WnyAz9zlOKfB6Qi1" data-title="2026.4.19" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/2026.4.19/" data-id="cuidhIHdSwg3ddgeoBlhsbprr" data-title="2026.4.19" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -114,14 +525,14 @@
 
 
   
-    <article id="post-claudecode/Git 提交信息与拆分" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-dcrawler改进/codex重构压缩上下文" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/05/09/claudecode/Git%20%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8B%86%E5%88%86/" class="article-date">
+    <a href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/codex%E9%87%8D%E6%9E%84%E5%8E%8B%E7%BC%A9%E4%B8%8A%E4%B8%8B%E6%96%87/" class="article-date">
   <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
+    <a class="article-category-link" href="/categories/dcrawler%E6%94%B9%E8%BF%9B/">dcrawler改进</a>
   </div>
 
   </div>
@@ -132,7 +543,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/Git%20%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8B%86%E5%88%86/">Git 提交信息与拆分</a>
+      <a class="p-name article-title" href="/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/codex%E9%87%8D%E6%9E%84%E5%8E%8B%E7%BC%A9%E4%B8%8A%E4%B8%8B%E6%96%87/">codex重构压缩上下文</a>
     </h1>
   
 
@@ -140,656 +551,33 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Git-提交信息与拆分"><a href="#Git-提交信息与拆分" class="headerlink" title="Git 提交信息与拆分"></a>Git 提交信息与拆分</h1><h2 id="这篇笔记解决什么问题"><a href="#这篇笔记解决什么问题" class="headerlink" title="这篇笔记解决什么问题"></a>这篇笔记解决什么问题</h2><p>这篇笔记主要帮助解决两个问题：</p>
+        <p>&#x2F;compact_save_v2</p>
+<p>压缩当前会话为“可重构上下文状态”，用于跨会话恢复：<br>格式如下：<br>[PROJECT]<br>一句话目标<br>[STACK]<br>技术栈（逗号分隔）<br>[ARCH]<br>当前架构（≤3行）<br>[MODULES]</p>
 <ul>
-<li>这次改动应该保留为一个 commit，还是拆成多个 commit</li>
-<li>这条 commit message 应该怎么写，才能让别人看得懂、以后也方便回看</li>
+<li>模块A: 职责</li>
+<li>模块B: 职责<br>[DECISIONS]</li>
+<li>xxx → 原因（极简）<br>[CONSTRAINTS]</li>
+<li>xxx<br>[NEXT]<br>下一步操作（必须具体）</li>
 </ul>
-<p>目标不是追求形式上的完美，而是让提交更容易 review、更容易回滚，也更容易理解。</p>
-<h2 id="什么时候一个-commit-就够"><a href="#什么时候一个-commit-就够" class="headerlink" title="什么时候一个 commit 就够"></a>什么时候一个 commit 就够</h2><p>通常满足下面这些条件时，一个 commit 就够：</p>
+<p>限制：≤220 token<br>输出在 code block 中</p>
+<p>&#x2F;load_context_v2</p>
+<p>你现在是这个项目的“持续重构助手”，规则：</p>
 <ul>
-<li>这次改动只服务于一个明确目标</li>
-<li>改动涉及的文件虽然不止一个，但仍然在讲同一件事</li>
-<li>你能用一句话说清这次提交为什么存在</li>
-<li>以后如果要回滚这次改动，不会顺便回滚掉无关内容</li>
+<li>严格基于项目记录文件中和我提供的上下文工作</li>
+<li>不重复问已有信息</li>
+<li>输出优先：结构清晰 + 可执行</li>
+<li>默认我在做“渐进式重构”（不是推倒重写）</li>
+<li>每次更新都要要求记录到项目记录文件，方便后续查阅和恢复会话</li>
 </ul>
-<p>简单判断：</p>
-<blockquote>
-<p>如果别人只看这一个 commit，就能理解你做了什么、为什么这么做，而且单独回滚也不会伤到别的内容，那通常一个 commit 就够。</p>
-</blockquote>
-<h2 id="什么时候应该拆成多个-commit"><a href="#什么时候应该拆成多个-commit" class="headerlink" title="什么时候应该拆成多个 commit"></a>什么时候应该拆成多个 commit</h2><p>遇到下面这些情况时，通常应该拆：</p>
-<ul>
-<li>重构和功能修改混在一起</li>
-<li>机械性改动和逻辑改动混在一起</li>
-<li>两个不相干的问题被顺手一起改了</li>
-<li>某一部分改动本来就可以独立 review</li>
-<li>你自己已经开始说“顺手把这个也改了”</li>
-</ul>
-<p>常见例子：</p>
-<ul>
-<li>一次提交里既改命名、又改逻辑、又补文档</li>
-<li>为了修一个 bug，顺手把另一个模块的格式也整理了</li>
-<li>同时包含“纯重构”和“真实行为变化”</li>
-</ul>
-<p>拆 commit 的核心不是追求越多越好，而是看：</p>
-<ul>
-<li>能不能独立 review</li>
-<li>能不能独立回滚</li>
-<li>message 能不能各自说清楚</li>
-</ul>
-<h2 id="怎么写-commit-message"><a href="#怎么写-commit-message" class="headerlink" title="怎么写 commit message"></a>怎么写 commit message</h2><p>实操上，先做到两件事就够：</p>
-<ol>
-<li>开头类型尽量明确</li>
-<li>一句话能看出这次提交为什么存在</li>
-</ol>
-<p>常见起手：</p>
-<ul>
-<li><code>feat:</code> 新功能或新能力</li>
-<li><code>fix:</code> 修 bug 或纠正错误行为</li>
-<li><code>refactor:</code> 重构，但不改变对外行为</li>
-<li><code>docs:</code> 文档说明调整</li>
-</ul>
-<p>好的 message 应该让以后回看的人快速明白：</p>
-<ul>
-<li>这是在加东西、修东西，还是整理东西</li>
-<li>这次改动存在的原因是什么</li>
-</ul>
-<p>例如：</p>
-<ul>
-<li><code>feat: add manual launcher for dc-spider-tool</code></li>
-<li><code>fix: correct worktree cleanup order after PR merge</code></li>
-<li><code>refactor: simplify proxy startup entrypoint</code></li>
-<li><code>docs: clarify when to split commits</code></li>
-</ul>
-<p>尽量不要写这种过于空泛的标题：</p>
-<ul>
-<li><code>update</code></li>
-<li><code>fix bug</code></li>
-<li><code>修改一下</code></li>
-<li><code>调整代码</code></li>
-</ul>
-<p>这些标题的问题不是“不规范”，而是几乎不能帮助别人理解这次提交为什么存在。</p>
-<h2 id="常见反例"><a href="#常见反例" class="headerlink" title="常见反例"></a>常见反例</h2><h3 id="反例-1：一个-commit-里混太多事"><a href="#反例-1：一个-commit-里混太多事" class="headerlink" title="反例 1：一个 commit 里混太多事"></a>反例 1：一个 commit 里混太多事</h3><p>比如：</p>
-<ul>
-<li>改了代码逻辑</li>
-<li>顺手统一了格式</li>
-<li>又补了一点文档</li>
-</ul>
-<p>这种提交的问题是：</p>
-<ul>
-<li>review 时重点不清楚</li>
-<li>回滚时容易误伤</li>
-<li>message 很难写准确</li>
-</ul>
-<h3 id="反例-2：message-太空"><a href="#反例-2：message-太空" class="headerlink" title="反例 2：message 太空"></a>反例 2：message 太空</h3><p>比如：</p>
-<ul>
-<li><code>update</code></li>
-<li><code>fix</code></li>
-<li><code>改一下</code></li>
-</ul>
-<p>这种 message 的问题是，几天后连你自己都不一定知道当时到底改了什么、为什么改。</p>
-<h3 id="反例-3：拆得过碎"><a href="#反例-3：拆得过碎" class="headerlink" title="反例 3：拆得过碎"></a>反例 3：拆得过碎</h3><p>不是 commit 越多越好。</p>
-<p>如果拆到每个 commit 都只剩下零散、不完整、无法独立理解的改动，review 反而更痛苦。</p>
-<p>好的拆分应该让每个 commit 都还是一个完整、能讲明白的小单位。</p>
-<h2 id="提交前快速检查"><a href="#提交前快速检查" class="headerlink" title="提交前快速检查"></a>提交前快速检查</h2><p>提交前可以快速问自己这几个问题：</p>
-<ul>
-<li>这个 commit 是不是只在表达一件事</li>
-<li>别人只看这一个 commit，能不能大致理解意图</li>
-<li>如果现在回滚它，会不会顺便回滚掉不该回滚的内容</li>
-<li>这条 message 有没有说明为什么改，而不只是“改了什么”</li>
-</ul>
-<p>如果这四个问题里有两个以上答不上来，通常就该停一下，重新整理 commit。</p>
-<h2 id="最小模板"><a href="#最小模板" class="headerlink" title="最小模板"></a>最小模板</h2><p>可以直接从这些模板开始：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">feat: add &lt;new capability&gt;</span><br><span class="line">fix: correct &lt;specific problem&gt;</span><br><span class="line">refactor: simplify &lt;target area&gt;</span><br><span class="line">docs: clarify &lt;documented topic&gt;</span><br></pre></td></tr></table></figure>
-
-<p>如果要写得更贴近日常一点，也可以这样想：</p>
-<ul>
-<li>这是新增能力吗？用 <code>feat</code></li>
-<li>这是修错误吗？用 <code>fix</code></li>
-<li>这是整理代码但不改行为吗？用 <code>refactor</code></li>
-<li>这是改说明文档吗？用 <code>docs</code></li>
-</ul>
+<p>准备好后回复：READY</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/Git%20%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%B8%8E%E6%8B%86%E5%88%86/" data-id="cuidW4UTgiGdE8cnV439CYHE1" data-title="Git 提交信息与拆分" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/dcrawler%E6%94%B9%E8%BF%9B/codex%E9%87%8D%E6%9E%84%E5%8E%8B%E7%BC%A9%E4%B8%8A%E4%B8%8B%E6%96%87/" data-id="cuidelpp1UT66qAaBRJI7c2uY" data-title="codex重构压缩上下文" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/Git worktree 日常协作笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/Git%20worktree%20%E6%97%A5%E5%B8%B8%E5%8D%8F%E4%BD%9C%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/Git%20worktree%20%E6%97%A5%E5%B8%B8%E5%8D%8F%E4%BD%9C%E7%AC%94%E8%AE%B0/">Git worktree 日常协作笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-worktree-日常协作笔记"><a href="#Git-worktree-日常协作笔记" class="headerlink" title="Git worktree 日常协作笔记"></a>Git worktree 日常协作笔记</h1><p>这篇笔记已经被拆分进一套更完整的团队协作手册中。</p>
-<p>建议从这里开始：</p>
-<ul>
-<li>[[团队协作总览]]</li>
-</ul>
-<p>按场景查阅：</p>
-<ul>
-<li>[[日常开发流程]]</li>
-<li>[[PR、评审与合并]]</li>
-<li>[[冲突处理与常见问题]]</li>
-</ul>
-<p>如果你只关心一个问题，可以直接跳到对应子笔记；如果你想看整套流程，先看总览。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/Git%20worktree%20%E6%97%A5%E5%B8%B8%E5%8D%8F%E4%BD%9C%E7%AC%94%E8%AE%B0/" data-id="cuid-GYMYUM0oru1KWhRvgtn9" data-title="Git worktree 日常协作笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/冲突处理与常见问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">冲突处理与常见问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="冲突处理与常见问题"><a href="#冲突处理与常见问题" class="headerlink" title="冲突处理与常见问题"></a>冲突处理与常见问题</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>这篇笔记解决的问题是：当 <code>git pull</code>、merge、rebase、stash、worktree 清理这些环节出问题时，应该先怎么判断、再怎么处理。</p>
-<h2 id="本地有未提交内容时，能不能直接-pull"><a href="#本地有未提交内容时，能不能直接-pull" class="headerlink" title="本地有未提交内容时，能不能直接 pull"></a>本地有未提交内容时，能不能直接 pull</h2><p>默认不建议。</p>
-<p>因为这时通常会发生两种情况：</p>
-<ol>
-<li>Git 直接拒绝 pull</li>
-<li>pull 进入 merge&#x2F;rebase 后出现冲突</li>
-</ol>
-<p>更稳妥的做法是先处理本地改动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git add ...</span><br><span class="line">git commit -m <span class="string">&quot;wip&quot;</span></span><br><span class="line"><span class="comment"># 或 git stash</span></span><br><span class="line">git pull --rebase</span><br></pre></td></tr></table></figure>
-
-<h2 id="pull-被拒绝时怎么处理"><a href="#pull-被拒绝时怎么处理" class="headerlink" title="pull 被拒绝时怎么处理"></a>pull 被拒绝时怎么处理</h2><p>优先按这个顺序判断：</p>
-<ol>
-<li>你是不是在一个不该直接开发的分支上改了东西</li>
-<li>这些本地改动是不是已经值得提交</li>
-<li>如果只是临时内容，是否适合先 stash</li>
-</ol>
-<p>大多数情况下，优先考虑：</p>
-<ul>
-<li>先 commit</li>
-<li>次选 stash</li>
-<li>再 pull</li>
-</ul>
-<h2 id="merge-rebase-冲突时怎么想"><a href="#merge-rebase-冲突时怎么想" class="headerlink" title="merge &#x2F; rebase 冲突时怎么想"></a>merge &#x2F; rebase 冲突时怎么想</h2><p>先不要急着做复杂操作，先确认：</p>
-<ul>
-<li>这是你自己的功能分支，还是 <code>master</code></li>
-<li>你现在是在 merge 过程中，还是 rebase 过程中</li>
-<li>冲突文件里哪些改动是本地的，哪些来自远端</li>
-</ul>
-<p>处理思路：</p>
-<ul>
-<li>如果是日常同步功能分支，通常优先把冲突解开，然后继续当前流程</li>
-<li>如果是 <code>master</code> 上出现混乱，先确认是不是因为你不小心在 <code>master</code> 上开发了</li>
-</ul>
-<h2 id="stash-什么时候用"><a href="#stash-什么时候用" class="headerlink" title="stash 什么时候用"></a>stash 什么时候用</h2><p>适合用 stash：</p>
-<ul>
-<li>你只是临时切一下上下文</li>
-<li>当前改动还不值得形成正式提交</li>
-</ul>
-<p>不建议滥用 stash：</p>
-<ul>
-<li>长时间堆很多 stash 不处理</li>
-<li>把本来应该提交的小步进度一直藏在 stash 里</li>
-</ul>
-<h2 id="worktree-删除失败怎么办"><a href="#worktree-删除失败怎么办" class="headerlink" title="worktree 删除失败怎么办"></a>worktree 删除失败怎么办</h2><p>常见原因：</p>
-<ul>
-<li>worktree 里还有未提交内容</li>
-<li>该 worktree 正被某个 shell 占用</li>
-<li>分支状态还没整理干净</li>
-</ul>
-<p>先检查：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git worktree list</span><br></pre></td></tr></table></figure>
-
-<h2 id="分支删不掉通常是什么原因"><a href="#分支删不掉通常是什么原因" class="headerlink" title="分支删不掉通常是什么原因"></a>分支删不掉通常是什么原因</h2><p>常见原因：</p>
-<ul>
-<li>该分支还有未合并提交</li>
-<li>当前正停留在这个分支上</li>
-<li>这个分支仍然被某个 worktree 使用</li>
-</ul>
-<p>先检查：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br><span class="line">git worktree list</span><br></pre></td></tr></table></figure>
-
-<h2 id="常见问题速查"><a href="#常见问题速查" class="headerlink" title="常见问题速查"></a>常见问题速查</h2><h3 id="为什么-push-的不是-worktree？"><a href="#为什么-push-的不是-worktree？" class="headerlink" title="为什么 push 的不是 worktree？"></a>为什么 push 的不是 worktree？</h3><p>因为远端识别的是 Git 分支，不是你本地目录。</p>
-<h3 id="为什么-master-要保持干净？"><a href="#为什么-master-要保持干净？" class="headerlink" title="为什么 master 要保持干净？"></a>为什么 master 要保持干净？</h3><p>因为这样同步远端最简单，冲突最少。</p>
-<h3 id="什么时候必须新开分支？"><a href="#什么时候必须新开分支？" class="headerlink" title="什么时候必须新开分支？"></a>什么时候必须新开分支？</h3><p>只要是一个独立任务，就建议新开分支。</p>
-<h3 id="一个-PR-多大合适？"><a href="#一个-PR-多大合适？" class="headerlink" title="一个 PR 多大合适？"></a>一个 PR 多大合适？</h3><p>以“别人能看懂并能安全 review”为准，不要把多个无关需求塞进同一个 PR。</p>
-<p>处理完问题后，回到 [[日常开发流程]] 或 [[PR、评审与合并]] 继续。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" data-id="cuidmo1EBaUL6Nn8349H13HQ_" data-title="冲突处理与常见问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/PR、评审与合并" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/">PR、评审与合并</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="PR、评审与合并"><a href="#PR、评审与合并" class="headerlink" title="PR、评审与合并"></a>PR、评审与合并</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>这篇笔记解决的问题是：代码已经在功能分支里，接下来应该怎么发 PR、怎么 review、怎么合并。</p>
-<h2 id="什么时候发-PR"><a href="#什么时候发-PR" class="headerlink" title="什么时候发 PR"></a>什么时候发 PR</h2><p>通常在以下情况发 PR：</p>
-<ul>
-<li>当前任务已经形成一段相对完整的改动</li>
-<li>代码已经可以让别人 review</li>
-<li>你准备进入合并流程</li>
-</ul>
-<h2 id="PR-里至少写什么"><a href="#PR-里至少写什么" class="headerlink" title="PR 里至少写什么"></a>PR 里至少写什么</h2><p>建议最少写清楚：</p>
-<ul>
-<li>这次改了什么</li>
-<li>为什么这样改</li>
-<li>还有没有已知限制</li>
-<li>review 时最值得重点看的地方</li>
-</ul>
-<h2 id="小团队下的最低-review-要求"><a href="#小团队下的最低-review-要求" class="headerlink" title="小团队下的最低 review 要求"></a>小团队下的最低 review 要求</h2><p>适合小团队的最低要求：</p>
-<ul>
-<li>改动较小且风险低时，可以快速 review</li>
-<li>改动较大、影响共享逻辑、或可能影响稳定性时，最好等另一个人看过</li>
-<li>如果只是你个人维护的内容，可以按自己的节奏合并，但仍建议保留 PR 记录</li>
-</ul>
-<h2 id="什么时候可以自己合并"><a href="#什么时候可以自己合并" class="headerlink" title="什么时候可以自己合并"></a>什么时候可以自己合并</h2><p>通常可以自己合并：</p>
-<ul>
-<li>只有你自己在维护该模块</li>
-<li>改动很小，且影响范围清楚</li>
-<li>团队已经约定这类改动无需等待额外 review</li>
-</ul>
-<p>通常不建议自己直接合并：</p>
-<ul>
-<li>改动涉及公共基础能力</li>
-<li>改动较大</li>
-<li>其他人正在并行依赖这部分代码</li>
-</ul>
-<h2 id="默认合并建议"><a href="#默认合并建议" class="headerlink" title="默认合并建议"></a>默认合并建议</h2><p>小团队默认建议优先使用 <strong>squash merge</strong>。</p>
-<p>原因：</p>
-<ul>
-<li>PR 内可以保留开发过程中的多个小提交</li>
-<li>合并到 <code>master</code> 后历史更整洁</li>
-<li>回看主分支历史时更容易理解</li>
-</ul>
-<p>如果团队明确希望保留完整分支提交历史，再考虑普通 merge。</p>
-<h2 id="PR-合并后本地要做什么"><a href="#PR-合并后本地要做什么" class="headerlink" title="PR 合并后本地要做什么"></a>PR 合并后本地要做什么</h2><p>先回到主仓库所在的 <code>master</code> worktree，再执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
-<p>不要在当前功能 worktree 里直接切回 <code>master</code>。同步完成后，再清理已经完成的分支和 worktree：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git worktree remove ../wt-foo</span><br><span class="line">git branch -d feature/foo</span><br></pre></td></tr></table></figure>
-
-<p>先默认尝试 <code>git branch -d feature/foo</code>。如果因为 squash merge，Git 仍然认为这个分支没有合并，可以在确认远端 PR 已经合并后改用 <code>git branch -D feature/foo</code>。</p>
-<p>如果远端分支也需要删：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete feature/foo</span><br></pre></td></tr></table></figure>
-
-<h2 id="常见误区"><a href="#常见误区" class="headerlink" title="常见误区"></a>常见误区</h2><h3 id="误区-1：PR-合并后，还要不要本地再-merge-一遍？"><a href="#误区-1：PR-合并后，还要不要本地再-merge-一遍？" class="headerlink" title="误区 1：PR 合并后，还要不要本地再 merge 一遍？"></a>误区 1：PR 合并后，还要不要本地再 merge 一遍？</h3><p>通常不需要。</p>
-<p>一般是远端 PR 合并完成后，你本地更新 <code>master</code> 即可。</p>
-<h3 id="误区-2：是不是把-worktree-推到远端？"><a href="#误区-2：是不是把-worktree-推到远端？" class="headerlink" title="误区 2：是不是把 worktree 推到远端？"></a>误区 2：是不是把 worktree 推到远端？</h3><p>不是。</p>
-<p>推到远端的是分支，worktree 只是本地目录。</p>
-<h3 id="误区-3：是不是每个-PR-都必须很正式？"><a href="#误区-3：是不是每个-PR-都必须很正式？" class="headerlink" title="误区 3：是不是每个 PR 都必须很正式？"></a>误区 3：是不是每个 PR 都必须很正式？</h3><p>对小团队来说，不需要过度流程化，但至少要保证别人能看懂改动目的。</p>
-<p>遇到 pull 冲突、清理失败等问题，转到 [[冲突处理与常见问题]]。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/PR%E3%80%81%E8%AF%84%E5%AE%A1%E4%B8%8E%E5%90%88%E5%B9%B6/" data-id="cuidZLPwk9EQOi2wMkYBlkxZo" data-title="PR、评审与合并" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/团队协作总览" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%80%BB%E8%A7%88/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%80%BB%E8%A7%88/">团队协作总览</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="团队协作总览"><a href="#团队协作总览" class="headerlink" title="团队协作总览"></a>团队协作总览</h1><h2 id="这套手册适合谁"><a href="#这套手册适合谁" class="headerlink" title="这套手册适合谁"></a>这套手册适合谁</h2><p>这套手册适合我自己和少量协作者一起开发时使用。</p>
-<p>目标是：</p>
-<ul>
-<li>日常开发步骤尽量固定</li>
-<li>减少因为分支、worktree、PR 使用不一致带来的混乱</li>
-<li>遇到常见 Git 问题时能快速查到处理办法</li>
-</ul>
-<p>这不是大团队流程文档，也不是公司级规范，而是一套能直接执行的小团队协作手册。</p>
-<h2 id="我们的基本约定"><a href="#我们的基本约定" class="headerlink" title="我们的基本约定"></a>我们的基本约定</h2><ul>
-<li><code>master</code> 保持干净，只负责同步远端</li>
-<li>一个任务一个分支</li>
-<li>一个任务尽量对应一个 worktree</li>
-<li>日常开发在功能分支中完成，不直接在 <code>master</code> 上改代码</li>
-<li>代码完成后先推分支，再发 PR</li>
-<li>PR 合并通常在远端完成，本地只负责同步结果</li>
-</ul>
-<h2 id="分支、worktree、PR-的关系"><a href="#分支、worktree、PR-的关系" class="headerlink" title="分支、worktree、PR 的关系"></a>分支、worktree、PR 的关系</h2><ul>
-<li><strong>分支</strong>：表示一段独立开发工作</li>
-<li><strong>worktree</strong>：本地承载某个分支的一份独立目录</li>
-<li><strong>PR</strong>：把某个分支的改动提交给团队评审和合并</li>
-</ul>
-<p>一句话理解：</p>
-<blockquote>
-<p>worktree 是本地工作目录，真正推到远端的是分支，协作入口是 PR。</p>
-</blockquote>
-<h2 id="标准协作主线"><a href="#标准协作主线" class="headerlink" title="标准协作主线"></a>标准协作主线</h2><ol>
-<li>先在主 worktree 中同步本地 <code>master</code></li>
-<li>为新任务创建分支和 worktree</li>
-<li>在 worktree 中开发和提交</li>
-<li>推送分支到远端</li>
-<li>创建 PR</li>
-<li>完成 review 与合并</li>
-<li>回到主 worktree 同步 <code>master</code></li>
-<li>删除已完成的分支和 worktree</li>
-</ol>
-<h2 id="从哪里开始看"><a href="#从哪里开始看" class="headerlink" title="从哪里开始看"></a>从哪里开始看</h2><ul>
-<li>想开始一个新任务：看 [[日常开发流程]]</li>
-<li>想发 PR 或决定怎么合并：看 [[PR、评审与合并]]</li>
-<li>遇到 pull、冲突、stash、清理失败等问题：看 [[冲突处理与常见问题]]</li>
-</ul>
-<h2 id="阅读顺序建议"><a href="#阅读顺序建议" class="headerlink" title="阅读顺序建议"></a>阅读顺序建议</h2><ol>
-<li>先读这篇总览</li>
-<li>日常开发时主要查 [[日常开发流程]]</li>
-<li>提交协作时查 [[PR、评审与合并]]</li>
-<li>出现异常时查 [[冲突处理与常见问题]]</li>
-</ol>
-<h2 id="新任务开始前"><a href="#新任务开始前" class="headerlink" title="新任务开始前"></a>新任务开始前</h2><p>默认先回到主仓库所在的 <code>master</code> worktree，再做这几件事：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
-<p>不要在当前功能 worktree 里直接切回 <code>master</code>。然后根据任务创建新的分支和 worktree，具体命令见 [[日常开发流程]]。</p>
-<h2 id="PR-合并后"><a href="#PR-合并后" class="headerlink" title="PR 合并后"></a>PR 合并后</h2><p>默认先回到主仓库所在的 <code>master</code> worktree，再同步结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
-<p>完成同步后，再删除已经完成的功能分支和 worktree，具体步骤见 [[PR、评审与合并]]。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%80%BB%E8%A7%88/" data-id="cuid_qIE6NIMx6uVYxGrHO2va" data-title="团队协作总览" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/通过sub2api访问gpt5.4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/">通过sub2api访问gpt5.4</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="claude-code配置"><a href="#claude-code配置" class="headerlink" title="claude code配置"></a>claude code配置</h2><h3 id="配置文件路径"><a href="#配置文件路径" class="headerlink" title="配置文件路径"></a>配置文件路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.claude/settings.json</span><br></pre></td></tr></table></figure>
-
-<h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>模型直接配置gpt-5.4,此时不需要配置sub2api的模型映射</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span> </span><br><span class="line">	<span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> </span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_OPUS_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gpt-5.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_SONNET_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gpt-5.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_HAIKU_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gpt-5.4-mini&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;___CLAUDE_CODE_EFFORT_LEVEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;max&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_BASE_URL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://localhost:8090&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_AUTH_TOKEN&quot;</span><span class="punctuation">:</span> <span class="string">&quot;api-key&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;CLAUDE_CODE_ATTRIBUTION_HEADER&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;theme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auto&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>配置anthropic的模型</strong>或者<strong>不配置模型使用默认的（实际也是claude模型）</strong>，需要在sub2api里面进行模型映射，映射成gpt的模型</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span> </span><br><span class="line">	<span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> </span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_OPUS_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;claude-opus-4-6&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_SONNET_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;claude-opus-4-6&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_DEFAULT_HAIKU_MODEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;claude-opus-4-6&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;___CLAUDE_CODE_EFFORT_LEVEL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;max&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_BASE_URL&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://localhost:8090&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;ANTHROPIC_AUTH_TOKEN&quot;</span><span class="punctuation">:</span> <span class="string">&quot;api-key&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;CLAUDE_CODE_ATTRIBUTION_HEADER&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;theme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auto&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="各个配置解释"><a href="#各个配置解释" class="headerlink" title="各个配置解释"></a>各个配置解释</h3><ul>
-<li>“ANTHROPIC_DEFAULT_OPUS_MODEL”: “复杂推理任务模型，最好的模型”,</li>
-<li>“ANTHROPIC_DEFAULT_SONNET_MODEL”: “常规编码模型”,</li>
-<li>“ANTHROPIC_DEFAULT_HAIKU_MODEL”: “日常任务模型”,</li>
-<li>“___CLAUDE_CODE_EFFORT_LEVEL”: “模型推理强度，前面加__是为了注释，实际没使用”,</li>
-<li>“ANTHROPIC_BASE_URL”: “sub2api 服务”,</li>
-<li>“ANTHROPIC_AUTH_TOKEN”: “api-key”,</li>
-<li>“CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC”: “关闭所有非必要网络请求，遥测，统计，自动更新等请求”,</li>
-<li>“CLAUDE_CODE_ATTRIBUTION_HEADER”: “用来自定义请求里的 Attribution 标识头（来源标识）”</li>
-</ul>
-<h2 id="在sub2api中做模型映射"><a href="#在sub2api中做模型映射" class="headerlink" title="在sub2api中做模型映射"></a>在sub2api中做模型映射</h2><p>分组管理</p>
-<p><img src="/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/file-20260424234121657.png"></p>
-<p>“&#x2F;v1&#x2F;messages” 是claude的协议，开启之后sub2api可以识别并自动将模型进行映射</p>
-<p><img src="/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/file-20260424234147503.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E9%80%9A%E8%BF%87sub2api%E8%AE%BF%E9%97%AEgpt5.4/" data-id="cuid9A1vsHs6ZFuYU-ys50-qn" data-title="通过sub2api访问gpt5.4" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-claudecode/日常开发流程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/claudecode/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.000Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/claudecode/">claudecode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/claudecode/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">日常开发流程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="日常开发流程"><a href="#日常开发流程" class="headerlink" title="日常开发流程"></a>日常开发流程</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>这篇笔记解决的问题是：从接到一个新任务开始，到把代码推到远端分支为止，日常应该怎么操作。</p>
-<h2 id="标准流程"><a href="#标准流程" class="headerlink" title="标准流程"></a>标准流程</h2><h3 id="1-先在主-worktree-里同步主分支"><a href="#1-先在主-worktree-里同步主分支" class="headerlink" title="1. 先在主 worktree 里同步主分支"></a>1. 先在主 worktree 里同步主分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
-<p>这里的命令应该在主仓库所在的 <code>master</code> worktree 中执行，不要在当前功能 worktree 里直接切回 <code>master</code>。</p>
-<p>要求：</p>
-<ul>
-<li><code>master</code> 尽量保持干净</li>
-<li>不要在 <code>master</code> 上直接开发</li>
-</ul>
-<h3 id="2-为新任务创建分支和-worktree"><a href="#2-为新任务创建分支和-worktree" class="headerlink" title="2. 为新任务创建分支和 worktree"></a>2. 为新任务创建分支和 worktree</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree add ../wt-foo -b feature/foo master</span><br></pre></td></tr></table></figure>
-
-<p>含义：</p>
-<ul>
-<li>基于 <code>master</code> 创建 <code>feature/foo</code></li>
-<li>在 <code>../wt-foo</code> 目录中开始新任务</li>
-</ul>
-<h3 id="3-在-worktree-里开发"><a href="#3-在-worktree-里开发" class="headerlink" title="3. 在 worktree 里开发"></a>3. 在 worktree 里开发</h3><p>常用节奏：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git add &lt;files&gt;</span><br><span class="line">git commit -m <span class="string">&quot;feat: foo&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>建议：</p>
-<ul>
-<li>小步提交</li>
-<li>一个提交只表达一件事</li>
-<li>不要等到改了一大堆再一次性提交</li>
-</ul>
-<h3 id="4-首次推送远端分支"><a href="#4-首次推送远端分支" class="headerlink" title="4. 首次推送远端分支"></a>4. 首次推送远端分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin feature/foo</span><br></pre></td></tr></table></figure>
-
-<p>之后继续开发时，正常 <code>git push</code> 即可。</p>
-<h2 id="一个任务对应一个分支"><a href="#一个任务对应一个分支" class="headerlink" title="一个任务对应一个分支"></a>一个任务对应一个分支</h2><p>推荐：</p>
-<ul>
-<li>一个任务一个分支</li>
-<li>一个任务一个 worktree</li>
-</ul>
-<p>不推荐：</p>
-<ul>
-<li>多个需求混在同一个分支里</li>
-<li>在同一个 worktree 中长期混做多个任务</li>
-</ul>
-<h2 id="什么时候应该-push"><a href="#什么时候应该-push" class="headerlink" title="什么时候应该 push"></a>什么时候应该 push</h2><p>推荐在这些时机 push：</p>
-<ul>
-<li>一个功能点已经可以保存</li>
-<li>想让别人提前看到进展</li>
-<li>准备发 PR</li>
-<li>需要把当前进度同步到远端备用</li>
-</ul>
-<h2 id="不要这样做"><a href="#不要这样做" class="headerlink" title="不要这样做"></a>不要这样做</h2><ul>
-<li>不要在 <code>master</code> 上直接写业务代码</li>
-<li>不要在有大量未整理改动时才第一次提交</li>
-<li>不要把多个无关需求塞进同一个分支</li>
-<li>不要把 worktree 当成远端协作对象，真正协作的是分支</li>
-</ul>
-<h2 id="最小命令模板"><a href="#最小命令模板" class="headerlink" title="最小命令模板"></a>最小命令模板</h2><h3 id="新任务开始"><a href="#新任务开始" class="headerlink" title="新任务开始"></a>新任务开始</h3><p>先回到主仓库所在的 <code>master</code> worktree，再执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">git pull</span><br><span class="line">git worktree add ../wt-foo -b feature/foo master</span><br></pre></td></tr></table></figure>
-
-<h3 id="开发中提交"><a href="#开发中提交" class="headerlink" title="开发中提交"></a>开发中提交</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;files&gt;</span><br><span class="line">git commit -m <span class="string">&quot;feat: foo&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="首次推送"><a href="#首次推送" class="headerlink" title="首次推送"></a>首次推送</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin feature/foo</span><br></pre></td></tr></table></figure>
-
-<p>下一步见 [[PR、评审与合并]]。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/claudecode/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/" data-id="cuidwAlIqFk1NBKKnsY_qi3a9" data-title="日常开发流程" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-
     </footer>
   </div>
   
@@ -836,7 +624,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%86%85%E9%83%A8%E7%B1%BB/" data-id="cuidMQfTFC0QwprUiczbFvGT-" data-title="内部类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%86%85%E9%83%A8%E7%B1%BB/" data-id="cuidUBZK_GRUF5VCRaBoH9UCj" data-title="内部类" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -966,7 +754,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cuidItPf6BwC5PpIhj61gJ-Js" data-title="基本数据类型" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cuidhzeWqXkfSpE8rQGioVr9_" data-title="基本数据类型" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

@@ -250,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/" data-id="cuidKTI094hYnOtI3fv29TkRS" data-title="🧪 一句话理解" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/Linux/Virtualization/podman/%F0%9F%A7%A0%20Distrobox%20vs%20Docker%EF%BC%88%E6%A0%B8%E5%BF%83%E5%B7%AE%E5%BC%82%E4%B8%80%E7%9C%BC%E7%9C%8B%E6%87%82%EF%BC%89/" data-id="cuideZ-FX362zOm0NRTmswgPd" data-title="🧪 一句话理解" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -372,7 +372,120 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%EF%BC%88%E6%99%BA%E8%83%BD%E8%BD%AC%E5%9E%8B%EF%BC%89/" data-id="cuidDiWmyJnaz2YjOqpAUf71t" data-title="🧭 场景一：带 `throw`（你的原始代码）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%EF%BC%88%E6%99%BA%E8%83%BD%E8%BD%AC%E5%9E%8B%EF%BC%89/" data-id="cuidqbLUNWRfNOBCMhp_rtveq" data-title="🧭 场景一：带 `throw`（你的原始代码）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-java编程思想/第三章操作符/3.9.1 指数记数法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/">3.9.1 指数记数法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>我记得指数记数法是有一个国际标准的，小数点多少位，指数多少位，怎么记录这些数字？</p>
+<p>单精度和多精度（通常指双精度、四倍精度等）数字表示法的国际标准是 <strong>IEEE 754</strong>（全称 <strong>IEEE Standard for Floating-Point Arithmetic</strong>）。</p>
+<p>该标准由电气电子工程师学会 (IEEE) 制定，并被国际标准化组织 (ISO) 和国际电工委员会 (IEC) 采纳为国际标准，编号为 <strong>ISO&#x2F;IEC&#x2F;IEEE 60559</strong>。</p>
+<hr>
+<h3 id="📋-标准核心内容"><a href="#📋-标准核心内容" class="headerlink" title="📋 标准核心内容"></a>📋 标准核心内容</h3><p>IEEE 754 规定了计算机中浮点数的存储格式、算术运算、舍入规则以及异常处理（如溢出、被零除、NaN 等）。</p>
+<h4 id="1-常见精度格式"><a href="#1-常见精度格式" class="headerlink" title="1. 常见精度格式"></a>1. 常见精度格式</h4><p>在 IEEE 754 标准中，最常用的两种格式是单精度和双精度：</p>
+<table>
+<thead>
+<tr>
+<th><strong>格式名称</strong></th>
+<th><strong>别名</strong></th>
+<th><strong>总位数</strong></th>
+<th><strong>符号位 (Sign)</strong></th>
+<th><strong>指数位 (Exponent)</strong></th>
+<th><strong>尾数位 (Mantissa)</strong></th>
+<th><strong>十进制精度</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>单精度</strong></td>
+<td>binary32</td>
+<td>32 bit</td>
+<td>1 bit</td>
+<td>8 bit</td>
+<td>23 bit</td>
+<td>~7 位有效数字</td>
+</tr>
+<tr>
+<td><strong>双精度</strong></td>
+<td>binary64</td>
+<td>64 bit</td>
+<td>1 bit</td>
+<td>11 bit</td>
+<td>52 bit</td>
+<td>~16 位有效数字</td>
+</tr>
+<tr>
+<td><strong>四倍精度</strong></td>
+<td>binary128</td>
+<td>128 bit</td>
+<td>1 bit</td>
+<td>15 bit</td>
+<td>112 bit</td>
+<td>~34 位有效数字</td>
+</tr>
+</tbody></table>
+<h4 id="2-数值的表示公式"><a href="#2-数值的表示公式" class="headerlink" title="2. 数值的表示公式"></a>2. 数值的表示公式</h4><p>一个浮点数的值通过以下公式计算：</p>
+<p>$$Value &#x3D; (-1)^S \times (1.f) \times 2^{E - Bias}$$</p>
+<ul>
+<li><p><strong>$S$ (Sign)</strong>：符号位。0 代表正数，1 代表负数。</p>
+</li>
+<li><p><strong>$f$ (Fraction&#x2F;Mantissa)</strong>：尾数的小数部分。隐含的高位为 1（规格化数）。</p>
+</li>
+<li><p><strong>$E$ (Exponent)</strong>：阶码（指数）。</p>
+</li>
+<li><p><strong>$Bias$ (偏移量)</strong>：为了表示负指数，标准规定了一个偏移值。单精度为 127，双精度为 1023。</p>
+</li>
+</ul>
+<hr>
+<h3 id="🔍-为什么这个标准很重要？"><a href="#🔍-为什么这个标准很重要？" class="headerlink" title="🔍 为什么这个标准很重要？"></a>🔍 为什么这个标准很重要？</h3><ol>
+<li><p><strong>跨平台一致性</strong>：无论你在 Intel CPU、ARM 架构还是英伟达 GPU 上运行，同样的浮点运算代码应该得到相同的结果。</p>
+</li>
+<li><p><strong>特殊的数值处理</strong>：标准定义了如何表示特殊状态：</p>
+<ul>
+<li><p><strong>NaN (Not a Number)</strong>：用于非法运算（如 $\sqrt{-1}$）。</p>
+</li>
+<li><p><strong>Infinity ($\infty$)</strong>：用于表示超出范围的极值。</p>
+</li>
+<li><p><strong>$\pm 0$</strong>：区分正零和负零。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>舍入模式</strong>：规定了四种（或更多）舍入规则，确保精度损失是可控且可预测的。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" data-id="cuiduQxTPUTHi557g9BL5Jx0x" data-title="3.9.1 指数记数法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -498,120 +611,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="cuid7j0aNkixm96abmAqo9bE7" data-title="字符串" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java编程思想/第三章操作符/3.9.1 指数记数法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2026-05-09T01:34:34.884Z" itemprop="datePublished">2026-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/">3.9.1 指数记数法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>我记得指数记数法是有一个国际标准的，小数点多少位，指数多少位，怎么记录这些数字？</p>
-<p>单精度和多精度（通常指双精度、四倍精度等）数字表示法的国际标准是 <strong>IEEE 754</strong>（全称 <strong>IEEE Standard for Floating-Point Arithmetic</strong>）。</p>
-<p>该标准由电气电子工程师学会 (IEEE) 制定，并被国际标准化组织 (ISO) 和国际电工委员会 (IEC) 采纳为国际标准，编号为 <strong>ISO&#x2F;IEC&#x2F;IEEE 60559</strong>。</p>
-<hr>
-<h3 id="📋-标准核心内容"><a href="#📋-标准核心内容" class="headerlink" title="📋 标准核心内容"></a>📋 标准核心内容</h3><p>IEEE 754 规定了计算机中浮点数的存储格式、算术运算、舍入规则以及异常处理（如溢出、被零除、NaN 等）。</p>
-<h4 id="1-常见精度格式"><a href="#1-常见精度格式" class="headerlink" title="1. 常见精度格式"></a>1. 常见精度格式</h4><p>在 IEEE 754 标准中，最常用的两种格式是单精度和双精度：</p>
-<table>
-<thead>
-<tr>
-<th><strong>格式名称</strong></th>
-<th><strong>别名</strong></th>
-<th><strong>总位数</strong></th>
-<th><strong>符号位 (Sign)</strong></th>
-<th><strong>指数位 (Exponent)</strong></th>
-<th><strong>尾数位 (Mantissa)</strong></th>
-<th><strong>十进制精度</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>单精度</strong></td>
-<td>binary32</td>
-<td>32 bit</td>
-<td>1 bit</td>
-<td>8 bit</td>
-<td>23 bit</td>
-<td>~7 位有效数字</td>
-</tr>
-<tr>
-<td><strong>双精度</strong></td>
-<td>binary64</td>
-<td>64 bit</td>
-<td>1 bit</td>
-<td>11 bit</td>
-<td>52 bit</td>
-<td>~16 位有效数字</td>
-</tr>
-<tr>
-<td><strong>四倍精度</strong></td>
-<td>binary128</td>
-<td>128 bit</td>
-<td>1 bit</td>
-<td>15 bit</td>
-<td>112 bit</td>
-<td>~34 位有效数字</td>
-</tr>
-</tbody></table>
-<h4 id="2-数值的表示公式"><a href="#2-数值的表示公式" class="headerlink" title="2. 数值的表示公式"></a>2. 数值的表示公式</h4><p>一个浮点数的值通过以下公式计算：</p>
-<p>$$Value &#x3D; (-1)^S \times (1.f) \times 2^{E - Bias}$$</p>
-<ul>
-<li><p><strong>$S$ (Sign)</strong>：符号位。0 代表正数，1 代表负数。</p>
-</li>
-<li><p><strong>$f$ (Fraction&#x2F;Mantissa)</strong>：尾数的小数部分。隐含的高位为 1（规格化数）。</p>
-</li>
-<li><p><strong>$E$ (Exponent)</strong>：阶码（指数）。</p>
-</li>
-<li><p><strong>$Bias$ (偏移量)</strong>：为了表示负指数，标准规定了一个偏移值。单精度为 127，双精度为 1023。</p>
-</li>
-</ul>
-<hr>
-<h3 id="🔍-为什么这个标准很重要？"><a href="#🔍-为什么这个标准很重要？" class="headerlink" title="🔍 为什么这个标准很重要？"></a>🔍 为什么这个标准很重要？</h3><ol>
-<li><p><strong>跨平台一致性</strong>：无论你在 Intel CPU、ARM 架构还是英伟达 GPU 上运行，同样的浮点运算代码应该得到相同的结果。</p>
-</li>
-<li><p><strong>特殊的数值处理</strong>：标准定义了如何表示特殊状态：</p>
-<ul>
-<li><p><strong>NaN (Not a Number)</strong>：用于非法运算（如 $\sqrt{-1}$）。</p>
-</li>
-<li><p><strong>Infinity ($\infty$)</strong>：用于表示超出范围的极值。</p>
-</li>
-<li><p><strong>$\pm 0$</strong>：区分正零和负零。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>舍入模式</strong>：规定了四种（或更多）舍入规则，确保精度损失是可控且可预测的。</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/3.9.1%20%E6%8C%87%E6%95%B0%E8%AE%B0%E6%95%B0%E6%B3%95/" data-id="cuid2gQjZTEi76oTUH7MLHQTu" data-title="3.9.1 指数记数法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%93%8D%E4%BD%9C%E7%AC%A6/%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="cuid0DboRM2kdxg-Ws97mkXDM" data-title="字符串" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -694,7 +694,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" data-id="cuidtud1axsUe90ohA_vi51FG" data-title="Java 泛型 (Generics) 核心笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%E6%B3%9B%E5%9E%8B/Java_%E6%B3%9B%E5%9E%8B%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9/" data-id="cuidoWw1bLWIDvZ5FxVnjLAym" data-title="Java 泛型 (Generics) 核心笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -762,7 +762,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9/switch%E9%80%89%E6%8B%A9%E5%9B%A0%E5%AD%90/" data-id="cuidFeoYjrFL3M_sWfCdrByA9" data-title="switch选择因子" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9/switch%E9%80%89%E6%8B%A9%E5%9B%A0%E5%AD%90/" data-id="cuidoOsVHzAEVI8yhCK8sXICr" data-title="switch选择因子" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -836,7 +836,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%B4%A2%E5%BC%95%20(MOC)/" data-id="cuidmeCWI5Fbu-Vb2AOQiDNUZ" data-title="Java 学习笔记索引 (MOC)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%B4%A2%E5%BC%95%20(MOC)/" data-id="cuidyORBVPV-ccdZeYgbKbLQd" data-title="Java 学习笔记索引 (MOC)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -897,7 +897,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%BC%82%E5%B8%B8/Java_finally%E4%B8%AD%E5%BC%82%E5%B8%B8%E4%B8%A2%E5%A4%B1%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="cuidzV983HSJUzTq_wVDaJWJd" data-title="Java 中 finally 块异常丢失及其解决方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/%E5%BC%82%E5%B8%B8/Java_finally%E4%B8%AD%E5%BC%82%E5%B8%B8%E4%B8%A2%E5%A4%B1%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="cuidqmwO-zrNUXqdpQ14mv107" data-title="Java 中 finally 块异常丢失及其解决方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -996,7 +996,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/blender/%E9%97%AE%E9%A2%98/" data-id="cuidbZwcGsTWSta4lcF3At64o" data-title="问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/blender/%E9%97%AE%E9%A2%98/" data-id="cuid701nPCN-2ama-H9A5SWHu" data-title="问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1084,7 +1084,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/" data-id="cuidqvet-r0NvuXlSqw6FY22Y" data-title="2基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/05/09/blender/2%E5%9F%BA%E7%A1%80/" data-id="cuidiBNECh0xT7QjDNt6y-qXY" data-title="2基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
