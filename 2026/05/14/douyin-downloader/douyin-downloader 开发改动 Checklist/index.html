@@ -1,0 +1,784 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>douyin-downloader 开发改动 Checklist | </title><meta name="author" content="zh2683"><meta name="copyright" content="zh2683"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="douyin-downloader 开发改动 Checklist这篇笔记解决什么问题这篇笔记用于开发时快速确认：  改某类功能需要碰哪些文件 必须补哪些测试 哪些配置、文档、桌面端同步点容易漏 提交前最小验证命令是什么  建议搭配：  douyin-downloader 项目开发文档 douyin-downloader 故障排查手册  通用改动前检查开始前先确认：   当前改动是否属于共享逻辑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="douyin-downloader 开发改动 Checklist">
+<meta property="og:url" content="https://baiyu2683.github.io/2026/05/14/douyin-downloader/douyin-downloader%20%E5%BC%80%E5%8F%91%E6%94%B9%E5%8A%A8%20Checklist/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="douyin-downloader 开发改动 Checklist这篇笔记解决什么问题这篇笔记用于开发时快速确认：  改某类功能需要碰哪些文件 必须补哪些测试 哪些配置、文档、桌面端同步点容易漏 提交前最小验证命令是什么  建议搭配：  douyin-downloader 项目开发文档 douyin-downloader 故障排查手册  通用改动前检查开始前先确认：   当前改动是否属于共享逻辑">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://baiyu2683.github.io/img/avatar.png">
+<meta property="article:published_time" content="2026-05-14T11:32:25.000Z">
+<meta property="article:modified_time" content="2026-05-14T14:34:22.142Z">
+<meta property="article:author" content="zh2683">
+<meta property="article:tag" content="checklist">
+<meta property="article:tag" content="development">
+<meta property="article:tag" content="douyin">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://baiyu2683.github.io/img/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "douyin-downloader 开发改动 Checklist",
+  "url": "https://baiyu2683.github.io/2026/05/14/douyin-downloader/douyin-downloader%20%E5%BC%80%E5%8F%91%E6%94%B9%E5%8A%A8%20Checklist/",
+  "image": "https://baiyu2683.github.io/img/avatar.png",
+  "datePublished": "2026-05-14T11:32:25.000Z",
+  "dateModified": "2026-05-14T14:34:22.142Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zh2683",
+      "url": "https://baiyu2683.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://baiyu2683.github.io/2026/05/14/douyin-downloader/douyin-downloader%20%E5%BC%80%E5%8F%91%E6%94%B9%E5%8A%A8%20Checklist/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'douyin-downloader 开发改动 Checklist',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.2"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name"></span></a><a class="nav-page-title" href="/"><span class="site-name">douyin-downloader 开发改动 Checklist</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">douyin-downloader 开发改动 Checklist</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-14T11:32:25.000Z" title="发表于 2026-05-14 19:32:25">2026-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-14T14:34:22.142Z" title="更新于 2026-05-14 22:34:22">2026-05-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/douyin-downloader/">douyin-downloader</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="douyin-downloader-开发改动-Checklist"><a href="#douyin-downloader-开发改动-Checklist" class="headerlink" title="douyin-downloader 开发改动 Checklist"></a>douyin-downloader 开发改动 Checklist</h1><h2 id="这篇笔记解决什么问题"><a href="#这篇笔记解决什么问题" class="headerlink" title="这篇笔记解决什么问题"></a>这篇笔记解决什么问题</h2><p>这篇笔记用于开发时快速确认：</p>
+<ul>
+<li>改某类功能需要碰哪些文件</li>
+<li>必须补哪些测试</li>
+<li>哪些配置、文档、桌面端同步点容易漏</li>
+<li>提交前最小验证命令是什么</li>
+</ul>
+<p>建议搭配：</p>
+<ul>
+<li><a   href='/2026/05/14/douyin-downloader/douyin-downloader 项目开发文档/'>douyin-downloader 项目开发文档</a></li>
+<li><a   href='/2026/05/14/douyin-downloader/douyin-downloader 故障排查手册/'>douyin-downloader 故障排查手册</a></li>
+</ul>
+<h2 id="通用改动前检查"><a href="#通用改动前检查" class="headerlink" title="通用改动前检查"></a>通用改动前检查</h2><p>开始前先确认：</p>
+<ul>
+<li><input disabled="" type="checkbox"> 当前改动是否属于共享逻辑</li>
+<li><input disabled="" type="checkbox"> 是否需要同步桌面端项目</li>
+<li><input disabled="" type="checkbox"> 是否会影响 Python 3.8 兼容</li>
+<li><input disabled="" type="checkbox"> 是否在核心下载路径引入了阻塞 I&#x2F;O</li>
+<li><input disabled="" type="checkbox"> 是否会改变用户配置格式</li>
+<li><input disabled="" type="checkbox"> 是否会改变文件命名或落盘结构</li>
+<li><input disabled="" type="checkbox"> 是否会改变 SQLite schema</li>
+<li><input disabled="" type="checkbox"> 是否会改变 Cookie &#x2F; API key &#x2F; token 等敏感信息处理</li>
+</ul>
+<p>共享逻辑目录：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">auth/</span><br><span class="line">cli/</span><br><span class="line">config/</span><br><span class="line">control/</span><br><span class="line">core/</span><br><span class="line">storage/</span><br><span class="line">tools/</span><br><span class="line">utils/</span><br><span class="line">tests/</span><br></pre></td></tr></table></figure>
+
+<p>有意差异文件：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cli/main.py</span><br><span class="line">run.py</span><br><span class="line">server/app.py</span><br><span class="line">server/jobs.py</span><br><span class="line">control/__init__.py</span><br></pre></td></tr></table></figure>
+
+<h2 id="提交前通用验证"><a href="#提交前通用验证" class="headerlink" title="提交前通用验证"></a>提交前通用验证</h2><p>最小：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/&lt;相关测试文件&gt;.py -v</span><br><span class="line">ruff check .</span><br></pre></td></tr></table></figure>
+
+<p>完整：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/</span><br><span class="line">ruff check .</span><br></pre></td></tr></table></figure>
+
+<p>如果改了共享逻辑，还要检查桌面端同步状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../douyin-downloader-desktop/scripts/sync-to-cli.sh --check</span><br></pre></td></tr></table></figure>
+
+<h2 id="新增-URL-类型-Checklist"><a href="#新增-URL-类型-Checklist" class="headerlink" title="新增 URL 类型 Checklist"></a>新增 URL 类型 Checklist</h2><p>例如新增：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">challenge</span><br></pre></td></tr></table></figure>
+
+<h3 id="必改文件"><a href="#必改文件" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>utils/validators.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/url_parser.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/downloader_factory.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/api_client.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/&lt;type&gt;_downloader.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/__init__.py</code>，如果需要对外导出</li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code>，如果新增配置</li>
+<li><input disabled="" type="checkbox"> <code>tests/test_url_parser.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_downloader_factory.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_api_client.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_&lt;type&gt;_downloader.py</code></li>
+</ul>
+<h3 id="具体检查"><a href="#具体检查" class="headerlink" title="具体检查"></a>具体检查</h3><ul>
+<li><input disabled="" type="checkbox"> <code>parse_url_type()</code> 能识别新 URL</li>
+<li><input disabled="" type="checkbox"> <code>URLParser.parse()</code> 能提取稳定 ID</li>
+<li><input disabled="" type="checkbox"> parser 返回 dict 中包含 <code>original_url</code> 和 <code>type</code></li>
+<li><input disabled="" type="checkbox"> downloader factory 能创建正确 downloader</li>
+<li><input disabled="" type="checkbox"> downloader 继承 <code>BaseDownloader</code></li>
+<li><input disabled="" type="checkbox"> downloader 构造参数与其他 downloader 保持一致</li>
+<li><input disabled="" type="checkbox"> downloader 返回 <code>DownloadResult</code></li>
+<li><input disabled="" type="checkbox"> downloader 内部主资源下载走 <code>_download_aweme_assets()</code> 或等价安全路径</li>
+<li><input disabled="" type="checkbox"> 分页逻辑有 cursor 不推进保护</li>
+<li><input disabled="" type="checkbox"> API 返回空数据时不会死循环</li>
+<li><input disabled="" type="checkbox"> 单元测试不请求真实抖音 API</li>
+</ul>
+<h3 id="最小测试"><a href="#最小测试" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_url_parser.py -v</span><br><span class="line">python -m pytest tests/test_downloader_factory.py -v</span><br><span class="line">python -m pytest tests/test_api_client.py -v</span><br><span class="line">python -m pytest tests/test_&lt;<span class="built_in">type</span>&gt;_downloader.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="新增用户-mode-Checklist"><a href="#新增用户-mode-Checklist" class="headerlink" title="新增用户 mode Checklist"></a>新增用户 mode Checklist</h2><p>例如新增：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forward</span><br></pre></td></tr></table></figure>
+
+<h3 id="必改文件-1"><a href="#必改文件-1" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>core/api_client.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/user_modes/forward_strategy.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/user_modes/__init__.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/user_mode_registry.py</code></li>
+<li><input disabled="" type="checkbox"> <code>config/default_config.py</code></li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_user_mode_registry.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_user_mode_strategies.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_user_downloader_modes.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_config_loader.py</code>，如果涉及别名或默认值</li>
+</ul>
+<h3 id="Strategy-检查"><a href="#Strategy-检查" class="headerlink" title="Strategy 检查"></a>Strategy 检查</h3><ul>
+<li><input disabled="" type="checkbox"> strategy 继承 <code>BaseUserModeStrategy</code></li>
+<li><input disabled="" type="checkbox"> 设置 <code>mode_name</code></li>
+<li><input disabled="" type="checkbox"> 设置 <code>api_method_name</code></li>
+<li><input disabled="" type="checkbox"> API 直接返回 aweme 列表时不用重写 <code>collect_items()</code></li>
+<li><input disabled="" type="checkbox"> API 返回 metadata 时重写 <code>collect_items()</code></li>
+<li><input disabled="" type="checkbox"> metadata 展开可复用 <code>_expand_metadata_items()</code></li>
+<li><input disabled="" type="checkbox"> 返回列表中的每项最终包含 <code>aweme_id</code></li>
+<li><input disabled="" type="checkbox"> 去重依赖 <code>seen_aweme_ids</code></li>
+<li><input disabled="" type="checkbox"> 需要增量时补 <code>increase.&lt;mode&gt;</code></li>
+<li><input disabled="" type="checkbox"> 需要数量限制时补 <code>number.&lt;mode&gt;</code></li>
+</ul>
+<h3 id="配置检查"><a href="#配置检查" class="headerlink" title="配置检查"></a>配置检查</h3><ul>
+<li><input disabled="" type="checkbox"> <code>number.&lt;mode&gt;</code> 默认值合理</li>
+<li><input disabled="" type="checkbox"> <code>increase.&lt;mode&gt;</code> 是否支持，不支持不要乱加</li>
+<li><input disabled="" type="checkbox"> README 写清楚是否支持增量</li>
+<li><input disabled="" type="checkbox"> 如果 mode 只能单独使用，要在 <code>UserDownloader._validate_mode_scope()</code> 中校验</li>
+</ul>
+<h3 id="最小测试-1"><a href="#最小测试-1" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_user_mode_registry.py -v</span><br><span class="line">python -m pytest tests/test_user_mode_strategies.py -v</span><br><span class="line">python -m pytest tests/test_user_downloader_modes.py -v</span><br><span class="line">python -m pytest tests/test_user_downloader.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置项-Checklist"><a href="#修改配置项-Checklist" class="headerlink" title="修改配置项 Checklist"></a>修改配置项 Checklist</h2><h3 id="必改文件-2"><a href="#必改文件-2" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>config/default_config.py</code></li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> <code>config/config_loader.py</code></li>
+<li><input disabled="" type="checkbox"> 读取该配置的业务模块</li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_config_loader.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_config_validation.py</code>，如果需要校验</li>
+<li><input disabled="" type="checkbox"> <code>tests/test_config_loader_save.py</code>，如果需要保存</li>
+</ul>
+<h3 id="具体检查-1"><a href="#具体检查-1" class="headerlink" title="具体检查"></a>具体检查</h3><ul>
+<li><input disabled="" type="checkbox"> 默认值是否向后兼容</li>
+<li><input disabled="" type="checkbox"> YAML 示例是否包含注释说明</li>
+<li><input disabled="" type="checkbox"> 环境变量是否需要支持</li>
+<li><input disabled="" type="checkbox"> 类型是否需要 coercion</li>
+<li><input disabled="" type="checkbox"> 无效值是否 fallback 而不是崩溃</li>
+<li><input disabled="" type="checkbox"> 是否需要加入 <code>_UI_PERSISTED_KEYS</code></li>
+<li><input disabled="" type="checkbox"> 是否可能写入敏感信息</li>
+<li><input disabled="" type="checkbox"> 是否影响桌面端 UI</li>
+<li><input disabled="" type="checkbox"> 是否影响 Docker 默认运行</li>
+</ul>
+<h3 id="如果是嵌套配置"><a href="#如果是嵌套配置" class="headerlink" title="如果是嵌套配置"></a>如果是嵌套配置</h3><p>确认 <code>_merge_config()</code> 能正确 deep merge：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">comments:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>不应覆盖整个默认 <code>comments</code> dict 导致其他字段丢失。</p>
+<h3 id="最小测试-2"><a href="#最小测试-2" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_config_loader.py -v</span><br><span class="line">python -m pytest tests/test_config_validation.py -v</span><br><span class="line">python -m pytest tests/test_config_loader_save.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-Cookie-鉴权-Checklist"><a href="#修改-Cookie-鉴权-Checklist" class="headerlink" title="修改 Cookie &#x2F; 鉴权 Checklist"></a>修改 Cookie &#x2F; 鉴权 Checklist</h2><h3 id="必改文件视情况"><a href="#必改文件视情况" class="headerlink" title="必改文件视情况"></a>必改文件视情况</h3><ul>
+<li><input disabled="" type="checkbox"> <code>auth/cookie_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>auth/ms_token_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>config/config_loader.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tools/cookie_fetcher.py</code></li>
+<li><input disabled="" type="checkbox"> <code>utils/cookie_utils.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/api_client.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_cookie_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_ms_token_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_cookie_fetcher.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_cookie_utils.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_api_client.py</code></li>
+</ul>
+<h3 id="安全检查"><a href="#安全检查" class="headerlink" title="安全检查"></a>安全检查</h3><ul>
+<li><input disabled="" type="checkbox"> 不在日志输出完整 Cookie</li>
+<li><input disabled="" type="checkbox"> 不在数据库 <code>download_history.config</code> 写 Cookie</li>
+<li><input disabled="" type="checkbox"> 不把 API key 写进 manifest</li>
+<li><input disabled="" type="checkbox"> Cookie 文件权限仍是 <code>0600</code>，Windows 除外</li>
+<li><input disabled="" type="checkbox"> Cookie 字符串走 <code>sanitize_cookies()</code></li>
+<li><input disabled="" type="checkbox"> 支持 dict 和 header string 两种输入</li>
+</ul>
+<h3 id="行为检查"><a href="#行为检查" class="headerlink" title="行为检查"></a>行为检查</h3><ul>
+<li><input disabled="" type="checkbox"> <code>msToken</code> 缺失不应导致硬失败</li>
+<li><input disabled="" type="checkbox"> 必需 Cookie 缺失只 warning，不直接阻断下载</li>
+<li><input disabled="" type="checkbox"> <code>cookie: auto</code> 仍能查找候选文件</li>
+<li><input disabled="" type="checkbox"> <code>auto_cookie: true</code> 仍能工作</li>
+</ul>
+<h3 id="最小测试-3"><a href="#最小测试-3" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_cookie_manager.py -v</span><br><span class="line">python -m pytest tests/test_cookie_utils.py -v</span><br><span class="line">python -m pytest tests/test_ms_token_manager.py -v</span><br><span class="line">python -m pytest tests/test_cookie_fetcher.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-API-Client-Checklist"><a href="#修改-API-Client-Checklist" class="headerlink" title="修改 API Client Checklist"></a>修改 API Client Checklist</h2><h3 id="必改文件视情况-1"><a href="#必改文件视情况-1" class="headerlink" title="必改文件视情况"></a>必改文件视情况</h3><ul>
+<li><input disabled="" type="checkbox"> <code>core/api_client.py</code></li>
+<li><input disabled="" type="checkbox"> <code>utils/xbogus.py</code></li>
+<li><input disabled="" type="checkbox"> <code>utils/abogus.py</code></li>
+<li><input disabled="" type="checkbox"> <code>auth/ms_token_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_api_client.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_xbogus.py</code></li>
+</ul>
+<h3 id="请求检查"><a href="#请求检查" class="headerlink" title="请求检查"></a>请求检查</h3><ul>
+<li><input disabled="" type="checkbox"> 新 API 使用 <code>_default_query()</code></li>
+<li><input disabled="" type="checkbox"> 请求 URL 走 <code>build_signed_path()</code></li>
+<li><input disabled="" type="checkbox"> 需要 live 域名时传 <code>base_url=self.LIVE_BASE_URL</code></li>
+<li><input disabled="" type="checkbox"> 需要特殊 Referer &#x2F; Origin 时传 <code>header_overrides</code></li>
+<li><input disabled="" type="checkbox"> 代理参数仍传给 <code>aiohttp</code></li>
+<li><input disabled="" type="checkbox"> HTTP 429 &#x2F; 5xx 有重试</li>
+<li><input disabled="" type="checkbox"> 空 200 响应按反爬处理</li>
+<li><input disabled="" type="checkbox"> 非 JSON 响应不会崩溃</li>
+</ul>
+<h3 id="响应检查"><a href="#响应检查" class="headerlink" title="响应检查"></a>响应检查</h3><ul>
+<li><input disabled="" type="checkbox"> 分页接口返回 <code>_normalize_paged_response()</code></li>
+<li><input disabled="" type="checkbox"> 明确 <code>item_keys</code></li>
+<li><input disabled="" type="checkbox"> 保留 <code>raw</code></li>
+<li><input disabled="" type="checkbox"> cursor 类型转 int</li>
+<li><input disabled="" type="checkbox"> <code>has_more</code> 能处理字符串和数字</li>
+<li><input disabled="" type="checkbox"> status code 可用于诊断</li>
+</ul>
+<h3 id="测试要求"><a href="#测试要求" class="headerlink" title="测试要求"></a>测试要求</h3><ul>
+<li><input disabled="" type="checkbox"> mock <code>_request_json()</code></li>
+<li><input disabled="" type="checkbox"> 不请求真实抖音</li>
+<li><input disabled="" type="checkbox"> 覆盖空响应</li>
+<li><input disabled="" type="checkbox"> 覆盖字段变体</li>
+<li><input disabled="" type="checkbox"> 覆盖 cursor &#x2F; has_more</li>
+</ul>
+<h3 id="最小测试-4"><a href="#最小测试-4" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_api_client.py -v</span><br><span class="line">python -m pytest tests/test_xbogus.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改下载资源选择-Checklist"><a href="#修改下载资源选择-Checklist" class="headerlink" title="修改下载资源选择 Checklist"></a>修改下载资源选择 Checklist</h2><h3 id="必改文件视情况-2"><a href="#必改文件视情况-2" class="headerlink" title="必改文件视情况"></a>必改文件视情况</h3><ul>
+<li><input disabled="" type="checkbox"> <code>core/downloader_base.py</code></li>
+<li><input disabled="" type="checkbox"> <code>storage/file_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_video_downloader.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_media_quality.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_file_manager.py</code></li>
+</ul>
+<h3 id="视频检查"><a href="#视频检查" class="headerlink" title="视频检查"></a>视频检查</h3><ul>
+<li><input disabled="" type="checkbox"> 仍优先无水印</li>
+<li><input disabled="" type="checkbox"> 仍优先最高码率 <code>video.bit_rate</code></li>
+<li><input disabled="" type="checkbox"> douyin.com URL 仍签名</li>
+<li><input disabled="" type="checkbox"> 直接 CDN URL 优先级合理</li>
+<li><input disabled="" type="checkbox"> watermarked fallback 不会优先于无水印</li>
+<li><input disabled="" type="checkbox"> headers 包含合适 <code>Referer</code> &#x2F; <code>Origin</code> &#x2F; <code>User-Agent</code></li>
+</ul>
+<h3 id="图文检查"><a href="#图文检查" class="headerlink" title="图文检查"></a>图文检查</h3><ul>
+<li><input disabled="" type="checkbox"> <code>image_post_info</code> 仍支持</li>
+<li><input disabled="" type="checkbox"> <code>images</code> &#x2F; <code>image_list</code> 仍支持</li>
+<li><input disabled="" type="checkbox"> 实况图 video 仍支持</li>
+<li><input disabled="" type="checkbox"> 图片扩展名可由 URL 或 Content-Type 推断</li>
+<li><input disabled="" type="checkbox"> 候选 URL 去重</li>
+<li><input disabled="" type="checkbox"> 无水印图优先</li>
+</ul>
+<h3 id="文件写入检查"><a href="#文件写入检查" class="headerlink" title="文件写入检查"></a>文件写入检查</h3><ul>
+<li><input disabled="" type="checkbox"> 仍写 <code>.tmp</code></li>
+<li><input disabled="" type="checkbox"> 仍校验 <code>Content-Length</code></li>
+<li><input disabled="" type="checkbox"> 成功后 <code>os.replace</code></li>
+<li><input disabled="" type="checkbox"> 失败清理 tmp</li>
+<li><input disabled="" type="checkbox"> optional 资源失败不影响主资源</li>
+</ul>
+<h3 id="最小测试-5"><a href="#最小测试-5" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_video_downloader.py -v</span><br><span class="line">python -m pytest tests/test_media_quality.py -v</span><br><span class="line">python -m pytest tests/test_file_manager.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改命名模板-Checklist"><a href="#修改命名模板-Checklist" class="headerlink" title="修改命名模板 Checklist"></a>修改命名模板 Checklist</h2><h3 id="必改文件-3"><a href="#必改文件-3" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>utils/naming.py</code></li>
+<li><input disabled="" type="checkbox"> <code>utils/validators.py</code>，如果清洗规则变化</li>
+<li><input disabled="" type="checkbox"> <code>storage/file_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/downloader_base.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/music_downloader.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/live_downloader.py</code></li>
+<li><input disabled="" type="checkbox"> <code>config/default_config.py</code>，如果默认模板变化</li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_naming.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_downloader_naming_templates.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_file_manager.py</code></li>
+</ul>
+<h3 id="兼容检查"><a href="#兼容检查" class="headerlink" title="兼容检查"></a>兼容检查</h3><ul>
+<li><input disabled="" type="checkbox"> 默认模板保持 <code>{date}_{title}_{id}</code>，除非明确要迁移</li>
+<li><input disabled="" type="checkbox"> 模板必须包含 <code>{id}</code> 的规则是否保留</li>
+<li><input disabled="" type="checkbox"> 不允许 <code>/</code> 和 <code>\</code></li>
+<li><input disabled="" type="checkbox"> 新变量加入 <code>ALLOWED_VARIABLES</code></li>
+<li><input disabled="" type="checkbox"> README 和 config 注释同步新增变量</li>
+<li><input disabled="" type="checkbox"> 普通 aweme、music、live 三种 context 都处理新变量</li>
+<li><input disabled="" type="checkbox"> fallback 命名不会为空</li>
+<li><input disabled="" type="checkbox"> sanitize 后仍不会覆盖</li>
+</ul>
+<h3 id="最小测试-6"><a href="#最小测试-6" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_naming.py -v</span><br><span class="line">python -m pytest tests/test_downloader_naming_templates.py -v</span><br><span class="line">python -m pytest tests/test_file_manager.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-SQLite-Schema-Checklist"><a href="#修改-SQLite-Schema-Checklist" class="headerlink" title="修改 SQLite Schema Checklist"></a>修改 SQLite Schema Checklist</h2><h3 id="必改文件-4"><a href="#必改文件-4" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>storage/database.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_database.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_database_migration.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_database_history.py</code>，如果影响历史查询</li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code>，如果用户可见</li>
+<li><input disabled="" type="checkbox"> <a   href='/2026/05/14/douyin-downloader/douyin-downloader 项目开发文档/'>douyin-downloader 项目开发文档</a>，如果维护文档需要同步</li>
+</ul>
+<h3 id="迁移检查"><a href="#迁移检查" class="headerlink" title="迁移检查"></a>迁移检查</h3><ul>
+<li><input disabled="" type="checkbox"> 新库 <code>CREATE TABLE</code> 包含新字段</li>
+<li><input disabled="" type="checkbox"> 老库通过 <code>PRAGMA table_info()</code> 检测字段</li>
+<li><input disabled="" type="checkbox"> 老库通过 <code>ALTER TABLE</code> 增量迁移</li>
+<li><input disabled="" type="checkbox"> <code>initialize()</code> 可重复执行</li>
+<li><input disabled="" type="checkbox"> 迁移不会丢旧数据</li>
+<li><input disabled="" type="checkbox"> 索引必要时补 <code>CREATE INDEX IF NOT EXISTS</code></li>
+<li><input disabled="" type="checkbox"> 读路径兼容 NULL 旧值</li>
+<li><input disabled="" type="checkbox"> 写路径提供默认值</li>
+</ul>
+<h3 id="写入检查"><a href="#写入检查" class="headerlink" title="写入检查"></a>写入检查</h3><ul>
+<li><input disabled="" type="checkbox"> 单条写入 <code>add_aweme()</code> 更新</li>
+<li><input disabled="" type="checkbox"> 批量写入 <code>add_aweme_batch()</code> 更新</li>
+<li><input disabled="" type="checkbox"> 查询接口返回新字段</li>
+<li><input disabled="" type="checkbox"> JSON 字段反序列化失败时有 fallback</li>
+</ul>
+<h3 id="最小测试-7"><a href="#最小测试-7" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_database.py -v</span><br><span class="line">python -m pytest tests/test_database_migration.py -v</span><br><span class="line">python -m pytest tests/test_database_history.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-manifest-Checklist"><a href="#修改-manifest-Checklist" class="headerlink" title="修改 manifest Checklist"></a>修改 manifest Checklist</h2><h3 id="必改文件-5"><a href="#必改文件-5" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>storage/metadata_handler.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/downloader_base.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/music_downloader.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_*</code> 中涉及 manifest 的测试</li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <a   href='/2026/05/14/douyin-downloader/douyin-downloader 项目开发文档/'>douyin-downloader 项目开发文档</a></li>
+</ul>
+<h3 id="检查点"><a href="#检查点" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> <code>recorded_at</code> 仍由 <code>MetadataHandler</code> 统一添加</li>
+<li><input disabled="" type="checkbox"> JSONL 每行都是完整 JSON</li>
+<li><input disabled="" type="checkbox"> 并发写仍有 lock</li>
+<li><input disabled="" type="checkbox"> 路径尽量相对下载根目录</li>
+<li><input disabled="" type="checkbox"> <code>database: false</code> 时仍写 manifest</li>
+<li><input disabled="" type="checkbox"> 主资源失败时不要写成功 manifest</li>
+<li><input disabled="" type="checkbox"> 新字段不会包含敏感信息</li>
+</ul>
+<h3 id="最小测试-8"><a href="#最小测试-8" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_video_downloader.py -v</span><br><span class="line">python -m pytest tests/test_music_downloader.py -v</span><br><span class="line">python -m pytest tests/test_downloader_naming_templates.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改直播-Checklist"><a href="#修改直播-Checklist" class="headerlink" title="修改直播 Checklist"></a>修改直播 Checklist</h2><h3 id="必改文件-6"><a href="#必改文件-6" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>core/live_downloader.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/api_client.py</code></li>
+<li><input disabled="" type="checkbox"> <code>utils/naming.py</code>，如果改直播命名</li>
+<li><input disabled="" type="checkbox"> <code>config/default_config.py</code>，如果改直播配置</li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_live_downloader.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_url_parser.py</code>，如果改直播 URL</li>
+</ul>
+<h3 id="检查点-1"><a href="#检查点-1" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> <code>live.douyin.com/{room_id}</code> 仍识别</li>
+<li><input disabled="" type="checkbox"> <code>/follow/live/{room_id}</code> 仍识别</li>
+<li><input disabled="" type="checkbox"> <code>room.status == 2</code> 才录制</li>
+<li><input disabled="" type="checkbox"> FLV 优先于 HLS</li>
+<li><input disabled="" type="checkbox"> HLS 警告仍准确</li>
+<li><input disabled="" type="checkbox"> <code>.tmp</code> 非空保留策略仍存在</li>
+<li><input disabled="" type="checkbox"> Ctrl+C cancel 保留已录数据</li>
+<li><input disabled="" type="checkbox"> live headers 使用 live.douyin.com 的 Referer &#x2F; Origin</li>
+<li><input disabled="" type="checkbox"> <code>max_duration_seconds</code> 生效</li>
+<li><input disabled="" type="checkbox"> <code>idle_timeout_seconds</code> 生效</li>
+</ul>
+<h3 id="最小测试-9"><a href="#最小测试-9" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_live_downloader.py -v</span><br><span class="line">python -m pytest tests/test_url_parser.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改评论采集-Checklist"><a href="#修改评论采集-Checklist" class="headerlink" title="修改评论采集 Checklist"></a>修改评论采集 Checklist</h2><h3 id="必改文件-7"><a href="#必改文件-7" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>core/comments_collector.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/api_client.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/downloader_base.py</code></li>
+<li><input disabled="" type="checkbox"> <code>config/default_config.py</code>，如果改配置</li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_comments_collector.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_api_client.py</code></li>
+</ul>
+<h3 id="检查点-2"><a href="#检查点-2" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> <code>comments.enabled</code> 默认仍为 false</li>
+<li><input disabled="" type="checkbox"> <code>include_replies</code> 不应默认打开</li>
+<li><input disabled="" type="checkbox"> <code>max_comments: 0</code> 仍表示不限</li>
+<li><input disabled="" type="checkbox"> cursor 不推进时停止</li>
+<li><input disabled="" type="checkbox"> comment id 去重</li>
+<li><input disabled="" type="checkbox"> 采集失败不应导致主媒体下载失败</li>
+<li><input disabled="" type="checkbox"> 输出仍为 <code>{file_stem}_comments.json</code></li>
+</ul>
+<h3 id="最小测试-10"><a href="#最小测试-10" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_comments_collector.py -v</span><br><span class="line">python -m pytest tests/test_api_client.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改转写-Checklist"><a href="#修改转写-Checklist" class="headerlink" title="修改转写 Checklist"></a>修改转写 Checklist</h2><h3 id="必改文件-8"><a href="#必改文件-8" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>core/transcript_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/downloader_base.py</code></li>
+<li><input disabled="" type="checkbox"> <code>config/default_config.py</code></li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>storage/database.py</code>，如果改 transcript_job</li>
+<li><input disabled="" type="checkbox"> <code>tests/test_transcript_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_database.py</code>，如果改数据库记录</li>
+</ul>
+<h3 id="检查点-3"><a href="#检查点-3" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> <code>transcript.enabled</code> 默认 false</li>
+<li><input disabled="" type="checkbox"> 没 API key 时 skipped，不应失败主下载</li>
+<li><input disabled="" type="checkbox"> 图文不触发转写</li>
+<li><input disabled="" type="checkbox"> 只对 <code>media_type == video</code> 触发</li>
+<li><input disabled="" type="checkbox"> <code>output_dir</code> 为空时与视频同目录</li>
+<li><input disabled="" type="checkbox"> <code>output_dir</code> 非空时镜像路径</li>
+<li><input disabled="" type="checkbox"> txt&#x2F;json 输出由 <code>response_formats</code> 控制</li>
+<li><input disabled="" type="checkbox"> <code>transcript_job</code> 状态记录正确</li>
+<li><input disabled="" type="checkbox"> API 失败记录 error_message</li>
+<li><input disabled="" type="checkbox"> 不把 API key 写入数据库或日志</li>
+</ul>
+<h3 id="最小测试-11"><a href="#最小测试-11" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_transcript_manager.py -v</span><br><span class="line">python -m pytest tests/test_database.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改通知-Checklist"><a href="#修改通知-Checklist" class="headerlink" title="修改通知 Checklist"></a>修改通知 Checklist</h2><h3 id="必改文件-9"><a href="#必改文件-9" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>utils/notifier.py</code></li>
+<li><input disabled="" type="checkbox"> <code>cli/main.py</code>，如果改触发时机</li>
+<li><input disabled="" type="checkbox"> <code>config/default_config.py</code></li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_notifier.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_notifier_redactor_property.py</code></li>
+</ul>
+<h3 id="检查点-4"><a href="#检查点-4" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> <code>notifications.enabled</code> 默认 false</li>
+<li><input disabled="" type="checkbox"> provider 失败不影响主流程</li>
+<li><input disabled="" type="checkbox"> 所有 provider 并发发送</li>
+<li><input disabled="" type="checkbox"> on_success &#x2F; on_failure 过滤正确</li>
+<li><input disabled="" type="checkbox"> Bark URL 编码正确</li>
+<li><input disabled="" type="checkbox"> Telegram token 不进日志</li>
+<li><input disabled="" type="checkbox"> Webhook query secret 脱敏</li>
+<li><input disabled="" type="checkbox"> 新 provider 加入 registry</li>
+</ul>
+<h3 id="最小测试-12"><a href="#最小测试-12" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_notifier.py -v</span><br><span class="line">python -m pytest tests/test_notifier_redactor_property.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-REST-API-Checklist"><a href="#修改-REST-API-Checklist" class="headerlink" title="修改 REST API Checklist"></a>修改 REST API Checklist</h2><h3 id="必改文件-10"><a href="#必改文件-10" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>server/app.py</code></li>
+<li><input disabled="" type="checkbox"> <code>server/jobs.py</code></li>
+<li><input disabled="" type="checkbox"> <code>cli/main.py</code>，如果改 <code>--serve</code></li>
+<li><input disabled="" type="checkbox"> <code>config/default_config.py</code>，如果改服务配置</li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_server.py</code></li>
+</ul>
+<h3 id="检查点-5"><a href="#检查点-5" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> <code>fastapi</code> &#x2F; <code>uvicorn</code> 仍是可选依赖</li>
+<li><input disabled="" type="checkbox"> 未安装依赖时 CLI 给出明确提示</li>
+<li><input disabled="" type="checkbox"> <code>GET /api/v1/health</code> 正常</li>
+<li><input disabled="" type="checkbox"> <code>POST /api/v1/download</code> 参数校验</li>
+<li><input disabled="" type="checkbox"> job id 唯一</li>
+<li><input disabled="" type="checkbox"> pending&#x2F;running 不被剪裁</li>
+<li><input disabled="" type="checkbox"> terminal job 按 TTL 和容量剪裁</li>
+<li><input disabled="" type="checkbox"> lifespan shutdown 等待任务结束</li>
+<li><input disabled="" type="checkbox"> 不复用已关闭的 <code>aiohttp.ClientSession</code></li>
+</ul>
+<h3 id="最小测试-13"><a href="#最小测试-13" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_server.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改热榜-搜索-Checklist"><a href="#修改热榜-搜索-Checklist" class="headerlink" title="修改热榜 &#x2F; 搜索 Checklist"></a>修改热榜 &#x2F; 搜索 Checklist</h2><h3 id="必改文件-11"><a href="#必改文件-11" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>core/discovery.py</code></li>
+<li><input disabled="" type="checkbox"> <code>core/api_client.py</code></li>
+<li><input disabled="" type="checkbox"> <code>cli/main.py</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_discovery.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_cli_main.py</code>，如果改 CLI 参数</li>
+</ul>
+<h3 id="检查点-6"><a href="#检查点-6" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> 输出仍为 JSONL</li>
+<li><input disabled="" type="checkbox"> 不下载媒体</li>
+<li><input disabled="" type="checkbox"> <code>--hot-board [N]</code> 可选 N 仍生效</li>
+<li><input disabled="" type="checkbox"> <code>--search-max</code> 仍生效</li>
+<li><input disabled="" type="checkbox"> keyword 文件名安全</li>
+<li><input disabled="" type="checkbox"> 结果按 aweme_id 去重</li>
+<li><input disabled="" type="checkbox"> 分页 cursor 不推进时停止</li>
+</ul>
+<h3 id="最小测试-14"><a href="#最小测试-14" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_discovery.py -v</span><br><span class="line">python -m pytest tests/test_cli_main.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改并发-限速-重试-Checklist"><a href="#修改并发-限速-重试-Checklist" class="headerlink" title="修改并发 &#x2F; 限速 &#x2F; 重试 Checklist"></a>修改并发 &#x2F; 限速 &#x2F; 重试 Checklist</h2><h3 id="必改文件-12"><a href="#必改文件-12" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>control/rate_limiter.py</code></li>
+<li><input disabled="" type="checkbox"> <code>control/retry_handler.py</code></li>
+<li><input disabled="" type="checkbox"> <code>control/queue_manager.py</code></li>
+<li><input disabled="" type="checkbox"> <code>cli/main.py</code>，如果改实例化参数</li>
+<li><input disabled="" type="checkbox"> <code>core/downloader_base.py</code>，如果改调用方式</li>
+<li><input disabled="" type="checkbox"> <code>tests/test_rate_limiter.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_retry_handler.py</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_queue_manager.py</code></li>
+</ul>
+<h3 id="检查点-7"><a href="#检查点-7" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> <code>RateLimiter.acquire()</code> 仍是 async</li>
+<li><input disabled="" type="checkbox"> jitter 不破坏最小间隔</li>
+<li><input disabled="" type="checkbox"> <code>RetryHandler.max_retries</code> 语义仍是额外重试次数</li>
+<li><input disabled="" type="checkbox"> <code>QueueManager</code> 异常返回策略调用方能处理</li>
+<li><input disabled="" type="checkbox"> 并发数来自 <code>thread</code></li>
+<li><input disabled="" type="checkbox"> API 请求前仍调用 rate limiter</li>
+<li><input disabled="" type="checkbox"> 媒体下载仍经过 retry</li>
+</ul>
+<h3 id="最小测试-15"><a href="#最小测试-15" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_rate_limiter.py -v</span><br><span class="line">python -m pytest tests/test_retry_handler.py -v</span><br><span class="line">python -m pytest tests/test_queue_manager.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-CLI-参数-Checklist"><a href="#修改-CLI-参数-Checklist" class="headerlink" title="修改 CLI 参数 Checklist"></a>修改 CLI 参数 Checklist</h2><h3 id="必改文件-13"><a href="#必改文件-13" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>cli/main.py</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>tests/test_cli_main.py</code></li>
+<li><input disabled="" type="checkbox"> <code>pyproject.toml</code>，如果改 entry point</li>
+</ul>
+<h3 id="检查点-8"><a href="#检查点-8" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> argparse 参数有 help</li>
+<li><input disabled="" type="checkbox"> 默认行为不破坏 <code>python run.py -c config.yml</code></li>
+<li><input disabled="" type="checkbox"> 子命令缺 config 的行为明确</li>
+<li><input disabled="" type="checkbox"> <code>--serve</code> 不显示下载 banner</li>
+<li><input disabled="" type="checkbox"> <code>--version</code> 仍使用 <code>__version__</code></li>
+<li><input disabled="" type="checkbox"> 新参数与 config 覆盖顺序清晰</li>
+</ul>
+<h3 id="最小测试-16"><a href="#最小测试-16" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/test_cli_main.py -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-Docker-依赖-Checklist"><a href="#修改-Docker-依赖-Checklist" class="headerlink" title="修改 Docker &#x2F; 依赖 Checklist"></a>修改 Docker &#x2F; 依赖 Checklist</h2><h3 id="必改文件-14"><a href="#必改文件-14" class="headerlink" title="必改文件"></a>必改文件</h3><ul>
+<li><input disabled="" type="checkbox"> <code>requirements.txt</code></li>
+<li><input disabled="" type="checkbox"> <code>pyproject.toml</code></li>
+<li><input disabled="" type="checkbox"> <code>Dockerfile</code></li>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>uv.lock</code>，如果项目使用 uv 锁文件维护</li>
+</ul>
+<h3 id="检查点-9"><a href="#检查点-9" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> 基础依赖和 <code>pyproject.toml</code> 同步</li>
+<li><input disabled="" type="checkbox"> 可选依赖放在 optional dependencies</li>
+<li><input disabled="" type="checkbox"> Docker 只安装运行必要依赖</li>
+<li><input disabled="" type="checkbox"> Playwright &#x2F; fastapi &#x2F; whisper 这类依赖不要无意塞进基础 requirements，除非明确需要</li>
+<li><input disabled="" type="checkbox"> Python 版本要求仍正确</li>
+</ul>
+<h3 id="最小测试-17"><a href="#最小测试-17" class="headerlink" title="最小测试"></a>最小测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pytest tests/ -q</span><br></pre></td></tr></table></figure>
+
+<p>如需验证 Docker：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t douyin-downloader .</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-README-笔记文档-Checklist"><a href="#修改-README-笔记文档-Checklist" class="headerlink" title="修改 README &#x2F; 笔记文档 Checklist"></a>修改 README &#x2F; 笔记文档 Checklist</h2><h3 id="必改文件视情况-3"><a href="#必改文件视情况-3" class="headerlink" title="必改文件视情况"></a>必改文件视情况</h3><ul>
+<li><input disabled="" type="checkbox"> <code>README.zh-CN.md</code></li>
+<li><input disabled="" type="checkbox"> <code>README.md</code></li>
+<li><input disabled="" type="checkbox"> <code>PROJECT_SUMMARY.md</code></li>
+<li><input disabled="" type="checkbox"> <code>AGENTS.md</code></li>
+<li><input disabled="" type="checkbox"> <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> <code>memo/source/_posts/douyin-downloader/*.md</code></li>
+</ul>
+<h3 id="检查点-10"><a href="#检查点-10" class="headerlink" title="检查点"></a>检查点</h3><ul>
+<li><input disabled="" type="checkbox"> 用户可见功能必须更新 README</li>
+<li><input disabled="" type="checkbox"> 配置项必须更新 <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> 新架构或开发约定必须更新项目开发文档</li>
+<li><input disabled="" type="checkbox"> 新故障模式必须更新故障排查手册</li>
+<li><input disabled="" type="checkbox"> 新增开发流程必须更新 checklist</li>
+<li><input disabled="" type="checkbox"> 不要让 <code>PROJECT_SUMMARY.md</code> 与当前代码长期冲突</li>
+</ul>
+<h2 id="改动类型到测试文件速查"><a href="#改动类型到测试文件速查" class="headerlink" title="改动类型到测试文件速查"></a>改动类型到测试文件速查</h2><table>
+<thead>
+<tr>
+<th>改动类型</th>
+<th>最小测试</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>URL 解析</td>
+<td><code>tests/test_url_parser.py</code></td>
+</tr>
+<tr>
+<td>下载器工厂</td>
+<td><code>tests/test_downloader_factory.py</code></td>
+</tr>
+<tr>
+<td>单视频 &#x2F; 图文</td>
+<td><code>tests/test_video_downloader.py</code></td>
+</tr>
+<tr>
+<td>用户下载</td>
+<td><code>tests/test_user_downloader.py</code></td>
+</tr>
+<tr>
+<td>用户模式</td>
+<td><code>tests/test_user_mode_registry.py</code>, <code>tests/test_user_mode_strategies.py</code>, <code>tests/test_user_downloader_modes.py</code></td>
+</tr>
+<tr>
+<td>合集</td>
+<td><code>tests/test_mix_downloader.py</code></td>
+</tr>
+<tr>
+<td>音乐</td>
+<td><code>tests/test_music_downloader.py</code></td>
+</tr>
+<tr>
+<td>直播</td>
+<td><code>tests/test_live_downloader.py</code></td>
+</tr>
+<tr>
+<td>API client</td>
+<td><code>tests/test_api_client.py</code></td>
+</tr>
+<tr>
+<td>配置加载</td>
+<td><code>tests/test_config_loader.py</code>, <code>tests/test_config_validation.py</code></td>
+</tr>
+<tr>
+<td>配置保存</td>
+<td><code>tests/test_config_loader_save.py</code></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td><code>tests/test_cookie_manager.py</code>, <code>tests/test_cookie_utils.py</code>, <code>tests/test_cookie_fetcher.py</code></td>
+</tr>
+<tr>
+<td>数据库</td>
+<td><code>tests/test_database.py</code>, <code>tests/test_database_migration.py</code>, <code>tests/test_database_history.py</code></td>
+</tr>
+<tr>
+<td>文件落盘</td>
+<td><code>tests/test_file_manager.py</code></td>
+</tr>
+<tr>
+<td>命名模板</td>
+<td><code>tests/test_naming.py</code>, <code>tests/test_downloader_naming_templates.py</code></td>
+</tr>
+<tr>
+<td>评论</td>
+<td><code>tests/test_comments_collector.py</code></td>
+</tr>
+<tr>
+<td>转写</td>
+<td><code>tests/test_transcript_manager.py</code></td>
+</tr>
+<tr>
+<td>通知</td>
+<td><code>tests/test_notifier.py</code>, <code>tests/test_notifier_redactor_property.py</code></td>
+</tr>
+<tr>
+<td>REST 服务</td>
+<td><code>tests/test_server.py</code></td>
+</tr>
+<tr>
+<td>热榜 &#x2F; 搜索</td>
+<td><code>tests/test_discovery.py</code></td>
+</tr>
+<tr>
+<td>限速 &#x2F; 重试 &#x2F; 队列</td>
+<td><code>tests/test_rate_limiter.py</code>, <code>tests/test_retry_handler.py</code>, <code>tests/test_queue_manager.py</code></td>
+</tr>
+<tr>
+<td>签名</td>
+<td><code>tests/test_xbogus.py</code></td>
+</tr>
+<tr>
+<td>CLI</td>
+<td><code>tests/test_cli_main.py</code></td>
+</tr>
+</tbody></table>
+<h2 id="PR-提交前最终-Checklist"><a href="#PR-提交前最终-Checklist" class="headerlink" title="PR &#x2F; 提交前最终 Checklist"></a>PR &#x2F; 提交前最终 Checklist</h2><ul>
+<li><input disabled="" type="checkbox"> 运行相关单元测试</li>
+<li><input disabled="" type="checkbox"> 运行 <code>ruff check .</code></li>
+<li><input disabled="" type="checkbox"> 如果改动共享逻辑，检查桌面端同步</li>
+<li><input disabled="" type="checkbox"> 如果改配置，更新 <code>config.example.yml</code></li>
+<li><input disabled="" type="checkbox"> 如果用户可见，更新 README</li>
+<li><input disabled="" type="checkbox"> 如果维护文档受影响，更新 Obsidian 笔记</li>
+<li><input disabled="" type="checkbox"> 没有把 Cookie &#x2F; API key &#x2F; token 写入日志、数据库、manifest、测试快照</li>
+<li><input disabled="" type="checkbox"> 没有引入 Python 3.8 不兼容语法</li>
+<li><input disabled="" type="checkbox"> 没有在核心异步路径引入阻塞 I&#x2F;O</li>
+<li><input disabled="" type="checkbox"> 没有修改无关文件格式或大规模重排</li>
+</ul>
+<h2 id="相关笔记"><a href="#相关笔记" class="headerlink" title="相关笔记"></a>相关笔记</h2><ul>
+<li><a   href='/2026/05/14/douyin-downloader/douyin-downloader 项目开发文档/'>douyin-downloader 项目开发文档</a></li>
+<li><a   href='/2026/05/14/douyin-downloader/douyin-downloader 故障排查手册/'>douyin-downloader 故障排查手册</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://baiyu2683.github.io">zh2683</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://baiyu2683.github.io/2026/05/14/douyin-downloader/douyin-downloader%20%E5%BC%80%E5%8F%91%E6%94%B9%E5%8A%A8%20Checklist/">https://baiyu2683.github.io/2026/05/14/douyin-downloader/douyin-downloader%20%E5%BC%80%E5%8F%91%E6%94%B9%E5%8A%A8%20Checklist/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://baiyu2683.github.io" target="_blank"></a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a><a class="post-meta__tags" href="/tags/douyin/">douyin</a><a class="post-meta__tags" href="/tags/checklist/">checklist</a><a class="post-meta__tags" href="/tags/development/">development</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/05/14/douyin-downloader/douyin-downloader%20%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%89%8B%E5%86%8C/" title="douyin-downloader 故障排查手册"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">douyin-downloader 故障排查手册</div></div><div class="info-2"><div class="info-item-1">douyin-downloader 故障排查手册这篇笔记解决什么问题这篇笔记用于排查 douyin-downloader 运行和开发中最常见的问题。 建议先读 douyin-downloader 项目开发文档 建立主流程视角，再用这篇按症状定位问题。 排查顺序固定为：  先确认配置是否生效 再确认 Cookie 是否有效 再确认 URL 是否被正确解析 再确认 API 是否返回正常数据 再确认下载、落盘、数据库、manifest 是否正常  快速定位入口运行失败时先看： 1python run.py -c config.yml -v  如果 Rich 进度条刷屏或吞掉 warning，可以临时打开： 1python run.py -c config.yml --show-warnings  最小检查： 123python -m pytest tests/test_url_parser.py -vpython -m pytest tests/test_config_loader.py -vpython -m pytest tests/test_cookie_manager.py -...</div></div></div></a><a class="pagination-related" href="/2026/05/14/douyin-downloader/douyin-downloader%20%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/" title="douyin-downloader 项目开发文档"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">douyin-downloader 项目开发文档</div></div><div class="info-2"><div class="info-item-1">douyin-downloader 项目开发文档这篇文档解决什么问题这篇笔记是给后续接手 douyin-downloader 的新人看的开发说明，目标是快速建立项目全局视角：  项目能做什么 入口在哪里 下载流程怎么走 配置怎么合并和生效 主要数据结构是什么 文件、数据库、manifest 怎么落盘 新增下载模式、配置项、接口时应该改哪些地方 调试和测试从哪里开始  这不是用户使用手册，而是开发者理解和继续开发项目时的内部文档。 项目定位douyin-downloader 是一个 Python 3.8+ 的抖音批量下载器，核心能力是通过抖音 Web API 和 Cookie 登录态下载：  单个视频 单个图文 &#x2F; 图集 作者主页作品 作者点赞 作者合集 作者音乐相关作品 当前登录账号收藏夹作品 当前登录账号收藏合集 单个合集 单个音乐 直播录制 评论采集 热搜榜 &#x2F; 搜索结果导出 可选视频转写 下载完成通知 可选 REST API 服务模式  项目主运行方式是 CLI： 1python run.py -c config.yml  安装后也可以通过 pyproj...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/05/14/douyin-downloader/douyin-downloader%20%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%89%8B%E5%86%8C/" title="douyin-downloader 故障排查手册"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-14</div><div class="info-item-2">douyin-downloader 故障排查手册</div></div><div class="info-2"><div class="info-item-1">douyin-downloader 故障排查手册这篇笔记解决什么问题这篇笔记用于排查 douyin-downloader 运行和开发中最常见的问题。 建议先读 douyin-downloader 项目开发文档 建立主流程视角，再用这篇按症状定位问题。 排查顺序固定为：  先确认配置是否生效 再确认 Cookie 是否有效 再确认 URL 是否被正确解析 再确认 API 是否返回正常数据 再确认下载、落盘、数据库、manifest 是否正常  快速定位入口运行失败时先看： 1python run.py -c config.yml -v  如果 Rich 进度条刷屏或吞掉 warning，可以临时打开： 1python run.py -c config.yml --show-warnings  最小检查： 123python -m pytest tests/test_url_parser.py -vpython -m pytest tests/test_config_loader.py -vpython -m pytest tests/test_cookie_manager.py -...</div></div></div></a><a class="pagination-related" href="/2026/05/14/douyin-downloader/douyin-downloader%20%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/" title="douyin-downloader 项目开发文档"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-14</div><div class="info-item-2">douyin-downloader 项目开发文档</div></div><div class="info-2"><div class="info-item-1">douyin-downloader 项目开发文档这篇文档解决什么问题这篇笔记是给后续接手 douyin-downloader 的新人看的开发说明，目标是快速建立项目全局视角：  项目能做什么 入口在哪里 下载流程怎么走 配置怎么合并和生效 主要数据结构是什么 文件、数据库、manifest 怎么落盘 新增下载模式、配置项、接口时应该改哪些地方 调试和测试从哪里开始  这不是用户使用手册，而是开发者理解和继续开发项目时的内部文档。 项目定位douyin-downloader 是一个 Python 3.8+ 的抖音批量下载器，核心能力是通过抖音 Web API 和 Cookie 登录态下载：  单个视频 单个图文 &#x2F; 图集 作者主页作品 作者点赞 作者合集 作者音乐相关作品 当前登录账号收藏夹作品 当前登录账号收藏合集 单个合集 单个音乐 直播录制 评论采集 热搜榜 &#x2F; 搜索结果导出 可选视频转写 下载完成通知 可选 REST API 服务模式  项目主运行方式是 CLI： 1python run.py -c config.yml  安装后也可以通过 pyproj...</div></div></div></a><a class="pagination-related" href="/2026/05/09/python/python/" title="python"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-09</div><div class="info-item-2">python</div></div><div class="info-2"><div class="info-item-1">那python我需要看哪本书？或者给一个入门途径既然您已经有了 Java 开发经验，千万不要像小白一样从零开始看那种“什么是变量、什么是循环”的入门书，那会浪费您大量时间。    作为 Java 程序员，您的 Python 学习路径应该是 “对照式学习” + “AI 场景导向”。    以下是为您定制的 Python 入门方案：    1. 推荐书籍（选一本即可）     * 《Python 编程：从入门到实践》(Python Crash Course):        * 特点： 经典中的经典。虽然有一部分内容是零基础，但后半部分的实战（数据可视化、Web 项目、小游戏）非常扎实。你可以快速扫过前半部分，重点看后半部分的实战。▄  * 《流畅的 Python》(Fluent Python):      * 特点： Java 程序员的进阶神书。如果你想知道 Python 里的“接口”、“装饰器”、“多线程”和 Java 的有什么不同，这本书会让你拍案叫绝。建议在有了一两周基础后再翻阅。▄    2. 高效入门途径：对比法 (Comparison Learning)    第 1-...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zh2683</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">44</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/baiyu2683"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">能一直这样一个人虚度光阴就好了</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#douyin-downloader-%E5%BC%80%E5%8F%91%E6%94%B9%E5%8A%A8-Checklist"><span class="toc-number">1.</span> <span class="toc-text">douyin-downloader 开发改动 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E7%AF%87%E7%AC%94%E8%AE%B0%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">这篇笔记解决什么问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%94%B9%E5%8A%A8%E5%89%8D%E6%A3%80%E6%9F%A5"><span class="toc-number">1.2.</span> <span class="toc-text">通用改动前检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E5%89%8D%E9%80%9A%E7%94%A8%E9%AA%8C%E8%AF%81"><span class="toc-number">1.3.</span> <span class="toc-text">提交前通用验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E-URL-%E7%B1%BB%E5%9E%8B-Checklist"><span class="toc-number">1.4.</span> <span class="toc-text">新增 URL 类型 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%A3%80%E6%9F%A5"><span class="toc-number">1.4.2.</span> <span class="toc-text">具体检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E7%94%A8%E6%88%B7-mode-Checklist"><span class="toc-number">1.5.</span> <span class="toc-text">新增用户 mode Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-1"><span class="toc-number">1.5.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Strategy-%E6%A3%80%E6%9F%A5"><span class="toc-number">1.5.2.</span> <span class="toc-text">Strategy 检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%A3%80%E6%9F%A5"><span class="toc-number">1.5.3.</span> <span class="toc-text">配置检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-1"><span class="toc-number">1.5.4.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E9%A1%B9-Checklist"><span class="toc-number">1.6.</span> <span class="toc-text">修改配置项 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-2"><span class="toc-number">1.6.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%A3%80%E6%9F%A5-1"><span class="toc-number">1.6.2.</span> <span class="toc-text">具体检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%98%AF%E5%B5%8C%E5%A5%97%E9%85%8D%E7%BD%AE"><span class="toc-number">1.6.3.</span> <span class="toc-text">如果是嵌套配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-2"><span class="toc-number">1.6.4.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-Cookie-%E9%89%B4%E6%9D%83-Checklist"><span class="toc-number">1.7.</span> <span class="toc-text">修改 Cookie &#x2F; 鉴权 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6%E8%A7%86%E6%83%85%E5%86%B5"><span class="toc-number">1.7.1.</span> <span class="toc-text">必改文件视情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%A3%80%E6%9F%A5"><span class="toc-number">1.7.2.</span> <span class="toc-text">安全检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%9F%A5"><span class="toc-number">1.7.3.</span> <span class="toc-text">行为检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-3"><span class="toc-number">1.7.4.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-API-Client-Checklist"><span class="toc-number">1.8.</span> <span class="toc-text">修改 API Client Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6%E8%A7%86%E6%83%85%E5%86%B5-1"><span class="toc-number">1.8.1.</span> <span class="toc-text">必改文件视情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%A3%80%E6%9F%A5"><span class="toc-number">1.8.2.</span> <span class="toc-text">请求检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%A3%80%E6%9F%A5"><span class="toc-number">1.8.3.</span> <span class="toc-text">响应检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E8%A6%81%E6%B1%82"><span class="toc-number">1.8.4.</span> <span class="toc-text">测试要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-4"><span class="toc-number">1.8.5.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%8B%E8%BD%BD%E8%B5%84%E6%BA%90%E9%80%89%E6%8B%A9-Checklist"><span class="toc-number">1.9.</span> <span class="toc-text">修改下载资源选择 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6%E8%A7%86%E6%83%85%E5%86%B5-2"><span class="toc-number">1.9.1.</span> <span class="toc-text">必改文件视情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E6%A3%80%E6%9F%A5"><span class="toc-number">1.9.2.</span> <span class="toc-text">视频检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E6%96%87%E6%A3%80%E6%9F%A5"><span class="toc-number">1.9.3.</span> <span class="toc-text">图文检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E6%A3%80%E6%9F%A5"><span class="toc-number">1.9.4.</span> <span class="toc-text">文件写入检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-5"><span class="toc-number">1.9.5.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%91%BD%E5%90%8D%E6%A8%A1%E6%9D%BF-Checklist"><span class="toc-number">1.10.</span> <span class="toc-text">修改命名模板 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-3"><span class="toc-number">1.10.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%BC%E5%AE%B9%E6%A3%80%E6%9F%A5"><span class="toc-number">1.10.2.</span> <span class="toc-text">兼容检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-6"><span class="toc-number">1.10.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-SQLite-Schema-Checklist"><span class="toc-number">1.11.</span> <span class="toc-text">修改 SQLite Schema Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-4"><span class="toc-number">1.11.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E6%A3%80%E6%9F%A5"><span class="toc-number">1.11.2.</span> <span class="toc-text">迁移检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%85%A5%E6%A3%80%E6%9F%A5"><span class="toc-number">1.11.3.</span> <span class="toc-text">写入检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-7"><span class="toc-number">1.11.4.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-manifest-Checklist"><span class="toc-number">1.12.</span> <span class="toc-text">修改 manifest Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-5"><span class="toc-number">1.12.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="toc-number">1.12.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-8"><span class="toc-number">1.12.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%9B%B4%E6%92%AD-Checklist"><span class="toc-number">1.13.</span> <span class="toc-text">修改直播 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-6"><span class="toc-number">1.13.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-1"><span class="toc-number">1.13.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-9"><span class="toc-number">1.13.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AF%84%E8%AE%BA%E9%87%87%E9%9B%86-Checklist"><span class="toc-number">1.14.</span> <span class="toc-text">修改评论采集 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-7"><span class="toc-number">1.14.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-2"><span class="toc-number">1.14.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-10"><span class="toc-number">1.14.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%BD%AC%E5%86%99-Checklist"><span class="toc-number">1.15.</span> <span class="toc-text">修改转写 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-8"><span class="toc-number">1.15.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-3"><span class="toc-number">1.15.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-11"><span class="toc-number">1.15.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%80%9A%E7%9F%A5-Checklist"><span class="toc-number">1.16.</span> <span class="toc-text">修改通知 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-9"><span class="toc-number">1.16.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-4"><span class="toc-number">1.16.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-12"><span class="toc-number">1.16.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-REST-API-Checklist"><span class="toc-number">1.17.</span> <span class="toc-text">修改 REST API Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-10"><span class="toc-number">1.17.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-5"><span class="toc-number">1.17.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-13"><span class="toc-number">1.17.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%83%AD%E6%A6%9C-%E6%90%9C%E7%B4%A2-Checklist"><span class="toc-number">1.18.</span> <span class="toc-text">修改热榜 &#x2F; 搜索 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-11"><span class="toc-number">1.18.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-6"><span class="toc-number">1.18.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-14"><span class="toc-number">1.18.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%B9%B6%E5%8F%91-%E9%99%90%E9%80%9F-%E9%87%8D%E8%AF%95-Checklist"><span class="toc-number">1.19.</span> <span class="toc-text">修改并发 &#x2F; 限速 &#x2F; 重试 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-12"><span class="toc-number">1.19.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-7"><span class="toc-number">1.19.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-15"><span class="toc-number">1.19.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-CLI-%E5%8F%82%E6%95%B0-Checklist"><span class="toc-number">1.20.</span> <span class="toc-text">修改 CLI 参数 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-13"><span class="toc-number">1.20.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-8"><span class="toc-number">1.20.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-16"><span class="toc-number">1.20.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-Docker-%E4%BE%9D%E8%B5%96-Checklist"><span class="toc-number">1.21.</span> <span class="toc-text">修改 Docker &#x2F; 依赖 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6-14"><span class="toc-number">1.21.1.</span> <span class="toc-text">必改文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-9"><span class="toc-number">1.21.2.</span> <span class="toc-text">检查点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%8B%E8%AF%95-17"><span class="toc-number">1.21.3.</span> <span class="toc-text">最小测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-README-%E7%AC%94%E8%AE%B0%E6%96%87%E6%A1%A3-Checklist"><span class="toc-number">1.22.</span> <span class="toc-text">修改 README &#x2F; 笔记文档 Checklist</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E6%94%B9%E6%96%87%E4%BB%B6%E8%A7%86%E6%83%85%E5%86%B5-3"><span class="toc-number">1.22.1.</span> <span class="toc-text">必改文件视情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%82%B9-10"><span class="toc-number">1.22.2.</span> <span class="toc-text">检查点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9%E5%8A%A8%E7%B1%BB%E5%9E%8B%E5%88%B0%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6%E9%80%9F%E6%9F%A5"><span class="toc-number">1.23.</span> <span class="toc-text">改动类型到测试文件速查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PR-%E6%8F%90%E4%BA%A4%E5%89%8D%E6%9C%80%E7%BB%88-Checklist"><span class="toc-number">1.24.</span> <span class="toc-text">PR &#x2F; 提交前最终 Checklist</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0"><span class="toc-number">1.25.</span> <span class="toc-text">相关笔记</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/14/douyin-downloader/douyin-downloader%20%E5%BC%80%E5%8F%91%E6%94%B9%E5%8A%A8%20Checklist/" title="douyin-downloader 开发改动 Checklist">douyin-downloader 开发改动 Checklist</a><time datetime="2026-05-14T11:32:25.000Z" title="发表于 2026-05-14 19:32:25">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/14/douyin-downloader/douyin-downloader%20%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%89%8B%E5%86%8C/" title="douyin-downloader 故障排查手册">douyin-downloader 故障排查手册</a><time datetime="2026-05-14T11:32:25.000Z" title="发表于 2026-05-14 19:32:25">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/14/douyin-downloader/douyin-downloader%20%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/" title="douyin-downloader 项目开发文档">douyin-downloader 项目开发文档</a><time datetime="2026-05-14T06:01:14.000Z" title="发表于 2026-05-14 14:01:14">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/14/claudecode/GitHub%20Fork%20%E6%A0%87%E5%87%86%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/" title="GitHub Fork 标准工作流程">GitHub Fork 标准工作流程</a><time datetime="2026-05-14T05:52:59.000Z" title="发表于 2026-05-14 13:52:59">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/10/Linux/archlinux+kde%E5%90%AF%E5%8A%A8discord%E6%97%B6%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/" title="解决archlinux下discord启动后不会自动走代理">解决archlinux下discord启动后不会自动走代理</a><time datetime="2026-05-10T01:43:33.000Z" title="发表于 2026-05-10 09:43:33">2026-05-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By zh2683</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
